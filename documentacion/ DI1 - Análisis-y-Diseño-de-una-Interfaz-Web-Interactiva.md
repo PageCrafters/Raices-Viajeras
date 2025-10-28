@@ -83,7 +83,7 @@ con objetivos similares:
 
 | Prioridad | Esfuerzo estimado | Dependencia |
 |-----------|-------------------|-------------|
-|     1     |      3 días       |   Ninguna   |
+|     1     |    4 semanas      |   Ninguna   |
 
 ---
 
@@ -105,6 +105,6 @@ con objetivos similares:
 
 ## 🧾 Referencia
 Proyecto: **Raíces Viajeras**  
-Repositorio: [https://github.com/Manuucho27/PageCrafters.git] 
+Repositorio: (https://github.com/PageCrafters/Raices-Viajeras.git)
 Sprint: **1 — Diseño de interfaz y navegación**  
 Estado: 🟢 *En desarrollo*
