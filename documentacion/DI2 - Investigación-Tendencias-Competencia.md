@@ -31,10 +31,10 @@ Conocer la competencia ayuda a **mejorar la experiencia de usuario** y a destaca
 ### 2. Análisis de interfaces de la competencia
 | Competidor | Fortalezas visuales | Oportunidades de mejora |
 |-------------|--------------------|--------------------------|
+| **Biosfy**  | Enfoque temático claro, diseño visual limpio y emocional, interfaz responsiva y minimalista | Prioriza la usabilidad móvil, crear categorías, desarrollar un blog
 | **Responsible Travel** | Diseño claro, tipografía legible, imágenes reales | Incorporar más dinamismo visual |
 | **Ecobnb** | Estilo natural, navegación sencilla | Mejorar contraste y jerarquía visual |
 | **Green Trip** | Iconografía coherente y paleta ecológica | Optimizar tiempos de carga |
-| **Airbnb Experiences** | Interactividad fluida y estructura modular | Simplificar interfaz para mejor accesibilidad |
 
 ### 3. Análisis de funcionalidades de la competencia
 | Funcionalidad | Descripción | Observaciones |
@@ -51,7 +51,7 @@ Conocer la competencia ayuda a **mejorar la experiencia de usuario** y a destaca
 
 | ID | Criterio | Descripción |
 |----|-----------|-------------|
-| CA-1 | Investigación completa | Se documentan al menos 5 fuentes o sitios analizados. |
+| CA-1 | Investigación completa | Se documentan al menos 3 fuentes o sitios analizados. |
 | CA-2 | Análisis visual | Se incluyen referencias visuales o capturas de ejemplos relevantes. |
 | CA-3 | Tendencias aplicables | Se identifican tendencias adaptables al proyecto. |
 | CA-4 | Informe entregable | Se presenta un documento con conclusiones y propuesta de estilo inicial. |
@@ -94,7 +94,7 @@ Conocer la competencia ayuda a **mejorar la experiencia de usuario** y a destaca
 
 | Prioridad | Esfuerzo estimado | Dependencias |
 |-----------|-------------------|--------------|
-| 1         | 5 días            |    Ninguna   |
+|     1     |     4 semanas     |    Ninguna   |
 
 ---
 
@@ -116,6 +116,5 @@ Conocer la competencia ayuda a **mejorar la experiencia de usuario** y a destaca
 
 ## 🧾 Referencia
 Proyecto: **Raíces Viajeras**  
-Repositorio: [https://github.com/Manuucho27/PageCrafters.git]
 Sprint: **1 — Investigación de diseño y definición de estilo visual**  
 Estado: 🟢 *En desarrollo*
