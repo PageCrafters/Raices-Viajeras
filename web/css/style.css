@@ -1,0 +1,20 @@
+:root {
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-accent: #007bff;
+}
+.dark-mode {
+    --color-bg: #121212;
+    --color-text: #ffffff;
+    --color-accent: #66b2ff;
+}
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color .3s, color .3s;
+}
+
+button {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+}
