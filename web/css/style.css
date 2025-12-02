@@ -20,7 +20,7 @@
   --color-formulario: #56a64d;
   --color-parrafo: #ffffff;
   /* Fondo más oscuro para destacar letras blancas */
-  --bg-formulario: rgba(80, 80, 80, 0.3) url("../../img/web/landing11.jpg");
+  --bg-formulario: rgba(80, 80, 80, 0.3) url("../../img/web/landing12.jpg");
 }
 
 body {
@@ -120,13 +120,13 @@ main {
   display: flex;
   flex-direction: column;
   width: auto;
-  h3 {
-    width: 90%;
-    text-align: center;
-    font-family: Pacifico, Dancing Script;
-    font-weight: bold;
-    font-weight: bolder;
-  }
+}
+h3 {
+  width: 90%;
+  text-align: center;
+  font-family: Pacifico, Dancing Script;
+  font-weight: bold;
+  font-weight: bolder;
 }
 
 #registrarse {
@@ -145,6 +145,7 @@ main {
     rgba(0, 0, 0, 0.2) 0 12px 24px -4px;
 }
 #registrarse form {
+  margin-top: 2em;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
