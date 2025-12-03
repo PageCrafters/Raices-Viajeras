@@ -1,0 +1,79 @@
+/* Paleta y base tipográfica */
+:root {
+    --burdeos: #7a1f3d;
+    --verde: #2e7d32;
+    --gris-perla: #f2f3f5;
+    --gris-200: #e5e7eb;
+    --gris-700: #374151;
+    --texto: #1f2937;
+    --acento: var(--burdeos);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto Thin";
+    color: var(--texto);
+    background: linear-gradient(180deg, #ffffff 0%, var(--gris-perla) 100%);
+    margin: 0;
+    padding: 2.5rem 1.5rem;
+    line-height: 1.65;
+}
+
+/* Contenedor y ritmo vertical */
+body > * {
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1, h2 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--texto);
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 1rem;
+    border-left: 6px solid var(--acento);
+    padding-left: 0.75rem;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--gris-700);
+}
+
+p {
+    margin: 0.75rem 0 1.25rem;
+    font-size: 1.2em;
+}
+.wireframe img {
+
+    width: 100%;
+
+    border-radius: 8px;
+}
+.wireframe-movil{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.wireframe-movil img {
+    width: 60%;
+}
+
+
+
+
+
