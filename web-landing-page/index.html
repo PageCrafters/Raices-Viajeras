@@ -9,103 +9,105 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo-container">
+    <div class="container-fluid">
+        <div class="logo-container col-12">
             <img src="../img/logos/raices-viajeras-logo0.webp" alt="RV Logo">
             <h1>RAÍCES VIAJERAS</h1>
-        </div>
-        <a onclick="cambiaModoColor()">◑</a>
-    </header>
-
-    <main>
-
-        <section class="mensaje">
-            <h2>CADA VIAJE CON NOSOTROS DEJA HUELLA EN TU MEMORIA,<br>
+            <h2>CADA VIAJE CON NOSOTROS DEJA HUELLA EN TU MEMORIA,
                 NO EN EL PLANETA</h2>
-        </section>
+            </h2>
+            <a onclick="cambiaModoColor()">◑</a>
 
-        <section class="imagenes">
-            <div class="imagen">
-                <img src="../img/web/landing1.jpg" alt="Imagen 1">
-            </div>
-            <div class="imagen">
-                <img src="../img/web/landing2.jpg" alt="Imagen 2">
-            </div>
-            <div class="imagen">
-                <img src="../img/web/landing3.jpg" alt="Imagen 3">
-            </div>
-            <div class="imagen">
-                <img src="../img/web/landing4.jpg" alt="Imagen 4">
-            </div>
-        </section>
+        </div>
 
-        <section class="formulario">
-            <div class="intro-formulario">
-                <h3>¿Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS en UN AÑO entero?
-                </h3>
-                <ul class="lista-ventajas">
-                    <li>Alojamientos rurales sostenibles</li>
-                    <li>Uso de energías renovables en alojamientos</li>
-                    <li>Apoyo a comunidades locales</li>
-                    <li>Gastronomía con productos locales y de temporada</li>
-                    <li>Autobuses ecológicos</li>
-                    <li>Actividades respetuosas con el medio ambiente</li>
-                    <li>Colaboración con proyectos de economía circular</li>
-                    <li>Educación ambiental para viajeros</li>
-                    <li>Compensación de huella de carbono</li>
-                </ul>
-                <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo haces</p>
-            </div>
-            <div id="registrarse">
-                <h3>REGÍSTRATE Y EMPIEZA </br> TU AVENTURA</h3>
-                <form action="#" method="post">
-                    <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
-                    <input type="email" name="email" placeholder="Correo Electrónico" required>
-                    <input type="password" name="contrasenia" placeholder="Contraseña" required>
-                    <input type="password" name="repeat_contrasenia" placeholder="Repetir Contraseña" required>
-                    <label for="tipo_viaje">Tipo de Viaje Favorito</label>
-                    <select name="tipo_viaje" id="tipo_viaje" required>
-                        <option value="" disabled selected>Selecciona tu tipo de viaje</option>
-                        <option value="aventura">Aventura</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="gastronomico">Gastronómico</option>
-                        <option value="playa">Playa</option>
-                        <option value="montana">Montaña</option>
-                        <option value="rural">Rural</option>
-                        <option value="urbano">Urbano</option>
-                    </select>
 
-                    <label for="notificaciones"><input type="checkbox" name="notificaciones" id="notificaciones">
-                        Deseo recibir notificaciones sobre ofertas y novedades</label>
-                    <label for="politica_privacidad"><input type="checkbox" name="politica_privacidad"
-                            id="politica_privacidad" required>
-                        Acepto la política de privacidad</label>
-                    <button type="submit">Suscribirse</button>
-                </form>
-            </div>
-        </section>
+        <div class="separador">
 
-        <section class="imagenes">
-            <div class="imagen">
-                <img src="../img/web/landing5.jpg" alt="Imagen 5">
+            <div class="imagenes">
+                <div class="imagen">
+                    <img src="../img/web/landing1.jpg" alt="Imagen 1">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing2.jpg" alt="Imagen 2">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing3.jpg" alt="Imagen 3">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing4.jpg" alt="Imagen 4">
+                </div>
             </div>
-            <div class="imagen">
-                <img src="../img/web/landing6.jpg" alt="Imagen 6">
-            </div>
-            <div class="imagen">
-                <img src="../img/web/landing7.jpg" alt="Imagen 7">
-            </div>
-            <div class="imagen">
-                <img src="../img/web/landing8.jpg" alt="Imagen 8">
-            </div>
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2024 Raíces Viajeras. All rights reserved.</p>
-    </footer>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+            <div class="formulario">
+                <div class="intro-formulario">
+                    <h3>¿Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS en UN AÑO
+                        entero?
+                    </h3>
+                    <ul class="lista-ventajas">
+                        <li>Alojamientos rurales sostenibles</li>
+                        <li>Uso de energías renovables en alojamientos</li>
+                        <li>Apoyo a comunidades locales</li>
+                        <li>Gastronomía con productos locales y de temporada</li>
+                        <li>Autobuses ecológicos</li>
+                        <li>Actividades respetuosas con el medio ambiente</li>
+                        <li>Colaboración con proyectos de economía circular</li>
+                        <li>Educación ambiental para viajeros</li>
+                        <li>Compensación de huella de carbono</li>
+                    </ul>
+                    <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo
+                        haces</p>
+                </div>
+                <div id="registrarse">
+                    <h3>REGÍSTRATE Y EMPIEZA </br> TU AVENTURA</h3>
+                    <form action="#" method="post">
+                        <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+                        <input type="email" name="email" placeholder="Correo Electrónico" required>
+                        <input type="password" name="contrasenia" placeholder="Contraseña" required>
+                        <input type="password" name="repeat_contrasenia" placeholder="Repetir Contraseña" required>
+                        <label for="tipo_viaje">Tipo de Viaje Favorito</label>
+                        <select name="tipo_viaje" id="tipo_viaje" required>
+                            <option value="" disabled selected>Selecciona tu tipo de viaje</option>
+                            <option value="aventura">Aventura</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="gastronomico">Gastronómico</option>
+                            <option value="playa">Playa</option>
+                            <option value="montana">Montaña</option>
+                            <option value="rural">Rural</option>
+                            <option value="urbano">Urbano</option>
+                        </select>
+
+                        <label for="notificaciones"><input type="checkbox" name="notificaciones" id="notificaciones">
+                            Deseo recibir notificaciones sobre ofertas y novedades</label>
+                        <label for="politica_privacidad"><input type="checkbox" name="politica_privacidad"
+                                id="politica_privacidad" required>
+                            Acepto la política de privacidad</label>
+                        <button type="submit">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="imagenes">
+                <div class="imagen">
+                    <img src="../img/web/landing5.jpg" alt="Imagen 5">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing6.jpg" alt="Imagen 6">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing7.jpg" alt="Imagen 7">
+                </div>
+                <div class="imagen">
+                    <img src="../img/web/landing8.jpg" alt="Imagen 8">
+                </div>
+            </div>
+        </div>
+
+        <div class="clear">
+            <p>&copy; 2024 Raíces Viajeras. All rights reserved.</p>
+        </div>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/main.js"></script>
+    </div>
 </body>
 
 </html>
