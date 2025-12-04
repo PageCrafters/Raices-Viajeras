@@ -9,110 +9,145 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="../img/logos/raices-viajeras-logo0.webp" alt="RV Logo">
-            <h1>RAÍCES VIAJERAS</h1>
+    <div class="container-fluid ">
+        <!--HEADER/ LOGO/ TITULO Y MODO-->
+        <div class="row align-items-center">
+            <!-- Logo + título -->
+            <div
+                class="col-12 col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-start order-1">
+                <img src="../img/logos/raices-viajeras-logo0.webp" alt="RV Logo" class="img-fluid me-2"
+                    style="max-width:80px;">
+                <h1 class="mb-0">RAÍCES VIAJERAS</h1>
+                <!-- Botón modo en móviles: junto al logo -->
+                <a onclick="cambiaModoColor()" class="modo-btn d-lg-none ms-3">◑</a>
+            </div>
+            <!-- Mensaje -->
+            <div class="col-12 col-lg-6 mt-3 mt-lg-4 text-center text-lg-start order-3 order-lg-2">
+                <h2 class="titulo mb-lg-4">
+                    CADA VIAJE CON NOSOTROS DEJA HUELLA EN TU MEMORIA, NO EN EL PLANETA
+                </h2>
+            </div>
+            <!-- Botón modo -->
+            <div
+                class="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-end mt-3 mt-lg-0 order-2 order-lg-3">
+                <a onclick="cambiaModoColor()" class="modo-btn d-none d-lg-block">◑</a>
+            </div>
         </div>
-        <div class="mensaje">
-            <h2>CADA VIAJE CON NOSOTROS DEJA HUELLA EN TU MEMORIA,
-                NO EN EL PLANETA</h2>
+        <!--Imágenes Header-->
+        <div class="row g-0 ">
+            <div class="col-6 col-lg-3 imagen">
+                <img src="../img/web/landing1.jpg" alt="Imagen 1" class=" same-height">
+            </div>
+            <div class="col-3 d-none d-lg-block imagen">
+                <img src="../img/web/landing2.jpg" alt="Imagen 2" class="same-height">
+            </div>
+            <div class="col-3 d-none d-lg-block imagen">
+                <img src="../img/web/landing3.jpg" alt="Imagen 3" class=" same-height">
+            </div>
+            <div class="col-6 col-lg-3 imagen">
+                <img src="../img/web/landing4.jpg" alt="Imagen 4" class=" same-height">
+            </div>
         </div>
-        <a onclick="cambiaModoColor()">◑</a>
-    </header>
-
-    <main>
-        <section class="imagenes">
-            <div class="imagen">
-                <img src="img/landing1.jpg" alt="Imagen 1">
-            </div>
-            <div class="imagen">
-                <img src="img/landing2.jpg" alt="Imagen 2">
-            </div>
-            <div class="imagen">
-                <img src="img/landing3.jpg" alt="Imagen 3">
-            </div>
-            <div class="imagen">
-                <img src="img/landing4.jpg" alt="Imagen 4">
-            </div>
-        </section>
-
-        <section class="formulario">
-            <div class="intro-formulario">
+        <!--IMain -->
+        <div class="row d-flex flex-lg-row align-items-start" id="formulario">
+            <!-- Deskpot -->
+            <div class="intro-formulario col-6 d-none d-lg-block">
                 <h3>¿Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS en UN AÑO entero?
                 </h3>
                 <ul class="lista-ventajas">
                     <li>Alojamientos rurales sostenibles</li>
                     <li>Uso de energías renovables en alojamientos</li>
+                    <li>Actividades respetuosas con el medio ambiente</li>
                     <li>Apoyo a comunidades locales</li>
                     <li>Gastronomía con productos locales y de temporada</li>
                     <li>Autobuses ecológicos</li>
-                    <li>Actividades respetuosas con el medio ambiente</li>
-                    <li>Colaboración con proyectos de economía circular</li>
                     <li>Educación ambiental para viajeros</li>
                     <li>Compensación de huella de carbono</li>
                 </ul>
                 <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo haces</p>
             </div>
-            <div id="registrarse">
-                <h3>REGÍSTRATE Y EMPIEZA</br>TU AVENTURA</h3>
-                <form id="form-registro" action="#" method="post">
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
-                    <p class="error" id="error-nombre"></p>
 
-                    <input type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
-                    <p class="error" id="error-correo"></p>
+            <!-- Móvil -->
+            <div class="intro-formulario col-12 d-lg-none">
+                <h3>¿Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS en UN AÑO entero?
+                </h3>
+                <ul class="lista-ventajas">
+                    <li>Alojamientos rurales sostenibles</li>
+                    <li>Uso de energías renovables en alojamientos</li>
+                    <li>Actividades respetuosas con el medio ambiente</li>
+                    <li>Apoyo a comunidades locales</li>
+                </ul>
+            </div>
 
-                    <input type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
-                    <p class="error" id="error-contrasenia"></p>
-
-                    <input type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
-                    <p class="error" id="error-confirmar_contrasenia"></p>
-
-                    <label for="tipo_viaje">Tipo de Viaje Favorito
-                    <select name="tipo_viaje" id="tipo_viaje" required>
-                        <option value="" disabled selected>Selecciona tu tipo de viaje</option>
-                        <option value="aventura">Aventura</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="gastronomico">Gastronómico</option>
-                        <option value="playa">Playa</option>
-                        <option value="montana">Montaña</option>
-                        <option value="rural">Rural</option>
-                        <option value="urbano">Urbano</option>
-                    </select></label>
-                    <p class="error" id="error-tipo_viaje"></p>
-
-                    <label for="notificaciones"><input type="checkbox" name="notificaciones" id="notificaciones">
-                        Deseo recibir notificaciones sobre ofertas y novedades</label>
-                    <label for="politica_privacidad"><input type="checkbox" name="politica_privacidad"
-                            id="politica_privacidad" required>
-                        Acepto la política de privacidad</label>
+            <!--Formulario-->
+            <div id="registrarse" class="col-12 col-lg-6 ">
+                <h3>"APÚNTATE HOY <br> Y SÉ PARTE DEL INICIO"</h3>
+                <form action="#" method="post">
+                    <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+                    <input type="email" name="email" placeholder="Correo Electrónico" required>
+                    <input type="password" name="contrasenia" placeholder="Contraseña" required>
+                    <input type="password" name="repeat_contrasenia" placeholder="Repetir Contraseña" required>
+                    <div id="viaje_favorito">
+                        <label for="tipo_viaje" id="tipo">Tipo de Viaje Favorito</label>
+                        <select name="tipo_viaje" id="tipo_viaje" required>
+                            <option value="" disabled selected>Selecciona tu tipo de viaje</option>
+                            <option value="aventura">Aventura</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="gastronomico">Gastronómico</option>
+                            <option value="playa">Playa</option>
+                            <option value="montana">Montaña</option>
+                            <option value="rural">Rural</option>
+                            <option value="urbano">Urbano</option>
+                        </select>
+                    </div>
+                    <label for="notificaciones">
+                        <input type="checkbox" name="notificaciones" id="notificaciones">
+                        Deseo recibir notificaciones sobre ofertas y novedades
+                    </label>
+                    <label for="politica_privacidad">
+                        <input type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
+                        Acepto la política de privacidad
+                    </label>
                     <button type="submit">Suscribirse</button>
                 </form>
             </div>
-        </section>
+            <!-- Móvil -->
+            <div class="intro-formulario col-12 d-lg-none">
+                <ul class="lista-ventajas">
+                    <li>Gastronomía con productos locales y de temporada</li>
+                    <li>Autobuses ecológicos</li>
+                    <li>Educación ambiental para viajeros</li>
+                    <li>Compensación de huella de carbono</li>
+                </ul>
+                <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo haces</p>
 
-        <section class="imagenes">
-            <div class="imagen">
-                <img src="img/landing5.jpg" alt="Imagen 5">
+                </ul>
             </div>
-            <div class="imagen">
-                <img src="img/landing6.jpg" alt="Imagen 6">
+        </div>
+        <!-- Imágenes Footer -->
+        <div class="row g-0">
+            <div class="imagen col-6 col-lg-3">
+                <img src="../img/web/landing5.jpg" alt="Imagen 5" class=" same-height">
             </div>
-            <div class="imagen">
-                <img src="img/landing7.jpg" alt="Imagen 7">
+            <div class="imagen col-6 col-lg-3">
+                <img src="../img/web/landing6.jpg" alt="Imagen 6" class=" same-height">
             </div>
-            <div class="imagen">
-                <img src="img/landing8.jpg" alt="Imagen 8">
+            <div class="imagen col-3 d-none d-lg-block">
+                <img src="../img/web/landing7.jpg" alt="Imagen 7" class=" same-height">
             </div>
-        </section>
-    </main>
+            <div class="imagen col-3 d-none d-lg-block">
+                <img src="../img/web/landing8.jpg" alt="Imagen 8" class=" same-height">
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Raíces Viajeras. All rights reserved.</p>
-    </footer>
+    <div class="clear">
+        <p>&copy; 2026 Raíces Viajeras. All rights reserved.</p>
+    </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    </div>
 </body>
 
 </html>
