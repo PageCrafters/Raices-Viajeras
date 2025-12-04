@@ -12,7 +12,7 @@
   --color-formulario: #56a64d;
   --color-parrafo: #800020;
   /* Fondo con imagen en modo claro */
-  --bg-formulario: rgba(255, 255, 255, 0.6) url("../../img/web/landing11.jpg");
+  --bg-formulario: rgba(255, 255, 255, 0.6) url("../img/web/landing11.jpg");
 }
 .dark-mode {
   --color-bg: #121212;
@@ -24,7 +24,7 @@
   --color-formulario: #56a64d;
   --color-parrafo: #ffffff;
   /* Fondo más oscuro para destacar letras blancas */
-  --bg-formulario: rgba(80, 80, 80, 0.3) url("../../img/web/landing12.jpg");
+  --bg-formulario: rgba(80, 80, 80, 0.3) url("../img/web/landing12.jpg");
 }
 
 body {
