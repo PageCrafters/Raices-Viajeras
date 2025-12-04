@@ -1,43 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 :root {
     --color-bg: #ffffff;
     --color-text: #000000;
-    --color-detalles: #ffb79f;
+    --color-detalles: #800020;
     --color-principal: #28a745;
-    --color-h1: #55ff00;
+    --color-h1: #228b22;
     --color-sombra: #00571e;
     --color-formulario: #56a64d;
+    --color-parrafo: #800020;
+    /* Fondo con imagen en modo claro */
+    --bg-formulario: rgba(255, 255, 255, 0.6) url("../img/landing11.jpg");
 }
 .dark-mode {
     --color-bg: #121212;
     --color-text: #ffffff;
     --color-detalles: #9b4d00;
     --color-principal: #34d058;
-    --color-h1: #82ff94;
+    --color-h1: #2e8b57;
     --color-sombra: #575757;
     --color-formulario: #56a64d;
+    --color-parrafo: #ffffff;
+    /* Fondo más oscuro para destacar letras blancas */
+    --bg-formulario: rgba(80, 80, 80, 0.3) url("../img/landing12.jpg");
 }
 
-body{
+body {
     background-color: var(--color-bg) !important;
     color: var(--color-text) !important;
-    transition: background-color .3s, color .3s !important;
+    transition: background-color 0.3s, color 0.3s !important;
 }
-h1{
+h1 {
     color: var(--color-h1) !important;
+    font-size: 1.5em !important;
 }
 
-header{
+header {
     padding: 1em;
-    border-bottom: 2px solid var(--color-principal);
-    margin-bottom: 1em;
+    border-bottom: 4px solid var(--color-principal);
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header a {
     font-size: 3em;
-    color: var(--color-text)!important;
+    color: var(--color-text) !important;
     text-decoration: none;
+    text-align: center;
 }
 header a:hover {
     cursor: pointer;
@@ -45,30 +59,32 @@ header a:hover {
 
 .logo-container {
     width: auto;
-    height: 5em;
-    margin: auto;
+    height: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
+    text-align: center;
 }
 
-.logo-container img{
+.logo-container img {
     max-width: 100%;
     max-height: 100%;
     margin-right: 1em;
 }
 
-main{
+.mensaje h2{
+    font-size: 1.5em !important;
+}
+
+
+main {
     padding-right: 1em;
     padding-left: 1em;
     width: 100%;
 }
 
-.mensaje{
-    text-align: center;
-}
-
-.imagenes{
+.imagenes {
     display: flex;
     flex-direction: row;
     /* Extiende el contenedor hasta los bordes de la página compensando el padding del <main> (1em) */
@@ -86,7 +102,7 @@ main{
     margin: 0;
     display: block;
 }
-.imagenes .imagen img{
+.imagenes .imagen img {
     /* Rellenar su contenedor y recortar si hace falta */
     width: 100%;
     height: 100%;
@@ -94,7 +110,7 @@ main{
     display: block;
 }
 
-.formulario{
+.formulario {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -103,26 +119,28 @@ main{
     width: calc(100% + 2em);
     margin-left: -1em;
     margin-right: -1em;
-    background:
-        linear-gradient(var(--color-detalles), var(--color-detalles)),
-        url('../../img/web/landing10.jpg');
+    background: var(--bg-formulario);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: overlay;
-
 }
 
-.intro-formulario{
+.intro-formulario {
     display: flex;
     flex-direction: column;
     width: auto;
 }
+h3 {
+    width: 90%;
+    text-align: center;
+    font-weight: bold;
+}
 
-#registrarse{
+#registrarse {
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 55%;
     background-color: var(--color-formulario);
     padding: 1em;
     border-radius: 10px;
@@ -131,12 +149,27 @@ main{
     margin-top: -2.3em;
     margin-right: 1em;
     z-index: 2;
-    box-shadow: var(--color-sombra) 0 4px 6px -1px;
+    box-shadow: var(--color-sombra) 0 8px 16px -2px,
+    rgba(0, 0, 0, 0.2) 0 12px 24px -4px;
 }
-#registrarse form{
+
+#registrarse h3{
+    margin-top: 0.5em;
+}
+
+#registrarse form {
+    margin-top: 1em;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.3em;
+}
+
+#registrarse form select{
+    padding-left: 1.3em;
+    padding-right: 1.3em;
+    font-size: 1em;
+    margin-left: 1.3em;
+
 }
 
 #registrarse form button {
@@ -148,10 +181,18 @@ main{
     font-weight: bold;
     cursor: pointer;
 }
-
-
-
-footer{
+.lista-ventajas {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: var(--color-parrafo);
+}
+footer {
     padding: 1em;
     background-color: var(--color-principal);
     text-align: center;
