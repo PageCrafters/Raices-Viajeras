@@ -1,5 +1,5 @@
 import * as ui from './ui.js';
-import * as v from "./validaciones";
+import * as v from "./validaciones.js";
 
 /**
  * Función para inicializar el controlador del formulario de registro.
@@ -12,6 +12,28 @@ export function initializeFormController() {
     const confirmarContrasenaInput = document.getElementById('confirmar_contrasenia');
     const tipoViajeSelect = document.getElementById('tipo_viaje');
     const privacidadCheckbox = document.getElementById('politica_privacidad');
+
+/*
+    // Comprobación de elementos críticos
+    if (!form) {
+        console.error('initializeFormController: elemento #form-registro no encontrado. Abortando inicialización.');
+        return;
+    }
+
+    if (!nombreInput || !correoInput || !contrasenaInput || !confirmarContrasenaInput || !tipoViajeSelect || !privacidadCheckbox) {
+        console.error('initializeFormController: uno o más campos del formulario no se encontraron. Revise los IDs en el HTML.');
+        // Mostrar cuáles faltan para facilitar la depuración
+        const missing = [];
+        if (!nombreInput) missing.push('nombre');
+        if (!correoInput) missing.push('correo');
+        if (!contrasenaInput) missing.push('contrasenia');
+        if (!confirmarContrasenaInput) missing.push('confirmar_contrasenia');
+        if (!tipoViajeSelect) missing.push('tipo_viaje');
+        if (!privacidadCheckbox) missing.push('politica_privacidad');
+        console.warn('IDs faltantes:', missing.join(', '));
+        return;
+    }
+*/
 
     // Validación en tiempo real para el campo nombre
     nombreInput.addEventListener('input', () => {

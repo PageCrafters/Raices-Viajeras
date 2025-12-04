@@ -82,13 +82,20 @@
             <!--Formulario-->
             <div id="registrarse" class="col-12 col-lg-6 ">
                 <h3>"APÚNTATE HOY <br> Y SÉ PARTE DEL INICIO"</h3>
-                <form action="#" method="post">
-                    <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
-                    <input type="email" name="email" placeholder="Correo Electrónico" required>
-                    <input type="password" name="contrasenia" placeholder="Contraseña" required>
-                    <input type="password" name="repeat_contrasenia" placeholder="Repetir Contraseña" required>
-                    <div id="viaje_favorito">
-                        <label for="tipo_viaje" id="tipo">Tipo de Viaje Favorito</label>
+                <form id="form-registro" action="#" method="post">
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+                    <p class="error" id="error-nombre"></p>
+
+                    <input type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
+                    <p class="error" id="error-correo"></p>
+
+                    <input type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
+                    <p class="error" id="error-contrasena"></p>
+
+                    <input type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
+                    <p class="error" id="error-confirmar-contrasena"></p>
+
+                    <label for="tipo_viaje" id="tipo">Tipo de Viaje Favorito
                         <select name="tipo_viaje" id="tipo_viaje" required>
                             <option value="" disabled selected>Selecciona tu tipo de viaje</option>
                             <option value="aventura">Aventura</option>
@@ -99,7 +106,9 @@
                             <option value="rural">Rural</option>
                             <option value="urbano">Urbano</option>
                         </select>
-                    </div>
+                    </label>
+                    <p class="error" id="error-tipo-viaje"></p>
+
                     <label for="notificaciones">
                         <input type="checkbox" name="notificaciones" id="notificaciones">
                         Deseo recibir notificaciones sobre ofertas y novedades
@@ -108,6 +117,8 @@
                         <input type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
                         Acepto la política de privacidad
                     </label>
+                    <p class="error" id="error-privacidad"></p>
+
                     <button type="submit">Suscribirse</button>
                 </form>
             </div>
@@ -120,8 +131,6 @@
                     <li>Compensación de huella de carbono</li>
                 </ul>
                 <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo haces</p>
-
-                </ul>
             </div>
         </div>
         <!-- Imágenes Footer -->
@@ -146,8 +155,7 @@
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    </div>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
