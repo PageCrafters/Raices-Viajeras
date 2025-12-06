@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-detalles: #800020;
+  --color-principal: #28a745;
+  --color-h1: #228b22;
+  --color-sombra: #00571e;
+  --color-formulario: #56a64d;
+  --color-parrafo: #800020;
+  /* Fondo con imagen en modo claro */
+  --bg-formulario: rgba(255, 255, 255, 0.6) url("../img/landing11.jpg");
+}
+.dark-mode {
+  --color-bg: #121212;
+  --color-text: #ffffff;
+  --color-detalles: #9b4d00;
+  --color-principal: #34d058;
+  --color-h1: #2e8b57;
+  --color-sombra: #575757;
+  --color-formulario: #56a64d;
+  --color-parrafo: #ffffff;
+  /* Fondo más oscuro para destacar letras blancas */
+  --bg-formulario: rgba(80, 80, 80, 0.3) url("../img/landing12.jpg");
+}
+
+body {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+  transition: background-color 0.3s, color 0.3s !important;
+  width: 100%;
+}
+h1 {
+  color: var(--color-h1) !important;
+  font-size: 1.25em !important;
+}
+.titulo {
+  line-height: 1.4;
+  color: var(--color-text) !important;
+}
+
+.modo-btn {
+  font-size: 2rem; /* más grande */
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-text) !important;
+  transition: transform 0.2s ease;
+}
+
+.modo-btn:hover {
+  transform: scale(1.2); /* efecto al pasar el ratón */
+}
+
+.mensaje h2 {
+  font-size: 1.3em !important;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.same-height {
+  height: 150px;
+  object-fit: cover; /* recorta la imagen para que todas llenen el espacio */
+  width: 100%; /* ocupa todo el ancho de su columna */
+}
+#formulario {
+  width: 100%;
+  margin: 0;
+  background: var(--bg-formulario);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+}
+
+.intro-formulario{
+   margin-bottom: 0.8em;
+}
+
+.intro-formulario h3 {
+  margin-top: 0.8em;
+  line-height: 1.5;
+}
+h3 {
+  width: 90%;
+  text-align: center;
+}
+
+#registrarse h3 {
+  margin-top: 1em;
+  line-height: 1.5;
+}
+#registrarse {
+  margin-top: -1.5em;
+  background-color: var(--color-formulario);
+  padding: 1em;
+  border-radius: 10px;
+  color: var(--color-bg);
+  box-shadow: var(--color-sombra) 0 8px 16px -2px,
+    rgba(0, 0, 0, 0.2) 0 12px 24px -4px;
+  min-height: 530px;
+}
+
+#viaje_favorito {
+  display: flex;
+}
+#tipo {
+  width: 40%;
+}
+#tipo_viaje {
+  width: 60%;
+}
+#registrarse form {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#registrarse form select {
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+  font-size: 1em;
+  margin-left: 1.3em;
+}
+#registrarse form button {
+  background-color: var(--color-bg);
+  color: var(--color-principal);
+  border: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.lista-ventajas {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: var(--color-parrafo);
+}
+.clear {
+  padding: 1em;
+  text-align: center;
+  color: var(--color-bg);
+  width: 100%;
+}
+/* Solo en pantallas grandes (lg ≥ 992px) */
+@media (min-width: 992px) {
+  #registrarse {
+    width: 46%;         /*ancho personalizado en grande */
+  }
+}
