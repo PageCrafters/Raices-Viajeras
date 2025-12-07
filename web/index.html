@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raíces Viajeras - Landing</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-personalizada">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="../img/logos/raices-viajeras-logo0.webp" alt="RV" style="max-width:56px;" class="me-2">
+                <span>RAÍCES VIAJERAS</span>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-link d-lg-none btn-modo" onclick="cambiaModoColor()">◑</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="btn cambiar-tema d-none d-lg-inline" onclick="cambiaModoColor()">◑</a>
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tit-form">Suscribirse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <!-- Encabezado: texto a la izquierda, 4 imágenes a la derecha -->
+        <header class="encabezado">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-7">
+                    <h2 class="display-6">CADA VIAJE CON NOSOTROS DEJA HUELLA EN TU MEMORIA, NO EN EL PLANETA</h2>
+                    <p class="lead">Viajes sostenibles, alojamientos con energía renovable y experiencias que apoyan a comunidades locales.</p>
+                    <div class="mt-3">
+                        <a href="#tit-form" class="btn btn-primario me-2">Apúntate hoy</a>
+                        <a href="#" class="btn btn-primario-outline">Conócenos</a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 d-none d-lg-block">
+                    <div class="row g-2 galeria">
+                        <div class="col-6"><img src="img/landing1.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing4.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing5.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing6.jpg" alt="img"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Intro (hero inverso): 4 imágenes a la izquierda, texto a la derecha -->
+        <section id="formulario" class="encabezado">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-5 d-none d-lg-block">
+                    <div class="row g-2 galeria">
+                        <div class="col-6"><img src="img/landing2.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing3.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing7.jpg" alt="img"></div>
+                        <div class="col-6"><img src="img/landing8.jpg" alt="img"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <h3>¿Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS en UN AÑO entero?</h3>
+                    <ul class="lista-beneficios">
+                        <li>Alojamientos rurales sostenibles</li>
+                        <li>Uso de energías renovables en alojamientos</li>
+                        <li>Actividades respetuosas con el medio ambiente</li>
+                        <li>Apoyo a comunidades locales</li>
+                        <li>Gastronomía con productos locales y de temporada</li>
+                        <li>Autobuses ecológicos</li>
+                        <li>Educación ambiental para viajeros</li>
+                        <li>Compensación de huella de carbono</li>
+                    </ul>
+                    <p>Viajar con nosotros no solo es descubrir nuevos destinos, es cuidar de ellos mientras lo haces</p>
+                </div>
+            </div>
+
+            <!-- Formulario centrado -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-12 col-lg-6">
+                    <div class="tarjeta-cta" id="tit-form">
+                        <h3>"APÚNTATE HOY <br> Y SÉ PARTE DEL INICIO"</h3>
+                        <form id="form-registro" action="#" method="post">
+                            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+                            <p class="error" id="error-nombre"></p>
+
+                            <input class="form-control" type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
+                            <p class="error" id="error-correo"></p>
+
+                            <div class="password-wrapper">
+                                <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('contrasenia')">👁️</button>
+                            </div>
+                            <p class="error" id="error-contrasena"></p>
+
+                            <div class="password-wrapper">
+                                <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia')">👁️</button>
+                            </div>
+                            <p class="error" id="error-confirmar-contrasena"></p>
+
+                            <label for="tipo_viaje" id="tipo">Tipo de Viaje Favorito
+                                <select class="form-select" name="tipo_viaje" id="tipo_viaje" required>
+                                    <option value="" disabled selected>Selecciona tu tipo de viaje</option>
+                                    <option value="aventura">Aventura</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="gastronomico">Gastronómico</option>
+                                    <option value="playa">Playa</option>
+                                    <option value="montana">Montaña</option>
+                                    <option value="rural">Rural</option>
+                                    <option value="urbano">Urbano</option>
+                                </select>
+                            </label>
+                            <p class="error" id="error-tipo-viaje"></p>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="notificaciones" id="notificaciones">
+                                <label class="form-check-label" for="notificaciones">Deseo recibir notificaciones sobre ofertas y novedades</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
+                                <label class="form-check-label" for="politica_privacidad">Acepto la política de privacidad</label>
+                            </div>
+                            <p class="error" id="error-privacidad"></p>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primario">Suscribirse</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="pie">
+        <p>&copy; 2026 Raíces Viajeras. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

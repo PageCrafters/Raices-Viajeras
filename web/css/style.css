@@ -1,158 +1,352 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-* {
-  font-family: "Roboto", sans-serif;
-}
+﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
+
+/* Sistema de variables para temas */
 :root {
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-detalles: #800020;
-  --color-principal: #28a745;
-  --color-h1: #228b22;
-  --color-sombra: #00571e;
-  --color-formulario: #56a64d;
-  --color-parrafo: #800020;
-  /* Fondo con imagen en modo claro */
-  --bg-formulario: rgba(255, 255, 255, 0.6) url("../img/landing11.jpg");
+  --bg: #f6fbf6;
+  /* fondo claro, tono crema-verdoso */
+  --text: #233029;
+  /* texto principal oscuro */
+  --muted: #5b6b5b;
+  --green-500: #2f9e44;
+  /* verde destacado */
+  --green-300: #8fd19b;
+  --brown-700: #6b4226;
+  /* marrón para detalles en modo claro */
+  --card-bg: #ffffff;
+  --glass: rgba(255, 255, 255, 0.65);
+  --shadow: 0 8px 24px rgba(35, 48, 41, 0.08);
+  --btn-text: #ffffff;
+  --focus: rgba(47, 158, 68, 0.18);
 }
+
 .dark-mode {
-  --color-bg: #121212;
-  --color-text: #ffffff;
-  --color-detalles: #9b4d00;
-  --color-principal: #34d058;
-  --color-h1: #2e8b57;
-  --color-sombra: #575757;
-  --color-formulario: #56a64d;
-  --color-parrafo: #ffffff;
-  /* Fondo más oscuro para destacar letras blancas */
-  --bg-formulario: rgba(80, 80, 80, 0.3) url("../img/landing12.jpg");
+  --bg: #070707;
+  /* fondo oscuro */
+  --text: #e8f8ea;
+  /* texto en oscuro */
+  --muted: #9aa69a;
+  --green-500: #34d058;
+  /* verde brillante en oscuro */
+  --green-300: #66e07f;
+  --brown-700: #000000;
+  /* en modo oscuro el "marrón" se vuelve negro */
+  --card-bg: #0f0f0f;
+  --glass: rgba(10, 10, 10, 0.6);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --btn-text: #ffffff;
+  --focus: rgba(52, 208, 88, 0.12);
+}
+
+/* Base */
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%
 }
 
 body {
-  background-color: var(--color-bg) !important;
-  color: var(--color-text) !important;
-  transition: background-color 0.3s, color 0.3s !important;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .35s ease, color .35s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Navbar */
+.navbar-personalizada {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(220, 245, 230, 0.75));
+  padding: .9rem 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(35, 48, 41, 0.15);
+  border-bottom: 1px solid rgba(47, 158, 68, 0.2);
+}
+
+.dark-mode .navbar-personalizada {
+  background: linear-gradient(90deg, rgba(15, 70, 40, 0.9), rgba(10, 50, 30, 0.85));
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(52, 208, 88, 0.3);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: .6px;
+  color: var(--green-500) !important
+}
+
+.nav-link {
+  color: var(--text)!important;
+}
+
+.cambiar-tema {
+  border: 1px solid transparent;
+  background: var(--green-500);
+  color: var(--btn-text);
+  padding: .45rem .65rem;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+/* Encabezado */
+.encabezado {
+  padding: 2.4rem 1rem;
+}
+
+.encabezado .lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 70ch;
+  margin-top: .5rem
+}
+
+/* Galería: imágenes cuadradas */
+.galeria img {
+  display: block;
   width: 100%;
-}
-h1 {
-  color: var(--color-h1) !important;
-  font-size: 1.25em !important;
-}
-.titulo {
-  line-height: 1.4;
-  color: var(--color-text) !important;
+  max-width: 100%;
+  aspect-ratio: 1 / 1; /* fuerza cuadrado */
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.modo-btn {
-  font-size: 2rem; /* más grande */
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--color-text) !important;
-  transition: transform 0.2s ease;
+/* Tarjeta CTA */
+.tarjeta-cta {
+  background: linear-gradient(180deg, #c8e6c9, #a5d6a7);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(47, 158, 68, 0.3);
 }
 
-.modo-btn:hover {
-  transform: scale(1.2); /* efecto al pasar el ratón */
+.dark-mode .tarjeta-cta {
+  background: linear-gradient(180deg, #2d5a2d, #1e4620);
+  border: 1px solid rgba(52, 208, 88, 0.4);
 }
 
-.mensaje h2 {
-  font-size: 1.3em !important;
-  text-align: center;
-  line-height: 1.5;
+.tarjeta-cta h3 {
+  margin-top: 0;
+  font-weight: 700;
+  color: rgba(35, 48, 41, 0.9);
 }
 
-.same-height {
-  height: 150px;
-  object-fit: cover; /* recorta la imagen para que todas llenen el espacio */
-  width: 100%; /* ocupa todo el ancho de su columna */
-}
-#formulario {
-  width: 100%;
-  margin: 0;
-  background: var(--bg-formulario);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
+.dark-mode .tarjeta-cta h3 {
+  color: #ffffff;
 }
 
-.intro-formulario{
-   margin-bottom: 0.8em;
+.tarjeta-cta label {
+  color: rgba(35, 48, 41, 0.85);
+  margin-top: .75rem;
+  display: block;
+  font-weight: 500;
 }
 
-.intro-formulario h3 {
-  margin-top: 0.8em;
-  line-height: 1.5;
-}
-h3 {
-  width: 90%;
-  text-align: center;
+.dark-mode .tarjeta-cta label {
+  color: #ffffff;
 }
 
-#registrarse h3 {
-  margin-top: 1em;
-  line-height: 1.5;
-}
-#registrarse {
-  margin-top: -1.5em;
-  background-color: var(--color-formulario);
-  padding: 1em;
-  border-radius: 10px;
-  color: var(--color-bg);
-  box-shadow: var(--color-sombra) 0 8px 16px -2px,
-    rgba(0, 0, 0, 0.2) 0 12px 24px -4px;
-  min-height: 530px;
+.tarjeta-cta .form-check-label {
+  color: rgba(35, 48, 41, 0.85);
 }
 
-#viaje_favorito {
-  display: flex;
+.dark-mode .tarjeta-cta .form-check-label {
+  color: #ffffff;
 }
-#tipo {
-  width: 40%;
+
+.lista-beneficios {
+  padding-left: 1rem
 }
-#tipo_viaje {
-  width: 60%;
+
+/* Form controls override */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid rgba(47, 158, 68, 0.3);
+  padding: .6rem .75rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text)!important;
 }
-#registrarse form {
-  margin-top: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(52, 208, 88, 0.5);
+  color: #e8f8ea!important;
 }
-#registrarse form select {
-  padding-left: 1.3em;
-  padding-right: 1.3em;
-  font-size: 1em;
-  margin-left: 1.3em;
+
+.form-control::placeholder {
+  color: rgba(35, 48, 41, 0.6);
 }
-#registrarse form button {
-  background-color: var(--color-bg);
-  color: var(--color-principal);
+
+.dark-mode .form-control::placeholder {
+  color: rgba(232, 248, 234, 0.7);
+}
+
+/* Select opciones en modo claro */
+.form-select option {
+  color: #233029;
+  background: #ffffff;
+}
+
+/* Select opciones en modo oscuro */
+.dark-mode .form-select option {
+  color: #ffffff;
+  background: #2a2a2a;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 6px var(--focus);
+  border-color: var(--green-500);
+  outline: none
+}
+
+/* Password wrapper para el icono del ojo */
+.password-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
   border: none;
-  padding: 0.5em;
-  border-radius: 5px;
-  font-weight: bold;
   cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
 }
-.lista-ventajas {
-  font-weight: bold;
-  font-size: 1.2em;
-  margin-top: 1em;
+
+.toggle-password:hover {
+  opacity: 0.7;
 }
-p {
+
+.dark-mode .toggle-password {
+  color: #e8f8ea;
+}
+
+.btn-primario {
+  background: var(--green-500);
+  color: var(--btn-text);
+  border: none;
+  padding: .6rem .9rem;
+  border-radius: 10px;
+  font-weight: 700
+}
+
+.btn-primario-outline {
+  background: transparent;
+  color: var(--green-500);
+  border: 2px solid var(--green-500);
+  padding: .45rem .85rem;
+  border-radius: 10px;
+  font-weight: 700
+}
+
+.pie {
+  padding: 1.6rem;
   text-align: center;
-  font-weight: bold;
-  font-size: 1.2em;
-  color: var(--color-parrafo);
+  color: var(--muted);
+  background: transparent
 }
-.clear {
-  padding: 1em;
-  text-align: center;
-  color: var(--color-bg);
-  width: 100%;
+
+/* Pequeño helper */
+.btn-modo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .25rem .5rem;
+  border-radius: 6px;
+  cursor: pointer
 }
-/* Solo en pantallas grandes (lg ≥ 992px) */
-@media (min-width: 992px) {
+
+/* Responsive adjustments */
+@media(min-width:992px) {
+  .encabezado {
+    padding: 3.2rem 2rem
+  }
+
+  /* las imágenes mantienen ratio 1:1 y se adaptan al ancho de la columna */
+
   #registrarse {
-    width: 46%;         /*ancho personalizado en grande */
+    min-height: 420px
+  }
+}
+
+/* Enlaces y acentos con marrón en modo claro, negro en oscuro */
+.acento-marron {
+  color: var(--brown-700)
+}
+
+/* Accessibility tweaks */
+button,
+input,
+select,
+a {
+  transition: all .18s ease
+}
+
+/* Evitar overflow horizontal causado por imágenes */
+/* Asegura que las imágenes no excedan el ancho del contenedor y se recorten correctamente */
+.container-fluid,
+.encabezado,
+.galeria,
+.row {
+  overflow-x: hidden;
+}
+
+.imagen {
+  padding: 0;
+  overflow: hidden;
+}
+
+.imagen img,
+.galeria img,
+.altura-igual {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1; /* mantener cuadrado */
+  object-fit: cover;
+}
+
+/* Mantener relación cuadrada y evitar alturas fijas en responsive */
+@media(min-width:992px) {
+  /* en desktop las imágenes usan aspect-ratio 1:1 */
+  .galeria img, .altura-igual { aspect-ratio: 1/1; }
+}
+
+@media(max-width:991px) {
+  /* en móviles las imágenes mantienen ratio cuadrado y escalan */
+  .galeria img, .altura-igual { aspect-ratio: 1/1; }
+}
+
+/* Si por alguna razón hay contenido que continúe generando scroll, asegurar que el body lo recorte */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Formulario centrado - asegurar máximo ancho y centrado */
+.tarjeta-cta {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  .tarjeta-cta {
+    max-width: 520px;
   }
 }

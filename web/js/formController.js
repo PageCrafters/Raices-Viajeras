@@ -63,11 +63,17 @@ export function initializeFormController() {
         const df = ui.obtenerDatosFormulario();
 
         const contrasena = df.contrasena;
+        const confirmarContrasena = df.confirmarContrasena;
 
         if (!v.validarContrasena(contrasena)) {
             ui.mostrarError('error-contrasena', 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.');
         } else {
             ui.mostrarError('error-contrasena', '');
+        }
+        if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
+            ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
+        } else {
+            ui.mostrarError('error-confirmar-contrasena', '');
         }
     });
 
