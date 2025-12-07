@@ -58,13 +58,22 @@ p {
     margin: 0.75rem 0 1.25rem;
     font-size: 1.2em;
 }
-.wireframe img {
-
+#boceto-lapiz{
     width: 100%;
-
+}
+#boceto-lapiz > img {
+    width: 100%;
+}
+.wireframe img {
+    width: 100%;
     border-radius: 8px;
 }
 .wireframe-movil{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.wireframe-movil-final{
     display: flex;
     justify-content: center;
     width: 100%;
