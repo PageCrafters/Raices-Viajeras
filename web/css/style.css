@@ -70,6 +70,11 @@ body {
   background: linear-gradient(90deg, rgba(15, 70, 40, 0.9), rgba(10, 50, 30, 0.85));
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(52, 208, 88, 0.3);
+    color: var(--text); /* usa tu variable clara, por ejemplo #e8f8ea */
+
+}
+.dark-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(232, 248, 234, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .navbar-brand {
@@ -81,6 +86,7 @@ body {
 .nav-link {
   color: var(--text)!important;
 }
+
 
 .cambiar-tema {
   border: 1px solid transparent;

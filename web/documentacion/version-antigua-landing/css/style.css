@@ -80,7 +80,7 @@ h1 {
 }
 
 .intro-formulario h3 {
-  margin-top: 0.8em;
+  margin-top: 2em;
   line-height: 1.5;
 }
 h3 {
@@ -95,28 +95,25 @@ h3 {
 #registrarse {
   margin-top: -1.5em;
   background-color: var(--color-formulario);
-  padding: 1em;
+  padding: 0.5em;
   border-radius: 10px;
   color: var(--color-bg);
   box-shadow: var(--color-sombra) 0 8px 16px -2px,
     rgba(0, 0, 0, 0.2) 0 12px 24px -4px;
-  min-height: 530px;
 }
 
-#viaje_favorito {
-  display: flex;
-}
 #tipo {
-  width: 40%;
+  display:flex;
+  width: 100%;
 }
 #tipo_viaje {
-  width: 60%;
+  width: 70%;
 }
 #registrarse form {
   margin-top: 1em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
 }
 #registrarse form select {
   padding-left: 1.3em;
