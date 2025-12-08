@@ -89,7 +89,6 @@ body {
   padding: .45rem .65rem;
   border-radius: 8px;
   font-weight: 600;
-  box-shadow: var(--shadow);
 }
 
 /* Encabezado */
