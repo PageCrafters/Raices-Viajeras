@@ -78,6 +78,9 @@ p {
     justify-content: center;
     width: 100%;
 }
+.wireframe-movil-final img{
+       width: 60%;
+}
 .wireframe-movil img {
     width: 60%;
 }
