@@ -70,7 +70,7 @@ body {
   background: linear-gradient(90deg, rgba(15, 70, 40, 0.9), rgba(10, 50, 30, 0.85));
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(52, 208, 88, 0.3);
-    color: var(--text); /* usa tu variable clara, por ejemplo #e8f8ea */
+  color: var(--text);
 
 }
 .dark-mode .navbar-toggler-icon {
