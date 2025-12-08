@@ -1,0 +1,19 @@
+{
+  "name": "raices-viajeras",
+  "version": "1.0.0",
+  "description": "**Aplicación web para una agencia de viajes ecológicos y sostenibles.** Promueve el turismo responsable y facilita la reserva de experiencias respetuosas con el medio ambiente.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --timeout 20000 web/tests/TestUnit/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.3.3",
+    "edgedriver": "^6.2.0",
+    "mocha": "^10.8.2",
+    "selenium-webdriver": "^4.39.0"
+  }
+}
