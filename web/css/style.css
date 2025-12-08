@@ -138,6 +138,7 @@ body {
   margin-top: 0;
   font-weight: 700;
   color: rgba(35, 48, 41, 0.9);
+  text-align: center;
 }
 
 .dark-mode .tarjeta-cta h3 {
