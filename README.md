@@ -160,5 +160,5 @@ Este proyecto se publica bajo licencia **MIT**, permitiendo su uso y modificaci�
 
 **Raíces Viajeras - Agencia de Turismo Sostenible**  
 🌐 [Sitio web (en desarrollo)](https://github.com/raicesviajeras)  
-📧 info@raicesviajeras.com  
+📧 pagecrafters1234@gmail.com  
 📍 Madrid, España  
