@@ -97,13 +97,13 @@
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
-                                <button type="button" class="toggle-password" onclick="togglePassword('contrasenia')">👁️</button>
+                                <button id="b1" type="button" class="toggle-password" onclick="togglePassword('contrasenia', 'b1')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-contrasena"></p>
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
-                                <button type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia')">👁️</button>
+                                <button id="b2" type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia', 'b2')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-confirmar-contrasena"></p>
 
@@ -147,6 +147,6 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="module" src="js/main.js"></script>
-</body>
+    <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script></body>
 
 </html>

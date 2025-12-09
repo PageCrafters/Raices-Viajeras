@@ -1,6 +1,6 @@
 /**
  * Función para validar que los nombres solo contengan letras y espacios.
- * Además limita la longitud máxima a 2 palabras.
+ * Además, limita la longitud máxima a 2 palabras.
  * @param {string} nombre - El nombre a validar.
  * @return {boolean} Verdadero si el nombre es válido, falso en caso contrario.
  */
