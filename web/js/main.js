@@ -6,12 +6,18 @@ window.cambiaModoColor = () => {
 };
 
 // Función para mostrar/ocultar contraseña
-window.togglePassword = (fieldId) => {
+window.togglePassword = (fieldId, buttonId) => {
     const field = document.getElementById(fieldId);
+    const boton = document.getElementById(buttonId);
+    const emoji= boton.querySelector('.fa-regular');
     if (field) {
         if (field.type === 'password') {
+            emoji.classList.toggle('fa-face-dizzy');
+            emoji.classList.toggle('fa-face-flushed');
             field.type = 'text';
         } else {
+            emoji.classList.toggle('fa-face-dizzy');
+            emoji.classList.toggle('fa-face-flushed');
             field.type = 'password';
         }
     }
