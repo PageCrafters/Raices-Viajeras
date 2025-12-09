@@ -66,6 +66,14 @@ body {
   border-bottom: 1px solid rgba(47, 158, 68, 0.2);
 }
 
+.rojo{
+    color: red;
+}
+
+.verde{
+    color: var(--green-500);
+}
+
 .dark-mode .navbar-personalizada {
   background: linear-gradient(90deg, rgba(15, 70, 40, 0.9), rgba(10, 50, 30, 0.85));
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
