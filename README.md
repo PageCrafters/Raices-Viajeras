@@ -11,12 +11,12 @@ Promueve el turismo responsable y facilita la reserva de experiencias respetuosa
 3. [Público Objetivo](#-público-objetivo)
 4. [Estructura del Proyecto](#-estructura-del-proyecto)
 5. [Elementos Multimedia](#-elementos-multimedia)
-6. [Estilo Visual y Sonoro](#-estilo-visual-y-sonoro)
+6. [Estilo Visual y Sonoro](#estilo-visual-y-sonoro)
 7. [Recursos Multimedia](#-recursos-multimedia)
-8. [Herramientas y Tecnología](#-herramientas-y-tecnología)
+8. [Herramientas y Tecnología](#herramientas-y-tecnología)
 9. [Requisitos de Hardware](#-requisitos-de-hardware)
-10. [Equipo de Trabajo](#-equipo-de-trabajo)
-11. [Cronograma Estimado](#-cronograma-estimado)
+10. [Equipo de Trabajo](#equipo-de-trabajo)
+11. [Cronograma Estimado](#cronograma-estimado)
 12. [Coste Estimado](#-coste-estimado)
 13. [Metodología Agile](#-metodología-agile)
 14. [Licencia](#-licencia)
@@ -67,7 +67,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 🗂️ Estilo Visual y Sonoro
+## 🗂️ Estilo Visual y Sonoro {#estilo-visual-y-sonoro}
 
 | Tipo | Descripción |
 |------|--------------|
@@ -86,7 +86,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 🛠️ Herramientas y Tecnología
+## 🛠️ Herramientas y Tecnología {#herramientas-y-tecnología}
 
 **Frontend:**
 - HTML5, CSS3, JavaScript (Vue.js o React opcionalmente).
@@ -111,7 +111,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 👩‍💻 Equipo de Trabajo
+## 👩‍💻 Equipo de Trabajo {#equipo-de-trabajo}
 
 | Rol | Función |
 |------|----------|
@@ -122,7 +122,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## ⏱️ Cronograma Estimado
+## ⏱️ Cronograma Estimado {#cronograma-estimado}
 
 | Fase | Duración | Fecha estimada |
 |------|-----------|----------------|
