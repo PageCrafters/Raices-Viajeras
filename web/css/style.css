@@ -175,7 +175,7 @@ body {
   padding-left: 1rem
 }
 
-/* Form controls override */
+/* Form control */
 .form-control,
 .form-select {
   border-radius: 8px;
@@ -220,7 +220,7 @@ body {
 }
 
 /* Password wrapper para el icono del ojo */
-.password-wrapper {
+.emoji-password {
   position: relative;
   margin-bottom: 0.5rem;
 }
@@ -285,7 +285,7 @@ body {
   cursor: pointer
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media(min-width:992px) {
   .encabezado {
     padding: 3.2rem 2rem
@@ -303,7 +303,6 @@ body {
   color: var(--brown-700)
 }
 
-/* Accessibility tweaks */
 button,
 input,
 select,
