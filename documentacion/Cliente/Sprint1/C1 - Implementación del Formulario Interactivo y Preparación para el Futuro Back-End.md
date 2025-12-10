@@ -109,16 +109,16 @@ el terreno para la gestión de cuentas en el servidor.
 ## 📎 Entregables
 
 - **Formularios implementados:**  
-  [index.html](../../../../index.html)  
-  [Carpeta CSS](../../../../web/css/)  
-  [Carpeta JS](../../../../web/js/)  
-  [Carpeta Imágenes](../../../../web/img/)
+  [index.html](../../../index.html)  
+  [Carpeta CSS](../../../web/css/)  
+  [Carpeta JS](../../../web/js/)  
+  [Carpeta Imágenes](../../../web/img/)
 
 - **Documentación ampliada:**  
-  [Ver carpeta Documentación](../../../../web/documentacion/).
+  [Ver carpeta Documentación](../../../web/documentacion/).
 
 - **Tests funcionales:**  
-  [Ver carpeta Tests](../../../../web/tests/Katalon).
+  [Ver carpeta Tests](../../../web/tests/Katalon).
 
 ---
 
