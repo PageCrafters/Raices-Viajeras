@@ -109,8 +109,8 @@ el terreno para la gestión de cuentas en el servidor.
 ## 📎 Entregables
 
 - **Formularios implementados:**  
-  [index.html](../../../../index.html) 
-  [Carpeta CSS](../../../../web/css/) 
+  [index.html](../../../../index.html)  
+  [Carpeta CSS](../../../../web/css/)  
   [Carpeta JS](../../../../web/js/)  
   [Carpeta Imágenes](../../../../web/img/)
 
