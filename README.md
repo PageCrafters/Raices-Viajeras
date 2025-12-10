@@ -11,7 +11,7 @@ Promueve el turismo responsable y facilita la reserva de experiencias respetuosa
 3. [Público Objetivo](#-público-objetivo)
 4. [Estructura del Proyecto](#-estructura-del-proyecto)
 5. [Elementos Multimedia](#-elementos-multimedia)
-6. [Estilo Visual y Sonoro](#estilo-visual-y-sonoro)
+6. [Estilo Visual y Sonoro](#-estilo-visual-y-sonoro)
 7. [Recursos Multimedia](#-recursos-multimedia)
 8. [Herramientas y Tecnología](#-herramientas-y-tecnología)
 9. [Requisitos de Hardware](#-requisitos-de-hardware)
