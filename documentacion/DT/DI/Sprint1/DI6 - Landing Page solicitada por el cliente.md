@@ -97,22 +97,22 @@ y preparar el terreno para el lanzamiento oficial.
 ## 📎 Entregables
 
 - **Boceto final (vista escritorio y móvil).**  
-  [Ver carpeta Documentación](../web/documentacion/)
+  [Ver carpeta Documentación](../../../../web/documentacion/)
 
 - **Landing page implementada en HTML/CSS/JS o Bootstrap.**  
-  [index.html](../web/index.html)  
-  [Carpeta CSS](../web/css/)  
-  [Carpeta JS](../web/js/)  
-  [Carpeta HTML](../web/html/)  
-  [Carpeta Imágenes](../web/img/)
+  [index.html](../../../../web/index.html)  
+  [Carpeta CSS](../../../../web/css/)  
+  [Carpeta JS](../../../../web/js/)  
+  [Carpeta HTML](../../../../web/html/)  
+  [Carpeta Imágenes](../../../../web/img/)
 
 - **Documentación técnica de estructura y estilos.**  
-    [Acceder a la documentación](../web/documentacion/)
+    [Acceder a la documentación](../../../../web/documentacion/)
     ## 🖼️ Nueva Sección: Boceto Final de la Landing Page
 
     ### 📜 Explicación
     La elección del boceto definitivo se documenta en el archivo:  
-    [Boceto_Final_Landing Page.html](../web/documentacion/Boceto_Final_Landin_Page.html)
+    [Boceto_Final_Landing Page.html](../../../../web/documentacion/Boceto_Final_Landin_Page.html)
     
     Este documento recoge el proceso de revisión de los bocetos individuales y la justificación de la selección final.
 
