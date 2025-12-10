@@ -100,7 +100,7 @@ y preparar el terreno para el lanzamiento oficial.
   [Ver carpeta Documentación](../../../../web/documentacion/)
 
 - **Landing page implementada en HTML/CSS/JS o Bootstrap.**  
-  [index.html](../../../../web/index.html)  
+  [index.html](../../../../index.html)  
   [Carpeta CSS](../../../../web/css/)  
   [Carpeta JS](../../../../web/js/)  
   [Carpeta HTML](../../../../web/html/)  
@@ -117,7 +117,7 @@ y preparar el terreno para el lanzamiento oficial.
     Este documento recoge el proceso de revisión de los bocetos individuales y la justificación de la selección final.
 
 🌐 **Landing publicada en GitHub Pages:**  
-[Ver Landing Page en vivo](https://PageCrafters.github.io/Raices-Viajeras/web/)
+[Ver Landing Page en vivo](https://PageCrafters.github.io/Raices-Viajeras/)
 ---
 
 ## 🧾 Referencia
