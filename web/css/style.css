@@ -1,40 +1,32 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 
-/* Sistema de variables para temas */
+/* Variables del tema (en español) */
 :root {
-  --bg: #f6fbf6;
-  /* fondo claro, tono crema-verdoso */
-  --text: #233029;
-  /* texto principal oscuro */
-  --muted: #5b6b5b;
-  --green-500: #2f9e44;
-  /* verde destacado */
-  --green-300: #8fd19b;
-  --brown-700: #6b4226;
-  /* marrón para detalles en modo claro */
-  --card-bg: #ffffff;
+  --bg: #f6fbf6; /* fondo claro */
+  --texto: #233029; /* color texto */
+  --tono-apagado: #5b6b5b; /* tono apagado */
+  --verde-500: #2f9e44; /* verde principal */
+  --verde-300: #8fd19b;
+  --marron-700: #6b4226; /* marrón */
+  --fondo-tarjeta: #ffffff;
   --glass: rgba(255, 255, 255, 0.65);
   --shadow: 0 8px 24px rgba(35, 48, 41, 0.08);
-  --btn-text: #ffffff;
+  --texto-boton: #ffffff;
   --focus: rgba(47, 158, 68, 0.18);
 }
 
 .dark-mode {
-  --bg: #070707;
-  /* fondo oscuro */
-  --text: #e8f8ea;
-  /* texto en oscuro */
-  --muted: #9aa69a;
-  --green-500: #34d058;
-  /* verde brillante en oscuro */
-  --green-300: #66e07f;
-  --brown-700: #000000;
-  /* en modo oscuro el "marrón" se vuelve negro */
-  --card-bg: #0f0f0f;
+  --bg: #070707; /* fondo oscuro */
+  --texto: #e8f8ea; /* texto claro */
+  --tono-apagado: #9aa69a;
+  --verde-500: #34d058;
+  --verde-300: #66e07f;
+  --marron-700: #000000; /* marrón en oscuro */
+  --fondo-tarjeta: #0f0f0f;
   --glass: rgba(10, 10, 10, 0.6);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  --btn-text: #ffffff;
+  --texto-boton: #ffffff;
   --focus: rgba(52, 208, 88, 0.12);
 }
 
@@ -51,13 +43,13 @@ body {
 body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--bg);
-  color: var(--text);
+  color: var(--texto);
   transition: background .35s ease, color .35s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Navbar */
+/* Barra de navegación */
 .navbar-personalizada {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(220, 245, 230, 0.75));
   padding: .9rem 1rem;
@@ -71,14 +63,14 @@ body {
 }
 
 .verde{
-    color: var(--green-500);
+    color: var(--verde-500);
 }
 
 .dark-mode .navbar-personalizada {
   background: linear-gradient(90deg, rgba(15, 70, 40, 0.9), rgba(10, 50, 30, 0.85));
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(52, 208, 88, 0.3);
-  color: var(--text);
+  color: var(--texto);
 
 }
 .dark-mode .navbar-toggler-icon {
@@ -88,18 +80,18 @@ body {
 .navbar-brand {
   font-weight: 800;
   letter-spacing: .6px;
-  color: var(--green-500) !important
+  color: var(--verde-500) !important
 }
 
 .nav-link {
-  color: var(--text)!important;
+  color: var(--texto)!important;
 }
 
 
 .cambiar-tema {
   border: 1px solid transparent;
-  background: var(--green-500);
-  color: var(--btn-text);
+  background: var(--verde-500);
+  color: var(--texto-boton);
   padding: .45rem .65rem;
   border-radius: 8px;
   font-weight: 600;
@@ -112,7 +104,7 @@ body {
 
 .encabezado .lead {
   font-size: 1.05rem;
-  color: var(--muted);
+  color: var(--tono-apagado);
   max-width: 70ch;
   margin-top: .5rem
 }
@@ -122,12 +114,12 @@ body {
   display: block;
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 1 / 1; /* fuerza cuadrado */
+  aspect-ratio: 1 / 1; /* cuadrado */
   object-fit: cover;
   border-radius: 8px;
 }
 
-/* Tarjeta CTA */
+/* Tarjeta de llamada */
 .tarjeta-cta {
   background: linear-gradient(180deg, #c8e6c9, #a5d6a7);
   border-radius: 12px;
@@ -175,14 +167,14 @@ body {
   padding-left: 1rem
 }
 
-/* Form control */
+/* Controles de formulario */
 .form-control,
 .form-select {
   border-radius: 8px;
   border: 1px solid rgba(47, 158, 68, 0.3);
   padding: .6rem .75rem;
   background: rgba(255, 255, 255, 0.9);
-  color: var(--text)!important;
+  color: var(--texto)!important;
 }
 
 .dark-mode .form-control,
@@ -200,13 +192,13 @@ body {
   color: rgba(232, 248, 234, 0.7);
 }
 
-/* Select opciones en modo claro */
+/* Opciones de select (claro) */
 .form-select option {
   color: #233029;
   background: #ffffff;
 }
 
-/* Select opciones en modo oscuro */
+/* Opciones de select (oscuro) */
 .dark-mode .form-select option {
   color: #ffffff;
   background: #2a2a2a;
@@ -215,12 +207,12 @@ body {
 .form-control:focus,
 .form-select:focus {
   box-shadow: 0 0 0 6px var(--focus);
-  border-color: var(--green-500);
+  border-color: var(--verde-500);
   outline: none
 }
 
-/* Password wrapper para el icono del ojo */
-.emoji-password {
+/* Icono ojo en contraseña */
+.password-wrapper {
   position: relative;
   margin-bottom: 0.5rem;
 }
@@ -235,7 +227,7 @@ body {
   cursor: pointer;
   font-size: 1.2rem;
   padding: 0;
-  color: var(--text);
+  color: var(--texto);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,9 +242,10 @@ body {
   color: #e8f8ea;
 }
 
+/* Botón principal */
 .btn-primario {
-  background: var(--green-500);
-  color: var(--btn-text);
+  background: var(--verde-500);
+  color: var(--texto-boton);
   border: none;
   padding: .6rem .9rem;
   border-radius: 10px;
@@ -261,8 +254,8 @@ body {
 
 .btn-primario-outline {
   background: transparent;
-  color: var(--green-500);
-  border: 2px solid var(--green-500);
+  color: var(--verde-500);
+  border: 2px solid var(--verde-500);
   padding: .45rem .85rem;
   border-radius: 10px;
   font-weight: 700
@@ -271,11 +264,11 @@ body {
 .pie {
   padding: 1.6rem;
   text-align: center;
-  color: var(--muted);
+  color: var(--tono-apagado);
   background: transparent
 }
 
-/* Pequeño helper */
+/* Helper pequeño */
 .btn-modo {
   display: inline-flex;
   align-items: center;
@@ -291,16 +284,16 @@ body {
     padding: 3.2rem 2rem
   }
 
-  /* las imágenes mantienen ratio 1:1 y se adaptan al ancho de la columna */
+  /* Las imágenes mantienen 1:1 */
 
   #registrarse {
     min-height: 420px
   }
 }
 
-/* Enlaces y acentos con marrón en modo claro, negro en oscuro */
+/* Acentos de color */
 .acento-marron {
-  color: var(--brown-700)
+  color: var(--marron-700)
 }
 
 button,
@@ -310,8 +303,7 @@ a {
   transition: all .18s ease
 }
 
-/* Evitar overflow horizontal causado por imágenes */
-/* Asegura que las imágenes no excedan el ancho del contenedor y se recorten correctamente */
+/* Evitar scroll horizontal por imágenes */
 .container-fluid,
 .encabezado,
 .galeria,
@@ -334,25 +326,24 @@ a {
   object-fit: cover;
 }
 
-/* Mantener relación cuadrada y evitar alturas fijas en responsive */
+/* Mantener cuadrado en desktop */
 @media(min-width:992px) {
-  /* en desktop las imágenes usan aspect-ratio 1:1 */
   .galeria img, .altura-igual { aspect-ratio: 1/1; }
 }
 
+/* Mantener cuadrado en móvil */
 @media(max-width:991px) {
-  /* en móviles las imágenes mantienen ratio cuadrado y escalan */
   .galeria img, .altura-igual { aspect-ratio: 1/1; }
 }
 
-/* Si por alguna razón hay contenido que continúe generando scroll, asegurar que el body lo recorte */
+/* Evitar overflow horizontal */
 html,
 body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Formulario centrado - asegurar máximo ancho y centrado */
+/* Centrar formulario */
 .tarjeta-cta {
   margin: 0 auto;
   max-width: 100%;
