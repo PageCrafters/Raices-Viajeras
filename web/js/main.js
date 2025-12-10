@@ -1,4 +1,13 @@
 import {initializeFormController} from "./formController.js";
+import {esModoOscuro} from "./ui.js";
+
+// Función para cambiar entre modo claro y oscuro según se inicia
+if (esModoOscuro()) {
+    document.documentElement.classList.add('dark-mode');
+} else {
+    document.documentElement.classList.remove('dark-mode');
+}
+
 
 // Exponer la función de cambio de modo como global para que los `onclick` inline la encuentren
 window.cambiaModoColor = () => {

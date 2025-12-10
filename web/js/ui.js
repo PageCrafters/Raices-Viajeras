@@ -57,3 +57,13 @@ export function ocultarErrores() {
 export function mostrarMensajeExito(mensaje) {
     alert(mensaje);
 }
+
+/**
+ * Función para comprobar si el modo oscuro está activado
+ * @return {boolean} true si el modo oscuro está activado, false en caso contrario.
+ */
+export function esModoOscuro() {
+    // Detecta si el usuario usa modo oscuro en su sistema
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    return prefersDark.matches;
+}
