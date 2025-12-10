@@ -67,7 +67,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 🗂️ Estilo Visual y Sonoro {#estilo-visual-y-sonoro}
+## 🗂️ Estilo Visual y Sonoro 
 
 | Tipo | Descripción |
 |------|--------------|
@@ -86,7 +86,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 🛠️ Herramientas y Tecnología {#herramientas-y-tecnología}
+## 🛠️ Herramientas y Tecnología 
 
 **Frontend:**
 - HTML5, CSS3, JavaScript (Vue.js o React opcionalmente).
@@ -111,7 +111,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## 👩‍💻 Equipo de Trabajo {#equipo-de-trabajo}
+## 👩‍💻 Equipo de Trabajo 
 
 | Rol | Función |
 |------|----------|
@@ -122,7 +122,7 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 
 ---
 
-## ⏱️ Cronograma Estimado {#cronograma-estimado}
+## ⏱️ Cronograma Estimado 
 
 | Fase | Duración | Fecha estimada |
 |------|-----------|----------------|
