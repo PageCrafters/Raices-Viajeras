@@ -112,7 +112,7 @@ y preparar el terreno para el lanzamiento oficial.
 
     ### 📜 Explicación
     La elección del boceto definitivo se documenta en el archivo:  
-    [Boceto_Final_Landing Page.html](../../../../web/documentacion/Boceto_Final_Landin_Page.html)
+    [Boceto_Final_Landing Page.html](../../../../web/documentacion/Boceto_Final_Landing_Page.html)
     
     Este documento recoge el proceso de revisión de los bocetos individuales y la justificación de la selección final.
 
