@@ -118,7 +118,7 @@ el terreno para la gestión de cuentas en el servidor.
   [Ver carpeta Documentación](../../../web/documentacion/).
 
 - **Tests funcionales:**  
-  [Ver carpeta Tests](../../../web/tests/Katalon).
+  [Ver carpeta Tests](../../web/tests/Katalon).
 
 ---
 
