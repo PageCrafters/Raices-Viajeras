@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Raíces Viajeras - Landing</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="web/css/bootstrap.min.css">
+    <link rel="stylesheet" href="web/css/style.css">
+    <link rel="icon" type="image/webp" href="img/logos/raices-viajeras-logo0.webp">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light navbar-personalizada">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="../img/logos/raices-viajeras-logo0.webp" alt="RV" style="max-width:56px;" class="me-2">
+                <img src="img/logos/raices-viajeras-logo0.webp" alt="RV" style="max-width:56px;" class="me-2">
                 <span>RAÍCES VIAJERAS</span>
             </a>
             <div class="d-flex align-items-center gap-2">
@@ -27,7 +28,7 @@
                     <a class="btn cambiar-tema d-none d-lg-inline" onclick="cambiaModoColor()">◑</a>
                     <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tit-form">Suscribirse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="web/html/contacto.html">Contacto</a></li>
                 </ul>
             </div>
         </div>
@@ -42,15 +43,15 @@
                     <p class="lead">Viajes sostenibles, alojamientos con energía renovable y experiencias que apoyan a comunidades locales.</p>
                     <div class="mt-3">
                         <a href="#tit-form" class="btn btn-primario me-2">Apúntate hoy</a>
-                        <a href="#" class="btn btn-primario-outline">Conócenos</a>
+                        <a href="web/html/conocenos.html" class="btn btn-primario-outline">Conócenos</a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-5 d-none d-lg-block">
                     <div class="row g-2 galeria">
-                        <div class="col-6"><img src="img/landing1.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing4.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing5.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing6.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing1.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing4.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing5.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing6.webp" alt="img"></div>
                     </div>
                 </div>
             </div>
@@ -61,10 +62,10 @@
             <div class="row align-items-center">
                 <div class="col-12 col-lg-5 d-none d-lg-block">
                     <div class="row g-2 galeria">
-                        <div class="col-6"><img src="img/landing2.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing3.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing7.webp" alt="img"></div>
-                        <div class="col-6"><img src="img/landing8.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing2.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing3.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing7.webp" alt="img"></div>
+                        <div class="col-6"><img src="web/img/landing8.webp" alt="img"></div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-7">
@@ -97,13 +98,13 @@
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
-                                <button type="button" class="toggle-password" onclick="togglePassword('contrasenia')">👁️</button>
+                                <button id="b1" type="button" class="toggle-password" onclick="togglePassword('contrasenia', 'b1')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-contrasena"></p>
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
-                                <button type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia')">👁️</button>
+                                <button id="b2" type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia', 'b2')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-confirmar-contrasena"></p>
 
@@ -145,8 +146,8 @@
         <p>&copy; 2026 Raíces Viajeras. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="js/main.js"></script>
-</body>
+    <script src="web/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="web/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script></body>
 
 </html>

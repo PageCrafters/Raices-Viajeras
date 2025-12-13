@@ -109,21 +109,21 @@ el terreno para la gestión de cuentas en el servidor.
 ## 📎 Entregables
 
 - **Formularios implementados:**  
-  [index.html](./web/index.html)  
-  [Carpeta CSS](./web/css/)  
-  [Carpeta JS](./web/js/)  
-  [Carpeta Imágenes](./web/img/)
+  [index.html](../../../index.html)  
+  [Carpeta CSS](../../../web/css/)  
+  [Carpeta JS](../../../web/js/)  
+  [Carpeta Imágenes](../../../web/img/)
 
 - **Documentación ampliada:**  
-  [Ver carpeta Documentación](./web/documentacion/)
+  [Ver carpeta Documentación](../../../web/documentacion/).
 
 - **Tests funcionales:**  
-  [Ver carpeta Tests](./web/tests/)
+  [Ver carpeta Tests](../../../web/test/Katalon).
 
 ---
 
 🌐 **Landing + Formularios publicados en GitHub Pages:**  
-[Ver Proyecto en vivo](https://PageCrafters.github.io/Raices-Viajeras/web/)
+[Ver Proyecto en vivo](https://PageCrafters.github.io/Raices-Viajeras/)
 
 ---
 

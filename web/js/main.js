@@ -1,4 +1,13 @@
 import {initializeFormController} from "./formController.js";
+import {esModoOscuro} from "./ui.js";
+
+// Función para cambiar entre modo claro y oscuro según se inicia
+if (esModoOscuro()) {
+    document.documentElement.classList.add('dark-mode');
+} else {
+    document.documentElement.classList.remove('dark-mode');
+}
+
 
 // Exponer la función de cambio de modo como global para que los `onclick` inline la encuentren
 window.cambiaModoColor = () => {
@@ -6,12 +15,18 @@ window.cambiaModoColor = () => {
 };
 
 // Función para mostrar/ocultar contraseña
-window.togglePassword = (fieldId) => {
+window.togglePassword = (fieldId, buttonId) => {
     const field = document.getElementById(fieldId);
+    const boton = document.getElementById(buttonId);
+    const emoji= boton.querySelector('.fa-regular');
     if (field) {
         if (field.type === 'password') {
+            emoji.classList.toggle('fa-face-dizzy');
+            emoji.classList.toggle('fa-face-flushed');
             field.type = 'text';
         } else {
+            emoji.classList.toggle('fa-face-dizzy');
+            emoji.classList.toggle('fa-face-flushed');
             field.type = 'password';
         }
     }

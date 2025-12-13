@@ -64,16 +64,42 @@ export function initializeFormController() {
 
         const contrasena = df.contrasena;
         const confirmarContrasena = df.confirmarContrasena;
+        const boton = document.getElementById('b1');
+        const emoji= boton.querySelector('.fa-regular');
+
+        const boton2 = document.getElementById('b2');
+        const emoji2= boton2.querySelector('.fa-regular');
+
 
         if (!v.validarContrasena(contrasena)) {
             ui.mostrarError('error-contrasena', 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.');
+            if (emoji.classList.contains('verde')) {
+                emoji.classList.replace('verde', 'rojo');
+            }else if (!emoji.classList.contains('rojo')) {
+                emoji.classList.add('rojo');
+            }
         } else {
             ui.mostrarError('error-contrasena', '');
+            if (emoji.classList.contains('rojo')) {
+                emoji.classList.replace('rojo', 'verde');
+            }else if (!emoji.classList.contains('verde')) {
+                emoji.classList.add('verde');
+            }
         }
         if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
             ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
+            if (emoji2.classList.contains('verde')) {
+                emoji2.classList.replace('verde', 'rojo');
+            }else if (!emoji2.classList.contains('rojo')) {
+                emoji2.classList.add('rojo');
+            }
         } else {
             ui.mostrarError('error-confirmar-contrasena', '');
+            if (emoji2.classList.contains('rojo')) {
+                emoji2.classList.replace('rojo', 'verde');
+            }else if (!emoji2.classList.contains('verde')) {
+                emoji2.classList.add('verde');
+            }
         }
     });
 
@@ -83,10 +109,23 @@ export function initializeFormController() {
 
         const contrasena = df.contrasena;
         const confirmarContrasena = df.confirmarContrasena;
+        const boton = document.getElementById('b2');
+        const emoji= boton.querySelector('.fa-regular');
+
         if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
             ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
+            if (emoji.classList.contains('verde')) {
+                emoji.classList.replace('verde', 'rojo');
+            }else if (!emoji.classList.contains('rojo')) {
+                emoji.classList.add('rojo');
+            }
         } else {
             ui.mostrarError('error-confirmar-contrasena', '');
+            if (emoji.classList.contains('rojo')) {
+                emoji.classList.replace('rojo', 'verde');
+            }else if (!emoji.classList.contains('verde')) {
+                emoji.classList.add('verde');
+            }
         }
     });
 
