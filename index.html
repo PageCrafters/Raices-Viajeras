@@ -136,6 +136,7 @@
                                 <button type="submit" class="btn btn-primario" aria-label="Suscribirme">Suscribirse</button>
                             </div>
                         </form>
+                        <button id="btn">Llamar PHP</button>
                     </div>
                 </div>
             </div>
@@ -145,7 +146,19 @@
     <footer class="pie">
         <p>&copy; 2026 Raíces Viajeras. Todos los derechos reservados.</p>
     </footer>
-
+    <!--<script>
+        document.getElementById("btn").addEventListener("click", () => {
+            fetch("web/php/test_connection.php")
+                .then(res => res.text())
+                .then(data => {
+                    console.log(data);
+                    alert(data);
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        });
+    </script>-->
     <script src="web/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="web/js/main.js"></script>
     <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script></body>
