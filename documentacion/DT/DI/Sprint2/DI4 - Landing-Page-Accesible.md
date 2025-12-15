@@ -102,7 +102,7 @@ permitiendo que cualquier persona, independientemente de sus capacidades, pueda 
 
 - Landing page corregida y accesible.
 - Informe de validación con capturas de WAVE.
-- [Documentación de errores y soluciones](../../../documentacion/Accesibilidad/img-accesibilidad/)
+- [Documentación de errores y soluciones](../../../documentacion/Accesibilidad/img-accesibilidad/captura-errores-wave.webp/)
 - Checklist de criterios de aceptación cumplidos.
 
 ---
