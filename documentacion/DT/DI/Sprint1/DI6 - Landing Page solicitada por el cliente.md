@@ -118,6 +118,7 @@ y preparar el terreno para el lanzamiento oficial.
     Este documento recoge el proceso de revisión de los bocetos individuales y la justificación de la selección final.
 
 🌐 **Landing publicada en GitHub Pages:**  
+
 [Ver Landing Page en vivo](https://PageCrafters.github.io/Raices-Viajeras/)
 ---
 
