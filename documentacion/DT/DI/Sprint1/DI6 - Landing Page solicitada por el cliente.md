@@ -35,13 +35,13 @@ y preparar el terreno para el lanzamiento oficial.
 
 ## 🧠 Criterios de Aceptación
 
-| ID   | Criterio    | Descripción                                           |
-|------|-------------|-------------------------------------------------------|
-| CA-1 | Boceto aprobado | La landing debe implementarse fielmente al boceto final del equipo. |
-| CA-2 | Responsive | La página debe adaptarse correctamente a escritorio y móvil. |
-| CA-3 | CTA eficaz | Debe incluir un botón o formulario claro y convincente para captar leads. |
-| CA-4 | Coherencia visual | Diseño limpio, equilibrado y con jerarquía visual clara. |
-| CA-5 | Profesionalidad | La landing debe transmitir confianza y calidad al usuario. |
+| ID   | Criterio          | Descripción                                                               |
+|------|-------------------|---------------------------------------------------------------------------|
+| CA-1 | Boceto aprobado   | La landing debe implementarse fielmente al boceto final del equipo.       |
+| CA-2 | Responsive        | La página debe adaptarse correctamente a escritorio y móvil.              |
+| CA-3 | CTA eficaz        | Debe incluir un botón o formulario claro y convincente para captar leads. |
+| CA-4 | Coherencia visual | Diseño limpio, equilibrado y con jerarquía visual clara.                  |
+| CA-5 | Profesionalidad   | La landing debe transmitir confianza y calidad al usuario.                |
 
 ---
 
@@ -73,7 +73,7 @@ y preparar el terreno para el lanzamiento oficial.
 | T3  | Justificar elección del boceto     | Equipo diseño | ✅ Terminado|
 | T4  | Implementar landing en HTML/CSS/JS | Equipo diseño | ✅ Terminado|
 | T5  | Adaptar diseño responsive          | Equipo        | ✅ Terminado|
-| T6  | Pruebas de usabilidad              | Equipo        | ⏳ Pendiente|
+| T6  | Pruebas de usabilidad              | Equipo        | ✅ Terminado|
 
 ---
 
@@ -126,4 +126,4 @@ y preparar el terreno para el lanzamiento oficial.
 Proyecto: **Raíces Viajeras**  
 Repositorio: (https://github.com/PageCrafters/Raices-Viajeras.git)  
 Sprint: **DI6 — Landing Page**  
-Estado: 🟢 *En desarrollo*
+Estado: ✅ *Terminado*
