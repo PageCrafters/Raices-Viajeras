@@ -98,13 +98,13 @@
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required aria-label="Contraseña">
-                                <button id="b1" type="button" class="toggle-password" onclick="togglePassword('contrasenia', 'b1')"><i class="fa-regular fa-face-dizzy"></i></button>
+                                <button id="b1" type="button" class="toggle-password" onclick="togglePassword('contrasenia', 'b1')" aria-label="Mostrar u ocultar contraseña"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-contrasena"></p>
 
                             <div class="password-wrapper">
                                 <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required aria-label="Repetir Contraseña">
-                                <button id="b2" type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia', 'b2')"><i class="fa-regular fa-face-dizzy"></i></button>
+                                <button id="b2" type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia', 'b2')" aria-label="Mostrar u ocultar confirmación de contraseña"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-confirmar-contrasena"></p>
 
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
-                                <label class="form-check-label" for="politica_privacidad" aria-label="Acepto la política de privacidad">Acepto la política de privacidad</label>
+                                <label class="form-check-label" for="politica_privacidad">Acepto la política de privacidad</label>
                             </div>
                             <p class="error" id="error-privacidad"></p>
 
