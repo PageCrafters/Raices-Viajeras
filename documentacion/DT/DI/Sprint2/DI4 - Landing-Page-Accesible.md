@@ -29,24 +29,22 @@ permitiendo que cualquier persona, independientemente de sus capacidades, pueda 
 
 ## 🔍 Análisis de referencias
 
-| Sitio / App | Elementos destacables | Lecciones para Raíces Viajeras |
-|-------------|-----------------------|--------------------------------|
-| **Gov.uk**  | Uso correcto de HTML semántico y contraste alto | Implementar buenas prácticas de contraste y jerarquía visual |
-| **W3C WAI** | Ejemplos claros de ARIA roles y etiquetas | Aplicar roles ARIA en componentes interactivos |
-| **Bootstrap Docs** | Componentes accesibles listos para usar | Aprovechar los componentes accesibles ya integrados |
-| **Wikipedia** | Navegación clara y estructura semántica | Mantener consistencia en encabezados y navegación |
+| Sitio / App        | Elementos destacables                     | Lecciones para Raíces Viajeras                      |
+|--------------------|-------------------------------------------|-----------------------------------------------------|
+| **W3C WAI**        | Ejemplos claros de ARIA roles y etiquetas | Aplicar roles ARIA en componentes interactivos      |
+| **Bootstrap Docs** | Componentes accesibles listos para usar   | Aprovechar los componentes accesibles ya integrados |
 
 ---
 
 ## 🧠 Criterios de Aceptación
 
-| ID   | Criterio | Descripción |
-|------|----------|-------------|
-| CA-1 | Contraste | Todos los textos cumplen ratio mínimo de contraste (4.5:1) |
-| CA-2 | Navegación | La página es navegable con teclado sin pérdida de funcionalidad |
-| CA-3 | ARIA | Se incluyen atributos ARIA en elementos interactivos cuando el HTML semántico no es suficiente |
-| CA-4 | Imágenes | Todas las imágenes tienen texto alternativo descriptivo |
-| CA-5 | Validación | La página pasa las pruebas de accesibilidad con herramientas como WAVE y Lighthouse |
+| ID   | Criterio   | Descripción                                                                                    |
+|------|------------|------------------------------------------------------------------------------------------------|
+| CA-1 | Contraste  | Todos los textos cumplen ratio mínimo de contraste (4.5:1)                                     |
+| CA-2 | Navegación | La página es navegable con teclado sin pérdida de funcionalidad                                |
+| CA-3 | ARIA       | Se incluyen atributos ARIA en elementos interactivos cuando el HTML semántico no es suficiente |
+| CA-4 | Imágenes   | Todas las imágenes tienen texto alternativo descriptivo                                        |
+| CA-5 | Validación | La página pasa las pruebas de accesibilidad con herramientas como WAVE y Lighthouse            |
 
 ---
 
@@ -72,21 +70,21 @@ permitiendo que cualquier persona, independientemente de sus capacidades, pueda 
 
 ## 🧰 Tareas Técnicas
 
-| ID  | Tarea                                      | Responsable | Estado         |
-|-----|--------------------------------------------|-------------|----------------|
-| T1  | Revisar etiquetas HTML semánticas          | Equipo Dev  | 🔄 En curso    |
-| T2  | Añadir atributos ARIA en elementos clave   | Equipo Dev  | ⏳ Pendiente   |
-| T3  | Validar accesibilidad con WAVE y Lighthouse| QA          | ✅ Terminado   |
-| T4  | Revisar contraste de colores en CSS        | Equipo Dev  | ❌ Cancelado   |
-| T5  | Documentar errores y soluciones            | Equipo Dev  | 🚧 En revisión |
-| T6  | Consultar material de accesibilidad        | Equipo Dev  | 🕒 En espera   |
+| ID  | Tarea                                      | Responsable | Estado       |
+|-----|--------------------------------------------|-------------|--------------|
+| T1  | Revisar etiquetas HTML semánticas          | Equipo Dev  | 🔄 En curso  |
+| T2  | Añadir atributos ARIA en elementos clave   | Equipo Dev  | ⏳ Pendiente |
+| T3  | Validar accesibilidad con WAVE y Lighthouse| Equipo Dev  | ✅ Terminado |
+| T4  | Revisar contraste de colores en CSS        | Equipo Dev  | ⏳ Pendiente |
+| T5  | Documentar errores y soluciones            | Equipo Dev  | ⏳ Pendiente |
+| T6  | Consultar material de accesibilidad        | Equipo Dev  | 🕒 En espera |
 
 ---
 
 ## 🧭 Prioridad y Estimación
 
-| Prioridad | Esfuerzo estimado | Dependencia |
-|-----------|-------------------|-------------|
+| Prioridad | Esfuerzo estimado | Dependencia                          |
+|-----------|-------------------|--------------------------------------|
 | Alta      | 8 horas           | Finalización de la landing entregada |
 
 ---
@@ -102,7 +100,7 @@ permitiendo que cualquier persona, independientemente de sus capacidades, pueda 
 
 - Landing page corregida y accesible.
 - Informe de validación con capturas de WAVE.
-- [Documentación de errores y soluciones](../../../documentacion/Accesibilidad/img-accesibilidad/captura-errores-wave.webp/)
+- [Documentación de errores y soluciones](../../../Accesibilidad/img-accesibilidad/captura-errores-wave.webp)
 - Checklist de criterios de aceptación cumplidos.
 
 ---
