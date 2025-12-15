@@ -90,50 +90,50 @@
                     <div class="tarjeta-cta" id="tit-form">
                         <h3>"APÚNTATE HOY <br> Y SÉ PARTE DEL INICIO"</h3>
                         <form id="form-registro" action="#" method="post">
-                            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+                            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required aria-label="Nombre y Apellido">
                             <p class="error" id="error-nombre"></p>
 
-                            <input class="form-control" type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
+                            <input class="form-control" type="email" name="email" id="correo" placeholder="Correo electrónico" required aria-label="Correo electrónico">
                             <p class="error" id="error-correo"></p>
 
                             <div class="password-wrapper">
-                                <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
+                                <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required aria-label="Contraseña">
                                 <button id="b1" type="button" class="toggle-password" onclick="togglePassword('contrasenia', 'b1')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-contrasena"></p>
 
                             <div class="password-wrapper">
-                                <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required>
+                                <input class="form-control" type="password" name="repeat_contrasenia" id="confirmar_contrasenia" placeholder="Repetir Contraseña" required aria-label="Repetir Contraseña">
                                 <button id="b2" type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasenia', 'b2')"><i class="fa-regular fa-face-dizzy"></i></button>
                             </div>
                             <p class="error" id="error-confirmar-contrasena"></p>
 
                             <label for="tipo_viaje" id="tipo">Tipo de Viaje Favorito
-                                <select class="form-select" name="tipo_viaje" id="tipo_viaje" required>
+                                <select class="form-select" name="tipo_viaje" id="tipo_viaje" required aria-label="Selecciona tu viaje favorito">
                                     <option value="" disabled selected>Selecciona tu tipo de viaje</option>
-                                    <option value="aventura">Aventura</option>
-                                    <option value="cultural">Cultural</option>
-                                    <option value="gastronomico">Gastronómico</option>
-                                    <option value="playa">Playa</option>
-                                    <option value="montana">Montaña</option>
-                                    <option value="rural">Rural</option>
-                                    <option value="urbano">Urbano</option>
+                                    <option value="aventura" aria-label="Viaje de aventura">Aventura</option>
+                                    <option value="cultural" aria-label="Viaje cultural">Cultural</option>
+                                    <option value="gastronómico" aria-label="Viaje gastronómico">Gastronómico</option>
+                                    <option value="playa" aria-label="Viaje a la playa">Playa</option>
+                                    <option value="montana" aria-label="Viaje de montaña">Montaña</option>
+                                    <option value="rural" aria-label="Viaje rural">Rural</option>
+                                    <option value="urbano" aria-label="Viaje urbano">Urbano</option>
                                 </select>
                             </label>
                             <p class="error" id="error-tipo-viaje"></p>
 
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="notificaciones" id="notificaciones">
-                                <label class="form-check-label" for="notificaciones">Deseo recibir notificaciones sobre ofertas y novedades</label>
+                                <label class="form-check-label" for="notificaciones" aria-label="Acepto recicibir notificaciones">Deseo recibir notificaciones sobre ofertas y novedades</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
-                                <label class="form-check-label" for="politica_privacidad">Acepto la política de privacidad</label>
+                                <label class="form-check-label" for="politica_privacidad" aria-label="Acepto la política de privacidad">Acepto la política de privacidad</label>
                             </div>
                             <p class="error" id="error-privacidad"></p>
 
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primario">Suscribirse</button>
+                                <button type="submit" class="btn btn-primario" aria-label="Suscribirme">Suscribirse</button>
                             </div>
                         </form>
                     </div>
