@@ -59,6 +59,14 @@ export function mostrarMensajeExito(mensaje) {
 }
 
 /**
+ * Función para mostrar un mensaje (alert) de error
+ * @param {string} mensaje - El mensaje de error a mostrar.
+ */
+export function mostrarMensajeError(mensaje) {
+    alert('Error: ' + mensaje);
+}
+
+/**
  * Función para comprobar si el modo oscuro está activado
  * @return {boolean} true si el modo oscuro está activado, false en caso contrario.
  */
