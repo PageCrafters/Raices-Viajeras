@@ -153,14 +153,39 @@ export function initializeFormController() {
     });
 
     // Manejo del evento submit del formulario
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
         ui.ocultarErrores();
 
         const datos = ui.obtenerDatosFormulario();
         if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarTipoViaje(datos.tipoViaje) && datos.privacidad) {
-            ui.mostrarMensajeExito('¡Registro exitoso!');
-            ui.limpiarFormulario();
+            // Enviar datos al servidor
+            try {
+                const formData = new FormData();
+                formData.append('nombre', datos.nombre);
+                formData.append('email', datos.correo);
+                formData.append('contrasenia', datos.contrasena);
+                formData.append('tipo_viaje', datos.tipoViaje);
+                if (datos.notificaciones) {
+                    formData.append('notificaciones', '1');
+                }
+
+                const response = await fetch('web/php/register.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    ui.mostrarMensajeExito(result.message);
+                    ui.limpiarFormulario();
+                } else {
+                    ui.mostrarMensajeError(result.message);
+                }
+            } catch (error) {
+                ui.mostrarMensajeError('Error al conectar con el servidor.');
+            }
         }
     });
 }

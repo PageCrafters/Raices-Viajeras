@@ -1,20 +1,18 @@
-/* Conexión con la base de datos */
 <?php
-    $host = getenv("mysql.railway.internal");
-    $user = getenv("root");
-    $pass = getenv("RNFiYiZdYGKjqLpOFuSphIcSiHOcmiiz");
-    $db   = getenv("railway");
-    $port = getenv("3306");
+/* Conexión con la base de datos Railway (MySQL) */
 
+$host = "trolley.proxy.rlwy.net";
+$user = "root";
+$pass = "RNFiYiZdYGKjqLpOFuSphIcSiHOcmiiz";
+$db   = "railway";
+$port = 21188;
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+try {
     $conn = new mysqli($host, $user, $pass, $db, $port);
-
-    /*Conexión usando try catch*/
-    try {
-        if ($conn->connect_error) {
-            throw new Exception("Error de conexión: " . $conn->connect_error);
-        }
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
-
+    $conn->set_charset("utf8mb4");
+} catch (mysqli_sql_exception $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
 ?>
