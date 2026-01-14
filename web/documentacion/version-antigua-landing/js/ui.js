@@ -17,7 +17,7 @@ export function obtenerDatosFormulario() {
         correo,
         contrasena,
         confirmarContrasena,
-        tipoViaje,
+        pais: tipoViaje,
         notis,
         privacidad
     };

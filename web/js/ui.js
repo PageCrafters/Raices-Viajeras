@@ -8,7 +8,7 @@ export function obtenerDatosFormulario() {
     const correo = document.getElementById('correo').value.trim();
     const contrasena = document.getElementById('contrasenia').value;
     const confirmarContrasena = document.getElementById('confirmar_contrasenia').value;
-    const tipoViaje = document.getElementById('tipo_viaje').value;
+    const pais = document.getElementById('pais').value;
     const notis = document.getElementById('notificaciones').checked;
     const privacidad = document.getElementById('politica_privacidad').checked;
 
@@ -17,7 +17,7 @@ export function obtenerDatosFormulario() {
         correo,
         contrasena,
         confirmarContrasena,
-        tipoViaje,
+        pais: pais,
         notis,
         privacidad
     };

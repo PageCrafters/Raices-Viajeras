@@ -10,7 +10,7 @@ export function initializeFormController() {
     const correoInput = document.getElementById('correo');
     const contrasenaInput = document.getElementById('contrasenia');
     const confirmarContrasenaInput = document.getElementById('confirmar_contrasenia');
-    const tipoViajeSelect = document.getElementById('tipo_viaje');
+    const paisSelect = document.getElementById('pais');
     const privacidadCheckbox = document.getElementById('politica_privacidad');
 
 /*
@@ -103,6 +103,7 @@ export function initializeFormController() {
         }
     });
 
+
     // Validación en tiempo real para el campo confirmar contraseña
     confirmarContrasenaInput.addEventListener('input', () => {
         const df = ui.obtenerDatosFormulario();
@@ -130,14 +131,14 @@ export function initializeFormController() {
     });
 
     // Validación en tiempo real para el campo tipo de viaje
-    tipoViajeSelect.addEventListener('change', () => {
+    paisSelect.addEventListener('change', () => {
         const df = ui.obtenerDatosFormulario();
 
-        const tipoViaje = df.tipoViaje;
-        if (!v.validarTipoViaje(tipoViaje)) {
-            ui.mostrarError('error-tipo-viaje', 'Debe seleccionar un tipo de viaje.');
+        const pais = df.pais;
+        if (!v.validarPais(pais)) {
+            ui.mostrarError('error-pais', 'Debe seleccionar un pais.');
         } else {
-            ui.mostrarError('error-tipo-viaje', '');
+            ui.mostrarError('error-pais', '');
         }
     });
 
@@ -158,14 +159,14 @@ export function initializeFormController() {
         ui.ocultarErrores();
 
         const datos = ui.obtenerDatosFormulario();
-        if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarTipoViaje(datos.tipoViaje) && datos.privacidad) {
+        if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarPais(datos.pais) && datos.privacidad) {
             // Enviar datos al servidor
             try {
                 const formData = new FormData();
                 formData.append('nombre', datos.nombre);
                 formData.append('email', datos.correo);
                 formData.append('contrasenia', datos.contrasena);
-                formData.append('tipo_viaje', datos.tipoViaje);
+                formData.append('pais', datos.pais);
                 if (datos.notificaciones) {
                     formData.append('notificaciones', '1');
                 }

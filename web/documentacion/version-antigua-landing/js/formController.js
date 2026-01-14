@@ -88,7 +88,7 @@ export function initializeFormController() {
     tipoViajeSelect.addEventListener('change', () => {
         const df = ui.obtenerDatosFormulario();
 
-        const tipoViaje = df.tipoViaje;
+        const tipoViaje = df.pais;
         if (!v.validarTipoViaje(tipoViaje)) {
             ui.mostrarError('error-tipo-viaje', 'Debe seleccionar un tipo de viaje.');
         } else {
@@ -113,7 +113,7 @@ export function initializeFormController() {
         ui.ocultarErrores();
 
         const datos = ui.obtenerDatosFormulario();
-        if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarTipoViaje(datos.tipoViaje) && datos.privacidad) {
+        if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarTipoViaje(datos.pais) && datos.privacidad) {
             ui.mostrarMensajeExito('¡Registro exitoso!');
             ui.limpiarFormulario();
         }

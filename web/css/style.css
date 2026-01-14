@@ -193,7 +193,7 @@ body {
 }
 
 /* Opciones de select (claro) */
-.form-select option {
+.form-select optgroup option {
   color: #233029;
   background: #ffffff;
 }

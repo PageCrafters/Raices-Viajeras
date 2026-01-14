@@ -43,9 +43,9 @@ export function comprobarContrasenas(contrasena1, contrasena2) {
 
 /**
  * Función para validar si ha seleccionado una opción en un campo de tipo_viaje.
- * @param {string} tipoViaje - El valor seleccionado en el campo tipo_viaje.
+ * @param {string} pais - El valor seleccionado en el campo tipo_viaje.
  * @return {boolean} Verdadero si se ha seleccionado una opción válida, falso en caso contrario.
  */
-export function validarTipoViaje(tipoViaje) {
-    return tipoViaje !== "";
+export function validarPais(pais) {
+    return pais !== "";
 }
