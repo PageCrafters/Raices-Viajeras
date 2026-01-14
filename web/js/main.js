@@ -1,17 +1,16 @@
 import {initializeFormController} from "./formController.js";
 import {esModoOscuro} from "./ui.js";
 
-// Función para cambiar entre modo claro y oscuro según se inicia
-if (esModoOscuro()) {
-    document.documentElement.classList.add('dark-mode');
-} else {
-    document.documentElement.classList.remove('dark-mode');
-}
+// El tema ya se aplicó en el script inline en head
+// Agregar la clase para habilitar transiciones después de la carga inicial
+document.body.classList.add('theme-loaded');
 
 
 // Exponer la función de cambio de modo como global para que los `onclick` inline la encuentren
 window.cambiaModoColor = () => {
-    document.documentElement.classList.toggle('dark-mode');
+    const isDark = document.documentElement.classList.toggle('dark-mode');
+    // Guarda el estado en localStorage
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 };
 
 // Función para mostrar/ocultar contraseña

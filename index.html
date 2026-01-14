@@ -7,6 +7,13 @@
     <title>Raíces Viajeras Landing</title>
     <link rel="stylesheet" href="web/css/bootstrap.min.css">
     <link rel="stylesheet" href="web/css/style.css">
+    <script>
+        // Aplicar el tema guardado inmediatamente para evitar animación al cargar
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
     <link rel="icon" type="image/webp" href="img/logos/raices-viajeras-logo0.webp">
 </head>
 

@@ -44,9 +44,16 @@ body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--bg);
   color: var(--texto);
-  transition: background .35s ease, color .35s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.initial-load {
+  transition: none;
+}
+
+body.theme-loaded {
+  transition: background .35s ease, color .35s ease;
 }
 
 /* Barra de navegación */

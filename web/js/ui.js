@@ -71,7 +71,12 @@ export function mostrarMensajeError(mensaje) {
  * @return {boolean} true si el modo oscuro está activado, false en caso contrario.
  */
 export function esModoOscuro() {
-    // Detecta si el usuario usa modo oscuro en su sistema
+    // Primero, verifica si hay una preferencia guardada en localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        return savedTheme === 'dark';
+    }
+    // Si no hay guardado, usa la preferencia del sistema
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     return prefersDark.matches;
 }
