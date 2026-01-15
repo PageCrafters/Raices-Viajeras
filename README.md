@@ -17,8 +17,10 @@ Personas que buscan **viajar de forma consciente**, respetando el entorno natura
 Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecoturismo, voluntariado ambiental y experiencias de bajo impacto.
 
 ## Enlace al video de explicación de Landing Page RV 
-> "https://youtu.be/ucAXW-ixVdw"
+> https://youtu.be/ucAXW-ixVdw
 
 ## Boceto final (vista escritorio y móvil)
-> [Ver carpeta Documentación](../../../../web/documentacion/)
+> https://pagecrafters.github.io/Raices-Viajeras/web/documentacion/Boceto_Final_Landing_Page.html
 
+## Landing publicada en GitHub Pages  
+>  https://PageCrafters.github.io/Raices-Viajeras
