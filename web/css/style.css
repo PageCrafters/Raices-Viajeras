@@ -84,6 +84,10 @@ body.theme-loaded {
     filter: invert(1);
 }
 
+.dark-mode .btn-close {
+    filter: invert(1);
+}
+
 .navbar-brand {
   font-weight: 800;
   letter-spacing: .6px;
@@ -360,4 +364,19 @@ body {
   .tarjeta-cta {
     max-width: 520px;
   }
+}
+
+/* Estilos para modal en modo oscuro */
+.dark-mode .modal-content {
+  background-color: var(--fondo-tarjeta);
+  color: var(--texto);
+  border-color: var(--tono-apagado);
+}
+
+.dark-mode .modal-header {
+  border-color: var(--tono-apagado);
+}
+
+.dark-mode .modal-footer {
+  border-color: var(--tono-apagado);
 }
