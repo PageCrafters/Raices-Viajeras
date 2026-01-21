@@ -1,7 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 
-/* Variables del tema (en español) */
+/* Variables del tema */
 :root {
   --bg: #f6fbf6; /* fondo claro */
   --texto: #233029; /* color texto */
