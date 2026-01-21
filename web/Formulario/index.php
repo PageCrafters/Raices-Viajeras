@@ -39,10 +39,10 @@
                 <!-- Registro -->
                 <form action="" class="formulario_register">
                     <h2>Registrarse</h2>
-                    <input type="text" placeholder="Nombre Completo" id="nombreApellido">
-                    <input type="text" placeholder="Correo Electrónico" id="correo">
-                    <input type="password" placeholder="Contraseña" id="pwd">
-                    <input type="password" placeholder="Confirmar Contraseña" id="pwdConfirm">
+                    <input type="text" placeholder="Nombre Completo" id="nombreApellido" nombre="nombreCompleto">
+                    <input type="text" placeholder="Correo Electrónico" id="correo" name="correo">
+                    <input type="password" placeholder="Contraseña" id="pwd" nombre="password">
+                    <input type="password" placeholder="Confirmar Contraseña" id="pwdConfirm" name="passwordConfirm">
 
                     <nav class="radio-group">
                         <label for="Genero">Género:</label>
