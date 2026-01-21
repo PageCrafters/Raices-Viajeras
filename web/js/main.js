@@ -1,4 +1,5 @@
 import {initializeFormController} from "./formController.js";
+import {cambiaIcono} from "./cambiaIcono.js";
 import {esModoOscuro} from "./ui.js";
 
 // El tema ya se aplicó en el script inline en head
@@ -6,11 +7,16 @@ import {esModoOscuro} from "./ui.js";
 document.body.classList.add('theme-loaded');
 
 
-// Exponer la función de cambio de modo como global para que los `onclick` inline la encuentren
+// Exponer la función de cambio de modo como global para que los `onclick` la encuentren
 window.cambiaModoColor = () => {
     const isDark = document.documentElement.classList.toggle('dark-mode');
     // Guarda el estado en localStorage
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const iconos = document.querySelectorAll('.bi-moon-fill, .bi-sun-fill');
+    for (const icono of iconos) {
+        icono.classList.toggle('bi-moon-fill');
+        icono.classList.toggle('bi-sun-fill');
+    }
 };
 
 // Función para mostrar/ocultar contraseña
@@ -34,6 +40,7 @@ window.togglePassword = (fieldId, buttonId) => {
 // Inicialización segura: si el DOM ya está listo, ejecutar inmediatamente; si no, esperar al evento
 function init() {
     initializeFormController();
+    cambiaIcono();
 }
 
 if (document.readyState === 'loading') {
