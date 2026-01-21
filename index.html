@@ -93,7 +93,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+<!--
+    <div class="modal fade" id="modalRegistros" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,7 +134,7 @@
 
                         <label for="pais">Selecciona tu país:</label>
                         <select class="form-select" id="pais" name="pais">
-                            <option value="" disabled selected>-- Selecciona un país --</option>
+                            <option value="" disabled selected>&#45;&#45; Selecciona un país &#45;&#45;</option>
                             <optgroup label="Europa">
                                 <option value="ad">Andorra</option>
                                 <option value="al">Albania</option>
@@ -257,12 +258,83 @@
             </div>
         </div>
     </div>
+-->
+
+    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content contenedor">
+                <div class="modal-header">
+                    <h5 class="modal-title">Log in / Sign in</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="caja_trasera">
+                    <div class="caja_trasera-login">
+                        <h3>¿Ya tienes una cuenta?</h3>
+                        <p>Inicia sesión para entrar en la página</p>
+                        <button id="btn_iniciar-sesion">Iniciar Sesión</button>
+                    </div>
+                    <div class="caja_trasera-registro">
+                        <h3>¿Aún no tienes una cuenta?</h3>
+                        <p>Regístrate para entrar en la página</p>
+                        <button id="btn_registrarse">Registrarse</button>
+                    </div>
+                </div>
+                <!-- Formularios de login y registro -->
+                <div class="contenedor_login-register">
+                    <!-- Login -->
+                    <form action="" class="formulario_login">
+                        <h2>Iniciar Sesión</h2>
+                        <input type="text" placeholder="Correo Electrónico">
+                        <input type="password" placeholder="Contraseña">
+                        <button>Entrar</button>
+                    </form>
+
+                    <!-- Registro -->
+                    <form action="" class="formulario_register">
+                        <h2>Registrarse</h2>
+                        <input type="text" placeholder="Nombre Completo" id="nombreApellido">
+                        <input type="text" placeholder="Correo Electrónico" id="correo">
+                        <input type="password" placeholder="Contraseña" id="pwd">
+                        <input type="password" placeholder="Confirmar Contraseña" id="pwdConfirm">
+
+                        <nav class="radio-group">
+                            <label>Género:</label>
+                            <label><input type="radio" name="Genero" value="masculino"> M</label>
+                            <label><input type="radio" name="Genero" value="femenino"> F</label>
+                            <label><input type="radio" name="Genero" value="otro"> O</label>
+                        </nav>
+
+                        <div>
+                            <label>Fecha de nacimiento</label>
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                        </div>
+
+                        <div class="form-check">
+                            <label class="form-check-label" for="politica_privacidad">
+                                <input class="form-check-input" type="checkbox" name="politica_privacidad"
+                                    id="politica_privacidad" required>
+                                Activar notificaciones
+                            </label>
+
+                            <label class="form-check-label" for="revista">
+                                <input class="form-check-input" type="checkbox" name="revista" id="revista" required>
+                                Recivir revista
+                            </label>
+                        </div>
+
+                        <button>Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="pie">
         <p>&copy; 2026 Raíces Viajeras. Todos los derechos reservados.</p>
     </footer>
     <script src="web/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="web/js/main.js"></script>
+    <script src="web/js/animacionesForm.js"></script>
     <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script>
 </body>
 
