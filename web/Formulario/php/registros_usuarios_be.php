@@ -1,5 +1,5 @@
 <?php
 
-    //Conectar con la base de datos
+    //Conectar con la base de dato
 
 ?>

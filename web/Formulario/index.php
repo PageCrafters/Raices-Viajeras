@@ -48,7 +48,7 @@
                         <label for="Genero">Género:</label>
                         <label><input type="radio" name="Genero" value="masculino"> M</label>
                         <label><input type="radio" name="Genero" value="femenino"> F</label>
-                        <label><input type="radio" name="Genero" value="otro"> O</label>
+                        <label><input type="radio" name="Genero" value="otr"> O</label>
                     </nav>
                     
                     <div>
