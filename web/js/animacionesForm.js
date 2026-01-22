@@ -5,7 +5,7 @@ window.addEventListener("resize", anchoPagina);
 //Declaracion de variables
 const contenedor_login_register = document.querySelector(".contenedor_login-register");
 const formulario_login = document.querySelector(".formulario_login");
-const formulario_register = document.querySelector(".formulario_register");
+const formulario_register = document.getElementById("form-registro");
 const caja_trasera_login = document.querySelector(".caja_trasera-login");
 const caja_trasera_register = document.querySelector(".caja_trasera-registro");
 
