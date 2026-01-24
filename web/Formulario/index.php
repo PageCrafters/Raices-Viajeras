@@ -31,24 +31,24 @@
                 <!-- Login -->
                 <form action="" class="formulario_login">
                     <h2>Iniciar Sesión</h2>
-                    <input type="text" placeholder="Correo Electrónico">
-                    <input type="password" placeholder="Contraseña">
+                    <input type="text" placeholder="Correo Electrónico" name="correo_login">
+                    <input type="password" placeholder="Contraseña" id="pwd_login">
                     <button>Entrar</button>
                 </form>
 
                 <!-- Registro -->
-                <form action="" class="formulario_register">
+                <form action="php/registros_usuarios_be.php" method="POST" class="formulario_register">
                     <h2>Registrarse</h2>
-                    <input type="text" placeholder="Nombre Completo" id="nombreApellido" nombre="nombreCompleto">
+                    <input type="text" placeholder="Nombre Completo" id="nombreApellido" name="nombre_completo">
                     <input type="text" placeholder="Correo Electrónico" id="correo" name="correo">
-                    <input type="password" placeholder="Contraseña" id="pwd" nombre="password">
+                    <input type="password" placeholder="Contraseña" id="pwd" name="pwd">
                     <input type="password" placeholder="Confirmar Contraseña" id="pwdConfirm" name="passwordConfirm">
 
                     <nav class="radio-group">
                         <label for="Genero">Género:</label>
-                        <label><input type="radio" name="Genero" value="masculino"> M</label>
-                        <label><input type="radio" name="Genero" value="femenino"> F</label>
-                        <label><input type="radio" name="Genero" value="otr"> O</label>
+                        <label><input type="radio" name="genero" value="masculino"> M</label>
+                        <label><input type="radio" name="genero" value="femenino"> F</label>
+                        <label><input type="radio" name="genero" value="otr"> O</label>
                     </nav>
                     
                     <div>
@@ -63,7 +63,7 @@
                         </label>
 
                         <label class="form-check-label" for="revista">
-                            <input class="form-check-input" type="checkbox" name="revista" id="revista" required>
+                            <input class="form-check-input" type="checkbox" name="revista" id="revista">
                             Recivir revista
                         </label>
                     </div>
