@@ -32,7 +32,7 @@
                 <form action="" class="formulario_login">
                     <h2>Iniciar Sesión</h2>
                     <input type="text" placeholder="Correo Electrónico" name="correo_login">
-                    <input type="password" placeholder="Contraseña" id="pwd_login">
+                    <input type="password" placeholder="Contraseña" id="pwd_login" name="pwd_login">
                     <button>Entrar</button>
                 </form>
 
