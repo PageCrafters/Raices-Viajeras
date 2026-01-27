@@ -16,14 +16,14 @@ if ($ejecutar) {
     echo '
         <script>
             alert("Usuario almacenado correctamente");
-            window.location = "../index.php";
+            window.location = "../index.html";
         </script>
     ';
 } else {
     echo '
         <script>
             alert("Inténtalo de nuevo");
-            window.location = "../index.php";
+            window.location = "../index.html";
         </script>
     ';
 }
