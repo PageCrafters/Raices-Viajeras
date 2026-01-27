@@ -93,8 +93,7 @@
     </div>
 
     <!-- Modal -->
-<!--
-    <div class="modal fade" id="modalRegistros" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -134,7 +133,7 @@
 
                         <label for="pais">Selecciona tu país:</label>
                         <select class="form-select" id="pais" name="pais">
-                            <option value="" disabled selected>&#45;&#45; Selecciona un país &#45;&#45;</option>
+                            <option value="" disabled selected>-- Selecciona un país --</option>
                             <optgroup label="Europa">
                                 <option value="ad">Andorra</option>
                                 <option value="al">Albania</option>
@@ -258,203 +257,12 @@
             </div>
         </div>
     </div>
--->
-
-    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content contenedor">
-                <div class="modal-header">
-                    <h5 class="modal-title">Log in / Sign in</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="caja_trasera modal-body">
-                    <div class="caja_trasera-login">
-                        <h3>¿Ya tienes una cuenta?</h3>
-                        <p>Inicia sesión para entrar en la página</p>
-                        <button id="btn_iniciar-sesion">Iniciar Sesión</button>
-                    </div>
-                    <div class="caja_trasera-registro">
-                        <h3>¿Aún no tienes una cuenta?</h3>
-                        <p>Regístrate para entrar en la página</p>
-                        <button id="btn_registrarse">Registrarse</button>
-                    </div>
-                </div>
-                <!-- Formularios de login y registro -->
-                <div class="contenedor_login-register">
-                    <!-- Login -->
-                    <form action="" class="formulario_login">
-                        <h2>Iniciar Sesión</h2>
-                        <input type="text" placeholder="Correo Electrónico">
-                        <input type="password" placeholder="Contraseña">
-                        <button>Entrar</button>
-                    </form>
-
-                    <!-- Registro -->
-                    <form id="form-registro" action="web/php/register.php" method="post">
-                        <h2>Registrarse</h2>
-                        <input class="form-control" type="text" name="nombre" id="nombre"
-                               placeholder="Nombre y Apellido" required aria-label="Nombre y Apellido">
-                        <p class="error" id="error-nombre"></p>
-
-                        <input class="form-control" type="email" name="email" id="correo"
-                               placeholder="Correo electrónico" required aria-label="Correo electrónico">
-                        <p class="error" id="error-correo"></p>
-
-                        <div class="password-wrapper">
-                            <input class="form-control" type="password" name="contrasenia" id="contrasenia"
-                                   placeholder="Contraseña" required aria-label="Contraseña">
-                            <button id="b1" type="button" class="toggle-password"
-                                    onclick="togglePassword('contrasenia', 'b1')"
-                                    aria-label="Mostrar u ocultar contraseña"><i
-                                    class="fa-regular fa-face-dizzy"></i></button>
-                        </div>
-                        <p class="error" id="error-contrasena"></p>
-
-                        <div class="password-wrapper">
-                            <input class="form-control" type="password" name="repeat_contrasenia"
-                                   id="confirmar_contrasenia" placeholder="Repetir Contraseña" required
-                                   aria-label="Repetir Contraseña">
-                            <button id="b2" type="button" class="toggle-password"
-                                    onclick="togglePassword('confirmar_contrasenia', 'b2')"
-                                    aria-label="Mostrar u ocultar confirmación de contraseña"><i
-                                    class="fa-regular fa-face-dizzy"></i></button>
-                        </div>
-                        <p class="error" id="error-confirmar-contrasena"></p>
-
-                        <label for="pais">Selecciona tu país:</label>
-                        <select class="form-select" id="pais" name="pais">
-                            <option value="" disabled selected>&#45;&#45; Selecciona un país &#45;&#45;</option>
-                            <optgroup label="Europa">
-                                <option value="ad">Andorra</option>
-                                <option value="al">Albania</option>
-                                <option value="at">Austria</option>
-                                <option value="be">Bélgica</option>
-                                <option value="bg">Bulgaria</option>
-                                <option value="ch">Suiza</option>
-                                <option value="cy">Chipre</option>
-                                <option value="cz">República Checa</option>
-                                <option value="de">Alemania</option>
-                                <option value="dk">Dinamarca</option>
-                                <option value="es">España</option>
-                                <option value="ee">Estonia</option>
-                                <option value="fi">Finlandia</option>
-                                <option value="fr">Francia</option>
-                                <option value="gr">Grecia</option>
-                                <option value="hu">Hungría</option>
-                                <option value="ie">Irlanda</option>
-                                <option value="is">Islandia</option>
-                                <option value="it">Italia</option>
-                                <option value="li">Liechtenstein</option>
-                                <option value="lt">Lituania</option>
-                                <option value="lu">Luxemburgo</option>
-                                <option value="lv">Letonia</option>
-                                <option value="mt">Malta</option>
-                                <option value="md">Moldavia</option>
-                                <option value="mc">Mónaco</option>
-                                <option value="nl">Países Bajos</option>
-                                <option value="no">Noruega</option>
-                                <option value="pl">Polonia</option>
-                                <option value="pt">Portugal</option>
-                                <option value="ro">Rumanía</option>
-                                <option value="ru">Rusia</option>
-                                <option value="se">Suecia</option>
-                                <option value="si">Eslovenia</option>
-                                <option value="sk">Eslovaquia</option>
-                                <option value="ua">Ucrania</option>
-                                <option value="gb">Reino Unido</option>
-                            </optgroup>
-
-                            <optgroup label="América">
-                                <option value="ar">Argentina</option>
-                                <option value="bo">Bolivia</option>
-                                <option value="br">Brasil</option>
-                                <option value="ca">Canadá</option>
-                                <option value="cl">Chile</option>
-                                <option value="co">Colombia</option>
-                                <option value="cr">Costa Rica</option>
-                                <option value="cu">Cuba</option>
-                                <option value="do">República Dominicana</option>
-                                <option value="ec">Ecuador</option>
-                                <option value="sv">El Salvador</option>
-                                <option value="gt">Guatemala</option>
-                                <option value="hn">Honduras</option>
-                                <option value="mx">México</option>
-                                <option value="ni">Nicaragua</option>
-                                <option value="pa">Panamá</option>
-                                <option value="py">Paraguay</option>
-                                <option value="pe">Perú</option>
-                                <option value="us">Estados Unidos</option>
-                                <option value="uy">Uruguay</option>
-                                <option value="ve">Venezuela</option>
-                            </optgroup>
-
-                            <optgroup label="Asia">
-                                <option value="cn">China</option>
-                                <option value="jp">Japón</option>
-                                <option value="kr">Corea del Sur</option>
-                                <option value="in">India</option>
-                                <option value="id">Indonesia</option>
-                                <option value="my">Malasia</option>
-                                <option value="ph">Filipinas</option>
-                                <option value="sg">Singapur</option>
-                                <option value="th">Tailandia</option>
-                                <option value="vn">Vietnam</option>
-                                <option value="ae">Emiratos Árabes Unidos</option>
-                                <option value="sa">Arabia Saudita</option>
-                                <option value="il">Israel</option>
-                            </optgroup>
-
-                            <optgroup label="África">
-                                <option value="za">Sudáfrica</option>
-                                <option value="eg">Egipto</option>
-                                <option value="ng">Nigeria</option>
-                                <option value="ke">Kenia</option>
-                                <option value="dz">Argelia</option>
-                                <option value="ma">Marruecos</option>
-                                <option value="tz">Tanzania</option>
-                                <option value="gh">Ghana</option>
-                                <option value="et">Etiopía</option>
-                            </optgroup>
-
-                            <optgroup label="Oceanía">
-                                <option value="au">Australia</option>
-                                <option value="nz">Nueva Zelanda</option>
-                                <option value="fj">Fiyi</option>
-                                <option value="pg">Papúa Nueva Guinea</option>
-                            </optgroup>
-                        </select>
-                        <p class="error" id="error-pais"></p>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="notificaciones"
-                                   id="notificaciones">
-                            <label class="form-check-label" for="notificaciones">Deseo recibir notificaciones sobre
-                                ofertas y novedades</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="politica_privacidad"
-                                   id="politica_privacidad" required>
-                            <label class="form-check-label" for="politica_privacidad">Acepto la política de
-                                privacidad</label>
-                        </div>
-                        <p class="error" id="error-privacidad"></p>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primario">Suscribirse</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div>
 
     <footer class="pie">
         <p>&copy; 2026 Raíces Viajeras. Todos los derechos reservados.</p>
     </footer>
     <script src="web/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="web/js/main.js"></script>
-    <script src="web/js/animacionesForm.js"></script>
     <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script>
 </body>
 
