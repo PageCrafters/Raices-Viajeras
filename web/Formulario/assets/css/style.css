@@ -34,7 +34,7 @@ main{
     display: flex;
     justify-content: center;
     backdrop-filter: blur(5px);
-    background-color: rgba(0, 128, 255, 0.3);
+    background-color: #497551;
 }
 
 .caja_trasera div{
@@ -67,7 +67,7 @@ main{
 
 .caja_trasera button:hover{
     background: white;
-    color: #46A2FD;
+    color: #2f9e44;
 }
 
 /*Formularios*/
@@ -95,7 +95,7 @@ main{
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
-    color: #46A2FD;
+    color: #2f9e44;
 }
 
 .contenedor_login-register form input{
@@ -121,7 +121,7 @@ main{
 
 .contenedor_login-register form input[type="date"]:focus{
     background: #e8e8e8;
-    outline: 2px solid #46A2FD;
+    outline: 2px solid #2f9e44;
 }
 
 label {
