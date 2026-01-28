@@ -7,5 +7,5 @@ document.addEventListener('DOMContentLoaded', () => {
             const headerContainer = document.getElementById('contenedorCesta');
             headerContainer.innerHTML = htmlDevuelto;
         })
-        .catch(err => console.error('Error cargando header:', err));
+        .catch(err => console.error('Error cargando la cesta:', err));
 });

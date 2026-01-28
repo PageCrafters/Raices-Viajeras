@@ -7,5 +7,5 @@ document.addEventListener('DOMContentLoaded', () => {
             const headerContainer = document.getElementById('body');
             headerContainer.innerHTML = headerContainer.innerHTML + htmlDevuelto;
         })
-        .catch(err => console.error('Error cargando header:', err));
+        .catch(err => console.error('Error cargando el footer:', err));
 });
