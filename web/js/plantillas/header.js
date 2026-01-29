@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Seleccionamos el contenedor donde irá el header
             const headerContainer = document.getElementById('header');
             headerContainer.innerHTML = htmlDevuelto;
+            // Después de cargar el header, actualizamos los iconos según el tema actual
+            window.actualizarIconos();
         })
         .catch(err => console.error('Error cargando el header:', err));
 });
