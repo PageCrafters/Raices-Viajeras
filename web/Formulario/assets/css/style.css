@@ -205,6 +205,26 @@ label {
     display: none;
 }
 
+/* Botón fijo para volver a la página anterior */
+.back-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 10px 14px;
+    background: #2f9e44;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-weight: 600;
+    z-index: 9999;
+}
+
+.back-btn:hover{
+    filter: brightness(0.95);
+}
+
 
 /*Trabajando con el responsive*/
 
