@@ -1058,6 +1058,29 @@ h2.section-title.compromiso-title {
     border-color: #3e3d3d;
     background: rgba(255,255,255,.1);
 }
+.btn-back {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.back-btn {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: .9rem 2.5rem;
+    border-radius: 3rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .25s;
+}
+
+.back-btn:hover {
+    background: #fff;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.2);
+}
 
 /* AVATARES (colores individuales) */
 .avatar-ana  { background: linear-gradient(135deg, #2d6a4f, #52b788); }
