@@ -669,7 +669,8 @@ label {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: .8rem;
-    height: 520px;
+    height: auto;
+    overflow: hidden;
 }
 .hero-img-grid img {
     width: 100%;
@@ -1066,6 +1067,7 @@ h2.section-title.compromiso-title {
 .back-btn {
     background: transparent;
     color: #fff;
+    cursor: pointer;
     border: 2px solid #fff;
     padding: .9rem 2.5rem;
     border-radius: 3rem;
