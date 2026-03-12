@@ -1044,7 +1044,7 @@ h2.section-title.compromiso-title {
 }
 .btn-cta-outline-blanco {
     background: transparent;
-    color: #000000;
+    color: #FFFFFFFF;
     border: 2px solid rgb(255, 255, 255);
     padding: .9rem 2.5rem;
     border-radius: 3rem;
