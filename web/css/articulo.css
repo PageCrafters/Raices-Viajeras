@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
+
+/* Variables del tema */
+:root {
+    --bg: #f6fbf6; /* fondo claro */
+    --texto: #18201DB3; /* color texto */
+    --tono-apagado: #5b6b5b; /* tono apagado */
+    --verde-500: #1D622A; /* verde principal */
+    --verde-300: #8fd19b;
+    --marron-700: #6b4226; /* marrón */
+    --marron-900: #6b4226;
+    --fondo-tarjeta: #ffffff;
+    --glass: rgba(255, 255, 255, 0.65);
+    --perla: #f0eeeb;
+    --shadow: 0 8px 24px rgba(35, 48, 41, 0.08);
+    --texto-boton: #ffffff;
+    --focus: rgba(47, 158, 68, 0.18);
+    --verde-oscuro: #1e4d36;
+}
+
+.dark-mode {
+    --bg: #070707; /* fondo oscuro */
+    --texto: #e8f8ea; /* texto claro */
+    --tono-apagado: #9aa69a;
+    --verde-500: #34d058;
+    --verde-300: #66e07f;
+    --marron-700: #000000; /* marrón en oscuro */
+    --marron-900: #e8b48a;
+    --fondo-tarjeta: #0f0f0f;
+    --glass: rgba(10, 10, 10, 0.6);
+    --perla: #ece9e4;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --texto-boton: #ffffff;
+    --focus: rgba(52, 208, 88, 0.12);
+    --verde-oscuro: #1e4d36;
+}
+
+/*Trabajando con el responsive*/
+
+@media screen and (max-width: 850px){
+
+}
