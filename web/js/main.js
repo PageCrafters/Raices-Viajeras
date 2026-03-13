@@ -45,6 +45,12 @@ window.togglePassword = (fieldId, buttonId) => {
 // Inicialización segura: si el DOM ya está listo, ejecutar inmediatamente; si no, esperar al evento
 function init() {
     initializeFormController();
+    // Si estamos en la página de destinos, cargar el módulo que maneja la lista
+    if (document.getElementById('destinos-container')) {
+        import('./plantillas/destinos.js')
+            .then(mod => { if (mod.initDestinos) mod.initDestinos(); })
+            .catch(err => console.error('No se pudo cargar destinos.js', err));
+    }
 }
 
 if (document.readyState === 'loading') {

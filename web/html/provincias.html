@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Provincias</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .cards-wrap { display:flex; flex-wrap:wrap; gap:1rem; }
+            .card-disabled { pointer-events: none; opacity: .6; }
+        </style>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
+        <script src="../js/darkTheme.js"></script>
 </head>
-<body>
+<body id="body">
+    <header id="header"></header>
+    <main class="container my-4">
+        <div id="provincias-wrap" class="cards-wrap"></div>
+    </main>
+    <script type="module" src="../js/plantillas/header.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 
+    <!--
+        Script externo: `../js/pages/provincias.js`
+        - Carga la lista de provincias desde `get_provincias.php`.
+        - Genera una tarjeta (card) por provincia mostrando imagen, nombre, descripción
+          y un contador de viajes (`viajes_count`). Si no hay viajes la tarjeta queda
+          deshabilitada visualmente.
+        - Al hacer clic en una provincia con viajes redirige a `destinos.html` pasando
+          el parámetro `provincia_id` en la URL.
+    -->
+    <script src="../js/pages/provincias.js"></script>
+
+    <script src="../js/plantillas/footer.js"></script>
 </body>
 </html>
