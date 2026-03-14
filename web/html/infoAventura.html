@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Info Aventura</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="header"></header>
+    <main class="container my-4">
+        <div id="viaje-detail"></div>
+    </main>
+    <script type="module" src="../js/plantillas/header.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <!--
+        Script externo: `../js/pages/infoAventura.js`
+        - Lee el parámetro `viaje` de la URL y consulta `get_viaje.php` por los datos
+          del viaje solicitado.
+        - Muestra la imagen, título, descripción, detalles, precio y (si viene)
+          el nombre de la provincia (`provincia_nombre`).
+    -->
+    <script src="../js/pages/infoAventura.js"></script>
+    <script src="../js/plantillas/footer.js"></script>
+</body>
+</html>
