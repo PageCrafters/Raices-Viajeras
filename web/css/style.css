@@ -1,6 +1,6 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 /* Variables del tema */
 :root {
   --bg: #f6fbf6; /* fondo claro */
@@ -71,10 +71,6 @@ body.theme-loaded {
   border-bottom: 1px solid rgba(47, 158, 68, 0.2);
 }
 
-.rojo{
-    color: red;
-}
-
 .verde{
     color: var(--verde-500);
 }
@@ -118,7 +114,13 @@ body.theme-loaded {
 .encabezado {
   padding: 2.4rem 1rem;
 }
-
+.encabezado .display-6{
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+}.encabezado .display-6 em {
+    font-style: italic;
+    color: var(--marron-900);
+}
 .encabezado .lead {
   font-size: 1.05rem;
   color: var(--tono-apagado);

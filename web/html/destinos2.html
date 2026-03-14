@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raíces Viajeras - Encuentra tu viaje</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/destinos2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="../js/darkTheme.js"></script>
+</head>
+
+<body id="body">
+    <header id="header"></header>
+    <script type="module" src="../js/plantillas/header.js"></script>
+
+    <!-- Buscador -->
+    <section class="buscador-hero">
+        <div class="buscador-bg-blob"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8 text-center">
+                    <p class="buscador-eyebrow">Tu próxima aventura sostenible</p>
+                    <h1 class="buscador-title">
+                        ¿A dónde te llaman<br><em>tus raíces</em> hoy?
+                    </h1>
+                    <p class="buscador-subtitle">
+                        Más de 20 destinos verificados. Filtra por comunidad, tipo de experiencia o estilo de viaje y encuentra el que late al ritmo de la naturaleza.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="buscador-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" class="buscador-input" placeholder="Destino, actividad o comunidad autónoma…" id="buscador-input">
+                        <button class="buscador-btn" onclick="buscar()">Buscar viaje</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comunidades Autónomas -->
+    <section class="destinos-section">
+        <div class="container">
+
+            <div class="row mb-4">
+                <div class="col-12 col-lg-7">
+                    <p class="section-label exp-title">Explora por territorio</p>
+                    <h2 class="section-title comunidades-title">Viajes por Comunidades de España</h2>
+                    <p class="section-desc desc-title">Cada rincón de España esconde un ecosistema único. Elige tu comunidad y descubre experiencias diseñadas para respetarla.</p>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/cantabria/capricho-cantabria-deskpot.webp" alt="Cantabria">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Cantabria</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/asturias/horreo-asturiano-deskpot.webp" alt="Asturias">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Asturias</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/murcia/catedral-murcia-deskpot.webp" alt="Murcia">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Murcia</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/catalunia/sagrada-familia-barcelona-deskpot.webp" alt="Murcia">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Cataluña</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/galicia/catedral-santiago-galicia-deskpot.webp" alt="Galicia">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Galicia</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <div class="ca-card">
+                        <img class="ca-card-img" src="../img/ca/madrid/oso-madronio-madrid-deskpot.webp" alt="Madrid">
+                        <div class="ca-card-overlay"></div>
+                        <div class="ca-card-body">
+                            <span class="ca-card-name">Madrid</span>
+                            <a href="#" class="ca-card-btn">Ver viajes</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="destinos-cta">
+        <div class="container cta-inner">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-7 text-center">
+                    <h2>¿No encuentras lo que buscas?</h2>
+                    <p>Cuéntanos tu viaje ideal y nuestro equipo diseñará una ruta sostenible hecha a tu medida.</p>
+                    <a href="/Raices-Viajeras/web/Formulario/form.html" class="btn-cta-blanco">Contactar con el equipo</a>
+                    <a href="/Raices-Viajeras/index.html" class="btn-cta-outline-blanco">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="../js/plantillas/footer.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
+
+
+
