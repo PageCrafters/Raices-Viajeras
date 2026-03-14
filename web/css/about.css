@@ -45,8 +45,6 @@
     overflow: hidden;
     background: var(--fondo-tarjeta);
 }
-
-
 .hero-bg-shape {
     position: absolute;
     top: -10%;
@@ -240,13 +238,13 @@ p.mision-autor {
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
-    color: var(--verde);
+    color: var(--bg);
     margin-bottom: 1.2rem;
 }
-.valor-card h4 {
+.valor-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem;
-    color: var(--verde);
+    color: var(--verde-500);
     margin-bottom: .6rem;
 }
 .valor-card p {
