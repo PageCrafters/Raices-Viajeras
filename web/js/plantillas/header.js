@@ -8,6 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
             headerContainer.innerHTML = htmlDevuelto;
             // Después de cargar el header, actualizamos los iconos según el tema actual
             window.actualizarIconos();
+        
+            // Comprobar si el usuario logueado es admin
+            fetch('/Raices-Viajeras/web/php/sesion.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.rol === 'admin') {
+                        document.getElementById('btn-admin-nav').classList.remove('d-none');
+                    }
+                })
+                .catch(err => console.error('Error comprobando sesión:', err));
         })
         .catch(err => console.error('Error cargando el header:', err));
 });
