@@ -2,8 +2,7 @@
     // Carga los viajes de una provincia concreta y genera las tarjetas que se muestran en destinos.html
     const wrap = document.getElementById('viajes-wrap');
     const params = new URLSearchParams(window.location.search);
-    // aceptamos `provincia_id` (recomendado) y por compatibilidad `provincia`
-    const provId = params.get('provincia_id') || params.get('provincia');
+    const provId = params.get('provincia_id')
     if (!provId) { wrap.innerHTML = '<p class="text-muted">Provincia no especificada.</p>'; return; }
     try{
         const res = await fetch('../php/get_viajes_by_provincia.php?provincia_id=' + encodeURIComponent(provId));
