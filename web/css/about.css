@@ -541,8 +541,8 @@ h2.section-title.compromiso-title {
 }
 
 /* AVATARES (colores individuales) */
-.avatar-ana  { background: linear-gradient(135deg, #2d6a4f, #52b788); }
-.avatar-manuel { background: linear-gradient(135deg, #1b4332, #40916c); }
+.avatar-ana  { background: linear-gradient(135deg, #1b4332, #40916c); }
+.avatar-manuel { background: linear-gradient(135deg, #2d6a4f, #52b788); }
 .avatar-monica { background: linear-gradient(135deg, #52b788, #95d5b2); }
 
 /* ── BADGES variantes ── */

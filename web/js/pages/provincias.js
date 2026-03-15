@@ -1,13 +1,16 @@
-(async function(){
+document.addEventListener('DOMContentLoaded', async () => {
     // Cargamos la lista de provincias desde el backend y generamos fichas (cards)
     const wrap = document.getElementById('provincias-wrap');
+    if (!wrap) return;
     try{
-        const res = await fetch('../php/get_provincias.php');
+        const res = await fetch('../php/get_provincias.php', { cache: 'no-store', credentials: 'same-origin' });
+        if (!res.ok) throw new Error('HTTP error ' + res.status);
         const data = await res.json();
         if (!Array.isArray(data) || data.length === 0) {
             wrap.innerHTML = '<p class="text-muted">No hay provincias para mostrar.</p>';
             return;
         }
+        wrap.innerHTML = '';
         data.forEach(p => {
             const card = document.createElement('div');
             card.className = 'card';
@@ -36,7 +39,6 @@
                 card.classList.add('card-disabled');
             } else {
                 card.style.cursor = 'pointer';
-                // enlazamos pasando el id de provincia como `provincia_id`
                 card.addEventListener('click', () => { window.location.href = 'destinos.html?provincia_id=' + p.id; });
             }
 
@@ -46,4 +48,4 @@
         console.error(err);
         wrap.innerHTML = '<p class="text-danger">Error cargando provincias.</p>';
     }
-})();
+});

@@ -1,5 +1,8 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 require_once __DIR__ . '/../Formulario/php/conexiones.php';
 
 $sql = "SELECT p.id, p.nombre, p.descripcion, p.imagen, COUNT(v.id) AS viajes_count
