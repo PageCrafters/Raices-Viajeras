@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-require_once '..Formulario/php/conexiones.php';
+require_once '../Formulario/php/conexiones.php';
 
 $conn = $conexion;
 
