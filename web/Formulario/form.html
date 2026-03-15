@@ -30,7 +30,7 @@
             <!-- Formularios de login y registro -->
             <div class="contenedor_login-register">
                 <!-- Login -->
-                <form action="" class="formulario_login">
+                <form action="php/login_usuarios.php" class="formulario_login" method="POST">
                     <h2>Iniciar Sesión</h2>
                     <input type="text" placeholder="Correo Electrónico" name="correo_login">
                     <input type="password" placeholder="Contraseña" id="pwd_login" name="pwd_login">
@@ -38,7 +38,7 @@
                 </form>
 
                 <!-- Registro -->
-                <form action="php/registros_usuarios_be.php" method="POST" class="formulario_register">
+                <form action="php/registros_usuarios.php" method="POST" class="formulario_register">
                     <h2>Registrarse</h2>
                     <input type="text" placeholder="Nombre Completo" id="nombreApellido" name="nombre_completo">
                     <input type="text" placeholder="Correo Electrónico" id="correo" name="correo">
@@ -54,7 +54,7 @@
                     
                     <div>
                         <label>Fecha de nacimiento</label>
-                        <input type="date" id="fechaNacimiento" name="fechaNacimiento"> 
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" aria-label="date"> 
                     </div>
                     
                     <div class="form-check">

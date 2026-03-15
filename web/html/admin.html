@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel de Administración - Raíces Viajeras</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light">
+
+<div id="overlay" class="d-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index:999" onclick="closeSidebar()"></div>
+
+<div class="d-flex">
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar" class="bg-success text-white flex-shrink-0 d-flex flex-column position-fixed top-0 start-0 vh-100" style="width:260px;z-index:1000;transition:transform .3s">
+        <div class="px-3 py-3 border-bottom border-white border-opacity-25">
+            <h6 class="fw-bold mb-0"><i class="bi bi-compass me-2"></i>Raíces Viajeras</h6>
+            <small class="text-white-50">Panel de Administración</small>
+        </div>
+        <div class="flex-grow-1 pt-2">
+            <small class="text-white-50 text-uppercase px-3 d-block mb-1 fw-semibold" style="font-size:.7rem;letter-spacing:.08em">Principal</small>
+            <a class="d-flex align-items-center gap-2 px-3 py-2 mx-2 rounded text-white text-decoration-none" id="nav-dashboard" onclick="mostrarSeccion('dashboard', this)" style="cursor:pointer">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+            <small class="text-white-50 text-uppercase px-3 d-block mt-3 mb-1 fw-semibold" style="font-size:.7rem;letter-spacing:.08em">Gestión</small>
+            <a class="d-flex align-items-center gap-2 px-3 py-2 mx-2 rounded text-white text-decoration-none" id="nav-usuarios" onclick="mostrarSeccion('usuarios', this)" style="cursor:pointer">
+                <i class="bi bi-people"></i> Usuarios
+            </a>
+            <a class="d-flex align-items-center gap-2 px-3 py-2 mx-2 rounded text-white text-decoration-none" id="nav-viajes" onclick="mostrarSeccion('viajes', this)" style="cursor:pointer">
+                <i class="bi bi-map"></i> Productos / Viajes
+            </a>
+            <a class="d-flex align-items-center gap-2 px-3 py-2 mx-2 rounded text-white text-decoration-none" id="nav-categorias" onclick="mostrarSeccion('categorias', this)" style="cursor:pointer">
+                <i class="bi bi-tag"></i> Categorías
+            </a>
+            <a class="d-flex align-items-center gap-2 px-3 py-2 mx-2 rounded text-white text-decoration-none" id="nav-pedidos" onclick="mostrarSeccion('pedidos', this)" style="cursor:pointer">
+                <i class="bi bi-bag"></i> Pedidos
+            </a>
+        </div>
+        <div class="px-3 py-2 border-top border-white border-opacity-25">
+            <small class="text-white-50">v1.0 · Raíces Viajeras</small>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <div id="main" class="flex-grow-1" style="margin-left:260px;transition:margin .3s">
+
+        <!-- TOPBAR -->
+        <div class="bg-white border-bottom px-4 py-2 d-flex align-items-center justify-content-between sticky-top shadow-sm">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-sm btn-outline-secondary d-lg-none" aria-label="button" onclick="toggleSidebar()">
+                    <i class="bi bi-list fs-5"></i>
+                </button>
+                <h6 class="mb-0 fw-semibold" id="topbar-title">Dashboard</h6>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <a href="/Raices-Viajeras/index.html" class="btn btn-sm btn-outline-success">
+                    <i class="bi bi-house me-1"></i>Volver al inicio
+                </a>
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:32px;height:32px;font-size:.8rem">A</div>
+                <span class="d-none d-sm-inline small">Admin</span>
+            </div>
+        </div>
+
+        <div class="p-3 p-md-4">
+
+            <!-- DASHBOARD -->
+            <div id="sec-dashboard" class="seccion">
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="bg-success bg-opacity-10 text-success rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;font-size:1.3rem"><i class="bi bi-people-fill"></i></div>
+                                <div><h3 class="mb-0 fw-bold" id="stat-usuarios">—</h3><p class="mb-0 text-muted small">Usuarios</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;font-size:1.3rem"><i class="bi bi-map-fill"></i></div>
+                                <div><h3 class="mb-0 fw-bold" id="stat-viajes">—</h3><p class="mb-0 text-muted small">Viajes</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="bg-warning bg-opacity-10 text-warning rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;font-size:1.3rem"><i class="bi bi-bag-fill"></i></div>
+                                <div><h3 class="mb-0 fw-bold" id="stat-pedidos">—</h3><p class="mb-0 text-muted small">Pedidos</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;font-size:1.3rem;background:#f3e8fd;color:#7c3aed"><i class="bi bi-geo-alt-fill"></i></div>
+                                <div><h3 class="mb-0 fw-bold" id="stat-provincias">—</h3><p class="mb-0 text-muted small">Provincias</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center justify-content-between">
+                        <h6 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-2"></i>Últimos pedidos</h6>
+                        <button class="btn btn-sm btn-outline-success" onclick="mostrarSeccion('pedidos', document.getElementById('nav-pedidos'))">Ver todos</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="small text-uppercase text-muted fw-semibold ps-3">#</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Usuario</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Total</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Estado</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-ultimos-pedidos">
+                                <tr><td colspan="5" class="text-center py-4"><div class="spinner-border spinner-border-sm text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USUARIOS -->
+            <div id="sec-usuarios" class="seccion d-none">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <h6 class="mb-0 fw-semibold"><i class="bi bi-people me-2"></i>Usuarios</h6>
+                        <div class="d-flex gap-2">
+                            <input type="text" class="form-control form-control-sm" style="max-width:220px" placeholder="Buscar..." oninput="buscarEnTabla('tabla-usuarios', this.value)">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="small text-uppercase text-muted fw-semibold ps-3">#</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Nombre</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Correo</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Género</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Rol</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-usuarios">
+                                <tr><td colspan="6" class="text-center py-4"><div class="spinner-border spinner-border-sm text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIAJES -->
+            <div id="sec-viajes" class="seccion d-none">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <h6 class="mb-0 fw-semibold"><i class="bi bi-map me-2"></i>Viajes</h6>
+                        <div class="d-flex gap-2">
+                            <input type="text" class="form-control form-control-sm" style="max-width:220px" placeholder="Buscar..." oninput="buscarEnTabla('tabla-viajes', this.value)">
+                            <button class="btn btn-success btn-sm" onclick="abrirModalViaje()"><i class="bi bi-plus-lg me-1"></i>Nuevo</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="small text-uppercase text-muted fw-semibold ps-3">#</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Título</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Origen</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Fecha inicio</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Precio</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Plazas</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-viajes">
+                                <tr><td colspan="7" class="text-center py-4"><div class="spinner-border spinner-border-sm text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍAS -->
+            <div id="sec-categorias" class="seccion d-none">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <h6 class="mb-0 fw-semibold"><i class="bi bi-tag me-2"></i>Categorías / Provincias</h6>
+                        <div class="d-flex gap-2">
+                            <input type="text" class="form-control form-control-sm" style="max-width:220px" placeholder="Buscar..." oninput="buscarEnTabla('tabla-categorias', this.value)">
+                            <button class="btn btn-success btn-sm" onclick="abrirModalCategoria()"><i class="bi bi-plus-lg me-1"></i>Nueva</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="small text-uppercase text-muted fw-semibold ps-3">#</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Nombre</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Descripción</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Creado</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-categorias">
+                                <tr><td colspan="5" class="text-center py-4"><div class="spinner-border spinner-border-sm text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PEDIDOS -->
+            <div id="sec-pedidos" class="seccion d-none">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <h6 class="mb-0 fw-semibold"><i class="bi bi-bag me-2"></i>Pedidos</h6>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <select class="form-select form-select-sm" style="width:140px" id="filtro-estado-pedido" aria-label="estado del pedido" onchange="cargarPedidos()">
+                                <option value="">Todos</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="procesando">Procesando</option>
+                                <option value="completado">Completado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                            <input type="text" class="form-control form-control-sm" style="max-width:220px" placeholder="Buscar..." oninput="buscarEnTabla('tabla-pedidos', this.value)">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="small text-uppercase text-muted fw-semibold ps-3">#</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Usuario ID</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Total</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Estado</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Dirección</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Fecha</th>
+                                    <th class="small text-uppercase text-muted fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-pedidos">
+                                <tr><td colspan="7" class="text-center py-4"><div class="spinner-border spinner-border-sm text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ELIMINAR -->
+<div class="modal fade" id="modalEliminar" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h6 class="modal-title">Confirmar eliminación</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="button"></button>
+            </div>
+            <div class="modal-body"><p class="mb-0">¿Estás seguro de que quieres eliminar este registro?</p></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL USUARIO -->
+<div class="modal fade" id="modalUsuario" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h6 class="modal-title" id="modalUsuarioTitulo">Nuevo usuario</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="button"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="u-id">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Nombre completo</label>
+                    <input type="text" class="form-control" id="u-nombre" aria-label="nombre completo">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Correo</label>
+                    <input type="email" class="form-control" id="u-correo" aria-label="correo">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Contraseña <small class="text-muted">(dejar vacío para no cambiar)</small></label>
+                    <input type="password" class="form-control" id="u-pwd" aria-label="contraseña">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label fw-semibold">Género</label>
+                        <select class="form-select" id="u-genero" aria-label="género">
+                            <option value="">—</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otr">Otro</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-semibold">Rol</label>
+                        <select class="form-select" id="u-rol" aria-label="rol">
+                            <option value="usuario">Usuario</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm btn-success" onclick="guardarUsuario()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VIAJE -->
+<div class="modal fade" id="modalViaje" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h6 class="modal-title" id="modalViajeTitulo">Nuevo viaje</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="button"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="v-id">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Título</label>
+                        <input type="text" class="form-control" id="v-titulo" aria-label="título">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Descripción</label>
+                        <textarea class="form-control" id="v-descripcion" rows="3" aria-label="descripción"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Origen</label>
+                        <input type="text" class="form-control" id="v-origen" aria-label="origen">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Provincia</label>
+                        <select class="form-select" id="v-provincia" aria-label="provincia"></select >
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Fecha inicio</label>
+                        <input type="date" class="form-control" id="v-fecha-inicio" aria-label="fecha inicio">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Fecha fin</label>
+                        <input type="date" class="form-control" id="v-fecha-fin" aria-label="fecha fin">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Precio (€)</label>
+                        <input type="number" class="form-control" id="v-precio" step="0.01" aria-label="precio">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Plazas</label>
+                        <input type="number" class="form-control" id="v-plazas" aria-label="plazas">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Imagen (nombre del archivo)</label>
+                        <input type="text" class="form-control" id="v-imagen" placeholder="ej: viaje1.webp">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm btn-success" onclick="guardarViaje()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CATEGORÍA -->
+<div class="modal fade" id="modalCategoria" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h6 class="modal-title" id="modalCategoriaTitulo">Nueva categoría</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="button"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="c-id">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Nombre</label>
+                    <input type="text" class="form-control" id="c-nombre" aria-label="nombre">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea class="form-control" id="c-descripcion" rows="3" aria-label="descripción"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Imagen (nombre del archivo)</label>
+                    <input type="text" class="form-control" id="c-imagen" placeholder="ej: provincia1.webp">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm btn-success" onclick="guardarCategoria()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ESTADO PEDIDO -->
+<div class="modal fade" id="modalEstado" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h6 class="modal-title">Cambiar estado del pedido</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="button"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="estado-pedido-id">
+                <label class="form-label fw-semibold">Estado</label>
+                <select class="form-select" id="nuevo-estado-pedido" aria-label="nuevo-estado">
+                    <option value="pendiente">Pendiente</option>
+                    <option value="procesando">Procesando</option>
+                    <option value="completado">Completado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm btn-success" onclick="guardarEstadoPedido()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>
