@@ -18,9 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `login_register_bd`
+-- Base de datos: `raices_viajeras`
 --
-
+CREATE DATABASE IF NOT EXISTS raices_viajeras;
+USE raices_viajeras;
 -- --------------------------------------------------------
 
 --
@@ -177,6 +178,31 @@ ALTER TABLE `pedido_viajes`
 
 ALTER TABLE `pedido_viajes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `noticias` (
+    `id` int(11) NOT NULL,
+    `nombre` varchar(255) NOT NULL,
+    `descripcion` text NOT NULL,
+    `categoria` varchar(15) NOT NULL,
+    `imagen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indices de la tabla `noticias`
+--
+ALTER TABLE `noticias`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `noticias`
+--
+ALTER TABLE `noticias`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
 
 -- Llaves foráneas
 ALTER TABLE `carritos`
