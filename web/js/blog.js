@@ -13,10 +13,14 @@ function renderNoticias(noticias) {
                 <div class="card h-100 shadow-sm">
                     <img src="../img/${n.imagen}" class="card-img-top" alt="${n.nombre}" style="height: 160px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
-                        <span class="badge bg-success mb-2 align-self-start">${n.categoria}</span>
-                        <h6 class="card-title fw-bold">${n.nombre}</h6>
-                        <p class="card-text text-muted small">${n.descripcion.substring(0, 100)}...</p>
-                        <a href="articulo.html?id=${n.id}" class="btn btn-success btn-sm mt-auto">Leer noticia completa</a>
+                        <span class="badge bg-success mb-2 align-self-start" aria-label="Categoría">${n.categoria}</span>
+                        <h6 class="card-title fw-bold" aria-label="Título de la noticia">${n.nombre}</h6>
+                        <p class="card-text text-muted small" aria-label="Descripción de la noticia">
+                            ${n.descripcion.substring(0, 100)}...
+                        </p>
+                        <a href="articulo.html?id=${n.id}" class="btn btn-success btn-sm mt-auto" aria-label="Leer noticia completa">
+                            Leer noticia completa
+                        </a>
                     </div>
                 </div>
             </div>`;

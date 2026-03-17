@@ -19,32 +19,34 @@
 
         <div class="col-12 col-xl-3 order-1 order-xl-2 mb-4">
             <!-- Buscador -->
-            <div class="mb-4">
+            <div class="mb-4" aria-describedby="desc-buscador">
                 <h6 class="fw-bold">Buscar por categoría</h6>
                 <div class="input-group">
-                    <input type="text" id="buscador-categoria" class="form-control form-control-sm" placeholder="Escribe una categoría...">
-                  <button class="btn btn-success btn-sm" id="btn-buscar">Buscar</button>
+                    <input type="text" id="buscador-categoria" class="form-control form-control-sm" placeholder="Escribe una categoría..." aria-label="Buscar por categoría">
+                  <button class="btn btn-success btn-sm" id="btn-buscar" aria-label="Buscar">
+                    Buscar
+                  </button>
     
                 </div>
             </div>
 
             <div>
-                <h6 class="fw-bold">Categorías</h6>
+                <h6 class="fw-bold" aria-describedby="desc-categorias">Categorías</h6>
                 <ul class="list-group" id="lista-categorias">
-                    <li class="list-group-item list-group-item-action" data-categoria="Turismo" style="cursor:pointer">
+                    <li class="list-group-item list-group-item-action" data-categoria="Turismo" style="cursor:pointer" aria-describedby="desc-turismo">
                         Turismo
                     </li>
-                    <li class="list-group-item list-group-item-action" data-categoria="Sostenible" style="cursor:pointer">
+                    <li class="list-group-item list-group-item-action" data-categoria="Sostenible" style="cursor:pointer" aria-describedby="desc-sostenible">
                         Sostenible
                     </li>
-                    <li class="list-group-item list-group-item-action" data-categoria="" style="cursor:pointer">
+                    <li class="list-group-item list-group-item-action" data-categoria="" style="cursor:pointer" aria-describedby="desc-todas">
                         Todas
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="col-12 col-xl-9 order-2 order-xl-1">
+        <div class="col-12 col-xl-9 order-2 order-xl-1" aria-describedby="desc-noticias">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3" id="noticias-container"></div>
         </div>
 
