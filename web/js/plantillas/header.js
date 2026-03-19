@@ -1,23 +1,47 @@
-// Cargamos el HTML
 document.addEventListener('DOMContentLoaded', () => {
+    const ensureCestaBootstrap = () => {
+        if (typeof window.initCesta === 'function') {
+            window.initCesta();
+            return;
+        }
+
+        if (document.getElementById('rv-cesta-script')) {
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.id = 'rv-cesta-script';
+        script.src = '/Raices-Viajeras/web/js/plantillas/cesta.js';
+        document.body.appendChild(script);
+    };
+
     fetch('/Raices-Viajeras/web/html/plantillas/header.html')
-        .then(resServer => resServer.text())
-        .then(htmlDevuelto => {
-            // Seleccionamos el contenedor donde irá el header
+        .then((response) => response.text())
+        .then((html) => {
             const headerContainer = document.getElementById('header');
-            headerContainer.innerHTML = htmlDevuelto;
-            // Después de cargar el header, actualizamos los iconos según el tema actual
-            window.actualizarIconos();
-        
-            // Comprobar si el usuario logueado es admin
+            if (!headerContainer) {
+                return;
+            }
+
+            headerContainer.innerHTML = html;
+
+            if (typeof window.actualizarIconos === 'function') {
+                window.actualizarIconos();
+            }
+
+            ensureCestaBootstrap();
+
             fetch('/Raices-Viajeras/web/php/sesion.php')
-                .then(res => res.json())
-                .then(data => {
+                .then((response) => response.json())
+                .then((data) => {
                     if (data.rol === 'admin') {
-                        document.getElementById('btn-admin-nav').classList.remove('d-none');
+                        const adminButton = document.getElementById('btn-admin-nav');
+                        if (adminButton) {
+                            adminButton.classList.remove('d-none');
+                        }
                     }
                 })
-                .catch(err => console.error('Error comprobando sesión:', err));
+                .catch((error) => console.error('Error comprobando sesion:', error));
         })
-        .catch(err => console.error('Error cargando el header:', err));
+        .catch((error) => console.error('Error cargando el header:', error));
 });

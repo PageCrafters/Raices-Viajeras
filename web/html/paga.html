@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cesta</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -11,9 +12,57 @@
 </head>
 <body id="body">
     <header id="header"></header>
-    <script src="../js/plantillas/header.js"></script>
+    <script type="module" src="../js/plantillas/header.js"></script>
 
-    <script type="module" src="../js/plantillas/footer.js"></script>
+    <main class="container rv-cart-page-shell">
+        <div class="rv-cart-page-hero">
+            <p class="rv-cart-kicker">Resumen de tu seleccion</p>
+            <h1>Tu cesta de viajes sostenibles</h1>
+            <p>
+                Revisa tu carrito actual, elimina los viajes que no quieras mantener y deja lista
+                tu seleccion para la siguiente fase.
+            </p>
+            <span class="rv-cart-count-pill" id="paga-cesta-count">0 articulos</span>
+        </div>
+
+        <div
+            id="paga-cesta-feedback"
+            class="rv-cart-feedback rv-cart-page-feedback"
+            role="status"
+            aria-live="polite"
+        >
+            Cargando cesta...
+        </div>
+
+        <div id="paga-cesta-content" class="row g-4 d-none">
+            <div class="col-12 col-xl-8">
+                <div id="paga-cesta-items" class="rv-cart-items rv-cart-items-page"></div>
+            </div>
+
+            <div class="col-12 col-xl-4">
+                <aside class="rv-cart-summary rv-cart-summary-page">
+                    <p class="rv-cart-summary-label mb-1">Total actual</p>
+                    <div class="rv-cart-total" id="paga-cesta-total">0,00 EUR</div>
+                    <p class="rv-cart-inline-note mt-2">
+                        El checkout completo llegara en la siguiente fase. Por ahora puedes revisar
+                        tu cesta y seguir explorando la web.
+                    </p>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="/Raices-Viajeras/web/html/provincias.html" class="btn btn-primario">
+                            Seguir explorando
+                        </a>
+                        <button type="button" class="btn btn-outline-secondary" disabled>
+                            Pago proximamente
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+    <script src="../js/plantillas/footer.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/main.js"></script>
     <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script>
