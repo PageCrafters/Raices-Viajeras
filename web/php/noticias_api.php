@@ -9,6 +9,7 @@ require_once '../Formulario/php/conexiones.php';
 
 $conn = $conexion;
 
+// Este endpoint sirve tanto para el listado del blog como para la ficha de una noticia concreta.
 if ($conn->connect_error) {
     http_response_code(500);
     echo json_encode(["error" => "Conexión fallida"]);
@@ -22,6 +23,8 @@ if (isset($_GET['id'])) {
 } else {
     $result = $conn->query("SELECT id, nombre, descripcion, categoria, imagen FROM noticias ORDER BY id DESC");
     $noticias = [];
+
+    // Devuelvo el listado plano para que blog.js pueda filtrar en cliente sin mas pasos.
     while ($row = $result->fetch_assoc()) {
         $noticias[] = $row;
     }

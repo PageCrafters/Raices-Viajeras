@@ -1,82 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Registro</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-
+    <title>Acceso - Raices Viajeras</title>
+    <script src="../js/darkTheme.js"></script>
+    <link rel="icon" href="/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="auth-page">
+    <!-- Guardo el modo desde la URL antes de que arranque el slider para evitar parpadeos. -->
+    <script>
+        const authParams = new URLSearchParams(window.location.search);
+        document.body.dataset.authMode = authParams.get('modo') === 'registro' ? 'registro' : 'login';
+    </script>
 
-    <main>
-        <div class="contenedor">
+    <!-- El header compartido se mantiene tambien aqui para no dejar esta pagina aislada. -->
+    <header id="header"></header>
+
+    <main class="auth-main">
+        <div class="contenedor" id="auth-slider">
+            <!-- Este bloque mantiene el mismo juego visual antiguo de login y registro. -->
             <div class="caja_trasera">
                 <div class="caja_trasera-login">
-                    <h3>¿Ya tienes una cuenta?</h3>
-                    <p>Inicia sesión para entrar en la página</p>
-                    <button id="btn_iniciar-sesion">Iniciar Sesión</button>
+                    <h3>Ya tienes una cuenta?</h3>
+                    <p>Inicia sesion para entrar en la web y recuperar tu cesta.</p>
+                    <button id="btn_iniciar-sesion" type="button">Iniciar sesion</button>
                 </div>
+
                 <div class="caja_trasera-registro">
-                    <h3>¿Aún no tienes una cuenta?</h3>
-                    <p>Regístrate para entrar en la página</p>
-                    <button id="btn_registrarse">Registrarse</button>
+                    <h3>Aun no tienes una cuenta?</h3>
+                    <p>Registrate para guardar tu sesion y preparar tus viajes.</p>
+                    <button id="btn_registrarse" type="button">Registrarse</button>
                 </div>
             </div>
 
-            <!-- Formularios de login y registro -->
+            <!-- Este contenedor se desplaza de lado a lado para tapar el formulario inactivo. -->
             <div class="contenedor_login-register">
-                <!-- Login -->
+                <!-- Formulario de login -->
                 <form action="php/login_usuarios.php" class="formulario_login" method="POST">
-                    <h2>Iniciar Sesión</h2>
-                    <input type="text" placeholder="Correo Electrónico" name="correo_login">
-                    <input type="password" placeholder="Contraseña" id="pwd_login" name="pwd_login">
-                    <button>Entrar</button>
+                    <h2>Iniciar sesion</h2>
+
+                    <label class="visually-hidden" for="correo_login">Correo electronico</label>
+                    <input type="email" id="correo_login" name="correo_login" autocomplete="email" placeholder="Correo electronico" required>
+
+                    <label class="visually-hidden" for="pwd_login">Contrasena</label>
+                    <input type="password" id="pwd_login" name="pwd_login" autocomplete="current-password" placeholder="Contrasena" required>
+
+                    <div class="form-check auth-inline-row">
+                        <label class="form-check-label" for="remember_me">
+                            <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me" value="1">
+                            Recordarme durante 30 dias
+                        </label>
+                    </div>
+
+                    <button type="submit">Entrar</button>
                 </form>
 
-                <!-- Registro -->
+                <!-- Formulario de registro -->
                 <form action="php/registros_usuarios.php" method="POST" class="formulario_register">
                     <h2>Registrarse</h2>
-                    <input type="text" placeholder="Nombre Completo" id="nombreApellido" name="nombre_completo">
-                    <input type="text" placeholder="Correo Electrónico" id="correo" name="correo">
-                    <input type="password" placeholder="Contraseña" id="pwd" name="pwd">
-                    <input type="password" placeholder="Confirmar Contraseña" id="pwdConfirm" name="passwordConfirm">
 
-                    <nav class="radio-group">
-                        <label for="Genero">Género:</label>
-                        <label><input type="radio" name="genero" value="masculino"> M</label>
-                        <label><input type="radio" name="genero" value="femenino"> F</label>
-                        <label><input type="radio" name="genero" value="otr"> O</label>
-                    </nav>
-                    
-                    <div>
-                        <label>Fecha de nacimiento</label>
-                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" aria-label="date"> 
+                    <label class="visually-hidden" for="nombre_completo">Nombre completo</label>
+                    <input type="text" id="nombre_completo" name="nombre_completo" autocomplete="name" placeholder="Nombre completo" required>
+
+                    <label class="visually-hidden" for="correo">Correo electronico</label>
+                    <input type="email" id="correo" name="correo" autocomplete="email" placeholder="Correo electronico" required>
+
+                    <label class="visually-hidden" for="pwd">Contrasena</label>
+                    <input type="password" id="pwd" name="pwd" autocomplete="new-password" placeholder="Contrasena" required>
+
+                    <label class="visually-hidden" for="pwdConfirm">Confirmar contrasena</label>
+                    <input type="password" id="pwdConfirm" name="passwordConfirm" autocomplete="new-password" placeholder="Confirmar contrasena" required>
+
+                    <div class="radio-group" role="radiogroup" aria-labelledby="genero-label">
+                        <span id="genero-label">Genero</span>
+                        <label><input type="radio" name="genero" value="m" required> M</label>
+                        <label><input type="radio" name="genero" value="f"> F</label>
+                        <label><input type="radio" name="genero" value="o"> O</label>
                     </div>
-                    
+
+                    <div class="auth-date-block">
+                        <label class="visually-hidden" for="fechaNacimiento">Fecha de nacimiento</label>
+                        <p class="auth-date-helper">Fecha de nacimiento</p>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+
                     <div class="form-check">
                         <label class="form-check-label" for="politica_privacidad">
-                            <input class="form-check-input" type="checkbox" name="politica_privacidad" id="politica_privacidad" required>
-                            Activar notificaciones
+                            <input class="form-check-input" type="checkbox" name="politica_privacidad" id="politica_privacidad" value="1" required>
+                            Acepto la politica de privacidad
                         </label>
 
                         <label class="form-check-label" for="revista">
-                            <input class="form-check-input" type="checkbox" name="revista" id="revista">
-                            Recibir revista
+                            <input class="form-check-input" type="checkbox" name="revista" id="revista" value="1">
+                            Quiero recibir novedades y revista
                         </label>
                     </div>
-                    
-                    <button>Registrarse</button>
+
+                    <button type="submit">Crear cuenta</button>
                 </form>
             </div>
         </div>
     </main>
-    <!-- Botón para volver a la página anterior -->
-    <button class="back-btn" type="button" onclick="history.back()">Volver</button>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/plantillas/header.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

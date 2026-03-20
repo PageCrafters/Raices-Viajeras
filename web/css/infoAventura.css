@@ -1,0 +1,240 @@
+/* Fondo general de la ficha. Lo dejo suave para que la card destaque sin recargar demasiado. */
+.info-trip-shell {
+    padding: 3rem 0 4rem;
+    background:
+        radial-gradient(circle at top right, rgba(143, 209, 155, 0.18), transparent 35%),
+        linear-gradient(180deg, var(--perla) 0%, var(--bg) 100%);
+}
+
+/* Card principal del detalle: aqui vive toda la aventura. */
+.info-trip-card {
+    background: var(--fondo-tarjeta);
+    border-radius: 1.8rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(29, 98, 42, 0.12);
+}
+
+.info-trip-media {
+    position: relative;
+    height: 100%;
+    min-height: 320px;
+}
+
+.info-trip-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-trip-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.32), transparent 60%);
+}
+
+.info-trip-body {
+    padding: 2rem;
+}
+
+.info-trip-kicker {
+    margin: 0 0 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.76rem;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.info-trip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.06;
+    color: var(--verde-oscuro);
+    margin-bottom: 1rem;
+}
+
+.info-trip-description {
+    color: var(--tono-apagado);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 1.6rem;
+}
+
+/* Rejilla de datos rapidos: fechas, origen, plazas y demas. */
+.info-trip-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.info-trip-meta-card {
+    padding: 1rem 1.05rem;
+    border-radius: 1rem;
+    background: rgba(143, 209, 155, 0.12);
+    border: 1px solid rgba(29, 98, 42, 0.1);
+}
+
+.info-trip-meta-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.info-trip-meta-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+/* Pie de la ficha con precio y llamadas a la accion. */
+.info-trip-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.info-trip-price-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.info-trip-price-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.info-trip-price {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    color: var(--verde-500);
+}
+
+.info-trip-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.info-trip-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.info-trip-btn:hover {
+    transform: translateY(-2px);
+}
+
+.info-trip-btn-primary {
+    background: var(--verde-500);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(29, 98, 42, 0.2);
+}
+
+.info-trip-btn-primary:hover {
+    color: #fff;
+    background: var(--verde-oscuro);
+}
+
+.info-trip-btn-secondary {
+    background: transparent;
+    color: var(--verde-500);
+    border: 1px solid rgba(29, 98, 42, 0.2);
+}
+
+.info-trip-btn-secondary:hover {
+    color: var(--verde-500);
+    background: rgba(143, 209, 155, 0.12);
+}
+
+.info-trip-empty {
+    max-width: 42rem;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    border-radius: 1.4rem;
+    background: var(--fondo-tarjeta);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+/* En oscuro mantengo contraste pero sin romper el look calmado de la ficha. */
+.dark-mode .info-trip-card,
+.dark-mode .info-trip-empty {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .info-trip-title {
+    color: #ffffff;
+}
+
+.dark-mode .info-trip-meta-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .info-trip-btn-secondary {
+    color: var(--verde-300);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark-mode .info-trip-btn-secondary:hover {
+    color: var(--verde-300);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Ajustes para tablet y movil */
+@media (max-width: 991px) {
+    .info-trip-media {
+        min-height: 260px;
+    }
+
+    .info-trip-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .info-trip-shell {
+        padding-top: 2rem;
+    }
+
+    .info-trip-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .info-trip-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .info-trip-actions {
+        width: 100%;
+    }
+
+    .info-trip-btn {
+        width: 100%;
+    }
+}

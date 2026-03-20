@@ -1,78 +1,46 @@
-import {initializeFormController} from "./formController.js";
-import {esModoOscuro} from "./ui.js";
-
-// El tema ya se aplicó en el script inline en head
-// Agregar la clase para habilitar transiciones después de la carga inicial
+// Activo la clase de transiciones al arrancar para que el cambio de tema no pegue saltos raros.
 document.body.classList.add('theme-loaded');
 
+/**
+ * Sincroniza los iconos del tema con el modo que este activo ahora.
+ *
+ * @returns {void}
+ */
 function actualizarIconos() {
     const isDark = document.documentElement.classList.contains('dark-mode');
     const iconos = document.querySelectorAll('.theme-icon');
 
-    for (const icono of iconos) {
+    iconos.forEach((icono) => {
         icono.classList.remove('bi-moon-fill', 'bi-sun-fill');
         icono.classList.add(isDark ? 'bi-sun-fill' : 'bi-moon-fill');
-    }
+    });
 }
+
+// Lo dejo global porque el header cargado por fetch usa onclick en los botones del tema.
 window.actualizarIconos = actualizarIconos;
 
-// Exponer la función de cambio de modo como global para que los `onclick` la encuentren
+/**
+ * Alterna entre modo claro y oscuro y guarda la preferencia.
+ *
+ * @returns {void}
+ */
 window.cambiaModoColor = () => {
     const isDark = document.documentElement.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     window.actualizarIconos();
 };
 
-
-// Función para mostrar/ocultar contraseña
-window.togglePassword = (fieldId, buttonId) => {
-    const field = document.getElementById(fieldId);
-    const boton = document.getElementById(buttonId);
-    const emoji= boton.querySelector('.fa-regular');
-    if (field) {
-        if (field.type === 'password') {
-            emoji.classList.toggle('fa-face-dizzy');
-            emoji.classList.toggle('fa-face-flushed');
-            field.type = 'text';
-        } else {
-            emoji.classList.toggle('fa-face-dizzy');
-            emoji.classList.toggle('fa-face-flushed');
-            field.type = 'password';
-        }
-    }
-};
-
-// Inicialización segura: si el DOM ya está listo, ejecutar inmediatamente; si no, esperar al evento
-/*function init() {
-    initializeFormController();
-    // Si estamos en la página de destinos, cargar el módulo que maneja la lista
-    if (document.getElementById('destinos-container')) {
-        import('./plantillas/destinos.js')
-            .then(mod => { if (mod.initDestinos) mod.initDestinos(); })
-            .catch(err => console.error('No se pudo cargar destinos.js', err));
-    }
+/**
+ * Deja el icono del tema listo cuando la pagina ya ha cargado.
+ *
+ * @returns {void}
+ */
+function initThemeUi() {
+    window.actualizarIconos();
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initThemeUi);
 } else {
-    init();
-}*/
-
-function init() {
-    if (document.getElementById('nombreApellido')) {
-        initializeFormController();
-    }
-
-    if (document.getElementById('destinos-container')) {
-        import('./plantillas/destinos.js')
-            .then(mod => { if (mod.initDestinos) mod.initDestinos(); })
-            .catch(err => console.error('No se pudo cargar destinos.js', err));
-    }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
+    initThemeUi();
 }

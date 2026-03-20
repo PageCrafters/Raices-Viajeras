@@ -1,45 +1,36 @@
 <?php
-session_start();
+require_once __DIR__ . '/autenticacion.php';
+require_once __DIR__ . '/utilidades_imagen.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-function json_response(array $data, int $status = 200): void
+// La cesta necesita saber la sesion real aunque venga recuperada por remember me.
+auth_bootstrap();
+
+/**
+ * Devuelve una respuesta JSON y corta la ejecucion del endpoint.
+ *
+ * @param array $data Datos que se envian al frontend.
+ * @param int $status Codigo HTTP.
+ * @return void
+ */
+function cart_json_response(array $data, int $status = 200): void
 {
     http_response_code($status);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-function get_logged_user_id(): int
-{
-    return isset($_SESSION['usuario']['id']) ? (int) $_SESSION['usuario']['id'] : 0;
-}
-
-function resolve_image(?string $value): ?string
-{
-    if ($value === null || $value === '') {
-        return null;
-    }
-
-    $isBinary = preg_match('/[\x00-\x08\x0E-\x1F]/', $value);
-    if ($isBinary) {
-        return 'data:image/jpeg;base64,' . base64_encode($value);
-    }
-
-    if (
-        preg_match('/^(https?:\/\/|\.\/|\/|img\/|[A-Za-z0-9_\-]+\/)/', $value) ||
-        preg_match('/\.[a-zA-Z0-9]{2,4}$/', $value)
-    ) {
-        return $value;
-    }
-
-    return 'data:image/jpeg;base64,' . base64_encode($value);
-}
-
-function empty_cart_summary(bool $loggedIn): array
+/**
+ * Devuelve la estructura vacia que espera el modal cuando no hay carrito o no hay login.
+ *
+ * @param bool $loggedIn Marca si el usuario esta autenticado.
+ * @return array
+ */
+function cart_empty_summary(bool $loggedIn): array
 {
     return [
         'logueado' => $loggedIn,
@@ -52,7 +43,14 @@ function empty_cart_summary(bool $loggedIn): array
     ];
 }
 
-function get_active_cart_id(PDO $pdo, int $userId): ?int
+/**
+ * Devuelve el carrito activo mas reciente del usuario.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @param int $userId Id del usuario.
+ * @return int|null
+ */
+function cart_get_active_id(PDO $pdo, int $userId): ?int
 {
     $stmt = $pdo->prepare(
         "SELECT id
@@ -67,23 +65,73 @@ function get_active_cart_id(PDO $pdo, int $userId): ?int
     return $cartId ? (int) $cartId : null;
 }
 
-function sync_cart_total(PDO $pdo, int $cartId, float $total): void
+/**
+ * Devuelve el carrito activo del usuario o lo crea si todavia no existe.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @param int $userId Id del usuario.
+ * @return int
+ */
+function cart_get_or_create_active_id(PDO $pdo, int $userId): int
+{
+    $cartId = cart_get_active_id($pdo, $userId);
+    if ($cartId !== null) {
+        return $cartId;
+    }
+
+    $stmt = $pdo->prepare("INSERT INTO carritos (usuario_id, total, estado) VALUES (?, 0.00, 'activo')");
+    $stmt->execute([$userId]);
+
+    return (int) $pdo->lastInsertId();
+}
+
+/**
+ * Mantiene el total del carrito sincronizado con sus lineas reales.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @param int $cartId Id del carrito.
+ * @param float $total Total recalculado.
+ * @return void
+ */
+function cart_sync_total(PDO $pdo, int $cartId, float $total): void
 {
     $stmt = $pdo->prepare('UPDATE carritos SET total = ? WHERE id = ?');
     $stmt->execute([number_format($total, 2, '.', ''), $cartId]);
 }
 
-function build_cart_summary(PDO $pdo): array
+/**
+ * Busca el viaje antes de tocar el carrito para asegurar que existe y usar su precio actual.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @param int $tripId Id del viaje.
+ * @return array|null
+ */
+function cart_find_trip(PDO $pdo, int $tripId): ?array
 {
-    $userId = get_logged_user_id();
+    $stmt = $pdo->prepare('SELECT id, precio FROM viajes WHERE id = ? LIMIT 1');
+    $stmt->execute([$tripId]);
+    $trip = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $trip ?: null;
+}
+
+/**
+ * Monta la respuesta completa que usa el modal y la pagina de cesta.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @return array
+ */
+function cart_build_summary(PDO $pdo): array
+{
+    $userId = auth_user_id();
 
     if ($userId <= 0) {
-        return empty_cart_summary(false);
+        return cart_empty_summary(false);
     }
 
-    $cartId = get_active_cart_id($pdo, $userId);
+    $cartId = cart_get_active_id($pdo, $userId);
     if ($cartId === null) {
-        return empty_cart_summary(true);
+        return cart_empty_summary(true);
     }
 
     $stmt = $pdo->prepare(
@@ -119,7 +167,7 @@ function build_cart_summary(PDO $pdo): array
             'viaje_id' => (int) $row['viaje_id'],
             'titulo' => $row['titulo'],
             'descripcion' => $row['descripcion'],
-            'imagen' => resolve_image($row['imagen']),
+            'imagen' => rv_resolve_image_value($row['imagen']),
             'provincia_nombre' => $row['provincia_nombre'],
             'cantidad' => $quantity,
             'precio_unitario' => $unitPrice,
@@ -130,7 +178,7 @@ function build_cart_summary(PDO $pdo): array
         $count += $quantity;
     }
 
-    sync_cart_total($pdo, $cartId, $total);
+    cart_sync_total($pdo, $cartId, $total);
 
     return [
         'logueado' => true,
@@ -143,11 +191,58 @@ function build_cart_summary(PDO $pdo): array
     ];
 }
 
+/**
+ * Anade el viaje al carrito activo o suma cantidad si ya estaba.
+ *
+ * @param PDO $pdo Conexion PDO compartida.
+ * @param int $userId Id del usuario activo.
+ * @param int $tripId Id del viaje.
+ * @return array
+ */
+function cart_add_item(PDO $pdo, int $userId, int $tripId): array
+{
+    $trip = cart_find_trip($pdo, $tripId);
+    if (!$trip) {
+        throw new RuntimeException('El viaje indicado no existe.');
+    }
+
+    $pdo->beginTransaction();
+
+    try {
+        $cartId = cart_get_or_create_active_id($pdo, $userId);
+
+        $checkStmt = $pdo->prepare(
+            'SELECT id, cantidad FROM carrito_viajes WHERE carrito_id = ? AND viaje_id = ? LIMIT 1'
+        );
+        $checkStmt->execute([$cartId, $tripId]);
+        $line = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($line) {
+            $updateStmt = $pdo->prepare('UPDATE carrito_viajes SET cantidad = ? WHERE id = ?');
+            $updateStmt->execute([(int) $line['cantidad'] + 1, (int) $line['id']]);
+        } else {
+            $insertStmt = $pdo->prepare(
+                'INSERT INTO carrito_viajes (carrito_id, viaje_id, cantidad, precio_unitario) VALUES (?, ?, 1, ?)'
+            );
+            $insertStmt->execute([$cartId, $tripId, $trip['precio']]);
+        }
+
+        $pdo->commit();
+    } catch (Throwable $error) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
+        throw $error;
+    }
+
+    return cart_build_summary($pdo);
+}
+
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=raices_viajeras;charset=utf8mb4', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $error) {
-    json_response(['error' => 'No se pudo conectar con la base de datos.'], 500);
+    $pdo = auth_get_pdo();
+} catch (Throwable $error) {
+    cart_json_response(['error' => 'No se pudo conectar con la base de datos.'], 500);
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -156,35 +251,57 @@ if ($method === 'GET') {
     $action = $_GET['accion'] ?? '';
 
     if ($action !== 'resumen') {
-        json_response(['error' => 'Accion no valida.'], 400);
+        cart_json_response(['error' => 'Accion no valida.'], 400);
     }
 
-    json_response(build_cart_summary($pdo));
+    cart_json_response(cart_build_summary($pdo));
 }
 
 if ($method === 'POST') {
-    $body = json_decode(file_get_contents('php://input'), true);
+    $body = json_decode(file_get_contents('php://input'), true) ?? [];
     $action = $body['accion'] ?? '';
+    $userId = auth_user_id();
 
-    if ($action !== 'eliminar_item') {
-        json_response(['error' => 'Accion no valida.'], 400);
+    // Las acciones POST de cesta quedan agrupadas aqui para compartir validaciones de sesion.
+    if ($action === 'agregar_item') {
+        if ($userId <= 0) {
+            cart_json_response(['error' => 'Debes iniciar sesion para guardar viajes en la cesta.'], 401);
+        }
+
+        $tripId = isset($body['viaje_id']) ? (int) $body['viaje_id'] : 0;
+        if ($tripId <= 0) {
+            cart_json_response(['error' => 'Viaje no valido.'], 400);
+        }
+
+        try {
+            cart_json_response(cart_add_item($pdo, $userId, $tripId));
+        } catch (RuntimeException $error) {
+            cart_json_response(['error' => $error->getMessage()], 404);
+        } catch (Throwable $error) {
+            error_log('cesta_api.php agregar_item error: ' . $error->getMessage());
+            cart_json_response(['error' => 'No se pudo anadir el viaje a la cesta.'], 500);
+        }
     }
 
-    $userId = get_logged_user_id();
+    if ($action !== 'eliminar_item') {
+        cart_json_response(['error' => 'Accion no valida.'], 400);
+    }
+
     if ($userId <= 0) {
-        json_response(['error' => 'Debes iniciar sesion para modificar la cesta.'], 401);
+        cart_json_response(['error' => 'Debes iniciar sesion para modificar la cesta.'], 401);
     }
 
     $cartItemId = isset($body['carrito_viaje_id']) ? (int) $body['carrito_viaje_id'] : 0;
     if ($cartItemId <= 0) {
-        json_response(['error' => 'Item de cesta no valido.'], 400);
+        cart_json_response(['error' => 'Item de cesta no valido.'], 400);
     }
 
-    $activeCartId = get_active_cart_id($pdo, $userId);
+    $activeCartId = cart_get_active_id($pdo, $userId);
     if ($activeCartId === null) {
-        json_response(build_cart_summary($pdo));
+        cart_json_response(cart_build_summary($pdo));
     }
 
+    // Antes de borrar, compruebo que la linea pertenece al carrito activo del usuario.
     $checkStmt = $pdo->prepare(
         "SELECT id
          FROM carrito_viajes
@@ -194,14 +311,14 @@ if ($method === 'POST') {
     $checkStmt->execute([$cartItemId, $activeCartId]);
 
     if (!$checkStmt->fetchColumn()) {
-        json_response(['error' => 'El viaje no pertenece a la cesta activa del usuario.'], 404);
+        cart_json_response(['error' => 'El viaje no pertenece a la cesta activa del usuario.'], 404);
     }
 
     $deleteStmt = $pdo->prepare('DELETE FROM carrito_viajes WHERE id = ?');
     $deleteStmt->execute([$cartItemId]);
 
-    json_response(build_cart_summary($pdo));
+    cart_json_response(cart_build_summary($pdo));
 }
 
-json_response(['error' => 'Metodo no permitido.'], 405);
+cart_json_response(['error' => 'Metodo no permitido.'], 405);
 ?>

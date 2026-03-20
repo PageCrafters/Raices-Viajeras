@@ -6,12 +6,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     let provincias = [];
     let provinciasLoaded = false;
 
-    if (!wrap) return;
+    if (!wrap) {
+        return;
+    }
 
-    const normalizeText = (value) => (value || '').toString().trim().toLowerCase();
-    const getProvinceUrl = (provinceId) => `destinos.html?provincia_id=${encodeURIComponent(provinceId)}`;
+    /**
+     * Normaliza un texto para comparar sin depender de mayusculas ni espacios.
+     *
+     * @param {unknown} value Texto original.
+     * @returns {string} Texto listo para comparar.
+     */
+    function normalizeText(value) {
+        return (value || '').toString().trim().toLowerCase();
+    }
 
-    const createMessage = (message, className) => {
+    /**
+     * Genera la URL de destinos para una provincia concreta.
+     *
+     * @param {string|number} provinceId Id de la provincia.
+     * @returns {string} Ruta al listado de viajes de esa provincia.
+     */
+    function getProvinceUrl(provinceId) {
+        return `destinos.html?provincia_id=${encodeURIComponent(provinceId)}`;
+    }
+
+    /**
+     * Pinta un mensaje simple en la zona del listado.
+     *
+     * @param {string} message Texto a mostrar.
+     * @param {string} className Clase visual para ese mensaje.
+     * @returns {void}
+     */
+    function createMessage(message, className) {
         wrap.innerHTML = '';
 
         const col = document.createElement('div');
@@ -23,9 +49,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         col.appendChild(text);
         wrap.appendChild(col);
-    };
+    }
 
-    const renderProvincias = (items) => {
+    /**
+     * Pinta todas las provincias con el look actual de tarjetas.
+     *
+     * @param {Array<object>} items Provincias que se van a mostrar.
+     * @returns {void}
+     */
+    function renderProvincias(items) {
         wrap.innerHTML = '';
 
         if (!items.length) {
@@ -86,13 +118,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             col.appendChild(card);
             wrap.appendChild(col);
         });
-    };
+    }
 
-    const applySearch = () => {
-        if (!provinciasLoaded) return;
+    /**
+     * Aplica el filtro del buscador solo cuando se pulsa el boton.
+     *
+     * @returns {void}
+     */
+    function applySearch() {
+        if (!provinciasLoaded) {
+            return;
+        }
 
         const query = normalizeText(searchInput ? searchInput.value : '');
-
         if (!query) {
             renderProvincias(provincias);
             return;
@@ -104,14 +142,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         renderProvincias(filtered);
-    };
+    }
 
     if (searchInput) {
-        searchInput.addEventListener('input', applySearch);
         searchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
-                applySearch();
             }
         });
     }
@@ -121,22 +157,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('../php/get_provincias.php', { cache: 'no-store', credentials: 'same-origin' });
-        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        const response = await fetch('../php/obtener_provincias.php', {
+            cache: 'no-store',
+            credentials: 'same-origin'
+        });
 
-        const data = await res.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+        provinciasLoaded = true;
 
         if (!Array.isArray(data) || data.length === 0) {
-            provinciasLoaded = true;
             createMessage('No hay provincias para mostrar.', 'text-muted');
             return;
         }
 
         provincias = data;
-        provinciasLoaded = true;
-        applySearch();
-    } catch (err) {
-        console.error(err);
+        renderProvincias(provincias);
+    } catch (error) {
+        console.error(error);
         createMessage('Error cargando provincias.', 'text-danger');
     }
 });

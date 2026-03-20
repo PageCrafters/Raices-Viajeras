@@ -1,28 +1,35 @@
+<!-- Cabecera comun. Desde aqui se mueve el menu, el tema, la sesion y la cesta. -->
 <nav class="navbar navbar-expand-lg navbar-light navbar-personalizada">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="/Raices-Viajeras/index.html">
       <img src="/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp" alt="RV" style="max-width:56px;" class="me-2">
       <span>RAICES VIAJERAS</span>
     </a>
+
     <div class="d-flex align-items-center gap-2">
       <button class="btn cambiar-tema d-lg-none btn-modo" type="button" onclick="cambiaModoColor()" aria-label="Cambiar tema">
         <i class="bi bi-moon-fill theme-icon"></i>
       </button>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
               aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
+
     <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item d-none d-lg-flex align-items-center">
           <button class="btn cambiar-tema" type="button" onclick="cambiaModoColor()" aria-label="Cambiar tema">
             <i class="bi bi-moon-fill theme-icon"></i>
           </button>
         </li>
+
         <li class="nav-item"><a class="nav-link" href="/Raices-Viajeras/index.html">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="/Raices-Viajeras/web/html/blog.html">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="/Raices-Viajeras/web/html/provincias.html">Viajes</a></li>
+
+        <!-- Este control abre la cesta compartida que se inyecta desde header.js -->
         <li class="nav-item">
           <button
             type="button"
@@ -35,18 +42,18 @@
             aria-haspopup="dialog"
           >
             <i class="bi bi-basket-fill" aria-hidden="true"></i>
-            <span
-              class="rv-cart-badge d-none"
-              id="header-cart-badge"
-              aria-live="polite"
-            >0</span>
+            <span class="rv-cart-badge d-none" id="header-cart-badge" aria-live="polite">0</span>
           </button>
         </li>
-        <li class="nav-item"><a class="nav-link" href="/Raices-Viajeras/web/Formulario/form.html">Sign in / Log in</a></li>
 
-        <!-- Boton admin: oculto por defecto -->
+        <!-- Este bloque cambia segun haya sesion o no. -->
+        <li class="nav-item header-auth-item" id="header-auth-item">
+          <a class="nav-link" href="/Raices-Viajeras/web/Formulario/form.html?modo=login">Iniciar sesion</a>
+        </li>
+
+        <!-- El acceso al panel solo se muestra si la sesion actual es admin. -->
         <li class="nav-item d-none" id="btn-admin-nav">
-          <a class="btn btn-success btn-sm ms-2" href="/Raices-Viajeras/web/html/admin.html">
+          <a class="btn btn-success btn-sm ms-lg-2" href="/Raices-Viajeras/web/html/admin.html">
             <i class="bi bi-speedometer2 me-1"></i>Panel Admin
           </a>
         </li>

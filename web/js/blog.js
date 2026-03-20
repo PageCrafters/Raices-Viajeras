@@ -1,60 +1,92 @@
 let todasLasNoticias = [];
 
+/**
+ * Pinta la rejilla del blog con las noticias que toquen en ese momento.
+ *
+ * @param {Array<object>} noticias Lista de noticias a mostrar.
+ * @returns {void}
+ */
 function renderNoticias(noticias) {
     const container = document.getElementById('noticias-container');
-    container.innerHTML = '';
-    if (noticias.length === 0) {
-        container.innerHTML = '<p class="text-muted ms-3">No hay noticias en esta categoría.</p>';
+    if (!container) {
         return;
     }
-    noticias.forEach(n => {
+
+    container.innerHTML = '';
+
+    if (!noticias.length) {
+        container.innerHTML = '<p class="text-muted ms-3">No hay noticias en esta categoria.</p>';
+        return;
+    }
+
+    noticias.forEach((noticia) => {
         container.innerHTML += `
             <div class="col mb-3">
                 <div class="card h-100 shadow-sm">
-                    <img src="../img/${n.imagen}" class="card-img-top" alt="${n.nombre}" style="height: 160px; object-fit: cover;">
+                    <img src="../img/${noticia.imagen}" class="card-img-top" alt="${noticia.nombre}" style="height: 160px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
-                        <span class="badge bg-success mb-2 align-self-start">${n.categoria}</span>
-                        <h6 class="card-title fw-bold">${n.nombre}</h6>
-                        <p class="card-text text-muted small">${n.descripcion.substring(0, 100)}...</p>
-                        <a href="articulo.html?id=${n.id}" class="btn btn-success btn-sm mt-auto">Leer noticia completa</a>
+                        <span class="badge bg-success mb-2 align-self-start">${noticia.categoria}</span>
+                        <h6 class="card-title fw-bold">${noticia.nombre}</h6>
+                        <p class="card-text text-muted small">${noticia.descripcion.substring(0, 100)}...</p>
+                        <a href="articulo.html?id=${noticia.id}" class="btn btn-success btn-sm mt-auto">Leer noticia completa</a>
                     </div>
                 </div>
-            </div>`;
+            </div>
+        `;
     });
 }
 
+/**
+ * Filtra las noticias ya cargadas sin pedir datos otra vez.
+ *
+ * @param {string} categoria Categoria o texto del filtro.
+ * @param {HTMLElement|null} elemento Elemento activo del listado lateral.
+ * @returns {void}
+ */
 function filtrarPorCategoria(categoria, elemento) {
-    document.querySelectorAll('#lista-categorias .list-group-item').forEach(li => {
-        li.classList.remove('active');
+    document.querySelectorAll('#lista-categorias .list-group-item').forEach((item) => {
+        item.classList.remove('active');
     });
-    if (elemento) elemento.classList.add('active');
+
+    if (elemento) {
+        elemento.classList.add('active');
+    }
 
     const filtradas = categoria === ''
         ? todasLasNoticias
-        : todasLasNoticias.filter(n => n.categoria.toLowerCase() === categoria.toLowerCase());
+        : todasLasNoticias.filter((noticia) => noticia.categoria.toLowerCase() === categoria.toLowerCase());
 
     renderNoticias(filtradas);
 }
 
-fetch('../php/noticias_api.php')
-    .then(res => res.json())
-    .then(noticias => {
-        todasLasNoticias = noticias;
-        renderNoticias(todasLasNoticias);
+/**
+ * Carga las noticias iniciales y conecta los filtros del blog.
+ *
+ * @returns {void}
+ */
+function initBlog() {
+    fetch('../php/noticias_api.php')
+        .then((response) => response.json())
+        .then((noticias) => {
+            todasLasNoticias = noticias;
+            renderNoticias(todasLasNoticias);
 
-        document.querySelectorAll('#lista-categorias .list-group-item').forEach(li => {
-            li.addEventListener('click', () => {
-                filtrarPorCategoria(li.dataset.categoria, li);
+            document.querySelectorAll('#lista-categorias .list-group-item').forEach((item) => {
+                item.addEventListener('click', () => {
+                    filtrarPorCategoria(item.dataset.categoria, item);
+                });
             });
-        });
 
-        document.getElementById('buscador-categoria').addEventListener('input', (e) => {
-            filtrarPorCategoria(e.target.value.trim(), null);
-        });
+            document.getElementById('buscador-categoria')?.addEventListener('input', (event) => {
+                filtrarPorCategoria(event.target.value.trim(), null);
+            });
 
-        document.getElementById('btn-buscar').addEventListener('click', () => {
-            const texto = document.getElementById('buscador-categoria').value.trim();
-            filtrarPorCategoria(texto, null);
-        });
-    })
-    .catch(err => console.error('Error cargando noticias:', err));
+            document.getElementById('btn-buscar')?.addEventListener('click', () => {
+                const texto = document.getElementById('buscador-categoria')?.value.trim() || '';
+                filtrarPorCategoria(texto, null);
+            });
+        })
+        .catch((error) => console.error('Error cargando noticias:', error));
+}
+
+initBlog();

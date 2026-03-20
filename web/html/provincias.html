@@ -21,7 +21,7 @@
 
 <body id="body">
     <header id="header"></header>
-    <!-- Buscador -->
+    <!-- Hero y buscador de provincias -->
     <section class="buscador-hero">
         <div class="buscador-bg-blob"></div>
         <div class="container">
@@ -44,7 +44,7 @@
                         <i class="bi bi-search"></i>
                         <input type="text" class="buscador-input" placeholder="Destino, actividad o comunidad autónoma…"
                             id="buscador-input">
-                        <button class="buscador-btn" id="buscador-btn" type="button">Buscar viaje</button>
+                        <button class="buscador-btn" id="buscador-btn" type="button">Buscar provincia</button>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,7 @@
     <script type="module" src="../js/main.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 
-    <!-- `provincias.js` carga las provincias, pinta las tarjetas con el look de
-         `destinos2.html` y conecta el buscador local de esta pagina. -->
+    <!-- provincias.js carga las provincias, pinta las tarjetas y filtra solo al pulsar el boton. -->
     <script src="../js/pages/provincias.js"></script>
 
     <div id="footer"></div>

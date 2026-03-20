@@ -1,3 +1,4 @@
+<!-- Modal comun de cesta: lo carga header.js y lo actualiza cesta.js. -->
 <div
     class="modal fade rv-cart-modal"
     id="cestaModal"
@@ -16,6 +17,7 @@
             </div>
 
             <div class="modal-body">
+                <!-- Este estado sirve para login, vacio, error y carga. -->
                 <div
                     id="cesta-modal-feedback"
                     class="rv-cart-feedback"
@@ -25,6 +27,7 @@
                     Cargando cesta...
                 </div>
 
+                <!-- Este bloque solo se muestra cuando ya hay datos reales que pintar. -->
                 <div id="cesta-modal-content" class="d-none">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <p class="rv-cart-inline-note mb-0">Resumen actual de tu seleccion.</p>

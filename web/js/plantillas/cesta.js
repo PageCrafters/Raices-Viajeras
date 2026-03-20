@@ -7,13 +7,19 @@
 
     const TEMPLATE_URL = '/Raices-Viajeras/web/html/plantillas/cesta.html';
     const API_URL = '/Raices-Viajeras/web/php/cesta_api.php';
-    const LOGIN_URL = '/Raices-Viajeras/web/Formulario/form.html';
+    const LOGIN_URL = '/Raices-Viajeras/web/Formulario/form.html?modo=login';
     const TRIPS_URL = '/Raices-Viajeras/web/html/provincias.html';
     const FALLBACK_IMAGE = '/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp';
 
     let templatePromise = null;
     let eventsBound = false;
 
+    /**
+     * Escapa texto antes de meterlo dentro del modal.
+     *
+     * @param {unknown} value Valor que se quiere pintar.
+     * @returns {string} Texto seguro para usar en HTML.
+     */
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, (char) => ({
             '&': '&amp;',
@@ -24,6 +30,12 @@
         }[char]));
     }
 
+    /**
+     * Formatea importes con el formato local de la web.
+     *
+     * @param {number|string} value Importe que se quiere mostrar.
+     * @returns {string} Precio listo para pintar.
+     */
     function formatCurrency(value) {
         return new Intl.NumberFormat('es-ES', {
             style: 'currency',
@@ -31,6 +43,13 @@
         }).format(Number(value || 0));
     }
 
+    /**
+     * Recorta descripciones largas para que las cards de cesta no se desmadren.
+     *
+     * @param {string} value Texto original.
+     * @param {number} [maxLength=120] Largo maximo permitido.
+     * @returns {string} Texto ya recortado si hacia falta.
+     */
     function truncateText(value, maxLength = 120) {
         const text = String(value ?? '').trim();
         if (text.length <= maxLength) {
@@ -40,10 +59,67 @@
         return `${text.slice(0, maxLength - 1).trimEnd()}...`;
     }
 
+    /**
+     * Devuelve la etiqueta del contador en singular o plural.
+     *
+     * @param {number} count Numero total de articulos.
+     * @returns {string} Texto que se pinta junto al total.
+     */
     function getCountLabel(count) {
         return `${count} ${count === 1 ? 'articulo' : 'articulos'}`;
     }
 
+    /**
+     * Se asegura de que exista la pila de avisos flotantes.
+     *
+     * @returns {HTMLElement} Contenedor donde se van apilando los avisos.
+     */
+    function ensureToastStack() {
+        let stack = document.getElementById('rv-cart-toast-stack');
+
+        if (!stack) {
+            stack = document.createElement('div');
+            stack.id = 'rv-cart-toast-stack';
+            stack.className = 'rv-toast-stack';
+            document.body.appendChild(stack);
+        }
+
+        return stack;
+    }
+
+    /**
+     * Muestra avisos cortos de exito o error sin sacar al usuario de la pagina.
+     *
+     * @param {string} message Texto del aviso.
+     * @param {string} [type='success'] Tipo visual del aviso.
+     * @returns {void}
+     */
+    function showNotice(message, type = 'success') {
+        const stack = ensureToastStack();
+        const toast = document.createElement('div');
+        toast.className = `rv-toast rv-toast--${type}`;
+        toast.textContent = message;
+
+        stack.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.classList.add('is-visible');
+        });
+
+        window.setTimeout(() => {
+            toast.classList.remove('is-visible');
+            window.setTimeout(() => {
+                toast.remove();
+            }, 220);
+        }, 2800);
+    }
+
+    /**
+     * Normaliza la respuesta del backend para trabajar siempre con la misma forma.
+     *
+     * @param {object} data Respuesta original del endpoint.
+     * @returns {object} Resumen de cesta con estructura estable.
+     */
     function normalizeSummary(data) {
         const cart = data && data.carrito ? data.carrito : {};
         const items = Array.isArray(cart.items) ? cart.items : [];
@@ -74,6 +150,11 @@
         };
     }
 
+    /**
+     * Se asegura de que exista el contenedor donde se inyecta la cesta.
+     *
+     * @returns {HTMLElement} Nodo contenedor de la plantilla.
+     */
     function ensureCartContainer() {
         let container = document.getElementById('contenedorCesta');
 
@@ -86,6 +167,11 @@
         return container;
     }
 
+    /**
+     * Carga el HTML del modal compartido y lo inyecta una sola vez.
+     *
+     * @returns {Promise<HTMLElement|null>} Modal listo para usar.
+     */
     async function ensureTemplateLoaded() {
         if (document.getElementById('cestaModal')) {
             bindModalEvents();
@@ -119,6 +205,13 @@
         return templatePromise;
     }
 
+    /**
+     * Devuelve el bloque visual para login, vacio, error o carga.
+     *
+     * @param {'login'|'empty'|'error'|'loading'} type Tipo de estado.
+     * @param {string} message Texto de apoyo.
+     * @returns {string} HTML del estado.
+     */
     function getStateHtml(type, message) {
         if (type === 'login') {
             return `
@@ -165,6 +258,12 @@
         `;
     }
 
+    /**
+     * Genera el listado de lineas con sus importes y boton para quitar.
+     *
+     * @param {Array<object>} items Lineas del carrito.
+     * @returns {string} HTML completo del listado.
+     */
     function getItemsHtml(items) {
         return items.map((item) => `
             <article class="rv-cart-item">
@@ -204,6 +303,12 @@
         `).join('');
     }
 
+    /**
+     * Sincroniza el badge del header con el numero total de articulos.
+     *
+     * @param {number} count Numero total de items.
+     * @returns {void}
+     */
     function updateBadge(count) {
         const badge = document.getElementById('header-cart-badge');
         if (!badge) {
@@ -220,6 +325,12 @@
         badge.classList.add('d-none');
     }
 
+    /**
+     * Renderiza el estado del modal rapido del header.
+     *
+     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @returns {void}
+     */
     function renderModal(summary) {
         const feedback = document.getElementById('cesta-modal-feedback');
         const content = document.getElementById('cesta-modal-content');
@@ -265,6 +376,12 @@
         }
     }
 
+    /**
+     * Renderiza la vista completa de paga.html reutilizando los mismos datos.
+     *
+     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @returns {void}
+     */
     function renderCartPage(summary) {
         const feedback = document.getElementById('paga-cesta-feedback');
         const content = document.getElementById('paga-cesta-content');
@@ -310,9 +427,17 @@
         }
     }
 
+    /**
+     * Muestra un error solo en el destino que haya pedido la llamada.
+     *
+     * @param {string} message Texto del error.
+     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del error.
+     * @returns {void}
+     */
     function renderError(message, target = 'both') {
         const feedback = document.getElementById('cesta-modal-feedback');
         const content = document.getElementById('cesta-modal-content');
+
         if ((target === 'both' || target === 'modal') && feedback && content) {
             feedback.innerHTML = getStateHtml('error', message);
             feedback.classList.remove('d-none');
@@ -321,6 +446,7 @@
 
         const pageFeedback = document.getElementById('paga-cesta-feedback');
         const pageContent = document.getElementById('paga-cesta-content');
+
         if ((target === 'both' || target === 'page') && pageFeedback && pageContent) {
             pageFeedback.innerHTML = getStateHtml('error', message);
             pageFeedback.classList.remove('d-none');
@@ -328,9 +454,17 @@
         }
     }
 
+    /**
+     * Pinta el estado de carga donde toque mientras llega la respuesta del backend.
+     *
+     * @param {string} message Texto de apoyo.
+     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del estado.
+     * @returns {void}
+     */
     function renderLoading(message, target = 'both') {
         const feedback = document.getElementById('cesta-modal-feedback');
         const content = document.getElementById('cesta-modal-content');
+
         if ((target === 'both' || target === 'modal') && feedback && content) {
             feedback.innerHTML = getStateHtml('loading', message);
             feedback.classList.remove('d-none');
@@ -339,6 +473,7 @@
 
         const pageFeedback = document.getElementById('paga-cesta-feedback');
         const pageContent = document.getElementById('paga-cesta-content');
+
         if ((target === 'both' || target === 'page') && pageFeedback && pageContent) {
             pageFeedback.innerHTML = getStateHtml('loading', message);
             pageFeedback.classList.remove('d-none');
@@ -346,12 +481,23 @@
         }
     }
 
+    /**
+     * Reparte el mismo resumen entre badge, modal y pagina completa.
+     *
+     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @returns {void}
+     */
     function renderAll(summary) {
         updateBadge(summary.carrito.count);
         renderModal(summary);
         renderCartPage(summary);
     }
 
+    /**
+     * Pide el resumen actual de la cesta al backend.
+     *
+     * @returns {Promise<object>} Resumen ya normalizado.
+     */
     async function fetchSummary() {
         const response = await fetch(`${API_URL}?accion=resumen`, {
             cache: 'no-store',
@@ -366,6 +512,46 @@
         return normalizeSummary(data);
     }
 
+    /**
+     * Llama al backend para anadir una aventura al carrito activo.
+     *
+     * @param {number|string} tripId Id del viaje.
+     * @returns {Promise<object>} Resumen actualizado de la cesta.
+     */
+    async function addItem(tripId) {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                accion: 'agregar_item',
+                viaje_id: tripId
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            const message = data && data.error ? data.error : `HTTP ${response.status}`;
+            showNotice(message, response.status === 401 ? 'info' : 'error');
+            throw new Error(message);
+        }
+
+        const summary = normalizeSummary(data);
+        renderAll(summary);
+        showNotice('Viaje anadido a la cesta.', 'success');
+
+        return summary;
+    }
+
+    /**
+     * Refresca la cesta y decide donde mostrar carga o error.
+     *
+     * @param {object} [options={}] Opciones de refresco.
+     * @returns {Promise<object>} Resumen actualizado.
+     */
     async function refreshCart(options = {}) {
         const target = options.target || 'both';
 
@@ -385,7 +571,13 @@
         }
     }
 
-    async function removeItem(carritoViajeId) {
+    /**
+     * Elimina una linea concreta del carrito activo.
+     *
+     * @param {number|string} cartItemId Id de la linea del carrito.
+     * @returns {Promise<object>} Resumen ya normalizado tras borrar.
+     */
+    async function removeItem(cartItemId) {
         const response = await fetch(API_URL, {
             method: 'POST',
             credentials: 'same-origin',
@@ -394,7 +586,7 @@
             },
             body: JSON.stringify({
                 accion: 'eliminar_item',
-                carrito_viaje_id: carritoViajeId
+                carrito_viaje_id: cartItemId
             })
         });
 
@@ -407,6 +599,11 @@
         return normalizeSummary(data);
     }
 
+    /**
+     * Vincula la recarga del resumen al evento de apertura del modal.
+     *
+     * @returns {void}
+     */
     function bindModalEvents() {
         const modal = document.getElementById('cestaModal');
         if (!modal || modal.dataset.rvCestaBound === '1') {
@@ -422,6 +619,11 @@
         });
     }
 
+    /**
+     * Escucha el boton de quitar con delegacion para no perder eventos al re-renderizar.
+     *
+     * @returns {void}
+     */
     function bindEvents() {
         if (eventsBound) {
             return;
@@ -459,6 +661,11 @@
         });
     }
 
+    /**
+     * Punto de entrada comun para modal global y pagina completa.
+     *
+     * @returns {Promise<void>}
+     */
     async function initCesta() {
         bindEvents();
 
@@ -476,6 +683,9 @@
     }
 
     window.initCesta = initCesta;
+    window.rvCartAddItem = addItem;
+    window.rvCartShowNotice = showNotice;
+    document.dispatchEvent(new CustomEvent('rv:cesta-ready'));
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initCesta);

@@ -1,8 +1,8 @@
 /**
- * Función para validar que los nombres solo contengan letras y espacios.
- * Además, limita la longitud máxima a 2 palabras.
- * @param {string} nombre - El nombre a validar.
- * @return {boolean} Verdadero si el nombre es válido, falso en caso contrario.
+ * Valida nombres sencillos de una o dos palabras.
+ *
+ * @param {string} nombre Nombre que llega desde el formulario.
+ * @returns {boolean} `true` si el formato encaja con la regla actual.
  */
 export function validarNombre(nombre) {
     const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)?$/;
@@ -10,9 +10,10 @@ export function validarNombre(nombre) {
 }
 
 /**
- * Función para validar que el correo electrónico tenga un formato correcto.
- * @param {string} correo - El correo electrónico a validar.
- * @return {boolean} Verdadero si el correo es válido, falso en caso contrario.
+ * Comprueba que el correo tenga un formato basico valido.
+ *
+ * @param {string} correo Correo que se quiere revisar.
+ * @returns {boolean} `true` si pasa la expresion regular.
  */
 export function validarCorreo(correo) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,11 +21,10 @@ export function validarCorreo(correo) {
 }
 
 /**
- * Función para validar contraseñas.
- * La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula,
- * una letra minúscula, un número y un carácter especial.
- * @param {string} contrasena - La contraseña a validar.
- * @return {boolean} Verdadero si la contraseña es válida, falso en caso contrario.
+ * Revisa la complejidad minima que pedimos para la contrasena.
+ *
+ * @param {string} contrasena Contrasena escrita por el usuario.
+ * @returns {boolean} `true` si cumple mayuscula, minuscula, numero y simbolo.
  */
 export function validarContrasena(contrasena) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -32,20 +32,22 @@ export function validarContrasena(contrasena) {
 }
 
 /**
- * Función para comprobar si dos contraseñas coinciden.
- * @param {string} contrasena1 - La primera contraseña.
- * @param {string} contrasena2 - La segunda contraseña.
- * @return {boolean} Verdadero si las contraseñas coinciden, falso en caso contrario.
+ * Comprueba que las dos contrasenas coincidan exactamente.
+ *
+ * @param {string} contrasena1 Primer valor.
+ * @param {string} contrasena2 Segundo valor.
+ * @returns {boolean} `true` si ambos textos son iguales.
  */
 export function comprobarContrasenas(contrasena1, contrasena2) {
     return contrasena1 === contrasena2;
 }
 
 /**
- * Función para validar si ha seleccionado una opción en un campo de tipo_viaje.
- * @param {string} pais - El valor seleccionado en el campo tipo_viaje.
- * @return {boolean} Verdadero si se ha seleccionado una opción válida, falso en caso contrario.
+ * Comprueba que se haya elegido algun pais en el selector.
+ *
+ * @param {string} pais Valor del select.
+ * @returns {boolean} `true` si no viene vacio.
  */
 export function validarPais(pais) {
-    return pais !== "";
+    return pais !== '';
 }
