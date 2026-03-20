@@ -101,31 +101,31 @@ try {
     }
 
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        registro_redirect('El correo electronico no es valido.', 'registro');
+        registro_redirect('El correo electrónico no es válido.', 'registro');
     }
 
     if (!registro_password_valido($pwd)) {
-        registro_redirect('La contrasena debe tener al menos 8 caracteres con mayuscula, minuscula, numero y simbolo.', 'registro');
+        registro_redirect('La contraseña debe tener al menos 8 caracteres con mayúscula, minúscula, número y símbolo.', 'registro');
     }
 
     if (!hash_equals($pwd, $passwordConfirm)) {
-        registro_redirect('Las contrasenas no coinciden.', 'registro');
+        registro_redirect('Las contraseñas no coinciden.', 'registro');
     }
 
     if (!registro_genero_valido($genero)) {
-        registro_redirect('El genero seleccionado no es valido.', 'registro');
+        registro_redirect('El género seleccionado no es válido.', 'registro');
     }
 
     if (!registro_fecha_valida($fechaNacimiento)) {
-        registro_redirect('La fecha de nacimiento no es valida.', 'registro');
+        registro_redirect('La fecha de nacimiento no es válida.', 'registro');
     }
 
     if ($politicaPrivacidad !== 1) {
-        registro_redirect('Debes aceptar la politica de privacidad.', 'registro');
+        registro_redirect('Debes aceptar la política de privacidad.', 'registro');
     }
 
     if (auth_find_user_by_email($correo)) {
-        registro_redirect('Este correo ya esta registrado.', 'registro');
+        registro_redirect('Este correo ya está registrado.', 'registro');
     }
 
     // El alta siempre crea usuarios normales; el rol de admin se gestiona fuera de este formulario.
@@ -144,7 +144,7 @@ try {
         'usuario'
     ]);
 
-    registro_redirect('Usuario registrado correctamente. Ya puedes iniciar sesion.', 'login');
+    registro_redirect('Usuario registrado correctamente. Ya puedes iniciar sesión.', 'login');
 } catch (Throwable $error) {
     error_log('registros_usuarios.php error: ' . $error->getMessage());
     registro_redirect('Error al registrar el usuario.', 'registro');

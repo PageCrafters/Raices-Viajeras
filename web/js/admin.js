@@ -26,9 +26,9 @@ async function parseApiResponse(response) {
     }
 
     if (response.status === 401 || response.status === 403) {
-        alert(data.error || 'Tu sesion ya no es valida para entrar aqui.');
+        alert(data.error || 'Tu sesión ya no es válida para entrar aquí.');
         redirectToLogin();
-        throw new Error(data.error || 'Sesion no valida');
+        throw new Error(data.error || 'Sesión no válida');
     }
 
     throw new Error(data.error || `HTTP ${response.status}`);
@@ -63,7 +63,7 @@ function showSection(name, linkElement) {
         dashboard: 'Dashboard',
         usuarios: 'Usuarios',
         viajes: 'Productos / Viajes',
-        categorias: 'Categorias',
+        categorias: 'Categorías',
         pedidos: 'Pedidos'
     };
 
@@ -707,7 +707,7 @@ async function loadCategories() {
         const data = await apiFetch({ accion: 'provincias' });
 
         if (!data.length) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-3">Sin categorias</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-3">Sin categorías</td></tr>';
             return;
         }
 
@@ -759,7 +759,7 @@ async function openCategoryModal(category = null) {
         document.getElementById('c-id').value = currentCategory?.id || '';
         document.getElementById('c-nombre').value = currentCategory?.nombre || '';
         document.getElementById('c-descripcion').value = currentCategory?.descripcion || '';
-        document.getElementById('modalCategoriaTitulo').textContent = isEditing ? 'Editar categoria' : 'Nueva categoria';
+        document.getElementById('modalCategoriaTitulo').textContent = isEditing ? 'Editar categoría' : 'Nueva categoría';
 
         if (imageInput instanceof HTMLInputElement) {
             imageInput.value = '';
@@ -804,7 +804,7 @@ async function saveCategory() {
         loadCategories();
     } catch (error) {
         console.error(error);
-        alert('Error al guardar la categoria');
+        alert('Error al guardar la categoría');
     }
 }
 

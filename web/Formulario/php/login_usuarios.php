@@ -69,17 +69,17 @@ try {
     $rememberMe = isset($_POST['remember_me']) && $_POST['remember_me'] === '1';
 
     if ($correo === '' || $pwd === '') {
-        login_redirect('Debes rellenar correo y contrasena.', 'login');
+        login_redirect('Debes rellenar correo y contraseña.', 'login');
     }
 
     $usuario = auth_find_user_by_email($correo);
     if (!$usuario) {
-        login_redirect('Correo o contrasena incorrectos.', 'login');
+        login_redirect('Correo o contraseña incorrectos.', 'login');
     }
 
     $needsRehash = false;
     if (!login_password_is_valid($pwd, (string) ($usuario['pwd'] ?? ''), $needsRehash)) {
-        login_redirect('Correo o contrasena incorrectos.', 'login');
+        login_redirect('Correo o contraseña incorrectos.', 'login');
     }
 
     // Si el usuario estaba guardado con password antigua en claro, la actualizo al vuelo.
@@ -92,6 +92,6 @@ try {
     login_redirect('Bienvenido, ' . ($usuario['nombre_completo'] ?? 'viajero') . '.', 'login', '/Raices-Viajeras/index.html');
 } catch (Throwable $error) {
     error_log('login_usuarios.php error: ' . $error->getMessage());
-    login_redirect('Error al iniciar sesion.', 'login');
+    login_redirect('Error al iniciar sesión.', 'login');
 }
 ?>

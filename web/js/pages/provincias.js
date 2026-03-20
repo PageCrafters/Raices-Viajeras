@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         wrap.innerHTML = '';
 
         if (!items.length) {
-            createMessage('No se han encontrado provincias para esa busqueda.', 'text-muted');
+            createMessage('No se han encontrado provincias para esa búsqueda.', 'text-muted');
             return;
         }
 

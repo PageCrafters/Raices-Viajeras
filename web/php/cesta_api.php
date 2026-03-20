@@ -265,7 +265,7 @@ if ($method === 'POST') {
     // Las acciones POST de cesta quedan agrupadas aqui para compartir validaciones de sesion.
     if ($action === 'agregar_item') {
         if ($userId <= 0) {
-            cart_json_response(['error' => 'Debes iniciar sesion para guardar viajes en la cesta.'], 401);
+            cart_json_response(['error' => 'Debes iniciar sesión para guardar viajes en la cesta.'], 401);
         }
 
         $tripId = isset($body['viaje_id']) ? (int) $body['viaje_id'] : 0;
@@ -279,7 +279,7 @@ if ($method === 'POST') {
             cart_json_response(['error' => $error->getMessage()], 404);
         } catch (Throwable $error) {
             error_log('cesta_api.php agregar_item error: ' . $error->getMessage());
-            cart_json_response(['error' => 'No se pudo anadir el viaje a la cesta.'], 500);
+            cart_json_response(['error' => 'No se pudo añadir el viaje a la cesta.'], 500);
         }
     }
 
@@ -288,12 +288,12 @@ if ($method === 'POST') {
     }
 
     if ($userId <= 0) {
-        cart_json_response(['error' => 'Debes iniciar sesion para modificar la cesta.'], 401);
+        cart_json_response(['error' => 'Debes iniciar sesión para modificar la cesta.'], 401);
     }
 
     $cartItemId = isset($body['carrito_viaje_id']) ? (int) $body['carrito_viaje_id'] : 0;
     if ($cartItemId <= 0) {
-        cart_json_response(['error' => 'Item de cesta no valido.'], 400);
+        cart_json_response(['error' => 'Ítem de cesta no válido.'], 400);
     }
 
     $activeCartId = cart_get_active_id($pdo, $userId);

@@ -298,9 +298,9 @@ function validateLoginEmail() {
     let message = '';
 
     if (!validarCampoObligatorio(value)) {
-        message = 'Escribe tu correo electronico.';
+        message = 'Escribe tu correo electrónico.';
     } else if (!validarCorreo(value)) {
-        message = 'El correo electronico no es valido.';
+        message = 'El correo electrónico no es válido.';
     }
 
     setErrorMessage('error-correo_login', message);
@@ -320,7 +320,7 @@ function validateLoginPassword() {
     let message = '';
 
     if (!validarCampoObligatorio(value)) {
-        message = 'Escribe tu contrasena.';
+        message = 'Escribe tu contraseña.';
     }
 
     setErrorMessage('error-pwd_login', message);
@@ -367,9 +367,9 @@ function validateRegisterEmail() {
     let message = '';
 
     if (!validarCampoObligatorio(value)) {
-        message = 'Escribe tu correo electronico.';
+        message = 'Escribe tu correo electrónico.';
     } else if (!validarCorreo(value)) {
-        message = 'El correo electronico no es valido.';
+        message = 'El correo electrónico no es válido.';
     }
 
     setErrorMessage('error-correo', message);
@@ -387,9 +387,9 @@ function validateRegisterPassword() {
     let message = '';
 
     if (!validarCampoObligatorio(value)) {
-        message = 'Escribe una contrasena.';
+        message = 'Escribe una contraseña.';
     } else if (!validarContrasena(value)) {
-        message = 'La contrasena debe tener 8 caracteres, mayuscula, minuscula, numero y simbolo.';
+        message = 'La contraseña debe tener 8 caracteres, mayúscula, minúscula, número y símbolo.';
     }
 
     setErrorMessage('error-pwd', message);
@@ -408,9 +408,9 @@ function validateRegisterPasswordConfirm() {
     let message = '';
 
     if (!validarCampoObligatorio(confirmValue)) {
-        message = 'Confirma tu contrasena.';
+        message = 'Confirma tu contraseña.';
     } else if (!comprobarContrasenas(passwordValue, confirmValue)) {
-        message = 'Las contrasenas no coinciden.';
+        message = 'Las contraseñas no coinciden.';
     }
 
     setErrorMessage('error-passwordConfirm', message);
@@ -427,7 +427,7 @@ function validateRegisterGender() {
     const selectedValue = registerGenderInputs.find((input) => input.checked)?.value || '';
     const isValid = validarGenero(selectedValue);
 
-    setErrorMessage('error-genero', isValid ? '' : 'Selecciona un genero.');
+    setErrorMessage('error-genero', isValid ? '' : 'Selecciona un género.');
     setGroupInvalidState(registerGenderGroup, !isValid);
     registerGenderInputs.forEach((input) => {
         input.setAttribute('aria-invalid', isValid ? 'false' : 'true');
@@ -448,7 +448,7 @@ function validateRegisterBirthDate() {
     if (!validarCampoObligatorio(value)) {
         message = 'Escribe tu fecha de nacimiento.';
     } else if (!validarFechaNacimiento(value)) {
-        message = 'La fecha de nacimiento no es valida.';
+        message = 'La fecha de nacimiento no es válida.';
     }
 
     setErrorMessage('error-fechaNacimiento', message);
@@ -465,7 +465,7 @@ function validateRegisterBirthDate() {
 function validateRegisterPrivacy() {
     const isValid = validarCheckboxObligatorio(privacyInput?.checked ?? false);
 
-    setErrorMessage('error-politica_privacidad', isValid ? '' : 'Debes aceptar la politica de privacidad.');
+    setErrorMessage('error-politica_privacidad', isValid ? '' : 'Debes aceptar la política de privacidad.');
     setInputInvalidState(privacyInput, !isValid);
     setGroupInvalidState(privacyGroup, !isValid);
     return isValid;

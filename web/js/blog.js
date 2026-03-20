@@ -15,7 +15,7 @@ function renderNoticias(noticias) {
     container.innerHTML = '';
 
     if (!noticias.length) {
-        container.innerHTML = '<p class="text-muted ms-3">No hay noticias en esta categoria.</p>';
+        container.innerHTML = '<p class="text-muted ms-3">No hay noticias en esta categoría.</p>';
         return;
     }
 

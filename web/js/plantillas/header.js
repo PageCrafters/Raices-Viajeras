@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const userName = escapeHtml(sessionData.nombre || 'Usuario');
             authItem.innerHTML = `
                 <span class="nav-link header-user-name">Hola, ${userName}</span>
-                <a class="nav-link header-logout-link" href="/Raices-Viajeras/web/php/cerrar_sesion.php">Cerrar sesion</a>
+                <a class="nav-link header-logout-link" href="/Raices-Viajeras/web/php/cerrar_sesion.php">Cerrar sesión</a>
             `;
             return;
         }
 
-        authItem.innerHTML = '<a class="nav-link" href="/Raices-Viajeras/web/Formulario/form.html?modo=login">Iniciar sesion</a>';
+        authItem.innerHTML = '<a class="nav-link" href="/Raices-Viajeras/web/Formulario/form.html?modo=login">Iniciar sesión</a>';
     }
 
     /**

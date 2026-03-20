@@ -66,7 +66,7 @@
      * @returns {string} Texto que se pinta junto al total.
      */
     function getCountLabel(count) {
-        return `${count} ${count === 1 ? 'articulo' : 'articulos'}`;
+        return `${count} ${count === 1 ? 'artículo' : 'artículos'}`;
     }
 
     /**
@@ -216,9 +216,9 @@
         if (type === 'login') {
             return `
                 <div class="rv-cart-state">
-                    <h3 class="rv-cart-state-title">Inicia sesion para ver tu cesta</h3>
+                    <h3 class="rv-cart-state-title">Inicia sesión para ver tu cesta</h3>
                     <p class="rv-cart-state-copy mb-3">
-                        ${escapeHtml(message || 'Necesitamos saber que usuario esta activo para cargar tu cesta.')}
+                        ${escapeHtml(message || 'Necesitamos saber qué usuario está activo para cargar tu cesta.')}
                     </p>
                     <a href="${LOGIN_URL}" class="btn btn-primario">Ir al acceso</a>
                 </div>
@@ -228,9 +228,9 @@
         if (type === 'empty') {
             return `
                 <div class="rv-cart-state">
-                    <h3 class="rv-cart-state-title">Tu cesta esta vacia</h3>
+                    <h3 class="rv-cart-state-title">Tu cesta está vacía</h3>
                     <p class="rv-cart-state-copy mb-3">
-                        ${escapeHtml(message || 'Aun no hay viajes guardados en tu carrito activo.')}
+                        ${escapeHtml(message || 'Aún no hay viajes guardados en tu carrito activo.')}
                     </p>
                     <a href="${TRIPS_URL}" class="btn btn-primario">Explorar viajes</a>
                 </div>
@@ -278,9 +278,9 @@
                             <p class="rv-cart-item-kicker">
                                 ${escapeHtml(item.provincia_nombre || 'Experiencia sostenible')}
                             </p>
-                            <h3 class="rv-cart-item-title">${escapeHtml(item.titulo || 'Viaje sin titulo')}</h3>
+                            <h3 class="rv-cart-item-title">${escapeHtml(item.titulo || 'Viaje sin título')}</h3>
                             <p class="rv-cart-item-description">
-                                ${escapeHtml(truncateText(item.descripcion, 140) || 'Sin descripcion disponible.')}
+                                ${escapeHtml(truncateText(item.descripcion, 140) || 'Sin descripción disponible.')}
                             </p>
                         </div>
                         <button
@@ -362,7 +362,7 @@
         }
 
         if (!summary.carrito.items.length) {
-            feedback.innerHTML = getStateHtml('empty', 'Tu carrito activo esta listo para recibir nuevas aventuras.');
+            feedback.innerHTML = getStateHtml('empty', 'Tu carrito activo está listo para recibir nuevas aventuras.');
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
@@ -406,14 +406,14 @@
         }
 
         if (!summary.logueado) {
-            feedback.innerHTML = getStateHtml('login', 'Tu cesta completa esta disponible cuando inicies sesion.');
+            feedback.innerHTML = getStateHtml('login', 'Tu cesta completa está disponible cuando inicies sesión.');
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
         }
 
         if (!summary.carrito.items.length) {
-            feedback.innerHTML = getStateHtml('empty', 'Todavia no hay viajes en tu carrito activo.');
+            feedback.innerHTML = getStateHtml('empty', 'Todavía no hay viajes en tu carrito activo.');
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
@@ -541,7 +541,7 @@
 
         const summary = normalizeSummary(data);
         renderAll(summary);
-        showNotice('Viaje anadido a la cesta.', 'success');
+        showNotice('Viaje añadido a la cesta.', 'success');
 
         return summary;
     }

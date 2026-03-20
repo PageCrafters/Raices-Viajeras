@@ -85,7 +85,7 @@ function getTripDescription(trip) {
         return provinceDescription;
     }
 
-    return 'Sin descripcion disponible.';
+    return 'Sin descripción disponible.';
 }
 
 /**
@@ -100,7 +100,7 @@ function waitForCartApi() {
 
     return new Promise((resolve, reject) => {
         const timeoutId = window.setTimeout(() => {
-            reject(new Error('La cesta todavia no esta lista.'));
+            reject(new Error('La cesta todavía no está lista.'));
         }, 2500);
 
         document.addEventListener('rv:cesta-ready', () => {
@@ -134,18 +134,18 @@ function getBackUrl(trip) {
 async function handleAddToCart(tripId, button) {
     const originalText = button.textContent;
     button.disabled = true;
-    button.textContent = 'Anadiendo...';
+    button.textContent = 'Añadiendo...';
 
     try {
         const addToCart = await waitForCartApi();
         await addToCart(tripId);
-        button.textContent = 'Anadido';
+        button.textContent = 'Añadido';
 
         window.setTimeout(() => {
             button.textContent = originalText;
         }, 1400);
     } catch (error) {
-        console.error('No se pudo anadir el viaje:', error);
+        console.error('No se pudo añadir el viaje:', error);
         button.textContent = originalText;
     } finally {
         button.disabled = false;
@@ -215,7 +215,7 @@ function renderTrip(container, trip) {
                             <div class="info-trip-actions">
                                 <button type="button" class="info-trip-btn info-trip-btn-primary js-trip-add">
                                     <i class="bi bi-basket-fill" aria-hidden="true"></i>
-                                    Anadir a la cesta
+                                    Añadir a la cesta
                                 </button>
                                 <a href="${backUrl}" class="info-trip-btn info-trip-btn-secondary">
                                     Volver a destinos
@@ -254,7 +254,7 @@ async function loadTripDetail(container, tripId) {
         trip = JSON.parse(raw);
     } catch (error) {
         console.error('get_viaje: respuesta no JSON', raw);
-        renderDetailMessage(container, 'Error cargando informacion del viaje.', 'text-danger');
+        renderDetailMessage(container, 'Error cargando información del viaje.', 'text-danger');
         return;
     }
 
@@ -287,7 +287,7 @@ async function initTripDetail() {
         await loadTripDetail(container, tripId);
     } catch (error) {
         console.error(error);
-        renderDetailMessage(container, 'Error cargando informacion del viaje.', 'text-danger');
+        renderDetailMessage(container, 'Error cargando información del viaje.', 'text-danger');
     }
 }
 

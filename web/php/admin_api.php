@@ -12,7 +12,7 @@ auth_bootstrap();
 $currentUser = auth_current_user();
 if (!$currentUser) {
     http_response_code(401);
-    echo json_encode(['error' => 'Debes iniciar sesion.'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['error' => 'Debes iniciar sesión.'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

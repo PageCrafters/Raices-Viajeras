@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         return new Promise((resolve, reject) => {
             const timeoutId = window.setTimeout(() => {
-                reject(new Error('La cesta todavia no esta lista.'));
+                reject(new Error('La cesta todavía no está lista.'));
             }, 2500);
 
             document.addEventListener('rv:cesta-ready', () => {
@@ -114,14 +114,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function handleAddToCart(tripId, button) {
         const originalText = button.textContent;
         button.disabled = true;
-        button.textContent = 'Anadiendo...';
+        button.textContent = 'Añadiendo...';
 
         try {
             const addToCart = await waitForCartApi();
             await addToCart(tripId);
-            pulseButtonState(button, 'Anadido', originalText);
+            pulseButtonState(button, 'Añadido', originalText);
         } catch (error) {
-            console.error('No se pudo anadir el viaje:', error);
+            console.error('No se pudo añadir el viaje:', error);
             button.textContent = originalText;
         } finally {
             button.disabled = false;
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         wrap.innerHTML = '';
 
         if (!items.length) {
-            createMessage('No se han encontrado viajes para esa busqueda.', 'text-muted');
+            createMessage('No se han encontrado viajes para esa búsqueda.', 'text-muted');
             return;
         }
 
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const cartButton = document.createElement('button');
             cartButton.type = 'button';
             cartButton.className = 'ca-card-btn ca-card-btn-secondary';
-            cartButton.textContent = 'Anadir a la cesta';
+            cartButton.textContent = 'Añadir a la cesta';
             cartButton.addEventListener('click', (event) => {
                 event.stopPropagation();
                 event.preventDefault();
