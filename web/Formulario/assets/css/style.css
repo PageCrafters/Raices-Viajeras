@@ -158,6 +158,12 @@
     box-shadow: 0 0 0 3px rgba(47, 158, 68, 0.12);
 }
 
+/* Estos estados rojos son los que uso para marcar errores propios del formulario. */
+.auth-page .contenedor_login-register form input.is-invalid {
+    background: #fff4f4;
+    box-shadow: 0 0 0 3px rgba(194, 49, 49, 0.12);
+}
+
 .auth-page label {
     display: block;
     margin-top: 20px;
@@ -203,6 +209,26 @@
     padding: 0;
     flex-shrink: 0;
     accent-color: #2f9e44;
+}
+
+.auth-page .radio-group.auth-group-invalid,
+.auth-page .form-check.auth-group-invalid,
+.auth-page .auth-date-block.auth-group-invalid {
+    border-radius: 12px;
+}
+
+.auth-page .radio-group.auth-group-invalid,
+.auth-page .form-check.auth-group-invalid {
+    padding: 10px 12px;
+    background: rgba(194, 49, 49, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(194, 49, 49, 0.18);
+}
+
+.auth-page .auth-date-block.auth-group-invalid .auth-date-helper,
+.auth-page .radio-group.auth-group-invalid span,
+.auth-page .radio-group.auth-group-invalid label,
+.auth-page .form-check.auth-group-invalid .form-check-label {
+    color: #a32929;
 }
 
 /* Los checks se quedan pequenos y alineados para que no rompan el alto del panel. */
@@ -253,6 +279,19 @@
     font-size: 13px;
     font-weight: 500;
     line-height: 1.2;
+}
+
+.auth-page .auth-field-error {
+    display: none;
+    margin-top: 6px;
+    color: #c23131;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.auth-page .auth-field-error.is-visible {
+    display: block;
 }
 
 .auth-page .contenedor_login-register form button[type="submit"] {
@@ -311,6 +350,11 @@
     color: #e8f8ea;
 }
 
+.dark-mode.auth-page .contenedor_login-register form input.is-invalid {
+    background: #291718;
+    box-shadow: 0 0 0 3px rgba(255, 120, 120, 0.12);
+}
+
 .dark-mode.auth-page .contenedor_login-register form input[type="text"]::placeholder,
 .dark-mode.auth-page .contenedor_login-register form input[type="email"]::placeholder,
 .dark-mode.auth-page .contenedor_login-register form input[type="password"]::placeholder {
@@ -319,6 +363,20 @@
 
 .dark-mode.auth-page .auth-date-helper {
     color: #b9c6ba;
+}
+
+.dark-mode.auth-page .radio-group.auth-group-invalid,
+.dark-mode.auth-page .form-check.auth-group-invalid {
+    background: rgba(255, 120, 120, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 120, 120, 0.2);
+}
+
+.dark-mode.auth-page .auth-date-block.auth-group-invalid .auth-date-helper,
+.dark-mode.auth-page .radio-group.auth-group-invalid span,
+.dark-mode.auth-page .radio-group.auth-group-invalid label,
+.dark-mode.auth-page .form-check.auth-group-invalid .form-check-label,
+.dark-mode.auth-page .auth-field-error {
+    color: #ffb5b5;
 }
 
 /* En movil dejo una sola cara visible para que el slider no pise el otro formulario. */
