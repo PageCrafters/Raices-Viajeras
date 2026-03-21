@@ -29,6 +29,6 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 > [Ver carpeta en GitHub](https://github.com/PageCrafters/Raices-Viajeras/tree/main/web/bocetos/img-bocetos)
 
 # Informe Accesibilidad
-> [Informe de Accesibilidad](documentación/InformeAccesibilidadRaicesViajeras.pdf)
+> [Informe de Accesibilidad](documentacion/Informe%20Accesibilidad%20Ra%C3%ADces%20Viajeras.pdf)
 
 
