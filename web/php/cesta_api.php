@@ -7,14 +7,14 @@ header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-// La cesta necesita saber la sesion real aunque venga recuperada por remember me.
+// La cesta necesita saber la sesion real aunque venga recuperada por remember me
 auth_bootstrap();
 
 /**
- * Devuelve una respuesta JSON y corta la ejecucion del endpoint.
+ * Devuelve una respuesta JSON y corta la ejecucion del endpoint
  *
- * @param array $data Datos que se envian al frontend.
- * @param int $status Codigo HTTP.
+ * @param array $data Datos que se envian al frontend
+ * @param int $status Codigo HTTP
  * @return void
  */
 function cart_json_response(array $data, int $status = 200): void
@@ -25,9 +25,9 @@ function cart_json_response(array $data, int $status = 200): void
 }
 
 /**
- * Devuelve la estructura vacia que espera el modal cuando no hay carrito o no hay login.
+ * Devuelve la estructura vacia que espera el modal cuando no hay carrito o no hay login
  *
- * @param bool $loggedIn Marca si el usuario esta autenticado.
+ * @param bool $loggedIn Marca si el usuario esta autenticado
  * @return array
  */
 function cart_empty_summary(bool $loggedIn): array
@@ -44,10 +44,10 @@ function cart_empty_summary(bool $loggedIn): array
 }
 
 /**
- * Devuelve el carrito activo mas reciente del usuario.
+ * Devuelve el carrito activo mas reciente del usuario
  *
- * @param PDO $pdo Conexion PDO compartida.
- * @param int $userId Id del usuario.
+ * @param PDO $pdo Conexion PDO compartida
+ * @param int $userId Id del usuario
  * @return int|null
  */
 function cart_get_active_id(PDO $pdo, int $userId): ?int
@@ -66,10 +66,10 @@ function cart_get_active_id(PDO $pdo, int $userId): ?int
 }
 
 /**
- * Devuelve el carrito activo del usuario o lo crea si todavia no existe.
+ * Devuelve el carrito activo del usuario o lo crea si todavia no existe
  *
- * @param PDO $pdo Conexion PDO compartida.
- * @param int $userId Id del usuario.
+ * @param PDO $pdo Conexion PDO compartida
+ * @param int $userId Id del usuario
  * @return int
  */
 function cart_get_or_create_active_id(PDO $pdo, int $userId): int
@@ -86,11 +86,11 @@ function cart_get_or_create_active_id(PDO $pdo, int $userId): int
 }
 
 /**
- * Mantiene el total del carrito sincronizado con sus lineas reales.
+ * Mantiene el total del carrito sincronizado con sus lineas reales
  *
- * @param PDO $pdo Conexion PDO compartida.
- * @param int $cartId Id del carrito.
- * @param float $total Total recalculado.
+ * @param PDO $pdo Conexion PDO compartida
+ * @param int $cartId Id del carrito
+ * @param float $total Total recalculado
  * @return void
  */
 function cart_sync_total(PDO $pdo, int $cartId, float $total): void
@@ -100,10 +100,10 @@ function cart_sync_total(PDO $pdo, int $cartId, float $total): void
 }
 
 /**
- * Busca el viaje antes de tocar el carrito para asegurar que existe y usar su precio actual.
+ * Busca el viaje antes de tocar el carrito para asegurar que existe y usar su precio actual
  *
- * @param PDO $pdo Conexion PDO compartida.
- * @param int $tripId Id del viaje.
+ * @param PDO $pdo Conexion PDO compartida
+ * @param int $tripId Id del viaje
  * @return array|null
  */
 function cart_find_trip(PDO $pdo, int $tripId): ?array
@@ -116,9 +116,9 @@ function cart_find_trip(PDO $pdo, int $tripId): ?array
 }
 
 /**
- * Monta la respuesta completa que usa el modal y la pagina de cesta.
+ * Monta la respuesta completa que usa el modal y la pagina de cesta
  *
- * @param PDO $pdo Conexion PDO compartida.
+ * @param PDO $pdo Conexion PDO compartida
  * @return array
  */
 function cart_build_summary(PDO $pdo): array
@@ -143,6 +143,7 @@ function cart_build_summary(PDO $pdo): array
             v.titulo,
             v.descripcion,
             v.imagen,
+            v.imagen_movil,
             p.nombre AS provincia_nombre
          FROM carrito_viajes cv
          INNER JOIN viajes v ON v.id = cv.viaje_id
@@ -167,7 +168,7 @@ function cart_build_summary(PDO $pdo): array
             'viaje_id' => (int) $row['viaje_id'],
             'titulo' => $row['titulo'],
             'descripcion' => $row['descripcion'],
-            'imagen' => rv_resolve_image_value($row['imagen']),
+            'imagen' => rv_resolve_responsive_image_value($row['imagen'] ?? null, $row['imagen_movil'] ?? null),
             'provincia_nombre' => $row['provincia_nombre'],
             'cantidad' => $quantity,
             'precio_unitario' => $unitPrice,
@@ -192,11 +193,11 @@ function cart_build_summary(PDO $pdo): array
 }
 
 /**
- * Anade el viaje al carrito activo o suma cantidad si ya estaba.
+ * Anade el viaje al carrito activo o suma cantidad si ya estaba
  *
- * @param PDO $pdo Conexion PDO compartida.
- * @param int $userId Id del usuario activo.
- * @param int $tripId Id del viaje.
+ * @param PDO $pdo Conexion PDO compartida
+ * @param int $userId Id del usuario activo
+ * @param int $tripId Id del viaje
  * @return array
  */
 function cart_add_item(PDO $pdo, int $userId, int $tripId): array
@@ -262,7 +263,7 @@ if ($method === 'POST') {
     $action = $body['accion'] ?? '';
     $userId = auth_user_id();
 
-    // Las acciones POST de cesta quedan agrupadas aqui para compartir validaciones de sesion.
+    // Las acciones POST de cesta quedan agrupadas aqui para compartir validaciones de sesion
     if ($action === 'agregar_item') {
         if ($userId <= 0) {
             cart_json_response(['error' => 'Debes iniciar sesión para guardar viajes en la cesta.'], 401);
@@ -301,7 +302,7 @@ if ($method === 'POST') {
         cart_json_response(cart_build_summary($pdo));
     }
 
-    // Antes de borrar, compruebo que la linea pertenece al carrito activo del usuario.
+    // Antes de borrar, compruebo que la linea pertenece al carrito activo del usuario
     $checkStmt = $pdo->prepare(
         "SELECT id
          FROM carrito_viajes

@@ -10,15 +10,18 @@
     const LOGIN_URL = '/Raices-Viajeras/web/Formulario/form.html?modo=login';
     const TRIPS_URL = '/Raices-Viajeras/web/html/provincias.html';
     const FALLBACK_IMAGE = '/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp';
+    const request = typeof window.rvFetch === 'function'
+        ? window.rvFetch.bind(window)
+        : window.fetch.bind(window);
 
     let templatePromise = null;
     let eventsBound = false;
 
     /**
-     * Escapa texto antes de meterlo dentro del modal.
+     * Escapa texto antes de meterlo dentro del modal
      *
-     * @param {unknown} value Valor que se quiere pintar.
-     * @returns {string} Texto seguro para usar en HTML.
+     * @param {unknown} value Valor que se quiere pintar
+     * @returns {string} Texto seguro para usar en HTML
      */
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -31,10 +34,10 @@
     }
 
     /**
-     * Formatea importes con el formato local de la web.
+     * Formatea importes con el formato local de la web
      *
-     * @param {number|string} value Importe que se quiere mostrar.
-     * @returns {string} Precio listo para pintar.
+     * @param {number|string} value Importe que se quiere mostrar
+     * @returns {string} Precio listo para pintar
      */
     function formatCurrency(value) {
         return new Intl.NumberFormat('es-ES', {
@@ -44,11 +47,11 @@
     }
 
     /**
-     * Recorta descripciones largas para que las cards de cesta no se desmadren.
+     * Recorta descripciones largas para que las cards de cesta no se desmadren
      *
-     * @param {string} value Texto original.
-     * @param {number} [maxLength=120] Largo maximo permitido.
-     * @returns {string} Texto ya recortado si hacia falta.
+     * @param {string} value Texto original
+     * @param {number} [maxLength=120] Largo maximo permitido
+     * @returns {string} Texto ya recortado si hacia falta
      */
     function truncateText(value, maxLength = 120) {
         const text = String(value ?? '').trim();
@@ -60,19 +63,19 @@
     }
 
     /**
-     * Devuelve la etiqueta del contador en singular o plural.
+     * Devuelve la etiqueta del contador en singular o plural
      *
-     * @param {number} count Numero total de articulos.
-     * @returns {string} Texto que se pinta junto al total.
+     * @param {number} count Numero total de articulos
+     * @returns {string} Texto que se pinta junto al total
      */
     function getCountLabel(count) {
         return `${count} ${count === 1 ? 'artículo' : 'artículos'}`;
     }
 
     /**
-     * Se asegura de que exista la pila de avisos flotantes.
+     * Se asegura de que exista la pila de avisos flotantes
      *
-     * @returns {HTMLElement} Contenedor donde se van apilando los avisos.
+     * @returns {HTMLElement} Contenedor donde se van apilando los avisos
      */
     function ensureToastStack() {
         let stack = document.getElementById('rv-cart-toast-stack');
@@ -88,10 +91,10 @@
     }
 
     /**
-     * Muestra avisos cortos de exito o error sin sacar al usuario de la pagina.
+     * Muestra avisos cortos de exito o error sin sacar al usuario de la pagina
      *
-     * @param {string} message Texto del aviso.
-     * @param {string} [type='success'] Tipo visual del aviso.
+     * @param {string} message Texto del aviso
+     * @param {string} [type='success'] Tipo visual del aviso
      * @returns {void}
      */
     function showNotice(message, type = 'success') {
@@ -115,10 +118,10 @@
     }
 
     /**
-     * Normaliza la respuesta del backend para trabajar siempre con la misma forma.
+     * Normaliza la respuesta del backend para trabajar siempre con la misma forma
      *
-     * @param {object} data Respuesta original del endpoint.
-     * @returns {object} Resumen de cesta con estructura estable.
+     * @param {object} data Respuesta original del endpoint
+     * @returns {object} Resumen de cesta con estructura estable
      */
     function normalizeSummary(data) {
         const cart = data && data.carrito ? data.carrito : {};
@@ -151,9 +154,9 @@
     }
 
     /**
-     * Se asegura de que exista el contenedor donde se inyecta la cesta.
+     * Se asegura de que exista el contenedor donde se inyecta la cesta
      *
-     * @returns {HTMLElement} Nodo contenedor de la plantilla.
+     * @returns {HTMLElement} Nodo contenedor de la plantilla
      */
     function ensureCartContainer() {
         let container = document.getElementById('contenedorCesta');
@@ -168,9 +171,9 @@
     }
 
     /**
-     * Carga el HTML del modal compartido y lo inyecta una sola vez.
+     * Carga el HTML del modal compartido y lo inyecta una sola vez
      *
-     * @returns {Promise<HTMLElement|null>} Modal listo para usar.
+     * @returns {Promise<HTMLElement|null>} Modal listo para usar
      */
     async function ensureTemplateLoaded() {
         if (document.getElementById('cestaModal')) {
@@ -179,7 +182,7 @@
         }
 
         if (!templatePromise) {
-            templatePromise = fetch(TEMPLATE_URL, {
+            templatePromise = request(TEMPLATE_URL, {
                 cache: 'no-store',
                 credentials: 'same-origin'
             })
@@ -206,11 +209,11 @@
     }
 
     /**
-     * Devuelve el bloque visual para login, vacio, error o carga.
+     * Devuelve el bloque visual para login, vacio, error o carga
      *
-     * @param {'login'|'empty'|'error'|'loading'} type Tipo de estado.
-     * @param {string} message Texto de apoyo.
-     * @returns {string} HTML del estado.
+     * @param {'login'|'empty'|'error'|'loading'} type Tipo de estado
+     * @param {string} message Texto de apoyo
+     * @returns {string} HTML del estado
      */
     function getStateHtml(type, message) {
         if (type === 'login') {
@@ -259,10 +262,10 @@
     }
 
     /**
-     * Genera el listado de lineas con sus importes y boton para quitar.
+     * Genera el listado de lineas con sus importes y boton para quitar
      *
-     * @param {Array<object>} items Lineas del carrito.
-     * @returns {string} HTML completo del listado.
+     * @param {Array<object>} items Lineas del carrito
+     * @returns {string} HTML completo del listado
      */
     function getItemsHtml(items) {
         return items.map((item) => `
@@ -304,9 +307,9 @@
     }
 
     /**
-     * Sincroniza el badge del header con el numero total de articulos.
+     * Sincroniza el badge del header con el numero total de articulos
      *
-     * @param {number} count Numero total de items.
+     * @param {number} count Numero total de items
      * @returns {void}
      */
     function updateBadge(count) {
@@ -326,9 +329,9 @@
     }
 
     /**
-     * Renderiza el estado del modal rapido del header.
+     * Renderiza el estado del modal rapido del header
      *
-     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @param {object} summary Resumen ya normalizado de la cesta
      * @returns {void}
      */
     function renderModal(summary) {
@@ -377,9 +380,9 @@
     }
 
     /**
-     * Renderiza la vista completa de paga.html reutilizando los mismos datos.
+     * Renderiza la vista completa de paga.html reutilizando los mismos datos
      *
-     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @param {object} summary Resumen ya normalizado de la cesta
      * @returns {void}
      */
     function renderCartPage(summary) {
@@ -428,10 +431,10 @@
     }
 
     /**
-     * Muestra un error solo en el destino que haya pedido la llamada.
+     * Muestra un error solo en el destino que haya pedido la llamada
      *
-     * @param {string} message Texto del error.
-     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del error.
+     * @param {string} message Texto del error
+     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del error
      * @returns {void}
      */
     function renderError(message, target = 'both') {
@@ -455,10 +458,10 @@
     }
 
     /**
-     * Pinta el estado de carga donde toque mientras llega la respuesta del backend.
+     * Pinta el estado de carga donde toque mientras llega la respuesta del backend
      *
-     * @param {string} message Texto de apoyo.
-     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del estado.
+     * @param {string} message Texto de apoyo
+     * @param {'both'|'modal'|'page'} [target='both'] Destino visual del estado
      * @returns {void}
      */
     function renderLoading(message, target = 'both') {
@@ -482,9 +485,9 @@
     }
 
     /**
-     * Reparte el mismo resumen entre badge, modal y pagina completa.
+     * Reparte el mismo resumen entre badge, modal y pagina completa
      *
-     * @param {object} summary Resumen ya normalizado de la cesta.
+     * @param {object} summary Resumen ya normalizado de la cesta
      * @returns {void}
      */
     function renderAll(summary) {
@@ -494,12 +497,12 @@
     }
 
     /**
-     * Pide el resumen actual de la cesta al backend.
+     * Pide el resumen actual de la cesta al backend
      *
-     * @returns {Promise<object>} Resumen ya normalizado.
+     * @returns {Promise<object>} Resumen ya normalizado
      */
     async function fetchSummary() {
-        const response = await fetch(`${API_URL}?accion=resumen`, {
+        const response = await request(`${API_URL}?accion=resumen`, {
             cache: 'no-store',
             credentials: 'same-origin'
         });
@@ -513,13 +516,13 @@
     }
 
     /**
-     * Llama al backend para anadir una aventura al carrito activo.
+     * Llama al backend para anadir una aventura al carrito activo
      *
-     * @param {number|string} tripId Id del viaje.
-     * @returns {Promise<object>} Resumen actualizado de la cesta.
+     * @param {number|string} tripId Id del viaje
+     * @returns {Promise<object>} Resumen actualizado de la cesta
      */
     async function addItem(tripId) {
-        const response = await fetch(API_URL, {
+        const response = await request(API_URL, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
@@ -547,10 +550,10 @@
     }
 
     /**
-     * Refresca la cesta y decide donde mostrar carga o error.
+     * Refresca la cesta y decide donde mostrar carga o error
      *
-     * @param {object} [options={}] Opciones de refresco.
-     * @returns {Promise<object>} Resumen actualizado.
+     * @param {object} [options={}] Opciones de refresco
+     * @returns {Promise<object>} Resumen actualizado
      */
     async function refreshCart(options = {}) {
         const target = options.target || 'both';
@@ -572,13 +575,13 @@
     }
 
     /**
-     * Elimina una linea concreta del carrito activo.
+     * Elimina una linea concreta del carrito activo
      *
-     * @param {number|string} cartItemId Id de la linea del carrito.
-     * @returns {Promise<object>} Resumen ya normalizado tras borrar.
+     * @param {number|string} cartItemId Id de la linea del carrito
+     * @returns {Promise<object>} Resumen ya normalizado tras borrar
      */
     async function removeItem(cartItemId) {
-        const response = await fetch(API_URL, {
+        const response = await request(API_URL, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
@@ -600,7 +603,7 @@
     }
 
     /**
-     * Vincula la recarga del resumen al evento de apertura del modal.
+     * Vincula la recarga del resumen al evento de apertura del modal
      *
      * @returns {void}
      */
@@ -620,7 +623,7 @@
     }
 
     /**
-     * Escucha el boton de quitar con delegacion para no perder eventos al re-renderizar.
+     * Escucha el boton de quitar con delegacion para no perder eventos al re-renderizar
      *
      * @returns {void}
      */
@@ -662,7 +665,7 @@
     }
 
     /**
-     * Punto de entrada comun para modal global y pagina completa.
+     * Punto de entrada comun para modal global y pagina completa
      *
      * @returns {Promise<void>}
      */

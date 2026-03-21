@@ -1,7 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
-/* Variables del tema compartido. Desde aqui cuelga casi toda la web. */
+/* Variables del tema compartido. Desde aqui cuelga casi toda la web */
 :root {
   --bg: #f6fbf6; /* fondo claro */
   --texto: #18201DB3; /* color texto */
@@ -22,7 +22,7 @@
   --verde-oscuro: #1e4d36;
 }
 
-/* En oscuro reutilizo los mismos nombres para no duplicar reglas por todas partes. */
+/* En oscuro reutilizo los mismos nombres para no duplicar reglas por todas partes */
 .dark-mode {
   --bg: #070707; /* fondo oscuro */
   --texto: #e8f8ea; /* texto claro */
@@ -398,7 +398,7 @@ body {
 
 
 
-/* Formulario antiguo de acceso. Se mantiene por compatibilidad visual con bloques viejos. */
+/* Formulario antiguo de acceso. Se mantiene por compatibilidad visual con bloques viejos */
 .contenedor{
     width: 100%;
     max-width: 800px;
@@ -672,7 +672,7 @@ label {
     box-shadow: 0 8px 18px rgba(29, 98, 42, .25);
 }
 
-/* Le doy un ancho comodo al modal para que el resumen no quede apretado. */
+/* Le doy un ancho comodo al modal para que el resumen no quede apretado */
 .rv-cart-modal .modal-dialog {
     max-width: 960px;
 }
@@ -891,7 +891,7 @@ label {
     top: 108px;
 }
 
-/* En oscuro fuerzo fondos solidos para que no transparente el contenido de detras. */
+/* En oscuro fuerzo fondos solidos para que no transparente el contenido de detras */
 .dark-mode .rv-cart-surface,
 .dark-mode .rv-cart-item {
     background: #121212;
@@ -921,7 +921,7 @@ label {
     color: var(--verde-300);
 }
 
-/* Avisos cortos que sustituyen a los alert del navegador. */
+/* Avisos cortos que sustituyen a los alert del navegador */
 .rv-toast-stack {
     position: fixed;
     top: 92px;
@@ -984,7 +984,7 @@ label {
     color: #c8ddff;
 }
 
-/* En las tablas del admin dejo el flex dentro de un bloque interno para no romper la celda. */
+/* En las tablas del admin dejo el flex dentro de un bloque interno para no romper la celda */
 .admin-actions-cell {
     white-space: nowrap;
     min-width: 108px;
@@ -1020,3 +1020,4 @@ label {
         bottom: 1rem;
     }
 }
+

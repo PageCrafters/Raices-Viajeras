@@ -1,9 +1,35 @@
 let todasLasNoticias = [];
+const request = typeof window.rvFetch === 'function'
+    ? window.rvFetch.bind(window)
+    : window.fetch.bind(window);
 
 /**
- * Pinta la rejilla del blog con las noticias que toquen en ese momento.
+ * Resuelve el src final del blog sin duplicar prefijos cuando la API ya trae una ruta usable
  *
- * @param {Array<object>} noticias Lista de noticias a mostrar.
+ * @param {string|null|undefined} imagePath Ruta o nombre de imagen recibido desde la API
+ * @returns {string} Ruta lista para usar en el atributo src
+ */
+function getNewsImageSrc(imagePath) {
+    const normalizedPath = String(imagePath ?? '').trim().replace(/\\/g, '/');
+    if (!normalizedPath) {
+        return '';
+    }
+
+    if (/^(data:|https?:\/\/|\/\/|\/|\.\.?\/)/i.test(normalizedPath)) {
+        return normalizedPath;
+    }
+
+    if (normalizedPath.startsWith('img/')) {
+        return `../${normalizedPath}`;
+    }
+
+    return `../img/${normalizedPath.replace(/^\/+/, '')}`;
+}
+
+/**
+ * Pinta la rejilla del blog con las noticias que toquen en ese momento
+ *
+ * @param {Array<object>} noticias Lista de noticias a mostrar
  * @returns {void}
  */
 function renderNoticias(noticias) {
@@ -23,7 +49,7 @@ function renderNoticias(noticias) {
         container.innerHTML += `
             <div class="col mb-3">
                 <div class="card h-100 shadow-sm">
-                    <img src="../img/${noticia.imagen}" class="card-img-top" alt="${noticia.nombre}" style="height: 160px; object-fit: cover;">
+                    <img src="${getNewsImageSrc(noticia.imagen)}" class="card-img-top" alt="${noticia.nombre}" style="height: 160px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <span class="badge bg-success mb-2 align-self-start">${noticia.categoria}</span>
                         <h6 class="card-title fw-bold">${noticia.nombre}</h6>
@@ -37,10 +63,10 @@ function renderNoticias(noticias) {
 }
 
 /**
- * Filtra las noticias ya cargadas sin pedir datos otra vez.
+ * Filtra las noticias ya cargadas sin pedir datos otra vez
  *
- * @param {string} categoria Categoria o texto del filtro.
- * @param {HTMLElement|null} elemento Elemento activo del listado lateral.
+ * @param {string} categoria Categoria o texto del filtro
+ * @param {HTMLElement|null} elemento Elemento activo del listado lateral
  * @returns {void}
  */
 function filtrarPorCategoria(categoria, elemento) {
@@ -60,12 +86,12 @@ function filtrarPorCategoria(categoria, elemento) {
 }
 
 /**
- * Carga las noticias iniciales y conecta los filtros del blog.
+ * Carga las noticias iniciales y conecta los filtros del blog
  *
  * @returns {void}
  */
 function initBlog() {
-    fetch('../php/noticias_api.php')
+    request('../php/noticias_api.php')
         .then((response) => response.json())
         .then((noticias) => {
             todasLasNoticias = noticias;

@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const request = typeof window.rvFetch === 'function'
+        ? window.rvFetch.bind(window)
+        : window.fetch.bind(window);
+
     /**
-     * Escapa texto antes de meterlo dentro del header.
+     * Escapa texto antes de meterlo dentro del header
      *
-     * @param {unknown} value Valor que se quiere pintar.
-     * @returns {string} Texto seguro para usar en HTML.
+     * @param {unknown} value Valor que se quiere pintar
+     * @returns {string} Texto seguro para usar en HTML
      */
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -16,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Se asegura de que la cesta global se cargue solo una vez.
+     * Se asegura de que la cesta global se cargue solo una vez
      *
      * @returns {void}
      */
@@ -37,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Pinta el estado de acceso en el header.
+     * Pinta el estado de acceso en el header
      *
-     * @param {object|null} sessionData Datos basicos de la sesion activa.
+     * @param {object|null} sessionData Datos basicos de la sesion activa
      * @returns {void}
      */
     function renderAuthState(sessionData) {
@@ -61,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Ajusta las partes del header que dependen de la sesion.
+     * Ajusta las partes del header que dependen de la sesion
      *
-     * @param {object|null} sessionData Datos de la sesion actual.
+     * @param {object|null} sessionData Datos de la sesion actual
      * @returns {void}
      */
     function applySessionState(sessionData) {
@@ -76,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Carga la plantilla comun del header y aplica el estado de sesion.
+     * Carga la plantilla comun del header y aplica el estado de sesion
      *
      * @returns {Promise<void>}
      */
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const response = await fetch('/Raices-Viajeras/web/html/plantillas/header.html', {
+        const response = await request('/Raices-Viajeras/web/html/plantillas/header.html', {
             cache: 'no-store'
         });
         const html = await response.text();
@@ -100,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ensureCestaBootstrap();
 
         try {
-            const sessionResponse = await fetch('/Raices-Viajeras/web/php/sesion.php', {
+            const sessionResponse = await request('/Raices-Viajeras/web/php/sesion.php', {
                 cache: 'no-store',
                 credentials: 'same-origin'
             });

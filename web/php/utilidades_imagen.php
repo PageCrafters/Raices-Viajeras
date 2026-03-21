@@ -1,11 +1,11 @@
 <?php
-// Aqui junto la logica de imagen para no repetir el mismo bloque en varios endpoints.
-// Asi la reutilizo igual desde viajes, provincias, cesta y admin.
+// Aqui junto la logica de imagen para no repetir el mismo bloque en varios endpoints
+// Asi la reutilizo igual desde viajes, provincias, cesta, noticias y admin
 
 /**
- * Comprueba si el valor guardado parece una ruta o URL y no un blob real.
+ * Comprueba si el valor guardado parece una ruta o URL y no un blob real
  *
- * @param string $value Valor guardado en base de datos.
+ * @param string $value Valor guardado en base de datos
  * @return bool
  */
 function rv_image_looks_like_path(string $value): bool
@@ -17,9 +17,9 @@ function rv_image_looks_like_path(string $value): bool
 }
 
 /**
- * Detecta el mime del blob para no devolver todo como JPEG aunque venga otro formato.
+ * Detecta el mime del blob para no devolver todo como JPEG aunque venga otro formato
  *
- * @param string $binaryValue Contenido binario de la imagen.
+ * @param string $binaryValue Contenido binario de la imagen
  * @return string
  */
 function rv_detect_image_mime(string $binaryValue): string
@@ -60,9 +60,21 @@ function rv_detect_image_mime(string $binaryValue): string
 }
 
 /**
- * Convierte una ruta o un blob al formato que entiende el frontend.
+ * Devuelve el viewport pedido por la carga inicial del frontend
  *
- * @param string|null $value Valor original guardado en base de datos.
+ * @return string
+ */
+function rv_requested_viewport(): string
+{
+    $viewport = strtolower(trim((string) ($_SERVER['HTTP_X_RV_VIEWPORT'] ?? 'desktop')));
+
+    return $viewport === 'mobile' ? 'mobile' : 'desktop';
+}
+
+/**
+ * Convierte una ruta o un blob al formato que entiende el frontend
+ *
+ * @param string|null $value Valor original guardado en base de datos
  * @return string|null
  */
 function rv_resolve_image_value(?string $value): ?string
@@ -76,5 +88,21 @@ function rv_resolve_image_value(?string $value): ?string
     }
 
     return 'data:' . rv_detect_image_mime($value) . ';base64,' . base64_encode($value);
+}
+
+/**
+ * Elige la imagen correcta para móvil o escritorio y la deja lista para el frontend
+ *
+ * @param string|null $desktopValue Imagen principal guardada en base de datos
+ * @param string|null $mobileValue Imagen móvil guardada en base de datos
+ * @return string|null
+ */
+function rv_resolve_responsive_image_value(?string $desktopValue, ?string $mobileValue = null): ?string
+{
+    if (rv_requested_viewport() === 'mobile' && $mobileValue !== null && $mobileValue !== '') {
+        return rv_resolve_image_value($mobileValue);
+    }
+
+    return rv_resolve_image_value($desktopValue);
 }
 ?>
