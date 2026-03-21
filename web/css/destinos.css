@@ -96,7 +96,7 @@
     outline: none;
     font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
-    color: var(--texto);
+    color: var(--bg);
     background: transparent;
     flex: 1;
     min-width: 0;
@@ -104,7 +104,7 @@
 .buscador-input::placeholder { color: var(--marron-900); }
 .buscador-btn {
     background: var(--verde-300);
-    color: var(--bg);
+    color: #000000;
     border: none;
     padding: .7rem 1.8rem;
     border-radius: 1.5rem;
