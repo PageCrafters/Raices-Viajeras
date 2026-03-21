@@ -270,7 +270,7 @@ body.theme-loaded {
 /* Botones base reutilizados en varias vistas */
 .btn-primario {
   background: var(--verde-500);
-  color: var(--texto-boton);
+  color: var(--bg);
   border: none;
   padding: .6rem .9rem;
   border-radius: 10px;
