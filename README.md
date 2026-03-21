@@ -19,8 +19,11 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 # Enlace al video de explicación de Landing Page RV 
 > https://youtu.be/ucAXW-ixVdw
 
-# Boceto final (vista escritorio y móvil)
+# Boceto final Landing Page (vista escritorio y móvil)
 > https://pagecrafters.github.io/Raices-Viajeras/web/bocetos/Boceto_Final_Landing_Page.html
+
+> # Bocetos (vista escritorio y móvil)
+> https://pagecrafters.github.io/Raices-Viajeras/web/bocetos/img-bocetos
 
 # Landing publicada en GitHub Pages  
 >  https://PageCrafters.github.io/Raices-Viajeras
