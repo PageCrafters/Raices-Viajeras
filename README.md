@@ -31,4 +31,6 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 # Informe Accesibilidad
 > [Informe de Accesibilidad](documentacion/Informe%20Accesibilidad%20Ra%C3%ADces%20Viajeras.pdf)
 
+# Informe Usabilidad
+> [Informe de Usabilidad](documentacion/Informe%20Usabilidad%20Ra%C3%ADces%20Viajeras.pdf)
 
