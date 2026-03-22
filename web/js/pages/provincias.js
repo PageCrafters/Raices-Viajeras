@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      * @returns {void}
      */
     function createMessage(message, className) {
-        wrap.innerHTML = '';
+        wrap.replaceChildren();
 
         const col = document.createElement('div');
         col.className = 'col-12';
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      * @returns {void}
      */
     function renderProvincias(items) {
-        wrap.innerHTML = '';
+        wrap.replaceChildren();
 
         if (!items.length) {
             createMessage('No se han encontrado provincias para esa búsqueda.', 'text-muted');

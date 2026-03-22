@@ -38,28 +38,64 @@ function renderNoticias(noticias) {
         return;
     }
 
-    container.innerHTML = '';
+    container.replaceChildren();
 
     if (!noticias.length) {
-        container.innerHTML = '<p class="text-muted ms-3">No hay noticias en esta categoría.</p>';
+        const emptyMessage = document.createElement('p');
+        emptyMessage.className = 'text-muted ms-3';
+        emptyMessage.textContent = 'No hay noticias en esta categoría.';
+        container.appendChild(emptyMessage);
         return;
     }
 
+    const fragment = document.createDocumentFragment();
+
     noticias.forEach((noticia) => {
-        container.innerHTML += `
-            <div class="col mb-3">
-                <div class="card h-100 shadow-sm">
-                    <img src="${getNewsImageSrc(noticia.imagen)}" class="card-img-top" alt="${noticia.nombre}" style="height: 160px; object-fit: cover;">
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-success mb-2 align-self-start">${noticia.categoria}</span>
-                        <h6 class="card-title fw-bold">${noticia.nombre}</h6>
-                        <p class="card-text text-muted small">${noticia.descripcion.substring(0, 100)}...</p>
-                        <a href="articulo.html?id=${noticia.id}" class="btn btn-success btn-sm mt-auto">Leer noticia completa</a>
-                    </div>
-                </div>
-            </div>
-        `;
+        const col = document.createElement('div');
+        col.className = 'col mb-3';
+
+        const card = document.createElement('div');
+        card.className = 'card h-100 shadow-sm';
+
+        const img = document.createElement('img');
+        img.src = `../img/${noticia.imagen}`;
+        img.className = 'card-img-top';
+        img.alt = noticia.nombre;
+        img.style.height = '160px';
+        img.style.objectFit = 'cover';
+
+        const body = document.createElement('div');
+        body.className = 'card-body d-flex flex-column';
+
+        const badge = document.createElement('span');
+        badge.className = 'badge bg-success mb-2 align-self-start';
+        badge.textContent = noticia.categoria;
+
+        const title = document.createElement('h6');
+        title.className = 'card-title fw-bold';
+        title.textContent = noticia.nombre;
+
+        const description = document.createElement('p');
+        description.className = 'card-text text-muted small';
+        description.textContent = `${noticia.descripcion.substring(0, 100)}...`;
+
+        const link = document.createElement('a');
+        link.href = `articulo.html?id=${noticia.id}`;
+        link.className = 'btn btn-success btn-sm mt-auto';
+        link.textContent = 'Leer noticia completa';
+
+        body.appendChild(badge);
+        body.appendChild(title);
+        body.appendChild(description);
+        body.appendChild(link);
+
+        card.appendChild(img);
+        card.appendChild(body);
+        col.appendChild(card);
+        fragment.appendChild(col);
     });
+
+    container.appendChild(fragment);
 }
 
 /**

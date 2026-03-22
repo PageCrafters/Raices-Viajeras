@@ -17,6 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * Convierte una plantilla HTML en nodos listos para inyectar.
+     *
+     * @param {string} html Plantilla cruda del footer.
+     * @returns {Array<Node>} Nodos clonado/importados al documento actual.
+     */
+    function parseHtmlNodes(html) {
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(html, 'text/html');
+        return Array.from(parsed.body.childNodes).map((node) => document.importNode(node, true));
+    }
+
+    /**
      * Carga el footer comun sin tocar el resto del DOM ya renderizado.
      *
      * @returns {Promise<void>}
@@ -31,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const html = await response.text();
-        ensureFooterContainer().innerHTML = html;
+        ensureFooterContainer().replaceChildren(...parseHtmlNodes(html));
     }
 
     loadFooter().catch((error) => {
