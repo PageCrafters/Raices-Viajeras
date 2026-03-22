@@ -5,10 +5,10 @@ require_once __DIR__ . '/utilidades_imagen.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-// Todas las operaciones del panel pasan por la misma sesion restaurada desde cookie o servidor.
+// Todas las operaciones del panel pasan por la misma sesion restaurada desde cookie o servidor
 auth_bootstrap();
 
-// El panel admin solo deberia responder si el usuario activo tiene permisos de admin.
+// El panel admin solo deberia responder si el usuario activo tiene permisos de admin
 $currentUser = auth_current_user();
 if (!$currentUser) {
     http_response_code(401);
@@ -23,10 +23,10 @@ if (($currentUser['rol'] ?? 'usuario') !== 'admin') {
 }
 
 /**
- * Respuesta corta para no repetir el mismo bloque de salida.
+ * Respuesta corta para no repetir el mismo bloque de salida
  *
- * @param array $data Datos que se devuelven al frontend.
- * @param int $status Codigo HTTP.
+ * @param array $data Datos que se devuelven al frontend
+ * @param int $status Codigo HTTP
  * @return void
  */
 function admin_json_response(array $data, int $status = 200): void
@@ -37,7 +37,7 @@ function admin_json_response(array $data, int $status = 200): void
 }
 
 /**
- * Lee el cuerpo del panel segun venga en JSON o en multipart.
+ * Lee el cuerpo del panel segun venga en JSON o en multipart
  *
  * @return array
  */
@@ -53,12 +53,13 @@ function admin_read_request_body(): array
 }
 
 /**
- * Valida la subida de imagen y devuelve el binario listo para guardar.
+ * Valida la subida de imagen y devuelve el binario listo para guardar
  *
- * @param array|null $file Archivo subido desde el formulario.
+ * @param array|null $file Archivo subido desde el formulario
+ * @param string $label Etiqueta legible para afinar los errores
  * @return string|null
  */
-function admin_uploaded_image_binary(?array $file): ?string
+function admin_uploaded_image_binary(?array $file, string $label = 'la imagen'): ?string
 {
     if (!$file || !isset($file['error'])) {
         return null;
@@ -69,12 +70,12 @@ function admin_uploaded_image_binary(?array $file): ?string
     }
 
     if ((int) $file['error'] !== UPLOAD_ERR_OK) {
-        admin_json_response(['error' => 'No se pudo subir la imagen del viaje.'], 400);
+        admin_json_response(['error' => "No se pudo subir {$label}."], 400);
     }
 
     $tmpName = $file['tmp_name'] ?? '';
     if ($tmpName === '' || !is_uploaded_file($tmpName)) {
-        admin_json_response(['error' => 'La imagen subida no es valida.'], 400);
+        admin_json_response(['error' => "El archivo subido para {$label} no es valido."], 400);
     }
 
     $mime = '';
@@ -96,20 +97,20 @@ function admin_uploaded_image_binary(?array $file): ?string
 
     $binary = file_get_contents($tmpName);
     if ($binary === false) {
-        admin_json_response(['error' => 'No se pudo leer la imagen subida.'], 400);
+        admin_json_response(['error' => "No se pudo leer {$label}."], 400);
     }
 
     return $binary;
 }
 
-// Conexion PDO compartida con el resto de autenticacion y carrito.
+// Conexion PDO compartida con el resto de autenticacion y carrito
 $pdo = auth_get_pdo();
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
     $action = $_GET['accion'] ?? '';
 
-    // Todas las lecturas del panel salen por este switch para mantener el contrato en un solo sitio.
+    // Todas las lecturas del panel salen por este switch para mantener el contrato en un solo sitio
     switch ($action) {
         case 'stats':
             $stats = [];
@@ -161,7 +162,7 @@ if ($method === 'GET') {
             }
 
             $stmt = $pdo->prepare(
-                'SELECT id, titulo, descripcion, origen, fecha_inicio, fecha_fin, precio, plazas, provincia_id, imagen
+                'SELECT id, titulo, descripcion, origen, fecha_inicio, fecha_fin, precio, plazas, provincia_id, imagen, imagen_movil
                  FROM viajes
                  WHERE id = ?
                  LIMIT 1'
@@ -174,7 +175,9 @@ if ($method === 'GET') {
             }
 
             $trip['imagen_preview'] = rv_resolve_image_value($trip['imagen'] ?? null);
+            $trip['imagen_movil_preview'] = rv_resolve_image_value($trip['imagen_movil'] ?? null);
             unset($trip['imagen']);
+            unset($trip['imagen_movil']);
 
             admin_json_response($trip);
 
@@ -197,7 +200,7 @@ if ($method === 'GET') {
             }
 
             $stmt = $pdo->prepare(
-                'SELECT id, nombre, descripcion, imagen, created_at
+                'SELECT id, nombre, descripcion, imagen, imagen_movil, created_at
                  FROM provincia
                  WHERE id = ?
                  LIMIT 1'
@@ -210,7 +213,9 @@ if ($method === 'GET') {
             }
 
             $province['imagen_preview'] = rv_resolve_image_value($province['imagen'] ?? null);
+            $province['imagen_movil_preview'] = rv_resolve_image_value($province['imagen_movil'] ?? null);
             unset($province['imagen']);
+            unset($province['imagen_movil']);
 
             admin_json_response($province);
 
@@ -233,7 +238,7 @@ if ($method === 'POST') {
     $body = admin_read_request_body();
     $action = $body['accion'] ?? '';
 
-    // Aqui agrupamos altas, ediciones y borrados del panel para no repartir logica por varios archivos.
+    // Aqui agrupamos altas, ediciones y borrados del panel para no repartir logica por varios archivos
     switch ($action) {
         case 'crear_usuario':
             if (empty($body['pwd'])) {
@@ -283,8 +288,9 @@ if ($method === 'POST') {
             admin_json_response(['ok' => true]);
 
         case 'crear_viaje':
-            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null);
-            $stmt = $pdo->prepare('INSERT INTO viajes (titulo, descripcion, origen, provincia_id, fecha_inicio, fecha_fin, precio, plazas, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null, 'la imagen principal del viaje');
+            $mobileImageBinary = admin_uploaded_image_binary($_FILES['imagen_movil'] ?? null, 'la imagen móvil del viaje');
+            $stmt = $pdo->prepare('INSERT INTO viajes (titulo, descripcion, origen, provincia_id, fecha_inicio, fecha_fin, precio, plazas, imagen, imagen_movil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([
                 $body['titulo'] ?? '',
                 $body['descripcion'] ?? '',
@@ -294,7 +300,8 @@ if ($method === 'POST') {
                 $body['fecha_fin'] ?? null,
                 $body['precio'] ?? 0,
                 $body['plazas'] ?? 0,
-                $imageBinary
+                $imageBinary,
+                $mobileImageBinary
             ]);
             admin_json_response(['ok' => true, 'id' => (int) $pdo->lastInsertId()]);
 
@@ -304,45 +311,39 @@ if ($method === 'POST') {
                 admin_json_response(['error' => 'Viaje no valido.'], 400);
             }
 
-            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null);
-
-            if ($imageBinary !== null) {
-                $stmt = $pdo->prepare('UPDATE viajes SET titulo = ?, descripcion = ?, origen = ?, provincia_id = ?, fecha_inicio = ?, fecha_fin = ?, precio = ?, plazas = ?, imagen = ? WHERE id = ?');
-                $stmt->execute([
-                    $body['titulo'] ?? '',
-                    $body['descripcion'] ?? '',
-                    $body['origen'] ?? '',
-                    $body['provincia_id'] ?? null,
-                    $body['fecha_inicio'] ?? null,
-                    $body['fecha_fin'] ?? null,
-                    $body['precio'] ?? 0,
-                    $body['plazas'] ?? 0,
-                    $imageBinary,
-                    $id
-                ]);
-            } else {
-                $stmt = $pdo->prepare('UPDATE viajes SET titulo = ?, descripcion = ?, origen = ?, provincia_id = ?, fecha_inicio = ?, fecha_fin = ?, precio = ?, plazas = ? WHERE id = ?');
-                $stmt->execute([
-                    $body['titulo'] ?? '',
-                    $body['descripcion'] ?? '',
-                    $body['origen'] ?? '',
-                    $body['provincia_id'] ?? null,
-                    $body['fecha_inicio'] ?? null,
-                    $body['fecha_fin'] ?? null,
-                    $body['precio'] ?? 0,
-                    $body['plazas'] ?? 0,
-                    $id
-                ]);
-            }
+            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null, 'la imagen principal del viaje');
+            $mobileImageBinary = admin_uploaded_image_binary($_FILES['imagen_movil'] ?? null, 'la imagen móvil del viaje');
+            $stmt = $pdo->prepare(
+                'UPDATE viajes
+                 SET titulo = ?, descripcion = ?, origen = ?, provincia_id = ?, fecha_inicio = ?, fecha_fin = ?, precio = ?, plazas = ?,
+                     imagen = COALESCE(?, imagen),
+                     imagen_movil = COALESCE(?, imagen_movil)
+                 WHERE id = ?'
+            );
+            $stmt->execute([
+                $body['titulo'] ?? '',
+                $body['descripcion'] ?? '',
+                $body['origen'] ?? '',
+                $body['provincia_id'] ?? null,
+                $body['fecha_inicio'] ?? null,
+                $body['fecha_fin'] ?? null,
+                $body['precio'] ?? 0,
+                $body['plazas'] ?? 0,
+                $imageBinary,
+                $mobileImageBinary,
+                $id
+            ]);
             admin_json_response(['ok' => true]);
 
         case 'crear_provincia':
-            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null);
-            $stmt = $pdo->prepare('INSERT INTO provincia (nombre, descripcion, imagen) VALUES (?, ?, ?)');
+            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null, 'la imagen principal de la provincia');
+            $mobileImageBinary = admin_uploaded_image_binary($_FILES['imagen_movil'] ?? null, 'la imagen móvil de la provincia');
+            $stmt = $pdo->prepare('INSERT INTO provincia (nombre, descripcion, imagen, imagen_movil) VALUES (?, ?, ?, ?)');
             $stmt->execute([
                 $body['nombre'] ?? '',
                 $body['descripcion'] ?? '',
-                $imageBinary
+                $imageBinary,
+                $mobileImageBinary
             ]);
             admin_json_response(['ok' => true, 'id' => (int) $pdo->lastInsertId()]);
 
@@ -352,24 +353,22 @@ if ($method === 'POST') {
                 admin_json_response(['error' => 'Provincia no valida.'], 400);
             }
 
-            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null);
-
-            if ($imageBinary !== null) {
-                $stmt = $pdo->prepare('UPDATE provincia SET nombre = ?, descripcion = ?, imagen = ? WHERE id = ?');
-                $stmt->execute([
-                    $body['nombre'] ?? '',
-                    $body['descripcion'] ?? '',
-                    $imageBinary,
-                    $id
-                ]);
-            } else {
-                $stmt = $pdo->prepare('UPDATE provincia SET nombre = ?, descripcion = ? WHERE id = ?');
-                $stmt->execute([
-                    $body['nombre'] ?? '',
-                    $body['descripcion'] ?? '',
-                    $id
-                ]);
-            }
+            $imageBinary = admin_uploaded_image_binary($_FILES['imagen'] ?? null, 'la imagen principal de la provincia');
+            $mobileImageBinary = admin_uploaded_image_binary($_FILES['imagen_movil'] ?? null, 'la imagen móvil de la provincia');
+            $stmt = $pdo->prepare(
+                'UPDATE provincia
+                 SET nombre = ?, descripcion = ?,
+                     imagen = COALESCE(?, imagen),
+                     imagen_movil = COALESCE(?, imagen_movil)
+                 WHERE id = ?'
+            );
+            $stmt->execute([
+                $body['nombre'] ?? '',
+                $body['descripcion'] ?? '',
+                $imageBinary,
+                $mobileImageBinary,
+                $id
+            ]);
             admin_json_response(['ok' => true]);
 
         case 'actualizar_estado_pedido':

@@ -1,12 +1,15 @@
 const DETAIL_FALLBACK_IMAGE = '../../img/logos/raices-viajeras-logo0.webp';
 const DEFAULT_BACK_URL = 'provincias.html';
+const request = typeof window.rvFetch === 'function'
+    ? window.rvFetch.bind(window)
+    : window.fetch.bind(window);
 
 /**
- * Pinta mensajes simples de error o de estado vacio dentro del detalle.
+ * Pinta mensajes simples de error o de estado vacio dentro del detalle
  *
- * @param {HTMLElement} container Contenedor principal del detalle.
- * @param {string} message Texto que se quiere mostrar.
- * @param {string} [className='text-muted'] Clase visual del mensaje.
+ * @param {HTMLElement} container Contenedor principal del detalle
+ * @param {string} message Texto que se quiere mostrar
+ * @param {string} [className='text-muted'] Clase visual del mensaje
  * @returns {void}
  */
 function renderDetailMessage(container, message, className = 'text-muted') {
@@ -28,9 +31,9 @@ function renderDetailMessage(container, message, className = 'text-muted') {
 }
 
 /**
- * Lee el id del viaje desde la query actual.
+ * Lee el id del viaje desde la query actual
  *
- * @returns {string|null} Id del viaje o `null` si no viene.
+ * @returns {string|null} Id del viaje o `null` si no viene
  */
 function getTripId() {
     const params = new URLSearchParams(window.location.search);
@@ -38,10 +41,10 @@ function getTripId() {
 }
 
 /**
- * Formatea un precio con el formato local.
+ * Formatea un precio con el formato local
  *
- * @param {number|string} value Importe a mostrar.
- * @returns {string} Importe listo para pintar.
+ * @param {number|string} value Importe a mostrar
+ * @returns {string} Importe listo para pintar
  */
 function formatCurrency(value) {
     return new Intl.NumberFormat('es-ES', {
@@ -51,10 +54,10 @@ function formatCurrency(value) {
 }
 
 /**
- * Formatea una fecha en castellano y deja un guion si no hay valor.
+ * Formatea una fecha en castellano y deja un guion si no hay valor
  *
- * @param {string|null|undefined} value Fecha original.
- * @returns {string} Fecha formateada o el texto de respaldo.
+ * @param {string|null|undefined} value Fecha original
+ * @returns {string} Fecha formateada o el texto de respaldo
  */
 function formatDate(value) {
     if (!value) {
@@ -74,12 +77,12 @@ function formatDate(value) {
 }
 
 /**
- * Devuelve la descripcion que mejor encaja para la ficha.
+ * Devuelve la descripcion que mejor encaja para la ficha
  *
- * Primero intento usar la del propio viaje y, si no viene, tiro de la provincia.
+ * Primero intento usar la del propio viaje y, si no viene, tiro de la provincia
  *
- * @param {object} trip Datos del viaje.
- * @returns {string} Texto descriptivo listo para pintar.
+ * @param {object} trip Datos del viaje
+ * @returns {string} Texto descriptivo listo para pintar
  */
 function getTripDescription(trip) {
     const tripDescription = (trip.descripcion || '').toString().trim();
@@ -96,9 +99,9 @@ function getTripDescription(trip) {
 }
 
 /**
- * Espera a que la API global de la cesta este lista.
+ * Espera a que la API global de la cesta este lista
  *
- * @returns {Promise<Function>} Funcion global para anadir items al carrito.
+ * @returns {Promise<Function>} Funcion global para anadir items al carrito
  */
 function waitForCartApi() {
     if (typeof window.rvCartAddItem === 'function') {
@@ -118,10 +121,10 @@ function waitForCartApi() {
 }
 
 /**
- * Devuelve el enlace de vuelta mas util para el viaje actual.
+ * Devuelve el enlace de vuelta mas util para el viaje actual
  *
- * @param {object} trip Datos del viaje.
- * @returns {string} Ruta de vuelta a destinos o a provincias.
+ * @param {object} trip Datos del viaje
+ * @returns {string} Ruta de vuelta a destinos o a provincias
  */
 function getBackUrl(trip) {
     if (trip.provincia_id) {
@@ -132,10 +135,10 @@ function getBackUrl(trip) {
 }
 
 /**
- * Anade el viaje al carrito y actualiza el texto del boton un momento.
+ * Anade el viaje al carrito y actualiza el texto del boton un momento
  *
- * @param {number|string} tripId Id del viaje.
- * @param {HTMLButtonElement} button Boton que lanza la accion.
+ * @param {number|string} tripId Id del viaje
+ * @param {HTMLButtonElement} button Boton que lanza la accion
  * @returns {Promise<void>}
  */
 async function handleAddToCart(tripId, button) {
@@ -160,10 +163,10 @@ async function handleAddToCart(tripId, button) {
 }
 
 /**
- * Pinta la ficha del viaje cuando la API devuelve un resultado valido.
+ * Pinta la ficha del viaje cuando la API devuelve un resultado valido
  *
- * @param {HTMLElement} container Contenedor principal del detalle.
- * @param {object} trip Datos del viaje.
+ * @param {HTMLElement} container Contenedor principal del detalle
+ * @param {object} trip Datos del viaje
  * @returns {void}
  */
 function renderTrip(container, trip) {
@@ -297,14 +300,14 @@ function renderTrip(container, trip) {
 }
 
 /**
- * Pide el viaje al backend y valida que la respuesta venga en JSON.
+ * Pide el viaje al backend y valida que la respuesta venga en JSON
  *
- * @param {HTMLElement} container Contenedor principal del detalle.
- * @param {string|number} tripId Id del viaje a cargar.
+ * @param {HTMLElement} container Contenedor principal del detalle
+ * @param {string|number} tripId Id del viaje a cargar
  * @returns {Promise<void>}
  */
 async function loadTripDetail(container, tripId) {
-    const response = await fetch(`../php/obtener_viaje.php?viaje=${encodeURIComponent(tripId)}`, {
+    const response = await request(`../php/obtener_viaje.php?viaje=${encodeURIComponent(tripId)}`, {
         cache: 'no-store'
     });
     const raw = await response.text();
@@ -327,7 +330,7 @@ async function loadTripDetail(container, tripId) {
 }
 
 /**
- * Arranca la pagina de detalle y deja todos los estados controlados aqui.
+ * Arranca la pagina de detalle y deja todos los estados controlados aqui
  *
  * @returns {Promise<void>}
  */

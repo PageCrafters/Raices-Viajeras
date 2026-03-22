@@ -9,7 +9,7 @@
 </head>
 <body class="bg-light">
 
-<!-- Este overlay solo se usa en movil para cerrar la sidebar tocando fuera. -->
+<!-- Este overlay solo se usa en movil para cerrar la sidebar tocando fuera -->
 <div id="overlay" class="d-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index:999" onclick="closeSidebar()"></div>
 
 <div class="d-flex">
@@ -387,19 +387,37 @@
                         <label class="form-label fw-semibold">Plazas</label>
                         <input type="number" class="form-control" id="v-plazas" aria-label="plazas">
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 col-lg-6">
                         <label class="form-label fw-semibold">Imagen del viaje</label>
                         <input type="file" class="form-control" id="v-imagen" accept="image/*" aria-label="imagen del viaje">
                         <p class="small text-muted mt-2 mb-2" id="v-imagen-help">
                             Si no subes una imagen nueva, se mantiene la que ya tiene el viaje.
                         </p>
-                        <!-- Esta miniatura ayuda a ver la imagen actual antes de sustituirla. -->
+                        <!-- Esta miniatura ayuda a ver la imagen actual antes de sustituirla -->
                         <div id="v-imagen-preview-wrap" class="d-none">
                             <p class="small fw-semibold mb-2">Imagen actual</p>
                             <img
                                 id="v-imagen-preview"
                                 src=""
                                 alt="Previsualización de la imagen del viaje"
+                                class="img-fluid rounded border"
+                                style="max-height:180px;object-fit:cover;"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <label class="form-label fw-semibold">Imagen móvil del viaje</label>
+                        <input type="file" class="form-control" id="v-imagen-movil" accept="image/*" aria-label="imagen móvil del viaje">
+                        <p class="small text-muted mt-2 mb-2" id="v-imagen-movil-help">
+                            Si no subes una imagen nueva, se mantiene la que ya tiene el viaje en móvil.
+                        </p>
+                        <!-- Esta miniatura ayuda a ver la imagen móvil actual antes de sustituirla -->
+                        <div id="v-imagen-movil-preview-wrap" class="d-none">
+                            <p class="small fw-semibold mb-2">Imagen móvil actual</p>
+                            <img
+                                id="v-imagen-movil-preview"
+                                src=""
+                                alt="Previsualización de la imagen móvil del viaje"
                                 class="img-fluid rounded border"
                                 style="max-height:180px;object-fit:cover;"
                             >
@@ -439,13 +457,31 @@
                     <p class="small text-muted mt-2 mb-2" id="c-imagen-help">
                         Si no subes una imagen nueva, se mantiene la que ya tiene la provincia.
                     </p>
-                    <!-- Esta miniatura sirve para revisar la imagen actual antes de cambiarla. -->
+                    <!-- Esta miniatura sirve para revisar la imagen actual antes de cambiarla -->
                     <div id="c-imagen-preview-wrap" class="d-none">
                         <p class="small fw-semibold mb-2">Imagen actual</p>
                         <img
                             id="c-imagen-preview"
                             src=""
                             alt="Previsualización de la imagen de la provincia"
+                            class="img-fluid rounded border"
+                            style="max-height:180px;object-fit:cover;"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Imagen móvil de la provincia</label>
+                    <input type="file" class="form-control" id="c-imagen-movil" accept="image/*" aria-label="imagen móvil de la provincia">
+                    <p class="small text-muted mt-2 mb-2" id="c-imagen-movil-help">
+                        Si no subes una imagen nueva, se mantiene la que ya tiene la provincia en móvil.
+                    </p>
+                    <!-- Esta miniatura sirve para revisar la imagen móvil actual antes de cambiarla -->
+                    <div id="c-imagen-movil-preview-wrap" class="d-none">
+                        <p class="small fw-semibold mb-2">Imagen móvil actual</p>
+                        <img
+                            id="c-imagen-movil-preview"
+                            src=""
+                            alt="Previsualización de la imagen móvil de la provincia"
                             class="img-fluid rounded border"
                             style="max-height:180px;object-fit:cover;"
                         >

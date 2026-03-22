@@ -1,7 +1,34 @@
+const request = typeof window.rvFetch === 'function'
+    ? window.rvFetch.bind(window)
+    : window.fetch.bind(window);
+
 /**
- * Saca el id del articulo desde la URL actual.
+ * Resuelve el src del detalle del blog sin romper rutas ya completas
  *
- * @returns {string|null} Id del articulo o `null` si no viene en la query.
+ * @param {string|null|undefined} imagePath Ruta o nombre de imagen recibido desde la API
+ * @returns {string} Ruta lista para usar en la imagen
+ */
+function getArticleImageSrc(imagePath) {
+    const normalizedPath = String(imagePath ?? '').trim().replace(/\\/g, '/');
+    if (!normalizedPath) {
+        return '';
+    }
+
+    if (/^(data:|https?:\/\/|\/\/|\/|\.\.?\/)/i.test(normalizedPath)) {
+        return normalizedPath;
+    }
+
+    if (normalizedPath.startsWith('img/')) {
+        return `../${normalizedPath}`;
+    }
+
+    return `../img/${normalizedPath.replace(/^\/+/, '')}`;
+}
+
+/**
+ * Saca el id del articulo desde la URL actual
+ *
+ * @returns {string|null} Id del articulo o `null` si no viene en la query
  */
 function getArticleId() {
     const params = new URLSearchParams(window.location.search);
@@ -9,9 +36,9 @@ function getArticleId() {
 }
 
 /**
- * Pinta un mensaje simple cuando falta el id o falla la carga.
+ * Pinta un mensaje simple cuando falta el id o falla la carga
  *
- * @param {string} message Texto a mostrar en pantalla.
+ * @param {string} message Texto a mostrar en pantalla
  * @returns {void}
  */
 function renderArticleMessage(message) {
@@ -27,9 +54,9 @@ function renderArticleMessage(message) {
 }
 
 /**
- * Pinta el articulo completo en la pagina de detalle.
+ * Pinta el articulo completo en la pagina de detalle
  *
- * @param {object} article Datos del articulo devueltos por la API.
+ * @param {object} article Datos del articulo devueltos por la API
  * @returns {void}
  */
 function renderArticle(article) {
@@ -41,7 +68,7 @@ function renderArticle(article) {
     document.title = `${article.nombre} - RV`;
     container.innerHTML = `
         <a href="blog.html" class="btn btn-outline-success btn-sm mb-4">Volver al blog</a>
-        <img src="../img/${article.imagen}" class="img-fluid rounded mb-4 w-100" style="max-height: 400px; object-fit: cover;" alt="${article.nombre}">
+        <img src="${getArticleImageSrc(article.imagen)}" class="img-fluid rounded mb-4 w-100" style="max-height: 400px; object-fit: cover;" alt="${article.nombre}">
         <span class="badge bg-success mb-3">${article.categoria}</span>
         <h1 class="fw-bold mb-3">${article.nombre}</h1>
         <p class="lead">${article.descripcion}</p>
@@ -49,7 +76,7 @@ function renderArticle(article) {
 }
 
 /**
- * Carga el detalle del articulo y deja un estado claro si algo falla.
+ * Carga el detalle del articulo y deja un estado claro si algo falla
  *
  * @returns {void}
  */
@@ -61,7 +88,7 @@ function loadArticle() {
         return;
     }
 
-    fetch(`../php/noticias_api.php?id=${id}`)
+    request(`../php/noticias_api.php?id=${id}`)
         .then((response) => response.json())
         .then((article) => {
             renderArticle(article);

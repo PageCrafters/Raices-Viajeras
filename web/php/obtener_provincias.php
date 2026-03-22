@@ -7,12 +7,13 @@ header('Expires: 0');
 require_once __DIR__ . '/../Formulario/php/conexiones.php';
 require_once __DIR__ . '/utilidades_imagen.php';
 
-// Evito agrupar por imagen para no meter un blob dentro del GROUP BY.
+// Evito agrupar por imagen para no meter blobs dentro del GROUP BY
 $sql = "SELECT
             p.id,
             p.nombre,
             p.descripcion,
             p.imagen,
+            p.imagen_movil,
             COALESCE(v.viajes_count, 0) AS viajes_count
         FROM provincia p
         LEFT JOIN (
@@ -30,13 +31,13 @@ if (!$result) {
 }
 
 $provinces = [];
-// Aqui convierto cada fila al shape que espera directamente provincias.js.
+// Aqui convierto cada fila al shape que espera directamente provincias.js
 while ($row = mysqli_fetch_assoc($result)) {
     $provinces[] = [
         'id' => (int) $row['id'],
         'nombre' => $row['nombre'],
         'descripcion' => $row['descripcion'],
-        'imagen' => rv_resolve_image_value($row['imagen']),
+        'imagen' => rv_resolve_responsive_image_value($row['imagen'] ?? null, $row['imagen_movil'] ?? null),
         'viajes_count' => (int) $row['viajes_count']
     ];
 }
