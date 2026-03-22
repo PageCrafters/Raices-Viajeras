@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Destinos</title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            .cards-wrap { display:flex; flex-wrap:wrap; gap:1rem; }
-        </style>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/destinos.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-        <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
-        <script src="../js/darkTheme.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Destinos</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/destinos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
+    <script src="../js/darkTheme.js"></script>
+    <script src="../js/viewport.js"></script>
 </head>
 <body id="body">
     <header id="header"></header>
-    <!-- Buscador -->
+
+    <!-- Este hero comparte estructura con provincias para que ambas vistas se sientan parte del mismo flujo. -->
     <section class="buscador-hero">
         <div class="buscador-bg-blob"></div>
         <div class="container">
@@ -27,7 +26,7 @@
                         ¿A dónde te llaman<br><em>tus raíces</em> hoy?
                     </h1>
                     <p class="buscador-subtitle">
-                        Más de 20 destinos verificados. Filtra por comunidad, tipo de experiencia o estilo de viaje y encuentra el que late al ritmo de la naturaleza.
+                        Filtra los viajes de esta provincia y elige la experiencia que mejor encaja contigo.
                     </p>
                 </div>
             </div>
@@ -36,29 +35,33 @@
                 <div class="col-12 col-lg-8" style="margin-bottom: 1%">
                     <div class="buscador-box">
                         <i class="bi bi-search"></i>
-                        <input type="text" class="buscador-input" placeholder="Destino, actividad o comunidad autónoma…" id="buscador-input">
-                        <button class="buscador-btn" onclick="buscar()">Buscar viaje</button>
+                        <input
+                            type="text"
+                            class="buscador-input"
+                            placeholder="Título o descripción del viaje..."
+                            id="buscador-input"
+                        >
+                        <button class="buscador-btn" id="buscador-btn" type="button">Buscar viaje</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <main class="container my-4">
-        <div id="viajes-wrap" class="cards-wrap"></div>
-    </main>
+
+    <section class="destinos-section">
+        <div class="container">
+            <div class="row g-4" id="viajes-wrap"></div>
+        </div>
+    </section>
+
     <script type="module" src="../js/plantillas/header.js"></script>
     <script type="module" src="../js/main.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 
-    <!--
-        Script externo: `../js/pages/destinos.js`
-        - Lee el parámetro `provincia_id` de la URL y pide al backend los viajes
-          correspondientes a esa provincia (`get_viajes_by_provincia.php`).
-        - Por cada viaje genera una card mostrando imagen, título, descripción y precio.
-        - Al hacer clic en una card o en el botón se abre `infoAventura.html?viaje=<id>`.
-    -->
+    <!-- destinos.js carga los viajes de la provincia actual y conecta el buscador local. -->
     <script src="../js/pages/destinos.js"></script>
 
+    <div id="footer"></div>
     <script src="../js/plantillas/footer.js"></script>
 </body>
 </html>

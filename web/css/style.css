@@ -1,7 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
-/* Variables del tema */
+/* Variables del tema compartido. Desde aqui cuelga casi toda la web */
 :root {
   --bg: #f6fbf6; /* fondo claro */
   --texto: #18201DB3; /* color texto */
@@ -15,13 +15,14 @@
   --fondo-tarjeta: #ffffff;
   --glass: rgba(255, 255, 255, 0.65);
   --perla: #e0e4e1;
-  --perla-gradient: linear-gradient(var(--perla) 0%, var(--bg) 100%);
+  --perla-gradient: linear-gradient(var(--bg) 0%, var(--perla) 100%);
   --shadow: 0 8px 24px rgba(45,106,79,.12);
   --texto-boton: #ffffff;
   --focus: rgba(47, 158, 68, 0.18);
   --verde-oscuro: #1e4d36;
 }
 
+/* En oscuro reutilizo los mismos nombres para no duplicar reglas por todas partes */
 .dark-mode {
   --bg: #070707; /* fondo oscuro */
   --texto: #e8f8ea; /* texto claro */
@@ -41,7 +42,7 @@
   --verde-oscuro: #1e4d36;
 }
 
-/* Base */
+/* Base general */
 * {
   box-sizing: border-box
 }
@@ -67,7 +68,7 @@ body.theme-loaded {
   transition: background .35s ease, color .35s ease;
 }
 
-/* Barra de navegación */
+/* Barra de navegacion compartida */
 .navbar-personalizada {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(220, 245, 230, 0.75));
   padding: .9rem 1rem;
@@ -115,7 +116,7 @@ body.theme-loaded {
   font-weight: 600;
 }
 
-/* Encabezado */
+/* Encabezado principal de la landing */
 .encabezado {
   padding: 2.4rem 1rem;
 }
@@ -143,7 +144,7 @@ body.theme-loaded {
   border-radius: 8px;
 }
 
-/* Tarjeta de llamada */
+/* Tarjeta de llamada del bloque antiguo de portada */
 .tarjeta-cta {
   background: linear-gradient(180deg, #c8e6c9, #a5d6a7);
   border-radius: 12px;
@@ -191,7 +192,7 @@ body.theme-loaded {
   padding-left: 1rem
 }
 
-/* Controles de formulario */
+/* Controles de formulario compartidos */
 .form-control,
 .form-select {
   border-radius: 8px;
@@ -235,7 +236,7 @@ body.theme-loaded {
   outline: none
 }
 
-/* Icono ojo en contraseña */
+/* Icono ojo en contrasena del formulario antiguo */
 .password-wrapper {
   position: relative;
   margin-bottom: 0.5rem;
@@ -266,10 +267,10 @@ body.theme-loaded {
   color: #e8f8ea;
 }
 
-/* Botón principal */
+/* Botones base reutilizados en varias vistas */
 .btn-primario {
   background: var(--verde-500);
-  color: var(--texto-boton);
+  color: var(--bg);
   border: none;
   padding: .6rem .9rem;
   border-radius: 10px;
@@ -292,7 +293,7 @@ body.theme-loaded {
   background: transparent
 }
 
-/* Helper pequeño */
+/* Helper pequeno para botones compactos */
 .btn-modo {
   display: inline-flex;
   align-items: center;
@@ -302,7 +303,7 @@ body.theme-loaded {
   cursor: pointer
 }
 
-/* Responsive */
+/* Ajustes globales de responsive */
 @media(min-width:992px) {
   .encabezado {
     padding: 3.2rem 2rem
@@ -315,7 +316,7 @@ body.theme-loaded {
   }
 }
 
-/* Acentos de color */
+/* Utilidades sueltas */
 .acento-marron {
   color: var(--marron-700)
 }
@@ -397,7 +398,7 @@ body {
 
 
 
-/* Estilos específicos para el formulario de registro y login */
+/* Formulario antiguo de acceso. Se mantiene por compatibilidad visual con bloques viejos */
 .contenedor{
     width: 100%;
     max-width: 800px;
@@ -447,7 +448,7 @@ body {
     color: #46A2FD;
 }
 
-/*Formularios*/
+/* Panel deslizante de login/registro */
 .contenedor_login-register{
     display: flex;
     align-items: center;
@@ -585,7 +586,7 @@ label {
     display: none;
 }
 
-/*Trabajando con el responsive*/
+/* Ajustes del formulario antiguo en movil */
 
 @media screen and (max-width: 850px){
     .caja_trasera{
@@ -611,3 +612,412 @@ label {
         position: relative;
     }
 }
+
+/* Cesta global: badge, modal, pagina completa y avisos flotantes */
+.header-cart-trigger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    padding: .4rem .55rem !important;
+    border-radius: 999px;
+    color: var(--texto) !important;
+}
+
+.header-cart-trigger:hover,
+.header-cart-trigger:focus-visible {
+    color: var(--verde-500) !important;
+}
+
+.header-cart-trigger:focus-visible {
+    box-shadow: 0 0 0 4px var(--focus);
+    outline: none;
+}
+
+.header-auth-item {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    flex-wrap: wrap;
+}
+
+.header-user-name {
+    font-weight: 700;
+    color: var(--verde-500) !important;
+}
+
+.header-logout-link {
+    font-weight: 600;
+}
+
+.rv-cart-badge {
+    position: absolute;
+    top: -.15rem;
+    right: -.15rem;
+    min-width: 1.15rem;
+    height: 1.15rem;
+    padding: 0 .24rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--verde-500);
+    color: var(--texto-boton);
+    font-size: .72rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 8px 18px rgba(29, 98, 42, .25);
+}
+
+/* Le doy un ancho comodo al modal para que el resumen no quede apretado */
+.rv-cart-modal .modal-dialog {
+    max-width: 960px;
+}
+
+.rv-cart-surface {
+    border: 0;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: #ffffff;
+    backdrop-filter: none;
+    color: var(--texto);
+    box-shadow: var(--shadow);
+}
+
+.rv-cart-header {
+    background: #f1f7f1;
+    backdrop-filter: none;
+    border-bottom: 1px solid rgba(29, 98, 42, .12);
+}
+
+.rv-cart-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    font-size: .72rem;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.rv-cart-feedback {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: #f7fbf7;
+    backdrop-filter: none;
+    color: var(--tono-apagado);
+    border: 1px solid rgba(29, 98, 42, .08);
+}
+
+.rv-cart-state {
+    text-align: center;
+}
+
+.rv-cart-state-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--texto);
+    margin-bottom: .6rem;
+}
+
+.rv-cart-state-copy {
+    max-width: 38rem;
+    margin: 0 auto;
+    color: var(--tono-apagado);
+}
+
+.rv-cart-count-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    background: rgba(29, 98, 42, .1);
+    color: var(--verde-500);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.rv-cart-items {
+    display: grid;
+    gap: 1rem;
+}
+
+.rv-cart-item {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(29, 98, 42, .12);
+    background: #ffffff;
+    backdrop-filter: none;
+    box-shadow: 0 10px 26px rgba(35, 48, 41, .06);
+}
+
+.rv-cart-item-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: .9rem;
+}
+
+.rv-cart-item-body {
+    min-width: 0;
+}
+
+.rv-cart-item-top {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.rv-cart-item-copy {
+    min-width: 0;
+}
+
+.rv-cart-item-kicker {
+    margin: 0 0 .25rem;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.rv-cart-item-title {
+    margin: 0 0 .45rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--texto);
+}
+
+.rv-cart-item-description {
+    margin: 0;
+    color: var(--tono-apagado);
+    line-height: 1.45;
+}
+
+.rv-cart-item-meta {
+    margin-top: .9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem 1rem;
+    color: var(--tono-apagado);
+    font-size: .92rem;
+}
+
+.rv-cart-remove {
+    flex-shrink: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(29, 98, 42, .18);
+    background: transparent;
+    color: var(--verde-500);
+    font-weight: 700;
+    padding-inline: .85rem;
+}
+
+.rv-cart-remove:hover,
+.rv-cart-remove:focus-visible {
+    background: rgba(29, 98, 42, .08);
+    color: var(--verde-500);
+    border-color: rgba(29, 98, 42, .3);
+}
+
+.rv-cart-summary {
+    padding: 1.35rem;
+    border-radius: 1.1rem;
+    background: #f7fbf7;
+    backdrop-filter: none;
+    border: 1px solid rgba(29, 98, 42, .12);
+}
+
+.rv-cart-summary-label {
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-size: .76rem;
+    color: var(--tono-apagado);
+    font-weight: 700;
+}
+
+.rv-cart-total {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    line-height: 1.1;
+    color: var(--verde-500);
+    font-weight: 800;
+}
+
+.rv-cart-inline-note {
+    color: var(--tono-apagado);
+    line-height: 1.5;
+}
+
+.rv-cart-page-shell {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.rv-cart-page-hero {
+    max-width: 48rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.rv-cart-page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    margin-bottom: .7rem;
+    color: var(--texto);
+}
+
+.rv-cart-page-hero p {
+    color: var(--tono-apagado);
+    max-width: 40rem;
+    margin: 0 auto 1rem;
+}
+
+.rv-cart-page-feedback {
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.rv-cart-summary-page {
+    position: sticky;
+    top: 108px;
+}
+
+/* En oscuro fuerzo fondos solidos para que no transparente el contenido de detras */
+.dark-mode .rv-cart-surface,
+.dark-mode .rv-cart-item {
+    background: #121212;
+    border-color: rgba(255, 255, 255, .08);
+}
+
+.dark-mode .rv-cart-header,
+.dark-mode .rv-cart-summary,
+.dark-mode .rv-cart-feedback {
+    background: #171717;
+    border-color: rgba(255, 255, 255, .08);
+}
+
+.dark-mode .rv-cart-count-pill {
+    background: rgba(52, 208, 88, .14);
+    color: var(--verde-300);
+}
+
+.dark-mode .rv-cart-remove {
+    border-color: rgba(52, 208, 88, .2);
+    color: var(--verde-300);
+}
+
+.dark-mode .rv-cart-remove:hover,
+.dark-mode .rv-cart-remove:focus-visible {
+    background: rgba(52, 208, 88, .08);
+    color: var(--verde-300);
+}
+
+/* Avisos cortos que sustituyen a los alert del navegador */
+.rv-toast-stack {
+    position: fixed;
+    top: 92px;
+    right: 1rem;
+    z-index: 1200;
+    display: grid;
+    gap: 0.75rem;
+    width: min(360px, calc(100vw - 2rem));
+}
+
+.rv-toast {
+    border-radius: 1rem;
+    padding: 0.95rem 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    box-shadow: 0 16px 36px rgba(24, 32, 29, 0.18);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity .22s ease, transform .22s ease;
+}
+
+.rv-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rv-toast--success {
+    background: #eff9f0;
+    border: 1px solid rgba(29, 98, 42, 0.18);
+    color: #174e21;
+}
+
+.rv-toast--error {
+    background: #fff1f1;
+    border: 1px solid rgba(185, 39, 39, 0.2);
+    color: #8d2222;
+}
+
+.rv-toast--info {
+    background: #eef6ff;
+    border: 1px solid rgba(42, 102, 180, 0.18);
+    color: #214b86;
+}
+
+.dark-mode .rv-toast--success {
+    background: #142218;
+    border-color: rgba(52, 208, 88, 0.18);
+    color: #bceec8;
+}
+
+.dark-mode .rv-toast--error {
+    background: #261515;
+    border-color: rgba(255, 120, 120, 0.16);
+    color: #ffc8c8;
+}
+
+.dark-mode .rv-toast--info {
+    background: #141d28;
+    border-color: rgba(125, 172, 243, 0.16);
+    color: #c8ddff;
+}
+
+/* En las tablas del admin dejo el flex dentro de un bloque interno para no romper la celda */
+.admin-actions-cell {
+    white-space: nowrap;
+    min-width: 108px;
+}
+
+.admin-table-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.admin-table-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    .rv-cart-item {
+        grid-template-columns: 1fr;
+    }
+
+    .rv-cart-item-top {
+        flex-direction: column;
+    }
+
+    .rv-cart-summary-page {
+        position: static;
+    }
+
+    .rv-toast-stack {
+        top: auto;
+        bottom: 1rem;
+    }
+}
+

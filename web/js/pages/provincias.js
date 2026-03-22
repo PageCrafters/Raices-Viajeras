@@ -1,51 +1,186 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Cargamos la lista de provincias desde el backend y generamos fichas (cards)
+    const request = typeof window.rvFetch === 'function'
+        ? window.rvFetch.bind(window)
+        : window.fetch.bind(window);
     const wrap = document.getElementById('provincias-wrap');
-    if (!wrap) return;
-    try{
-        const res = await fetch('../php/get_provincias.php', { cache: 'no-store', credentials: 'same-origin' });
-        if (!res.ok) throw new Error('HTTP error ' + res.status);
-        const data = await res.json();
-        if (!Array.isArray(data) || data.length === 0) {
-            wrap.innerHTML = '<p class="text-muted">No hay provincias para mostrar.</p>';
+    const searchInput = document.getElementById('buscador-input');
+    const searchButton = document.getElementById('buscador-btn');
+    const fallbackImage = '../../img/logos/raices-viajeras-logo0.webp';
+    let provincias = [];
+    let provinciasLoaded = false;
+
+    if (!wrap) {
+        return;
+    }
+
+    /**
+     * Normaliza un texto para comparar sin depender de mayusculas ni espacios
+     *
+     * @param {unknown} value Texto original
+     * @returns {string} Texto listo para comparar
+     */
+    function normalizeText(value) {
+        return (value || '').toString().trim().toLowerCase();
+    }
+
+    /**
+     * Genera la URL de destinos para una provincia concreta
+     *
+     * @param {string|number} provinceId Id de la provincia
+     * @returns {string} Ruta al listado de viajes de esa provincia
+     */
+    function getProvinceUrl(provinceId) {
+        return `destinos.html?provincia_id=${encodeURIComponent(provinceId)}`;
+    }
+
+    /**
+     * Pinta un mensaje simple en la zona del listado
+     *
+     * @param {string} message Texto a mostrar
+     * @param {string} className Clase visual para ese mensaje
+     * @returns {void}
+     */
+    function createMessage(message, className) {
+        wrap.replaceChildren();
+
+        const col = document.createElement('div');
+        col.className = 'col-12';
+
+        const text = document.createElement('p');
+        text.className = className;
+        text.textContent = message;
+
+        col.appendChild(text);
+        wrap.appendChild(col);
+    }
+
+    /**
+     * Pinta todas las provincias con el look actual de tarjetas
+     *
+     * @param {Array<object>} items Provincias que se van a mostrar
+     * @returns {void}
+     */
+    function renderProvincias(items) {
+        wrap.replaceChildren();
+
+        if (!items.length) {
+            createMessage('No se han encontrado provincias para esa búsqueda.', 'text-muted');
             return;
         }
-        wrap.innerHTML = '';
-        data.forEach(p => {
+
+        items.forEach((provincia) => {
+            const hasTrips = Number(provincia.viajes_count) > 0;
+            const provinceUrl = getProvinceUrl(provincia.id);
+
+            const col = document.createElement('div');
+            col.className = 'col-6 col-lg-4 mb-4';
+
             const card = document.createElement('div');
-            card.className = 'card';
-            card.style.width = '18rem';
+            card.className = 'ca-card';
 
-            const img = document.createElement('img');
-            img.className = 'card-img-top';
-            img.alt = p.nombre || '';
-            img.src = p.imagen || '../../img/logos/raices-viajeras-logo0.webp';
-            card.appendChild(img);
-
-            const body = document.createElement('div');
-            body.className = 'card-body';
-            const h5 = document.createElement('h5'); h5.className = 'card-title'; h5.textContent = p.nombre || '';
-            const pill = document.createElement('span'); pill.className = 'badge bg-secondary ms-2'; pill.textContent = p.viajes_count;
-            h5.appendChild(pill);
-            const ptext = document.createElement('p'); ptext.className = 'card-text'; ptext.textContent = p.descripcion || '';
-            const a = document.createElement('a'); a.className = 'btn btn-primary'; a.href = 'destinos.html?provincia_id=' + p.id; a.textContent = 'Ver destinos';
-
-            body.appendChild(h5);
-            body.appendChild(ptext);
-            body.appendChild(a);
-            card.appendChild(body);
-
-            if (p.viajes_count === 0) {
+            if (!hasTrips) {
                 card.classList.add('card-disabled');
-            } else {
-                card.style.cursor = 'pointer';
-                card.addEventListener('click', () => { window.location.href = 'destinos.html?provincia_id=' + p.id; });
             }
 
-            wrap.appendChild(card);
+            const img = document.createElement('img');
+            img.className = 'ca-card-img';
+            img.alt = provincia.nombre || '';
+            img.src = provincia.imagen || fallbackImage;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'ca-card-overlay';
+
+            const body = document.createElement('div');
+            body.className = 'ca-card-body';
+
+            const name = document.createElement('span');
+            name.className = 'ca-card-name';
+            name.textContent = provincia.nombre || '';
+
+            const button = document.createElement(hasTrips ? 'a' : 'span');
+            button.className = 'ca-card-btn';
+            button.textContent = hasTrips ? 'Ver destinos' : 'Sin viajes disponibles';
+
+            if (hasTrips) {
+                button.href = provinceUrl;
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+
+                card.addEventListener('click', () => {
+                    window.location.href = provinceUrl;
+                });
+            }
+
+            body.appendChild(name);
+            body.appendChild(button);
+
+            card.appendChild(img);
+            card.appendChild(overlay);
+            card.appendChild(body);
+            col.appendChild(card);
+            wrap.appendChild(col);
         });
-    } catch (err) {
-        console.error(err);
-        wrap.innerHTML = '<p class="text-danger">Error cargando provincias.</p>';
+    }
+
+    /**
+     * Aplica el filtro del buscador solo cuando se pulsa el boton
+     *
+     * @returns {void}
+     */
+    function applySearch() {
+        if (!provinciasLoaded) {
+            return;
+        }
+
+        const query = normalizeText(searchInput ? searchInput.value : '');
+        if (!query) {
+            renderProvincias(provincias);
+            return;
+        }
+
+        const filtered = provincias.filter((provincia) => {
+            const haystack = `${normalizeText(provincia.nombre)} ${normalizeText(provincia.descripcion)}`;
+            return haystack.includes(query);
+        });
+
+        renderProvincias(filtered);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener('click', applySearch);
+    }
+
+    try {
+        const response = await request('../php/obtener_provincias.php', {
+            cache: 'no-store',
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+        provinciasLoaded = true;
+
+        if (!Array.isArray(data) || data.length === 0) {
+            createMessage('No hay provincias para mostrar.', 'text-muted');
+            return;
+        }
+
+        provincias = data;
+        renderProvincias(provincias);
+    } catch (error) {
+        console.error(error);
+        createMessage('Error cargando provincias.', 'text-danger');
     }
 });

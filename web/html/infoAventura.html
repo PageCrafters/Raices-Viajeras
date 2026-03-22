@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Info Aventura</title>
+    <title>Información de la aventura</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/infoAventura.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
+    <script src="../js/darkTheme.js"></script>
+    <script src="../js/viewport.js"></script>
 </head>
-<body>
+<body id="body">
     <header id="header"></header>
-    <main class="container my-4">
-        <div id="viaje-detail"></div>
-    </main>
-    <script type="module" src="../js/plantillas/header.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
 
-    <!--
-        Script externo: `../js/pages/infoAventura.js`
-        - Lee el parámetro `viaje` de la URL y consulta `get_viaje.php` por los datos
-          del viaje solicitado.
-        - Muestra la imagen, título, descripción, detalles, precio y (si viene)
-          el nombre de la provincia (`provincia_nombre`).
-    -->
+    <!-- La ficha completa se pinta desde JS para que dependa siempre del viaje pedido en la URL. -->
+    <main class="info-trip-shell">
+        <div class="container">
+            <div id="viaje-detail"></div>
+        </div>
+    </main>
+
+    <script type="module" src="../js/plantillas/header.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/pages/infoAventura.js"></script>
+
+    <div id="footer"></div>
     <script src="../js/plantillas/footer.js"></script>
 </body>
 </html>

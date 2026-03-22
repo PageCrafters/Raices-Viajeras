@@ -500,7 +500,7 @@ h2.section-title.compromiso-title {
 }
 .btn-cta-outline-blanco {
     background: transparent;
-    color: #FFFFFFFF;
+    color: var(--bg);
     border: 2px solid rgb(255, 255, 255);
     padding: .9rem 2.5rem;
     border-radius: 3rem;
@@ -522,7 +522,7 @@ h2.section-title.compromiso-title {
 
 .back-btn {
     background: transparent;
-    color: #fff;
+    color: var(--bg);
     cursor: pointer;
     border: 2px solid #fff;
     padding: .9rem 2.5rem;

@@ -1,15 +1,15 @@
 /**
- * Función para obtener datos de un formulario y devolverlos como un objeto
- * @return {Object} Un objeto con los datos del formulario.
+ * Recoge los valores del formulario antiguo y los devuelve juntos.
+ *
+ * @returns {object} Objeto simple con todos los campos que usa el flujo viejo.
  */
-
 export function obtenerDatosFormulario() {
     const nombre = document.getElementById('nombre').value.trim();
     const correo = document.getElementById('correo').value.trim();
     const contrasena = document.getElementById('contrasenia').value;
     const confirmarContrasena = document.getElementById('confirmar_contrasenia').value;
     const pais = document.getElementById('pais').value;
-    const notis = document.getElementById('notificaciones').checked;
+    const notificaciones = document.getElementById('notificaciones').checked;
     const privacidad = document.getElementById('politica_privacidad').checked;
 
     return {
@@ -17,66 +17,76 @@ export function obtenerDatosFormulario() {
         correo,
         contrasena,
         confirmarContrasena,
-        pais: pais,
-        notis,
+        pais,
+        notificaciones,
         privacidad
     };
 }
 
 /**
- * Función para mostrar un mensaje de error en un elemento HTML.
- * @param {string} elementoId - El ID del elemento donde se mostrará el mensaje.
- * @param {string} mensaje - El mensaje de error a mostrar.
+ * Pinta un mensaje de error en el nodo asociado a un campo.
+ *
+ * @param {string} elementoId Id del elemento donde va el texto.
+ * @param {string} mensaje Mensaje que se quiere mostrar.
+ * @returns {void}
  */
 export function mostrarError(elementoId, mensaje) {
     const elemento = document.getElementById(elementoId);
-    elemento.textContent = mensaje;
+    if (elemento) {
+        elemento.textContent = mensaje;
+    }
 }
 
 /**
- * Función para limpiar formulario
+ * Limpia el formulario antiguo si sigue presente en el DOM.
+ *
+ * @returns {void}
  */
 export function limpiarFormulario() {
-    document.getElementById('form-registro').reset();
+    document.getElementById('form-registro')?.reset();
 }
 
 /**
- * Función para ocultar todos los mensajes de error
+ * Borra todos los mensajes de error visibles del formulario antiguo.
+ *
+ * @returns {void}
  */
 export function ocultarErrores() {
-    const errores = document.querySelectorAll('.error');
-    errores.forEach(error => {
-        error.textContent = "";
+    document.querySelectorAll('.error').forEach((error) => {
+        error.textContent = '';
     });
 }
 
 /**
- * Función para mostrar un mensaje (alert) de éxito
- * @param {string} mensaje - El mensaje de éxito a mostrar.
+ * Muestra un aviso de exito usando el mecanismo mas simple del flujo viejo.
+ *
+ * @param {string} mensaje Texto a mostrar.
+ * @returns {void}
  */
 export function mostrarMensajeExito(mensaje) {
     alert(mensaje);
 }
 
 /**
- * Función para mostrar un mensaje (alert) de error
- * @param {string} mensaje - El mensaje de error a mostrar.
+ * Muestra un error general del formulario.
+ *
+ * @param {string} mensaje Texto del error.
+ * @returns {void}
  */
 export function mostrarMensajeError(mensaje) {
-    alert('Error: ' + mensaje);
+    alert(`Error: ${mensaje}`);
 }
 
 /**
- * Función para comprobar si el modo oscuro está activado
- * @return {boolean} true si el modo oscuro está activado, false en caso contrario.
+ * Comprueba si el modo oscuro deberia estar activo.
+ *
+ * @returns {boolean} `true` si lo marca localStorage o la preferencia del sistema.
  */
 export function esModoOscuro() {
-    // Primero, verifica si hay una preferencia guardada en localStorage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         return savedTheme === 'dark';
     }
-    // Si no hay guardado, usa la preferencia del sistema
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    return prefersDark.matches;
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }

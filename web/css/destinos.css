@@ -1,6 +1,6 @@
 /* Estilos espécificos para la página destinos */
 
-/* Buscador */
+/* Hero con buscador grande para entrar al listado con un aire mas editorial */
 .buscador-hero {
     position: relative;
     padding: 6rem 0 5rem;
@@ -96,7 +96,7 @@
     outline: none;
     font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
-    color: var(--texto);
+    color: var(--bg);
     background: transparent;
     flex: 1;
     min-width: 0;
@@ -104,7 +104,7 @@
 .buscador-input::placeholder { color: var(--marron-900); }
 .buscador-btn {
     background: var(--verde-300);
-    color: var(--bg);
+    color: #000000;
     border: none;
     padding: .7rem 1.8rem;
     border-radius: 1.5rem;
@@ -125,6 +125,11 @@
 .destinos-section {
     padding: 5rem 0;
     background: var(--perla);
+}
+
+/* En viajes fuerzo columnas flex para que cada card ocupe todo su alto sin desajustes raros. */
+#viajes-wrap > [class*="col-"] {
+    display: flex;
 }
 
 .destinos-section.bg-white { background: var(--bg); }
@@ -162,12 +167,13 @@ h2.section-title.comunidades-title{
 p.section-desc.desc-title{
     color: var(--verde-oscuro);
 }
-/* Tarjetas Comunidades */
+/* Tarjetas principales del listado. Aqui viven provincias y viajes. */
 .ca-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.2rem;
 }
+/* Esta card hace casi todo el trabajo visual: imagen, overlay, titulo y CTA. */
 .ca-card {
     position: relative;
     border-radius: 1.2rem;
@@ -216,6 +222,15 @@ p.section-desc.desc-title{
     gap: .6rem;
 }
 
+.ca-card-body--trip {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.ca-card-copy {
+    width: 100%;
+}
+
 .ca-card-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
@@ -223,6 +238,25 @@ p.section-desc.desc-title{
     font-weight: 700;
     text-align: center;
     line-height: 1.2;
+}
+
+.ca-card-price {
+    display: inline-flex;
+    align-items: center;
+    padding: .3rem .75rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.9);
+    color: var(--verde-oscuro);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.ca-card-btn-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
 }
 
 .ca-card-btn {
@@ -239,10 +273,64 @@ p.section-desc.desc-title{
     backdrop-filter: blur(4px);
     letter-spacing: .05em;
 }
-.ca-card:hover .ca-card-btn {
+.ca-card-btn:hover,
+.ca-card-btn:focus-visible {
     background: #fff;
-    color: var(--verde);
+    color: var(--verde-oscuro);
     border-color: #fff;
+}
+
+.ca-card--trip {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    aspect-ratio: auto;
+}
+
+.ca-card-body--trip {
+    top: 0;
+    justify-content: flex-end;
+    gap: 0.95rem;
+}
+
+.ca-card-body--trip .ca-card-name {
+    text-align: left;
+    font-size: 1.35rem;
+}
+
+.ca-card-btn-row--actions {
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.ca-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.55rem;
+    margin-left: auto;
+}
+
+/* En la vista de viajes prefiero no levantar la card para que no se pise con la de al lado. */
+.ca-card--trip:hover {
+    transform: none;
+    box-shadow: 0 16px 40px rgba(0,0,0,.18);
+}
+
+.ca-card-btn-secondary {
+    background: rgba(255,255,255,.08);
+}
+
+.ca-card-btn-secondary:hover,
+.ca-card-btn-secondary:focus-visible {
+    background: rgba(255,255,255,.9);
+    color: var(--verde-oscuro);
+    border-color: #fff;
+}
+
+.card-disabled .ca-card-price,
+.card-disabled .ca-card-btn {
+    opacity: .85;
 }
 
 
@@ -546,6 +634,7 @@ p.section-desc.desc-title{
 }
 
 /* ── RESPONSIVE ── */
+/* Responsive para que el grid y los botones no se monten en movil */
 @media (max-width: 1199px) {
     .escapada-grid {
         grid-template-columns: 1fr 1fr;
@@ -568,4 +657,13 @@ p.section-desc.desc-title{
     .escapada-grid { grid-template-columns: 1fr; }
     .bienestar-row { grid-template-columns: repeat(2, 1fr); }
     .ca-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .ca-card-btn-row--actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .ca-card-actions {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
 }

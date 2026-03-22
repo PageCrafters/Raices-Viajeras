@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 
+/* Este archivo se queda ligero porque la pagina ya reutiliza casi todo desde estilos compartidos. */
 /* Variables del tema */
 :root {
     --bg: #f6fbf6; /* fondo claro */
@@ -19,6 +20,7 @@
     --verde-oscuro: #1e4d36;
 }
 
+/* En oscuro mantenemos la misma base para que no cambie el tono de la vista. */
 .dark-mode {
     --bg: #070707; /* fondo oscuro */
     --texto: #e8f8ea; /* texto claro */
@@ -36,7 +38,7 @@
     --verde-oscuro: #1e4d36;
 }
 
-/*Trabajando con el responsive*/
+/* Lo dejo preparado para retoques propios de esta pagina si mas adelante hacen falta. */
 
 @media screen and (max-width: 850px){
 

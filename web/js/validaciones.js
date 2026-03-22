@@ -1,51 +1,124 @@
 /**
- * Función para validar que los nombres solo contengan letras y espacios.
- * Además, limita la longitud máxima a 2 palabras.
- * @param {string} nombre - El nombre a validar.
- * @return {boolean} Verdadero si el nombre es válido, falso en caso contrario.
+ * Comprueba que el campo tenga contenido real y no solo espacios.
+ *
+ * @param {string} valor Texto que llega desde el formulario.
+ * @returns {boolean} `true` si hay algo escrito.
  */
-export function validarNombre(nombre) {
-    const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)?$/;
-    return regex.test(nombre);
+export function validarCampoObligatorio(valor) {
+    return String(valor ?? '').trim() !== '';
 }
 
 /**
- * Función para validar que el correo electrónico tenga un formato correcto.
- * @param {string} correo - El correo electrónico a validar.
- * @return {boolean} Verdadero si el correo es válido, falso en caso contrario.
+ * Valida el nombre con la misma idea que usa el backend del registro.
+ *
+ * @param {string} nombre Nombre que llega desde el formulario.
+ * @returns {boolean} `true` si el formato encaja con la regla actual.
+ */
+export function validarNombre(nombre) {
+    const texto = String(nombre ?? '').trim();
+    const regex = /^[\p{L}]+(?:[ '\-][\p{L}]+){0,2}$/u;
+    return regex.test(texto);
+}
+
+/**
+ * Comprueba que el correo tenga un formato basico valido.
+ *
+ * @param {string} correo Correo que se quiere revisar.
+ * @returns {boolean} `true` si pasa la expresion regular.
  */
 export function validarCorreo(correo) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(correo);
+    return regex.test(String(correo ?? '').trim());
 }
 
 /**
- * Función para validar contraseñas.
- * La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula,
- * una letra minúscula, un número y un carácter especial.
- * @param {string} contrasena - La contraseña a validar.
- * @return {boolean} Verdadero si la contraseña es válida, falso en caso contrario.
+ * Revisa la complejidad minima que pedimos para la contrasena.
+ *
+ * @param {string} contrasena Contrasena escrita por el usuario.
+ * @returns {boolean} `true` si cumple mayuscula, minuscula, numero y simbolo.
  */
 export function validarContrasena(contrasena) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(contrasena);
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    return regex.test(String(contrasena ?? ''));
 }
 
 /**
- * Función para comprobar si dos contraseñas coinciden.
- * @param {string} contrasena1 - La primera contraseña.
- * @param {string} contrasena2 - La segunda contraseña.
- * @return {boolean} Verdadero si las contraseñas coinciden, falso en caso contrario.
+ * Comprueba que las dos contrasenas coincidan exactamente.
+ *
+ * @param {string} contrasena1 Primer valor.
+ * @param {string} contrasena2 Segundo valor.
+ * @returns {boolean} `true` si ambos textos son iguales.
  */
 export function comprobarContrasenas(contrasena1, contrasena2) {
     return contrasena1 === contrasena2;
 }
 
 /**
- * Función para validar si ha seleccionado una opción en un campo de tipo_viaje.
- * @param {string} pais - El valor seleccionado en el campo tipo_viaje.
- * @return {boolean} Verdadero si se ha seleccionado una opción válida, falso en caso contrario.
+ * Comprueba que el genero elegido sea uno de los valores cortos permitidos.
+ *
+ * @param {string} genero Valor elegido en el formulario.
+ * @returns {boolean} `true` si coincide con uno de los codigos validos.
+ */
+export function validarGenero(genero) {
+    return ['m', 'f', 'o'].includes(String(genero ?? '').trim().toLowerCase());
+}
+
+/**
+ * Valida una fecha real y evita aceptar fechas futuras.
+ *
+ * @param {string} fecha Fecha en formato `YYYY-MM-DD`.
+ * @returns {boolean} `true` si la fecha existe y no es futura.
+ */
+export function validarFechaNacimiento(fecha) {
+    const texto = String(fecha ?? '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(texto)) {
+        return false;
+    }
+
+    const [year, month, day] = texto.split('-').map(Number);
+    const candidate = new Date(year, month - 1, day);
+
+    if (
+        candidate.getFullYear() !== year ||
+        candidate.getMonth() !== month - 1 ||
+        candidate.getDate() !== day
+    ) {
+        return false;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    candidate.setHours(0, 0, 0, 0);
+
+    return candidate <= today;
+}
+
+/**
+ * Comprueba el caso de los checks obligatorios.
+ *
+ * @param {boolean} checked Estado real del checkbox.
+ * @returns {boolean} `true` si esta marcado.
+ */
+export function validarCheckboxObligatorio(checked) {
+    return checked === true;
+}
+
+/**
+ * Deja pasar checks opcionales siempre que vengan como booleano normal.
+ *
+ * @param {boolean} checked Estado del checkbox opcional.
+ * @returns {boolean} `true` si el valor es utilizable.
+ */
+export function validarCheckboxOpcional(checked) {
+    return typeof checked === 'boolean';
+}
+
+/**
+ * Comprueba que se haya elegido algun pais en el selector.
+ *
+ * @param {string} pais Valor del select.
+ * @returns {boolean} `true` si no viene vacio.
  */
 export function validarPais(pais) {
-    return pais !== "";
+    return String(pais ?? '').trim() !== '';
 }

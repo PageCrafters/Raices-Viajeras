@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Provincias</title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            .cards-wrap { display:flex; flex-wrap:wrap; gap:1rem; }
-            .card-disabled { pointer-events: none; opacity: .6; }
-        </style>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/destinos.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-        <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
-        <script src="../js/darkTheme.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Provincias</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-disabled {
+            pointer-events: none;
+            opacity: .6;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/destinos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
+    <script src="../js/darkTheme.js"></script>
+    <script src="../js/viewport.js"></script>
 </head>
+
 <body id="body">
     <header id="header"></header>
-    <!-- Buscador -->
+    <!-- Hero y buscador de provincias -->
     <section class="buscador-hero">
         <div class="buscador-bg-blob"></div>
         <div class="container">
@@ -28,7 +33,8 @@
                         ¿A dónde te llaman<br><em>tus raíces</em> hoy?
                     </h1>
                     <p class="buscador-subtitle">
-                        Más de 20 destinos verificados. Filtra por comunidad, tipo de experiencia o estilo de viaje y encuentra el que late al ritmo de la naturaleza.
+                        Más de 20 destinos verificados. Filtra por comunidad, tipo de experiencia o estilo de viaje y
+                        encuentra el que late al ritmo de la naturaleza.
                     </p>
                 </div>
             </div>
@@ -37,33 +43,28 @@
                 <div class="col-12 col-lg-8" style="margin-bottom: 1%">
                     <div class="buscador-box">
                         <i class="bi bi-search"></i>
-                        <input type="text" class="buscador-input" placeholder="Destino, actividad o comunidad autónoma…" id="buscador-input">
-                        <button class="buscador-btn" onclick="buscar()">Buscar viaje</button>
+                        <input type="text" class="buscador-input" placeholder="Destino, actividad o comunidad autónoma..."
+                            id="buscador-input">
+                        <button class="buscador-btn" id="buscador-btn" type="button">Buscar provincia</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <section class="destinos-section">
-        <div id="provincias-wrap" class="container">
-            
+        <div class="container">
+            <div class="row" id="provincias-wrap"></div>
         </div>
     </section>
     <script type="module" src="../js/plantillas/header.js"></script>
     <script type="module" src="../js/main.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 
-    <!--
-        Script externo: `../js/pages/provincias.js`
-        - Carga la lista de provincias desde `get_provincias.php`.
-        - Genera una tarjeta (card) por provincia mostrando imagen, nombre, descripción
-          y un contador de viajes (`viajes_count`). Si no hay viajes la tarjeta queda
-          deshabilitada visualmente.
-        - Al hacer clic en una provincia con viajes redirige a `destinos.html` pasando
-          el parámetro `provincia_id` en la URL.
-    -->
+    <!-- provincias.js carga las provincias, pinta las tarjetas y filtra solo al pulsar el boton. -->
     <script src="../js/pages/provincias.js"></script>
 
+    <div id="footer"></div>
     <script src="../js/plantillas/footer.js"></script>
 </body>
+
 </html>

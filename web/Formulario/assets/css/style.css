@@ -1,4 +1,5 @@
-*{
+/* Reset corto del acceso para que el slider no herede cosas raras. */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +7,9 @@
     font-family: "Roboto", sans-serif;
 }
 
-body{
+/* Fondo general de la pagina de acceso */
+.auth-page {
+    min-height: 100vh;
     background-image: url('../img/fondo.webp');
     background-size: cover;
     background-position: center;
@@ -14,47 +17,61 @@ body{
     background-attachment: fixed;
 }
 
-main{
+/* Marco principal que baja el slider para convivir bien con el header */
+.auth-main {
     width: 100%;
     padding: 20px;
     margin: auto;
     margin-top: 100px;
 }
 
-.contenedor{
+/* Este contenedor sujeta tanto la caja trasera como el panel blanco deslizante. */
+.auth-page .contenedor {
     width: 100%;
-    max-width: 800px;
-    margin-top: 120px;
-    margin-left: 28%;
+    max-width: 820px;
+    min-height: 760px;
+    margin: 120px auto 0;
     position: relative;
 }
 
-.caja_trasera{
+/* Caja trasera verde: es el apoyo visual que queda visible detras del formulario activo. */
+.auth-page .caja_trasera {
     width: 100%;
+    min-height: 420px;
     padding: 10px 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
     backdrop-filter: blur(5px);
-    background-color: #497551;
+    background-color: rgba(73, 117, 81, 0.94);
+    border-radius: 18px;
+    box-shadow: 0 24px 50px rgba(24, 32, 29, 0.16);
 }
 
-.caja_trasera div{
-    margin: 100px 40px;
+.auth-page .caja_trasera div {
+    margin: 90px 40px;
     color: white;
     transition: all 500ms;
+    width: 100%;
+    max-width: 310px;
 }
 
-.caja_trasera div p,
-.caja_trasera div button {
+.auth-page .caja_trasera div p,
+.auth-page .caja_trasera div button {
     margin-top: 30px;
 }
 
-.caja_trasera div h3{
+.auth-page .caja_trasera div h3 {
     font-weight: 400;
     font-size: 26px;
 }
 
-.caja_trasera button{
+.auth-page .caja_trasera div p {
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.auth-page .caja_trasera button {
     padding: 10px 40px;
     border: 2px solid #fff;
     background: transparent;
@@ -66,53 +83,66 @@ main{
     transition: all 300ms;
 }
 
-.caja_trasera button:hover{
+.auth-page .caja_trasera button:hover,
+.auth-page .caja_trasera button:focus-visible {
     background: white;
     color: #2f9e44;
 }
 
-/*Formularios*/
-.contenedor_login-register{
+/* Este panel blanco es el que se desplaza de izquierda a derecha. */
+.auth-page .contenedor_login-register {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 380px;
-    position: relative;
+    max-width: 390px;
+    min-height: 700px;
+    position: absolute;
     top: -185px;
     left: 10px;
-
     transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    z-index: 2;
 }
 
-.contenedor_login-register form{
+.auth-page .contenedor_login-register form {
     width: 100%;
-    padding: 80px 20px;
+    padding: 75px 24px 45px;
     background: #fff;
     position: absolute;
     border-radius: 20px;
+    box-shadow: 0 24px 48px rgba(24, 32, 29, 0.18);
+    border: 1px solid rgba(47, 158, 68, 0.12);
 }
 
-.contenedor_login-register form h2{
+.auth-page .contenedor_login-register form h2 {
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
     color: #2f9e44;
 }
 
-.contenedor_login-register form input{
+.auth-page .contenedor_login-register form input[type="text"],
+.auth-page .contenedor_login-register form input[type="email"],
+.auth-page .contenedor_login-register form input[type="password"] {
     width: 100%;
-    margin-top: 20px;
-    padding: 10px;
+    margin-top: 12px;
+    padding: 12px 10px;
     border: none;
     background: #f2f2f2;
     font-size: 16px;
     outline: none;
+    color: #233029;
 }
 
-.contenedor_login-register form input[type="date"]{
+.auth-page .contenedor_login-register form input[type="text"]::placeholder,
+.auth-page .contenedor_login-register form input[type="email"]::placeholder,
+.auth-page .contenedor_login-register form input[type="password"]::placeholder {
+    color: rgba(35, 48, 41, 0.68);
+}
+
+.auth-page .contenedor_login-register form input[type="date"] {
     width: 100%;
     margin-top: 5px;
-    padding: 10px;
+    padding: 12px 10px;
     border: none;
     background: #f2f2f2;
     font-size: 14px;
@@ -120,12 +150,21 @@ main{
     cursor: pointer;
 }
 
-.contenedor_login-register form input[type="date"]:focus{
-    background: #e8e8e8;
-    outline: 2px solid #2f9e44;
+.auth-page .contenedor_login-register form input[type="text"]:focus,
+.auth-page .contenedor_login-register form input[type="email"]:focus,
+.auth-page .contenedor_login-register form input[type="password"]:focus,
+.auth-page .contenedor_login-register form input[type="date"]:focus {
+    background: #ecf5ee;
+    box-shadow: 0 0 0 3px rgba(47, 158, 68, 0.12);
 }
 
-label {
+/* Estos estados rojos son los que uso para marcar errores propios del formulario. */
+.auth-page .contenedor_login-register form input.is-invalid {
+    background: #fff4f4;
+    box-shadow: 0 0 0 3px rgba(194, 49, 49, 0.12);
+}
+
+.auth-page label {
     display: block;
     margin-top: 20px;
     margin-bottom: 5px;
@@ -134,19 +173,20 @@ label {
     font-size: 14px;
 }
 
-/* ====== GÉNERO (RADIO BUTTONS) ====== */
-.radio-group {
+/* Genero se resuelve en una sola fila para no desperdiciar alto. */
+.auth-page .radio-group {
     display: flex;
-    gap: 15px; /* espacio entre opciones */
+    gap: 15px;
     margin-top: 8px;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
-.radio-group label {
+.auth-page .radio-group label {
     display: flex;
-    align-items: end;
-    gap: 6px; /* espacio entre radio y texto */
+    align-items: center;
+    gap: 6px;
     cursor: pointer;
     margin: 0;
     white-space: nowrap;
@@ -154,41 +194,109 @@ label {
     padding: 0;
 }
 
-.radio-group label:first-child {
-    cursor: default;
+.auth-page .radio-group span {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+    min-width: 52px;
+    line-height: 1;
 }
 
-/* ====== CHECKBOX ====== */
-.form-check {
+.auth-page .radio-group input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: #2f9e44;
+}
+
+.auth-page .radio-group.auth-group-invalid,
+.auth-page .form-check.auth-group-invalid,
+.auth-page .auth-date-block.auth-group-invalid {
+    border-radius: 12px;
+}
+
+.auth-page .radio-group.auth-group-invalid,
+.auth-page .form-check.auth-group-invalid {
+    padding: 10px 12px;
+    background: rgba(194, 49, 49, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(194, 49, 49, 0.18);
+}
+
+.auth-page .auth-date-block.auth-group-invalid .auth-date-helper,
+.auth-page .radio-group.auth-group-invalid span,
+.auth-page .radio-group.auth-group-invalid label,
+.auth-page .form-check.auth-group-invalid .form-check-label {
+    color: #a32929;
+}
+
+/* Los checks se quedan pequenos y alineados para que no rompan el alto del panel. */
+.auth-page .form-check {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* todo a la izquierda */
+    align-items: flex-start;
     margin-top: 15px;
+    gap: 12px;
 }
 
-.form-check-label {
+.auth-page .form-check-label {
     display: flex;
-    align-items: end;      /* centra verticalmente */
-    gap: 10px;               /* espacio checkbox-texto */
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
     font-size: 14px;
-    white-space: nowrap;     /* evita que se rompa en dos líneas */
+    white-space: normal;
     margin: 0;
     padding: 0;
 }
 
-.form-check-input {
-    align-items: center;
+.auth-page .form-check-input {
     margin: 0;
     padding: 0;
     cursor: pointer;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    accent-color: #2f9e44;
 }
 
+.auth-page .auth-inline-row {
+    margin-top: 20px;
+}
 
+.auth-page .auth-inline-row .form-check-label {
+    white-space: nowrap;
+}
 
-.contenedor_login-register form button{
+.auth-page .auth-date-block {
+    margin-top: 16px;
+}
+
+.auth-page .auth-date-helper {
+    margin: 0 0 6px;
+    color: #5b6b5b;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.auth-page .auth-field-error {
+    display: none;
+    margin-top: 6px;
+    color: #c23131;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.auth-page .auth-field-error.is-visible {
+    display: block;
+}
+
+.auth-page .contenedor_login-register form button[type="submit"] {
     padding: 10px 40px;
-    margin-top: 40px;
+    margin-top: 32px;
     border: none;
     font-size: 14px;
     background: #2f9e44;
@@ -197,67 +305,124 @@ label {
     outline: none;
 }
 
-.formulario_login{
+.auth-page .contenedor_login-register form button[type="submit"]:hover,
+.auth-page .contenedor_login-register form button[type="submit"]:focus-visible {
+    background: #238337;
+}
+
+.auth-page .formulario_login {
     opacity: 1;
     display: block;
+    min-height: 540px;
+    z-index: 2;
 }
 
-.formulario_register{
+.auth-page .formulario_register {
     display: none;
+    opacity: 0;
+    min-height: 730px;
+    z-index: 1;
 }
 
-/* Botón fijo para volver a la página anterior */
-.back-btn{
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    padding: 10px 14px;
-    background: #2f9e44;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    font-weight: 600;
-    z-index: 9999;
+/* Version oscura del acceso */
+.dark-mode.auth-page .caja_trasera {
+    background-color: rgba(24, 56, 31, 0.92);
 }
 
-.back-btn:hover{
-    filter: brightness(0.95);
+.dark-mode.auth-page .contenedor_login-register form {
+    background: rgba(15, 15, 15, 0.96);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
+.dark-mode.auth-page .contenedor_login-register form h2,
+.dark-mode.auth-page label,
+.dark-mode.auth-page .radio-group span,
+.dark-mode.auth-page .radio-group label,
+.dark-mode.auth-page .form-check-label {
+    color: #e8f8ea;
+}
 
-/*Trabajando con el responsive*/
+.dark-mode.auth-page .contenedor_login-register form input[type="text"],
+.dark-mode.auth-page .contenedor_login-register form input[type="email"],
+.dark-mode.auth-page .contenedor_login-register form input[type="password"],
+.dark-mode.auth-page .contenedor_login-register form input[type="date"] {
+    background: #1b1b1b;
+    color: #e8f8ea;
+}
 
-@media screen and (max-width: 850px){
-    main{
-        margin-top: 50px;
+.dark-mode.auth-page .contenedor_login-register form input.is-invalid {
+    background: #291718;
+    box-shadow: 0 0 0 3px rgba(255, 120, 120, 0.12);
+}
+
+.dark-mode.auth-page .contenedor_login-register form input[type="text"]::placeholder,
+.dark-mode.auth-page .contenedor_login-register form input[type="email"]::placeholder,
+.dark-mode.auth-page .contenedor_login-register form input[type="password"]::placeholder {
+    color: rgba(232, 248, 234, 0.62);
+}
+
+.dark-mode.auth-page .auth-date-helper {
+    color: #b9c6ba;
+}
+
+.dark-mode.auth-page .radio-group.auth-group-invalid,
+.dark-mode.auth-page .form-check.auth-group-invalid {
+    background: rgba(255, 120, 120, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 120, 120, 0.2);
+}
+
+.dark-mode.auth-page .auth-date-block.auth-group-invalid .auth-date-helper,
+.dark-mode.auth-page .radio-group.auth-group-invalid span,
+.dark-mode.auth-page .radio-group.auth-group-invalid label,
+.dark-mode.auth-page .form-check.auth-group-invalid .form-check-label,
+.dark-mode.auth-page .auth-field-error {
+    color: #ffb5b5;
+}
+
+/* En movil dejo una sola cara visible para que el slider no pise el otro formulario. */
+@media screen and (max-width: 850px) {
+    .auth-main {
+        margin-top: 40px;
     }
 
-    .contenedor{
-        margin: auto;
+    .auth-page .contenedor {
+        min-height: auto;
+        margin: 40px auto 0;
     }
 
-    .caja_trasera{
-        max-width: 350px;
-        height: 300px;
+    .auth-page .caja_trasera {
+        max-width: 390px;
+        min-height: 280px;
         flex-direction: column;
         margin: auto;
+        position: relative;
+        overflow: hidden;
     }
 
-    .caja_trasera div{
+    .auth-page .caja_trasera div {
         margin: 0;
         position: absolute;
+        inset: 0;
+        max-width: none;
+        padding: 24px 20px;
+        display: none;
     }
 
-    /*Formulario*/
-    .contenedor_login-register{
+    .auth-page .contenedor_login-register {
         top: -10px;
-        left: -5px;
+        left: 0;
         margin: auto;
+        max-width: 390px;
+        min-height: auto;
+        position: relative;
     }
 
-    .contenedor_login-register form{
+    .auth-page .contenedor_login-register form {
         position: relative;
+        min-height: auto;
+    }
+
+    .auth-page .contenedor_login-register form button[type="submit"] {
+        width: 100%;
     }
 }

@@ -1,8 +1,12 @@
 import * as ui from './ui.js';
-import * as v from "./validaciones.js";
+import * as v from './validaciones.js';
 
 /**
- * Función para inicializar el controlador del formulario de registro.
+ * Inicializa el formulario antiguo de registro y sus validaciones en caliente.
+ *
+ * Si el DOM de ese formulario ya no existe, esta funcion sale sin tocar nada.
+ *
+ * @returns {void}
  */
 export function initializeFormController() {
     const form = document.getElementById('form-registro');
@@ -13,180 +17,181 @@ export function initializeFormController() {
     const paisSelect = document.getElementById('pais');
     const privacidadCheckbox = document.getElementById('politica_privacidad');
 
-/*
-    // Comprobación de elementos críticos
-    if (!form) {
-        console.error('initializeFormController: elemento #form-registro no encontrado. Abortando inicialización.');
+    if (
+        !form ||
+        !nombreInput ||
+        !correoInput ||
+        !contrasenaInput ||
+        !confirmarContrasenaInput ||
+        !paisSelect ||
+        !privacidadCheckbox
+    ) {
         return;
     }
 
-    if (!nombreInput || !correoInput || !contrasenaInput || !confirmarContrasenaInput || !tipoViajeSelect || !privacidadCheckbox) {
-        console.error('initializeFormController: uno o más campos del formulario no se encontraron. Revise los IDs en el HTML.');
-        // Mostrar cuáles faltan para facilitar la depuración
-        const missing = [];
-        if (!nombreInput) missing.push('nombre');
-        if (!correoInput) missing.push('correo');
-        if (!contrasenaInput) missing.push('contrasenia');
-        if (!confirmarContrasenaInput) missing.push('confirmar_contrasenia');
-        if (!tipoViajeSelect) missing.push('tipo_viaje');
-        if (!privacidadCheckbox) missing.push('politica_privacidad');
-        console.warn('IDs faltantes:', missing.join(', '));
-        return;
-    }
-*/
-
-    // Validación en tiempo real para el campo nombre
+    // Valido el nombre mientras el usuario escribe para que vea el error al momento.
     nombreInput.addEventListener('input', () => {
-        const df = ui.obtenerDatosFormulario();
-        const nombre = df.nombre.trim();
+        const datos = ui.obtenerDatosFormulario();
+        const nombre = datos.nombre.trim();
+
         if (!v.validarNombre(nombre)) {
-            ui.mostrarError('error-nombre', 'El nombre debe contener solo letras y un máximo de 2 palabras.');
-        } else {
-            ui.mostrarError('error-nombre', '');
+            ui.mostrarError('error-nombre', 'El nombre debe contener solo letras y un maximo de 2 palabras.');
+            return;
         }
+
+        ui.mostrarError('error-nombre', '');
     });
 
-    // Validación en tiempo real para el campo correo
+    // Valido el correo en caliente para no esperar al submit final.
     correoInput.addEventListener('input', () => {
-        const df = ui.obtenerDatosFormulario();
+        const datos = ui.obtenerDatosFormulario();
+        const correo = datos.correo.trim();
 
-        const correo = df.correo.trim();
         if (!v.validarCorreo(correo)) {
-            ui.mostrarError('error-correo', 'El correo electrónico no tiene un formato válido.');
-        } else {
-            ui.mostrarError('error-correo', '');
+            ui.mostrarError('error-correo', 'El correo electronico no tiene un formato valido.');
+            return;
         }
+
+        ui.mostrarError('error-correo', '');
     });
 
-    // Validación en tiempo real para el campo contraseña
+    // Reviso formato y coincidencia de contrasenas en el mismo bloque.
     contrasenaInput.addEventListener('input', () => {
-        const df = ui.obtenerDatosFormulario();
-
-        const contrasena = df.contrasena;
-        const confirmarContrasena = df.confirmarContrasena;
+        const datos = ui.obtenerDatosFormulario();
+        const contrasena = datos.contrasena;
+        const confirmarContrasena = datos.confirmarContrasena;
         const boton = document.getElementById('b1');
-        const emoji= boton.querySelector('.fa-regular');
-
+        const icono = boton?.querySelector('.fa-regular');
         const boton2 = document.getElementById('b2');
-        const emoji2= boton2.querySelector('.fa-regular');
-
+        const icono2 = boton2?.querySelector('.fa-regular');
 
         if (!v.validarContrasena(contrasena)) {
-            ui.mostrarError('error-contrasena', 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.');
-            if (emoji.classList.contains('verde')) {
-                emoji.classList.replace('verde', 'rojo');
-            }else if (!emoji.classList.contains('rojo')) {
-                emoji.classList.add('rojo');
+            ui.mostrarError('error-contrasena', 'La contrasena debe tener al menos 8 caracteres, mayuscula, minuscula, numero y simbolo.');
+            if (icono?.classList.contains('verde')) {
+                icono.classList.replace('verde', 'rojo');
+            } else if (icono && !icono.classList.contains('rojo')) {
+                icono.classList.add('rojo');
             }
         } else {
             ui.mostrarError('error-contrasena', '');
-            if (emoji.classList.contains('rojo')) {
-                emoji.classList.replace('rojo', 'verde');
-            }else if (!emoji.classList.contains('verde')) {
-                emoji.classList.add('verde');
+            if (icono?.classList.contains('rojo')) {
+                icono.classList.replace('rojo', 'verde');
+            } else if (icono && !icono.classList.contains('verde')) {
+                icono.classList.add('verde');
             }
         }
+
         if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
-            ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
-            if (emoji2.classList.contains('verde')) {
-                emoji2.classList.replace('verde', 'rojo');
-            }else if (!emoji2.classList.contains('rojo')) {
-                emoji2.classList.add('rojo');
+            ui.mostrarError('error-confirmar-contrasena', 'Las contrasenas no coinciden.');
+            if (icono2?.classList.contains('verde')) {
+                icono2.classList.replace('verde', 'rojo');
+            } else if (icono2 && !icono2.classList.contains('rojo')) {
+                icono2.classList.add('rojo');
             }
-        } else {
-            ui.mostrarError('error-confirmar-contrasena', '');
-            if (emoji2.classList.contains('rojo')) {
-                emoji2.classList.replace('rojo', 'verde');
-            }else if (!emoji2.classList.contains('verde')) {
-                emoji2.classList.add('verde');
-            }
+            return;
+        }
+
+        ui.mostrarError('error-confirmar-contrasena', '');
+        if (icono2?.classList.contains('rojo')) {
+            icono2.classList.replace('rojo', 'verde');
+        } else if (icono2 && !icono2.classList.contains('verde')) {
+            icono2.classList.add('verde');
         }
     });
 
-
-    // Validación en tiempo real para el campo confirmar contraseña
+    // Compruebo la segunda contrasena cada vez que se toca ese campo.
     confirmarContrasenaInput.addEventListener('input', () => {
-        const df = ui.obtenerDatosFormulario();
-
-        const contrasena = df.contrasena;
-        const confirmarContrasena = df.confirmarContrasena;
+        const datos = ui.obtenerDatosFormulario();
         const boton = document.getElementById('b2');
-        const emoji= boton.querySelector('.fa-regular');
+        const icono = boton?.querySelector('.fa-regular');
 
-        if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
-            ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
-            if (emoji.classList.contains('verde')) {
-                emoji.classList.replace('verde', 'rojo');
-            }else if (!emoji.classList.contains('rojo')) {
-                emoji.classList.add('rojo');
+        if (!v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena)) {
+            ui.mostrarError('error-confirmar-contrasena', 'Las contrasenas no coinciden.');
+            if (icono?.classList.contains('verde')) {
+                icono.classList.replace('verde', 'rojo');
+            } else if (icono && !icono.classList.contains('rojo')) {
+                icono.classList.add('rojo');
             }
-        } else {
-            ui.mostrarError('error-confirmar-contrasena', '');
-            if (emoji.classList.contains('rojo')) {
-                emoji.classList.replace('rojo', 'verde');
-            }else if (!emoji.classList.contains('verde')) {
-                emoji.classList.add('verde');
-            }
+            return;
+        }
+
+        ui.mostrarError('error-confirmar-contrasena', '');
+        if (icono?.classList.contains('rojo')) {
+            icono.classList.replace('rojo', 'verde');
+        } else if (icono && !icono.classList.contains('verde')) {
+            icono.classList.add('verde');
         }
     });
 
-    // Validación en tiempo real para el campo tipo de viaje
+    // Reviso que el selector de pais no se quede vacio.
     paisSelect.addEventListener('change', () => {
-        const df = ui.obtenerDatosFormulario();
+        const datos = ui.obtenerDatosFormulario();
 
-        const pais = df.pais;
-        if (!v.validarPais(pais)) {
-            ui.mostrarError('error-pais', 'Debe seleccionar un pais.');
-        } else {
-            ui.mostrarError('error-pais', '');
+        if (!v.validarPais(datos.pais)) {
+            ui.mostrarError('error-pais', 'Debes seleccionar un pais.');
+            return;
         }
+
+        ui.mostrarError('error-pais', '');
     });
 
-    // Validación en tiempo real para el checkbox de política de privacidad
+    // Marco el error del checkbox solo cuando de verdad no esta aceptado.
     privacidadCheckbox.addEventListener('change', () => {
-        const df = ui.obtenerDatosFormulario();
+        const datos = ui.obtenerDatosFormulario();
 
-        if (!df.privacidad) {
-            ui.mostrarError('error-privacidad', 'Debe aceptar la política de privacidad.');
-        } else {
-            ui.mostrarError('error-privacidad', '');
+        if (!datos.privacidad) {
+            ui.mostrarError('error-privacidad', 'Debes aceptar la politica de privacidad.');
+            return;
         }
+
+        ui.mostrarError('error-privacidad', '');
     });
 
-    // Manejo del evento submit del formulario
+    // Si todo esta bien, envio el formulario antiguo al endpoint que ya usaba este modulo.
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         ui.ocultarErrores();
 
         const datos = ui.obtenerDatosFormulario();
-        if (v.validarNombre(datos.nombre) && v.validarCorreo(datos.correo) && v.validarContrasena(datos.contrasena) && v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) && v.validarPais(datos.pais) && datos.privacidad) {
-            // Enviar datos al servidor
-            try {
-                const formData = new FormData();
-                formData.append('nombre', datos.nombre);
-                formData.append('email', datos.correo);
-                formData.append('contrasenia', datos.contrasena);
-                formData.append('pais', datos.pais);
-                if (datos.notificaciones) {
-                    formData.append('notificaciones', '1');
-                }
+        const isValid =
+            v.validarNombre(datos.nombre) &&
+            v.validarCorreo(datos.correo) &&
+            v.validarContrasena(datos.contrasena) &&
+            v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena) &&
+            v.validarPais(datos.pais) &&
+            datos.privacidad;
 
-                const response = await fetch('web/php/register.php', {
-                    method: 'POST',
-                    body: formData
-                });
+        if (!isValid) {
+            return;
+        }
 
-                const result = await response.json();
+        try {
+            const formData = new FormData();
+            formData.append('nombre', datos.nombre);
+            formData.append('email', datos.correo);
+            formData.append('contrasenia', datos.contrasena);
+            formData.append('pais', datos.pais);
 
-                if (result.success) {
-                    ui.mostrarMensajeExito(result.message);
-                    ui.limpiarFormulario();
-                } else {
-                    ui.mostrarMensajeError(result.message);
-                }
-            } catch (error) {
-                ui.mostrarMensajeError('Error al conectar con el servidor.');
+            if (datos.notificaciones) {
+                formData.append('notificaciones', '1');
             }
+
+            const response = await fetch('web/php/register.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                ui.mostrarMensajeExito(result.message);
+                ui.limpiarFormulario();
+                return;
+            }
+
+            ui.mostrarMensajeError(result.message);
+        } catch (error) {
+            ui.mostrarMensajeError('Error al conectar con el servidor.');
         }
     });
 }
