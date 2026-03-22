@@ -6,284 +6,333 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Raíces Viajeras - Conócenos</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/webp" href="../../img/logos/raices-viajeras-logo0.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="../js/darkTheme.js"></script>
-    <script src="../js/viewport.js"></script>
 </head>
 
 <body id="body">
-<header id="header"></header>
+<header id="header" role="banner"></header>
 <script type="module" src="../js/plantillas/header.js"></script>
 
-<!--Header -->
-<section class="hero-conocenos">
-    <div class="hero-bg-shape"></div>
-    <div class="container-fluid px-4 px-lg-5">
-        <div class="row align-items-center g-5">
+<main id="contenido-principal">
+    <a href="#contenido-principal" class="visually-hidden-focusable">
+        Saltar al contenido principal
+    </a>
 
-            <div class="col-12 col-lg-6">
-                <p class="hero-eyebrow">Nuestra historia</p>
-                <h1 class="hero-title">
-                    Viajamos con<br><em>propósito,</em><br>volvemos con raíces.
-                </h1>
-                <p class="hero-desc">
-                    Somos una agencia online nacida de la convicción de que el turismo puede ser una fuerza regeneradora: para los destinos, para las comunidades y para quienes viajan.
-                </p>
-                <div class="hero-stat-row">
-                    <div class="hero-stat">
-                        <strong>+20</strong>
-                        <span>Destinos sostenibles</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>100%</strong>
-                        <span>Alojamientos certificados</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>0 CO₂</strong>
-                        <span>Emisiones compensadas</span>
+    <section class="hero-conocenos" aria-labelledby="titulo-hero">
+        <div class="hero-bg-shape" aria-hidden="true"></div>
+        <div class="container-fluid px-4 px-lg-5">
+            <div class="row align-items-center g-5">
+
+                <div class="col-12 col-lg-6">
+                    <p class="hero-eyebrow" aria-hidden="true">Nuestra historia</p>
+                    <h1 id="titulo-hero" class="hero-title">
+                        Viajamos con<br><em>propósito,</em><br>volvemos con raíces.
+                    </h1>
+                    <p class="hero-desc">
+                        Somos una agencia online nacida de la convicción de que el turismo puede ser una fuerza regeneradora: para los destinos, para las comunidades y para quienes viajan.
+                    </p>
+                    <div class="hero-stat-row" role="list" aria-label="Cifras destacadas">
+                        <div class="hero-stat" role="listitem">
+                            <strong aria-label="Más de 20">+20</strong>
+                            <span>Destinos sostenibles</span>
+                        </div>
+                        <div class="hero-stat" role="listitem">
+                            <strong aria-label="100 por ciento">100%</strong>
+                            <span>Alojamientos certificados</span>
+                        </div>
+                        <div class="hero-stat" role="listitem">
+                            <strong aria-label="Cero emisiones de CO2">0 CO₂</strong>
+                            <span>Emisiones compensadas</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-12 col-lg-6 d-none d-lg-block">
-                <div class="hero-img-grid">
-                    <img src="../../web/img/conocenos/viajar-naturaleza-deskpot.webp" alt="Viajeros en la naturaleza">
-                    <img src="../../web/img/conocenos/naturaleza-deskpot.webp" alt="Viaje responsable">
-                    <img src="../../web/img/conocenos/bus-ecologico-deskpot.webp" alt="Transporte ecológico">
+                <div class="col-12 col-lg-6 d-none d-lg-block" aria-hidden="true">
+                    <div class="hero-img-grid">
+                        <img src="../../web/img/landing1.webp" alt="">
+                        <img src="../../web/img/landing4.webp" alt="">
+                        <img src="../../web/img/landing5.webp" alt="">
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-</section>
-
-<!--Misión-->
-<section class="mision-section">
-    <div class="container">
-        <p class="mision-quote">
-            "El viaje ideal no es aquel que te lleva al lugar más lejano, sino aquel que te acerca más a ti mismo y deja el mundo un poco mejor de como lo encontraste."
-        </p>
-        <p class="mision-autor">— Filosofía de Raíces Viajeras</p>
-    </div>
-</section>
-
-<!--Valores-->
-<section class="valores-section">
-    <div class="container">
-        <div class="row mb-2">
-            <div class="col-12 col-lg-7">
-                <p class="section-label">Lo que nos mueve</p>
-                <h2 class="section-title">Nuestros valores</h2>
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-tree-fill"></i></div>
-                    <h3>Sostenibilidad real</h3>
-                    <p>No greenwashing. Evaluamos cada proveedor con criterios rigurosos: energía renovable, gestión de residuos, huella de carbono y certificaciones verificables.</p>
+    </section>
+
+    <section class="mision-section" role="region" aria-label="Filosofía de Raíces Viajeras">
+        <div class="container">
+            <blockquote class="mision-quote">
+                "El viaje ideal no es aquel que te lleva al lugar más lejano, sino aquel que te acerca más a ti mismo y deja el mundo un poco mejor de como lo encontraste."
+            </blockquote>
+            <p class="mision-autor">
+                <cite>— Filosofía de Raíces Viajeras</cite>
+            </p>
+        </div>
+    </section>
+
+    <section class="valores-section" aria-labelledby="titulo-valores">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-12 col-lg-7">
+                    <p class="section-label" aria-hidden="true">Lo que nos mueve</p>
+                    <h2 id="titulo-valores" class="section-title">Nuestros valores</h2>
                 </div>
             </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-people-fill"></i></div>
-                    <h3>Comunidades primero</h3>
-                    <p>Más del 70 % del precio de cada viaje se queda en la economía local: guías autóctonos, artesanos y restaurantes de kilómetro cero.</p>
+            <div class="row g-4">
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-tree-fill"></i>
+                        </div>
+                        <h3>Sostenibilidad real</h3>
+                        <p>No greenwashing. Evaluamos cada proveedor con criterios rigurosos: energía renovable, gestión de residuos, huella de carbono y certificaciones verificables.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-heart-fill"></i></div>
-                    <h3>Turismo consciente</h3>
-                    <p>Diseñamos experiencias que fomentan la escucha, la presencia y el respeto profundo por la cultura y los ecosistemas de cada destino.</p>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3>Comunidades primero</h3>
+                        <p>Más del 70 % del precio de cada viaje se queda en la economía local: guías autóctonos, artesanos y restaurantes de kilómetro cero.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-shield-check"></i></div>
-                    <h3>Transparencia total</h3>
-                    <p>Publicamos nuestra huella de carbono anual, los destinos de cada euro pagado y los informes de impacto de nuestros viajes.</p>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                        <h3>Turismo consciente</h3>
+                        <p>Diseñamos experiencias que fomentan la escucha, la presencia y el respeto profundo por la cultura y los ecosistemas de cada destino.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-lightbulb-fill"></i></div>
-                    <h3>Innovación verde</h3>
-                    <p>Adoptamos transporte de bajas emisiones, rutas de temporada baja y tecnología para minimizar el impacto de cada desplazamiento.</p>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Transparencia total</h3>
+                        <p>Publicamos nuestra huella de carbono anual, los destinos de cada euro pagado y los informes de impacto de nuestros viajes.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="valor-card">
-                    <div class="valor-icon"><i class="bi bi-globe2"></i></div>
-                    <h3>Mirada global, acción local</h3>
-                    <p>Conectamos viajeros de todo el mundo con experiencias únicas que refuerzan identidades locales y preservan patrimonios en peligro.</p>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-lightbulb-fill"></i>
+                        </div>
+                        <h3>Innovación verde</h3>
+                        <p>Adoptamos transporte de bajas emisiones, rutas de temporada baja y tecnología para minimizar el impacto de cada desplazamiento.</p>
+                    </div>
                 </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="valor-card">
+                        <div class="valor-icon" aria-hidden="true">
+                            <i class="bi bi-globe2"></i>
+                        </div>
+                        <h3>Mirada global, acción local</h3>
+                        <p>Conectamos viajeros de todo el mundo con experiencias únicas que refuerzan identidades locales y preservan patrimonios en peligro.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!--Historia-->
-<section class="historia-section">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-
-            <div class="col-12 col-lg-5">
-                <div class="historia-img">
-                    <img src="../../web/img/conocenos/mochila-deskpot.webp" alt="Raíces de nuestro proyecto">
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-7">
-                <h3 class="section-label historia-label">Cómo llegamos aquí</h3>
-                <h2 class="section-title historia-title">Nuestra historia</h2>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <p class="timeline-year">2025 — El inicio</p>
-                        <h4>Una mochila y una pregunta</h4>
-                        <p>Todo comenzó con una viajera que, tras recorrer cinco países, se preguntó: ¿por qué mis viajes dejan solo huellas de carbono y no de cambio positivo?</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <p class="timeline-year">2026 — El lanzamiento</p>
-                        <h4>Raíces Viajeras nace online</h4>
-                        <p>Lanzamos nuestra plataforma digital con los primeros 15 itinerarios verificados y la promesa de compensar el 100 % de las emisiones de cada viaje.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <p class="timeline-year">2025–2026 — Hoy</p>
-                        <h4>Crecemos contigo</h4>
-                        <p>Más de 20 destinos, cientos de viajeros conscientes y un compromiso renovado: cada ruta que añadimos es una comunidad que apoyamos.</p>
+    <section class="historia-section" aria-labelledby="titulo-historia">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-12 col-lg-5">
+                    <div class="historia-img">
+                        <img src="../../web/img/landing2.webp" alt="Raíces de nuestro proyecto">
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-</section>
+                <div class="col-12 col-lg-7">
+                    <p class="section-label historia-label" aria-hidden="true">Cómo llegamos aquí</p>
+                    <h2 id="titulo-historia" class="section-title historia-title">Nuestra historia</h2>
 
-<!--Equipo-->
-<section class="equipo-section">
-    <div class="container">
-        <div class="text-center mb-5">
-            <p class="section-label">Las personas detrás del viaje</p>
-            <h2 class="section-title mb-0">Nuestro equipo</h2>
-        </div>
-        <div class="row justify-content-center g-4">
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="equipo-card">
-                    <div class="equipo-avatar avatar-ana">A</div>
-                    <h3>Ana López</h3>
-                    <p class="role">Fundadora & CEO</p>
-                    <p>Bióloga de formación y viajera de vocación. Diseña cada ruta pensando en el equilibrio entre experiencia humana e impacto ambiental.</p>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="equipo-card">
-                    <div class="equipo-avatar avatar-manuel">M</div>
-                    <h3>Manuel Moreno</h3>
-                    <p class="role">Experiencia de Viajero</p>
-                    <p>Ex guía de montaña reconvertido en diseñador de experiencias. Cuida que cada momento del viaje sea memorable y sin rastro.</p>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="equipo-card">
-                    <div class="equipo-avatar avatar-monica">M</div>
-                    <h3>Mónica Cortes</h3>
-                    <p class="role">Responsable de Sostenibilidad</p>
-                    <p>Experta en certificaciones ambientales y análisis de ciclo de vida. Audita y mejora la huella de cada viaje que ofrecemos.</p>
-                </div>
-            </div>
+                    <div class="timeline" role="list">
 
-        </div>
-    </div>
-</section>
+                        <div class="timeline-item" role="listitem">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <p class="timeline-year">
+                                <time datetime="2025">2025</time> — El inicio
+                            </p>
+                            <h3>Una mochila y una pregunta</h3>
+                            <p>Todo comenzó con una viajera que, tras recorrer cinco países, se preguntó: ¿por qué mis viajes dejan solo huellas de carbono y no de cambio positivo?</p>
+                        </div>
 
-<!--Compromiso-->
-<section class="compromiso-section">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-12 col-lg-7">
-                <p class="section-label compromiso-label">Lo que prometemos</p>
-                <h2 class="section-title compromiso-title">Nuestro compromiso contigo<br>y con el planeta</h2>
+                        <div class="timeline-item" role="listitem">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <p class="timeline-year">
+                                <time datetime="2026">2026</time> — El lanzamiento
+                            </p>
+                            <h3>Raíces Viajeras nace online</h3>
+                            <p>Lanzamos nuestra plataforma digital con los primeros 15 itinerarios verificados y la promesa de compensar el 100 % de las emisiones de cada viaje.</p>
+                        </div>
 
-                <div class="compromiso-item">
-                    <div class="compromiso-num">1</div>
-                    <div>
-                        <h3>Verificación independiente</h3>
-                        <p>Todos nuestros alojamientos y proveedores pasan una auditoría anual realizada por organismos externos especializados en turismo responsable.</p>
-                    </div>
-                </div>
-                <div class="compromiso-item">
-                    <div class="compromiso-num">2</div>
-                    <div>
-                        <h3>Compensación certificada de CO₂</h3>
-                        <p>Calculamos la huella de cada viaje y la compensamos mediante proyectos de reforestación y energías renovables en los propios destinos visitados.</p>
-                    </div>
-                </div>
-                <div class="compromiso-item">
-                    <div class="compromiso-num">3</div>
-                    <div>
-                        <h3>Fondo de impacto local</h3>
-                        <p>El 5 % de cada reserva se destina a un fondo que financia proyectos educativos, de conservación y de desarrollo en las comunidades anfitrionas.</p>
-                    </div>
-                </div>
-                <div class="compromiso-item">
-                    <div class="compromiso-num">4</div>
-                    <div>
-                        <h3>Garantía de satisfacción responsable</h3>
-                        <p>Si algo no cumple nuestros estándares de sostenibilidad durante tu viaje, actuamos de inmediato y publicamos el incidente en nuestro informe anual.</p>
-                    </div>
-                </div>
-            </div>
+                        <div class="timeline-item" role="listitem">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <p class="timeline-year">
+                                <time datetime="2025">2025</time>–<time datetime="2026">2026</time> — Hoy
+                            </p>
+                            <h3>Crecemos contigo</h3>
+                            <p>Más de 20 destinos, cientos de viajeros conscientes y un compromiso renovado: cada ruta que añadimos es una comunidad que apoyamos.</p>
+                        </div>
 
-            <div class="col-12 col-lg-5">
-                <div class="compromiso-badge">
-                    <span class="big-num">95%</span>
-                    <p>de nuestros viajeros repetiría con nosotros</p>
-                </div>
-                <div class="badge-grid">
-                    <div class="compromiso-badge badge-sm">
-                        <span class="big-num">+1.200</span>
-                        <p>árboles plantados en 2025</p>
-                    </div>
-                    <div class="compromiso-badge badge-sm">
-                        <span class="big-num">+40</span>
-                        <p>comunidades beneficiadas</p>
-                    </div>
-                    <div class="compromiso-badge badge-sm badge-full">
-                        <span class="big-num">100%</span>
-                        <p>proveedores con energía renovable o certificada</p>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!--CTA-->
-<section class="cta-section">
-    <div class="container cta-inner">
-        <h2>¿Listo para viajar de otra manera?</h2>
-        <p>Únete a nuestra comunidad de viajeros conscientes y descubre destinos que te transformarán sin dañar el mundo que los hace posibles.</p>
-        <a href="/Raices-Viajeras/web/html/provincias.html" class="btn-cta-blanco">Ver destinos</a>
-        <a href="/Raices-Viajeras/web/Formulario/form.html" class="btn-cta-outline-blanco">Crear cuenta gratis</a>
+    <section class="equipo-section" aria-labelledby="titulo-equipo">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="section-label" aria-hidden="true">Las personas detrás del viaje</p>
+                <h2 id="titulo-equipo" class="section-title mb-0">Nuestro equipo</h2>
+            </div>
+            <div class="row justify-content-center g-4">
 
-    </div>
-    <div class="container btn-back">
-        <!-- Botón para volver a la página anterior -->
-        <button class="back-btn" type="button" onclick="history.length > 1 ? history.back() : window.location.href='/Raices-Viajeras/index.html'">Volver</button>
-    </div>
-</section>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="equipo-card">
+                        <div class="equipo-avatar avatar-ana" aria-hidden="true">A</div>
+                        <h3>Ana López</h3>
+                        <p class="role">Fundadora & CEO</p>
+                        <p>Bióloga de formación y viajera de vocación. Diseña cada ruta pensando en el equilibrio entre experiencia humana e impacto ambiental.</p>
+                    </article>
+                </div>
 
-<div id="footer"></div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="equipo-card">
+                        <div class="equipo-avatar avatar-manuel" aria-hidden="true">M</div>
+                        <h3>Manuel Moreno</h3>
+                        <p class="role">Experiencia de Viajero</p>
+                        <p>Ex guía de montaña reconvertido en diseñador de experiencias. Cuida que cada momento del viaje sea memorable y sin rastro.</p>
+                    </article>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="equipo-card">
+                        <div class="equipo-avatar avatar-monica" aria-hidden="true">M</div>
+                        <h3>Mónica Cortes</h3>
+                        <p class="role">Responsable de Sostenibilidad</p>
+                        <p>Experta en certificaciones ambientales y análisis de ciclo de vida. Audita y mejora la huella de cada viaje que ofrecemos.</p>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="compromiso-section" aria-labelledby="titulo-compromiso">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-12 col-lg-7">
+                    <p class="section-label compromiso-label" aria-hidden="true">Lo que prometemos</p>
+                    <h2 id="titulo-compromiso" class="section-title compromiso-title">
+                        Nuestro compromiso contigo<br>y con el planeta
+                    </h2>
+
+                    <div role="list">
+
+                        <div class="compromiso-item" role="listitem">
+                            <div class="compromiso-num" aria-hidden="true">1</div>
+                            <div>
+                                <h3>Verificación independiente</h3>
+                                <p>Todos nuestros alojamientos y proveedores pasan una auditoría anual realizada por organismos externos especializados en turismo responsable.</p>
+                            </div>
+                        </div>
+
+                        <div class="compromiso-item" role="listitem">
+                            <div class="compromiso-num" aria-hidden="true">2</div>
+                            <div>
+                                <h3>Compensación certificada de CO₂</h3>
+                                <p>Calculamos la huella de cada viaje y la compensamos mediante proyectos de reforestación y energías renovables en los propios destinos visitados.</p>
+                            </div>
+                        </div>
+
+                        <div class="compromiso-item" role="listitem">
+                            <div class="compromiso-num" aria-hidden="true">3</div>
+                            <div>
+                                <h3>Fondo de impacto local</h3>
+                                <p>El 5 % de cada reserva se destina a un fondo que financia proyectos educativos, de conservación y de desarrollo en las comunidades anfitrionas.</p>
+                            </div>
+                        </div>
+
+                        <div class="compromiso-item" role="listitem">
+                            <div class="compromiso-num" aria-hidden="true">4</div>
+                            <div>
+                                <h3>Garantía de satisfacción responsable</h3>
+                                <p>Si algo no cumple nuestros estándares de sostenibilidad durante tu viaje, actuamos de inmediato y publicamos el incidente en nuestro informe anual.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-5">
+                    <div class="compromiso-badge" aria-label="El 95% de nuestros viajeros repetiría con nosotros">
+                        <span class="big-num" aria-hidden="true">95%</span>
+                        <p aria-hidden="true">de nuestros viajeros repetiría con nosotros</p>
+                    </div>
+                    <div class="badge-grid">
+                        <div class="compromiso-badge badge-sm" aria-label="Más de 1200 árboles plantados en 2025">
+                            <span class="big-num" aria-hidden="true">+1.200</span>
+                            <p aria-hidden="true">árboles plantados en 2025</p>
+                        </div>
+                        <div class="compromiso-badge badge-sm" aria-label="Más de 40 comunidades beneficiadas">
+                            <span class="big-num" aria-hidden="true">+40</span>
+                            <p aria-hidden="true">comunidades beneficiadas</p>
+                        </div>
+                        <div class="compromiso-badge badge-sm badge-full" aria-label="100% de proveedores con energía renovable o certificada">
+                            <span class="big-num" aria-hidden="true">100%</span>
+                            <p aria-hidden="true">proveedores con energía renovable o certificada</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" aria-labelledby="titulo-cta">
+        <div class="container cta-inner">
+            <h2 id="titulo-cta">¿Listo para viajar de otra manera?</h2>
+            <p>Únete a nuestra comunidad de viajeros conscientes y descubre destinos que te transformarán sin dañar el mundo que los hace posibles.</p>
+            <a href="/Raices-Viajeras/index.html" class="btn-cta-blanco">
+                Ver destinos
+            </a>
+            <a href="/Raices-Viajeras/web/Formulario/form.html" class="btn-cta-outline-blanco">
+                Crear cuenta gratis
+            </a>
+        </div>
+
+        <div class="container btn-back">
+            <button
+                class="back-btn"
+                type="button"
+                aria-label="Volver a la página anterior"
+                onclick="history.length > 1 ? history.back() : window.location.href='/Raices-Viajeras/index.html'">
+                Volver
+            </button>
+        </div>
+    </section>
+
+</main>
+
 <script type="module" src="../js/plantillas/footer.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script type="module" src="../js/main.js"></script>
