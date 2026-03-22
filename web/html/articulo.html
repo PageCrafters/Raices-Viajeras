@@ -16,11 +16,11 @@
 <script type="module" src="../js/plantillas/header.js"></script>
 
 <!-- Este contenedor se rellena por JS segun el id de noticia que venga en la URL. -->
-<div class="container mt-5 px-4" id="articulo-container">
-    <div class="text-center my-5">
+<article class="container mt-5 px-4" id="articulo-container" aria-describedby="desc-articulo">
+    <div class="text-center my-5" aria-describedby="desc-articulo">
         <div class="spinner-border text-success" role="status"></div>
     </div>
-</div>
+</article>
 
 <script type="module" src="../js/plantillas/footer.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
