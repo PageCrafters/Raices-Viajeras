@@ -1,18 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     /**
-     * Escapa texto antes de meterlo dentro del header.
+     * Convierte una plantilla HTML en nodos para insertarlos sin usar innerHTML.
      *
-     * @param {unknown} value Valor que se quiere pintar.
-     * @returns {string} Texto seguro para usar en HTML.
+     * @param {string} html Plantilla cruda recibida por fetch.
+     * @returns {Array<Node>} Nodos listos para insertar en el DOM actual.
      */
-    function escapeHtml(value) {
-        return String(value ?? '').replace(/[&<>"']/g, (char) => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[char]));
+    function parseHtmlNodes(html) {
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(html, 'text/html');
+        return Array.from(parsed.body.childNodes).map((node) => document.importNode(node, true));
     }
 
     /**
@@ -48,16 +44,30 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        authItem.replaceChildren();
+
         if (sessionData?.logueado) {
-            const userName = escapeHtml(sessionData.nombre || 'Usuario');
-            authItem.innerHTML = `
-                <span class="nav-link header-user-name">Hola, ${userName}</span>
-                <a class="nav-link header-logout-link" href="/Raices-Viajeras/web/php/cerrar_sesion.php">Cerrar sesión</a>
-            `;
+            const userName = sessionData.nombre || 'Usuario';
+
+            const userLabel = document.createElement('span');
+            userLabel.className = 'nav-link header-user-name';
+            userLabel.textContent = `Hola, ${userName}`;
+
+            const logoutLink = document.createElement('a');
+            logoutLink.className = 'nav-link header-logout-link';
+            logoutLink.href = '/Raices-Viajeras/web/php/cerrar_sesion.php';
+            logoutLink.textContent = 'Cerrar sesión';
+
+            authItem.appendChild(userLabel);
+            authItem.appendChild(logoutLink);
             return;
         }
 
-        authItem.innerHTML = '<a class="nav-link" href="/Raices-Viajeras/web/Formulario/form.html?modo=login">Iniciar sesión</a>';
+        const loginLink = document.createElement('a');
+        loginLink.className = 'nav-link';
+        loginLink.href = '/Raices-Viajeras/web/Formulario/form.html?modo=login';
+        loginLink.textContent = 'Iniciar sesión';
+        authItem.appendChild(loginLink);
     }
 
     /**
@@ -91,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const html = await response.text();
 
-        headerContainer.innerHTML = html;
+        headerContainer.replaceChildren(...parseHtmlNodes(html));
 
         if (typeof window.actualizarIconos === 'function') {
             window.actualizarIconos();

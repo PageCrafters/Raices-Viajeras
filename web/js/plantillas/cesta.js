@@ -15,19 +15,15 @@
     let eventsBound = false;
 
     /**
-     * Escapa texto antes de meterlo dentro del modal.
+     * Convierte una plantilla HTML en nodos para insertarlos sin usar innerHTML.
      *
-     * @param {unknown} value Valor que se quiere pintar.
-     * @returns {string} Texto seguro para usar en HTML.
+     * @param {string} html Plantilla cruda descargada por fetch.
+     * @returns {Array<Node>} Nodos listos para insertar en el documento actual.
      */
-    function escapeHtml(value) {
-        return String(value ?? '').replace(/[&<>"']/g, (char) => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[char]));
+    function parseHtmlNodes(html) {
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(html, 'text/html');
+        return Array.from(parsed.body.childNodes).map((node) => document.importNode(node, true));
     }
 
     /**
@@ -192,7 +188,7 @@
                 })
                 .then((html) => {
                     const container = ensureCartContainer();
-                    container.innerHTML = html;
+                    container.replaceChildren(...parseHtmlNodes(html));
                     bindModalEvents();
                     return document.getElementById('cestaModal');
                 })
@@ -210,97 +206,164 @@
      *
      * @param {'login'|'empty'|'error'|'loading'} type Tipo de estado.
      * @param {string} message Texto de apoyo.
-     * @returns {string} HTML del estado.
+     * @returns {HTMLElement} Nodo del estado.
      */
-    function getStateHtml(type, message) {
+    function createStateNode(type, message) {
+        const state = document.createElement('div');
+        state.className = 'rv-cart-state';
+
+        const title = document.createElement('h3');
+        title.className = 'rv-cart-state-title';
+
+        const copy = document.createElement('p');
+        copy.className = 'rv-cart-state-copy';
+
         if (type === 'login') {
-            return `
-                <div class="rv-cart-state">
-                    <h3 class="rv-cart-state-title">Inicia sesión para ver tu cesta</h3>
-                    <p class="rv-cart-state-copy mb-3">
-                        ${escapeHtml(message || 'Necesitamos saber qué usuario está activo para cargar tu cesta.')}
-                    </p>
-                    <a href="${LOGIN_URL}" class="btn btn-primario">Ir al acceso</a>
-                </div>
-            `;
+            title.textContent = 'Inicia sesión para ver tu cesta';
+            copy.classList.add('mb-3');
+            copy.textContent = message || 'Necesitamos saber qué usuario está activo para cargar tu cesta.';
+
+            const link = document.createElement('a');
+            link.href = LOGIN_URL;
+            link.className = 'btn btn-primario';
+            link.textContent = 'Ir al acceso';
+
+            state.appendChild(title);
+            state.appendChild(copy);
+            state.appendChild(link);
+            return state;
         }
 
         if (type === 'empty') {
-            return `
-                <div class="rv-cart-state">
-                    <h3 class="rv-cart-state-title">Tu cesta está vacía</h3>
-                    <p class="rv-cart-state-copy mb-3">
-                        ${escapeHtml(message || 'Aún no hay viajes guardados en tu carrito activo.')}
-                    </p>
-                    <a href="${TRIPS_URL}" class="btn btn-primario">Explorar viajes</a>
-                </div>
-            `;
+            title.textContent = 'Tu cesta está vacía';
+            copy.classList.add('mb-3');
+            copy.textContent = message || 'Aún no hay viajes guardados en tu carrito activo.';
+
+            const link = document.createElement('a');
+            link.href = TRIPS_URL;
+            link.className = 'btn btn-primario';
+            link.textContent = 'Explorar viajes';
+
+            state.appendChild(title);
+            state.appendChild(copy);
+            state.appendChild(link);
+            return state;
         }
 
         if (type === 'error') {
-            return `
-                <div class="rv-cart-state">
-                    <h3 class="rv-cart-state-title">No se pudo cargar la cesta</h3>
-                    <p class="rv-cart-state-copy mb-0">
-                        ${escapeHtml(message || 'Ha ocurrido un error inesperado.')}
-                    </p>
-                </div>
-            `;
+            title.textContent = 'No se pudo cargar la cesta';
+            copy.classList.add('mb-0');
+            copy.textContent = message || 'Ha ocurrido un error inesperado.';
+            state.appendChild(title);
+            state.appendChild(copy);
+            return state;
         }
 
-        return `
-            <div class="rv-cart-state">
-                <h3 class="rv-cart-state-title">Cargando cesta...</h3>
-                <p class="rv-cart-state-copy mb-0">
-                    ${escapeHtml(message || 'Estamos recuperando tu resumen actual.')}
-                </p>
-            </div>
-        `;
+        title.textContent = 'Cargando cesta...';
+        copy.classList.add('mb-0');
+        copy.textContent = message || 'Estamos recuperando tu resumen actual.';
+        state.appendChild(title);
+        state.appendChild(copy);
+        return state;
+    }
+
+    /**
+     * Crea una tarjeta de linea de carrito para modal o pagina.
+     *
+     * @param {object} item Linea ya normalizada.
+     * @returns {HTMLElement} Nodo article con la informacion del viaje.
+     */
+    function createItemNode(item) {
+        const article = document.createElement('article');
+        article.className = 'rv-cart-item';
+
+        const image = document.createElement('img');
+        image.className = 'rv-cart-item-image';
+        image.src = item.imagen || FALLBACK_IMAGE;
+        image.alt = item.titulo || 'Viaje';
+
+        const body = document.createElement('div');
+        body.className = 'rv-cart-item-body';
+
+        const top = document.createElement('div');
+        top.className = 'rv-cart-item-top';
+
+        const copy = document.createElement('div');
+        copy.className = 'rv-cart-item-copy';
+
+        const kicker = document.createElement('p');
+        kicker.className = 'rv-cart-item-kicker';
+        kicker.textContent = item.provincia_nombre || 'Experiencia sostenible';
+
+        const title = document.createElement('h3');
+        title.className = 'rv-cart-item-title';
+        title.textContent = item.titulo || 'Viaje sin título';
+
+        const description = document.createElement('p');
+        description.className = 'rv-cart-item-description';
+        description.textContent = truncateText(item.descripcion, 140) || 'Sin descripción disponible.';
+
+        copy.appendChild(kicker);
+        copy.appendChild(title);
+        copy.appendChild(description);
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'btn btn-sm rv-cart-remove js-remove-cart-item';
+        removeButton.dataset.itemId = String(item.carrito_viaje_id);
+        removeButton.setAttribute('aria-label', `Quitar ${item.titulo || 'viaje'} de la cesta`);
+        removeButton.textContent = 'Quitar';
+
+        top.appendChild(copy);
+        top.appendChild(removeButton);
+
+        const meta = document.createElement('div');
+        meta.className = 'rv-cart-item-meta';
+
+        const quantity = document.createElement('span');
+        quantity.append('Cantidad: ');
+        const quantityStrong = document.createElement('strong');
+        quantityStrong.textContent = String(item.cantidad);
+        quantity.appendChild(quantityStrong);
+
+        const unitPrice = document.createElement('span');
+        unitPrice.append('Precio unitario: ');
+        const unitPriceStrong = document.createElement('strong');
+        unitPriceStrong.textContent = formatCurrency(item.precio_unitario);
+        unitPrice.appendChild(unitPriceStrong);
+
+        const subtotal = document.createElement('span');
+        subtotal.append('Subtotal: ');
+        const subtotalStrong = document.createElement('strong');
+        subtotalStrong.textContent = formatCurrency(item.subtotal);
+        subtotal.appendChild(subtotalStrong);
+
+        meta.appendChild(quantity);
+        meta.appendChild(unitPrice);
+        meta.appendChild(subtotal);
+
+        body.appendChild(top);
+        body.appendChild(meta);
+
+        article.appendChild(image);
+        article.appendChild(body);
+
+        return article;
     }
 
     /**
      * Genera el listado de lineas con sus importes y boton para quitar.
      *
      * @param {Array<object>} items Lineas del carrito.
-     * @returns {string} HTML completo del listado.
+     * @returns {DocumentFragment} Fragmento listo para insertar.
      */
-    function getItemsHtml(items) {
-        return items.map((item) => `
-            <article class="rv-cart-item">
-                <img
-                    class="rv-cart-item-image"
-                    src="${escapeHtml(item.imagen || FALLBACK_IMAGE)}"
-                    alt="${escapeHtml(item.titulo || 'Viaje')}"
-                >
-                <div class="rv-cart-item-body">
-                    <div class="rv-cart-item-top">
-                        <div class="rv-cart-item-copy">
-                            <p class="rv-cart-item-kicker">
-                                ${escapeHtml(item.provincia_nombre || 'Experiencia sostenible')}
-                            </p>
-                            <h3 class="rv-cart-item-title">${escapeHtml(item.titulo || 'Viaje sin título')}</h3>
-                            <p class="rv-cart-item-description">
-                                ${escapeHtml(truncateText(item.descripcion, 140) || 'Sin descripción disponible.')}
-                            </p>
-                        </div>
-                        <button
-                            type="button"
-                            class="btn btn-sm rv-cart-remove js-remove-cart-item"
-                            data-item-id="${item.carrito_viaje_id}"
-                            aria-label="Quitar ${escapeHtml(item.titulo || 'viaje')} de la cesta"
-                        >
-                            Quitar
-                        </button>
-                    </div>
+    function getItemsFragment(items) {
+        const fragment = document.createDocumentFragment();
+        items.forEach((item) => {
+            fragment.appendChild(createItemNode(item));
+        });
 
-                    <div class="rv-cart-item-meta">
-                        <span>Cantidad: <strong>${item.cantidad}</strong></span>
-                        <span>Precio unitario: <strong>${formatCurrency(item.precio_unitario)}</strong></span>
-                        <span>Subtotal: <strong>${formatCurrency(item.subtotal)}</strong></span>
-                    </div>
-                </div>
-            </article>
-        `).join('');
+        return fragment;
     }
 
     /**
@@ -343,7 +406,7 @@
         }
 
         if (itemsContainer) {
-            itemsContainer.innerHTML = '';
+            itemsContainer.replaceChildren();
         }
 
         if (countElement) {
@@ -355,14 +418,14 @@
         }
 
         if (!summary.logueado) {
-            feedback.innerHTML = getStateHtml('login', 'Accede con tu cuenta para consultar la cesta asociada a tu usuario.');
+            feedback.replaceChildren(createStateNode('login', 'Accede con tu cuenta para consultar la cesta asociada a tu usuario.'));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
         }
 
         if (!summary.carrito.items.length) {
-            feedback.innerHTML = getStateHtml('empty', 'Tu carrito activo está listo para recibir nuevas aventuras.');
+            feedback.replaceChildren(createStateNode('empty', 'Tu carrito activo está listo para recibir nuevas aventuras.'));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
@@ -372,7 +435,7 @@
         content.classList.remove('d-none');
 
         if (itemsContainer) {
-            itemsContainer.innerHTML = getItemsHtml(summary.carrito.items);
+            itemsContainer.replaceChildren(getItemsFragment(summary.carrito.items));
         }
     }
 
@@ -394,7 +457,7 @@
         }
 
         if (itemsContainer) {
-            itemsContainer.innerHTML = '';
+            itemsContainer.replaceChildren();
         }
 
         if (totalElement) {
@@ -406,14 +469,14 @@
         }
 
         if (!summary.logueado) {
-            feedback.innerHTML = getStateHtml('login', 'Tu cesta completa está disponible cuando inicies sesión.');
+            feedback.replaceChildren(createStateNode('login', 'Tu cesta completa está disponible cuando inicies sesión.'));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
         }
 
         if (!summary.carrito.items.length) {
-            feedback.innerHTML = getStateHtml('empty', 'Todavía no hay viajes en tu carrito activo.');
+            feedback.replaceChildren(createStateNode('empty', 'Todavía no hay viajes en tu carrito activo.'));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
             return;
@@ -423,7 +486,7 @@
         content.classList.remove('d-none');
 
         if (itemsContainer) {
-            itemsContainer.innerHTML = getItemsHtml(summary.carrito.items);
+            itemsContainer.replaceChildren(getItemsFragment(summary.carrito.items));
         }
     }
 
@@ -439,7 +502,7 @@
         const content = document.getElementById('cesta-modal-content');
 
         if ((target === 'both' || target === 'modal') && feedback && content) {
-            feedback.innerHTML = getStateHtml('error', message);
+            feedback.replaceChildren(createStateNode('error', message));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
         }
@@ -448,7 +511,7 @@
         const pageContent = document.getElementById('paga-cesta-content');
 
         if ((target === 'both' || target === 'page') && pageFeedback && pageContent) {
-            pageFeedback.innerHTML = getStateHtml('error', message);
+            pageFeedback.replaceChildren(createStateNode('error', message));
             pageFeedback.classList.remove('d-none');
             pageContent.classList.add('d-none');
         }
@@ -466,7 +529,7 @@
         const content = document.getElementById('cesta-modal-content');
 
         if ((target === 'both' || target === 'modal') && feedback && content) {
-            feedback.innerHTML = getStateHtml('loading', message);
+            feedback.replaceChildren(createStateNode('loading', message));
             feedback.classList.remove('d-none');
             content.classList.add('d-none');
         }
@@ -475,7 +538,7 @@
         const pageContent = document.getElementById('paga-cesta-content');
 
         if ((target === 'both' || target === 'page') && pageFeedback && pageContent) {
-            pageFeedback.innerHTML = getStateHtml('loading', message);
+            pageFeedback.replaceChildren(createStateNode('loading', message));
             pageFeedback.classList.remove('d-none');
             pageContent.classList.add('d-none');
         }

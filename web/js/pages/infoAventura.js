@@ -10,14 +10,21 @@ const DEFAULT_BACK_URL = 'provincias.html';
  * @returns {void}
  */
 function renderDetailMessage(container, message, className = 'text-muted') {
-    container.innerHTML = `
-        <div class="info-trip-empty">
-            <p class="${className} mb-3">${message}</p>
-            <a class="info-trip-btn info-trip-btn-secondary" href="${DEFAULT_BACK_URL}">
-                Volver a provincias
-            </a>
-        </div>
-    `;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'info-trip-empty';
+
+    const text = document.createElement('p');
+    text.className = `${className} mb-3`;
+    text.textContent = message;
+
+    const backLink = document.createElement('a');
+    backLink.className = 'info-trip-btn info-trip-btn-secondary';
+    backLink.href = DEFAULT_BACK_URL;
+    backLink.textContent = 'Volver a provincias';
+
+    wrapper.appendChild(text);
+    wrapper.appendChild(backLink);
+    container.replaceChildren(wrapper);
 }
 
 /**
@@ -164,76 +171,129 @@ function renderTrip(container, trip) {
     const backUrl = getBackUrl(trip);
     const description = getTripDescription(trip);
 
-    container.innerHTML = `
-        <article class="info-trip-card">
-            <div class="row g-0">
-                <div class="col-12 col-lg-5">
-                    <div class="info-trip-media">
-                        <img src="${image}" alt="${trip.titulo}">
-                    </div>
-                </div>
+    const article = document.createElement('article');
+    article.className = 'info-trip-card';
 
-                <div class="col-12 col-lg-7">
-                    <div class="info-trip-body">
-                        <p class="info-trip-kicker">${trip.provincia_nombre || 'Experiencia sostenible'}</p>
-                        <h1 class="info-trip-title">${trip.titulo}</h1>
-                        <p class="info-trip-description">${description}</p>
+    const row = document.createElement('div');
+    row.className = 'row g-0';
 
-                        <div class="info-trip-meta">
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Provincia</span>
-                                <span class="info-trip-meta-value">${trip.provincia_nombre || '-'}</span>
-                            </div>
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Origen</span>
-                                <span class="info-trip-meta-value">${trip.origen || '-'}</span>
-                            </div>
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Fecha de inicio</span>
-                                <span class="info-trip-meta-value">${formatDate(trip.fecha_inicio)}</span>
-                            </div>
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Fecha de fin</span>
-                                <span class="info-trip-meta-value">${formatDate(trip.fecha_fin)}</span>
-                            </div>
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Plazas</span>
-                                <span class="info-trip-meta-value">${trip.plazas ?? '-'}</span>
-                            </div>
-                            <div class="info-trip-meta-card">
-                                <span class="info-trip-meta-label">Tipo</span>
-                                <span class="info-trip-meta-value">Aventura sostenible</span>
-                            </div>
-                        </div>
+    const mediaCol = document.createElement('div');
+    mediaCol.className = 'col-12 col-lg-5';
 
-                        <div class="info-trip-footer">
-                            <div class="info-trip-price-box">
-                                <span class="info-trip-price-label">Precio actual</span>
-                                <span class="info-trip-price">${formatCurrency(trip.precio)}</span>
-                            </div>
+    const mediaWrap = document.createElement('div');
+    mediaWrap.className = 'info-trip-media';
 
-                            <div class="info-trip-actions">
-                                <button type="button" class="info-trip-btn info-trip-btn-primary js-trip-add">
-                                    <i class="bi bi-basket-fill" aria-hidden="true"></i>
-                                    Añadir a la cesta
-                                </button>
-                                <a href="${backUrl}" class="info-trip-btn info-trip-btn-secondary">
-                                    Volver a destinos
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    `;
+    const imageNode = document.createElement('img');
+    imageNode.src = image;
+    imageNode.alt = trip.titulo || 'Viaje';
+    mediaWrap.appendChild(imageNode);
+    mediaCol.appendChild(mediaWrap);
 
-    const addButton = container.querySelector('.js-trip-add');
-    if (addButton) {
-        addButton.addEventListener('click', () => {
-            handleAddToCart(trip.id, addButton);
-        });
-    }
+    const bodyCol = document.createElement('div');
+    bodyCol.className = 'col-12 col-lg-7';
+
+    const body = document.createElement('div');
+    body.className = 'info-trip-body';
+
+    const kicker = document.createElement('p');
+    kicker.className = 'info-trip-kicker';
+    kicker.textContent = trip.provincia_nombre || 'Experiencia sostenible';
+
+    const title = document.createElement('h1');
+    title.className = 'info-trip-title';
+    title.textContent = trip.titulo || 'Viaje';
+
+    const desc = document.createElement('p');
+    desc.className = 'info-trip-description';
+    desc.textContent = description;
+
+    const meta = document.createElement('div');
+    meta.className = 'info-trip-meta';
+
+    const metaItems = [
+        ['Provincia', trip.provincia_nombre || '-'],
+        ['Origen', trip.origen || '-'],
+        ['Fecha de inicio', formatDate(trip.fecha_inicio)],
+        ['Fecha de fin', formatDate(trip.fecha_fin)],
+        ['Plazas', trip.plazas ?? '-'],
+        ['Tipo', 'Aventura sostenible']
+    ];
+
+    metaItems.forEach(([label, value]) => {
+        const card = document.createElement('div');
+        card.className = 'info-trip-meta-card';
+
+        const labelNode = document.createElement('span');
+        labelNode.className = 'info-trip-meta-label';
+        labelNode.textContent = label;
+
+        const valueNode = document.createElement('span');
+        valueNode.className = 'info-trip-meta-value';
+        valueNode.textContent = String(value);
+
+        card.appendChild(labelNode);
+        card.appendChild(valueNode);
+        meta.appendChild(card);
+    });
+
+    const footer = document.createElement('div');
+    footer.className = 'info-trip-footer';
+
+    const priceBox = document.createElement('div');
+    priceBox.className = 'info-trip-price-box';
+
+    const priceLabel = document.createElement('span');
+    priceLabel.className = 'info-trip-price-label';
+    priceLabel.textContent = 'Precio actual';
+
+    const price = document.createElement('span');
+    price.className = 'info-trip-price';
+    price.textContent = formatCurrency(trip.precio);
+
+    priceBox.appendChild(priceLabel);
+    priceBox.appendChild(price);
+
+    const actions = document.createElement('div');
+    actions.className = 'info-trip-actions';
+
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.className = 'info-trip-btn info-trip-btn-primary js-trip-add';
+
+    const addIcon = document.createElement('i');
+    addIcon.className = 'bi bi-basket-fill';
+    addIcon.setAttribute('aria-hidden', 'true');
+
+    addButton.appendChild(addIcon);
+    addButton.appendChild(document.createTextNode(' Añadir a la cesta'));
+
+    const backLink = document.createElement('a');
+    backLink.href = backUrl;
+    backLink.className = 'info-trip-btn info-trip-btn-secondary';
+    backLink.textContent = 'Volver a destinos';
+
+    actions.appendChild(addButton);
+    actions.appendChild(backLink);
+
+    footer.appendChild(priceBox);
+    footer.appendChild(actions);
+
+    body.appendChild(kicker);
+    body.appendChild(title);
+    body.appendChild(desc);
+    body.appendChild(meta);
+    body.appendChild(footer);
+    bodyCol.appendChild(body);
+
+    row.appendChild(mediaCol);
+    row.appendChild(bodyCol);
+    article.appendChild(row);
+
+    container.replaceChildren(article);
+
+    addButton.addEventListener('click', () => {
+        handleAddToCart(trip.id, addButton);
+    });
 }
 
 /**
