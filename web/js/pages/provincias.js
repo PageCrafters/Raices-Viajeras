@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const request = typeof window.rvFetch === 'function'
+        ? window.rvFetch.bind(window)
+        : window.fetch.bind(window);
     const wrap = document.getElementById('provincias-wrap');
     const searchInput = document.getElementById('buscador-input');
     const searchButton = document.getElementById('buscador-btn');
@@ -11,30 +14,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Normaliza un texto para comparar sin depender de mayusculas ni espacios.
+     * Normaliza un texto para comparar sin depender de mayusculas ni espacios
      *
-     * @param {unknown} value Texto original.
-     * @returns {string} Texto listo para comparar.
+     * @param {unknown} value Texto original
+     * @returns {string} Texto listo para comparar
      */
     function normalizeText(value) {
         return (value || '').toString().trim().toLowerCase();
     }
 
     /**
-     * Genera la URL de destinos para una provincia concreta.
+     * Genera la URL de destinos para una provincia concreta
      *
-     * @param {string|number} provinceId Id de la provincia.
-     * @returns {string} Ruta al listado de viajes de esa provincia.
+     * @param {string|number} provinceId Id de la provincia
+     * @returns {string} Ruta al listado de viajes de esa provincia
      */
     function getProvinceUrl(provinceId) {
         return `destinos.html?provincia_id=${encodeURIComponent(provinceId)}`;
     }
 
     /**
-     * Pinta un mensaje simple en la zona del listado.
+     * Pinta un mensaje simple en la zona del listado
      *
-     * @param {string} message Texto a mostrar.
-     * @param {string} className Clase visual para ese mensaje.
+     * @param {string} message Texto a mostrar
+     * @param {string} className Clase visual para ese mensaje
      * @returns {void}
      */
     function createMessage(message, className) {
@@ -52,9 +55,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Pinta todas las provincias con el look actual de tarjetas.
+     * Pinta todas las provincias con el look actual de tarjetas
      *
-     * @param {Array<object>} items Provincias que se van a mostrar.
+     * @param {Array<object>} items Provincias que se van a mostrar
      * @returns {void}
      */
     function renderProvincias(items) {
@@ -121,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Aplica el filtro del buscador solo cuando se pulsa el boton.
+     * Aplica el filtro del buscador solo cuando se pulsa el boton
      *
      * @returns {void}
      */
@@ -157,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('../php/obtener_provincias.php', {
+        const response = await request('../php/obtener_provincias.php', {
             cache: 'no-store',
             credentials: 'same-origin'
         });

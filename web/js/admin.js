@@ -1,10 +1,12 @@
-const API = '../php/admin_api.php';
+﻿const API = '../php/admin_api.php';
 let pendingDelete = null;
 let tripPreviewObjectUrl = null;
+let tripMobilePreviewObjectUrl = null;
 let categoryPreviewObjectUrl = null;
+let categoryMobilePreviewObjectUrl = null;
 
 /**
- * Saca al usuario del panel cuando la sesion ya no vale.
+ * Saca al usuario del panel cuando la sesion ya no vale
  *
  * @returns {void}
  */
@@ -13,10 +15,10 @@ function redirectToLogin() {
 }
 
 /**
- * Lee la respuesta JSON del panel y corta aqui si el backend ya ha devuelto error.
+ * Lee la respuesta JSON del panel y corta aqui si el backend ya ha devuelto error
  *
- * @param {Response} response Respuesta original de fetch.
- * @returns {Promise<any>} JSON valido cuando la respuesta es correcta.
+ * @param {Response} response Respuesta original de fetch
+ * @returns {Promise<any>} JSON valido cuando la respuesta es correcta
  */
 async function parseApiResponse(response) {
     const data = await response.json();
@@ -35,10 +37,10 @@ async function parseApiResponse(response) {
 }
 
 /**
- * Cambia la seccion visible del panel y carga sus datos cuando toca.
+ * Cambia la seccion visible del panel y carga sus datos cuando toca
  *
- * @param {string} name Nombre interno de la seccion.
- * @param {HTMLElement|null} linkElement Enlace del menu que se marca como activo.
+ * @param {string} name Nombre interno de la seccion
+ * @param {HTMLElement|null} linkElement Enlace del menu que se marca como activo
  * @returns {void}
  */
 function showSection(name, linkElement) {
@@ -92,7 +94,7 @@ function showSection(name, linkElement) {
 }
 
 /**
- * Abre o cierra la sidebar del panel en movil.
+ * Abre o cierra la sidebar del panel en movil
  *
  * @returns {void}
  */
@@ -110,7 +112,7 @@ function toggleSidebar() {
 }
 
 /**
- * Cierra la sidebar cuando estamos en movil.
+ * Cierra la sidebar cuando estamos en movil
  *
  * @returns {void}
  */
@@ -132,13 +134,13 @@ function closeSidebar() {
 }
 
 /**
- * Ajusta sidebar y contenido cuando cambia el ancho de pantalla.
+ * Ajusta sidebar y contenido cuando cambia el ancho de pantalla
  *
  * @returns {void}
  */
 function initResponsive() {
     /**
-     * Aplica el layout correcto del panel segun el ancho actual.
+     * Aplica el layout correcto del panel segun el ancho actual
      *
      * @returns {void}
      */
@@ -168,10 +170,10 @@ function initResponsive() {
 }
 
 /**
- * Hace las peticiones GET del panel desde un solo punto.
+ * Hace las peticiones GET del panel desde un solo punto
  *
- * @param {Record<string, string>} params Parametros de la accion a llamar.
- * @returns {Promise<any>} Respuesta JSON ya validada.
+ * @param {Record<string, string>} params Parametros de la accion a llamar
+ * @returns {Promise<any>} Respuesta JSON ya validada
  */
 async function apiFetch(params) {
     const url = new URL(API, window.location.href);
@@ -187,10 +189,10 @@ async function apiFetch(params) {
 }
 
 /**
- * Hace las peticiones POST del panel con el mismo control de errores.
+ * Hace las peticiones POST del panel con el mismo control de errores
  *
- * @param {object} body Cuerpo JSON de la peticion.
- * @returns {Promise<any>} Respuesta JSON ya validada.
+ * @param {object} body Cuerpo JSON de la peticion
+ * @returns {Promise<any>} Respuesta JSON ya validada
  */
 async function apiPost(body) {
     const response = await fetch(API, {
@@ -204,10 +206,10 @@ async function apiPost(body) {
 }
 
 /**
- * Hace POST con FormData para los casos en los que el panel sube archivos.
+ * Hace POST con FormData para los casos en los que el panel sube archivos
  *
- * @param {FormData} formData Datos del formulario listos para enviar.
- * @returns {Promise<any>} Respuesta JSON ya validada.
+ * @param {FormData} formData Datos del formulario listos para enviar
+ * @returns {Promise<any>} Respuesta JSON ya validada
  */
 async function apiPostFormData(formData) {
     const response = await fetch(API, {
@@ -220,10 +222,10 @@ async function apiPostFormData(formData) {
 }
 
 /**
- * Devuelve la chapa HTML que representa el estado de un pedido.
+ * Devuelve la chapa HTML que representa el estado de un pedido
  *
- * @param {string} status Estado actual del pedido.
- * @returns {string} HTML del badge listo para insertar.
+ * @param {string} status Estado actual del pedido
+ * @returns {string} HTML del badge listo para insertar
  */
 function badgeStatus(status) {
     const map = {
@@ -237,10 +239,10 @@ function badgeStatus(status) {
 }
 
 /**
- * Devuelve la chapa HTML del rol de usuario.
+ * Devuelve la chapa HTML del rol de usuario
  *
- * @param {string} role Rol actual del usuario.
- * @returns {string} HTML del badge listo para insertar.
+ * @param {string} role Rol actual del usuario
+ * @returns {string} HTML del badge listo para insertar
  */
 function badgeRole(role) {
     return role === 'admin'
@@ -249,10 +251,10 @@ function badgeRole(role) {
 }
 
 /**
- * Filtra una tabla del panel sin volver a pedir datos al backend.
+ * Filtra una tabla del panel sin volver a pedir datos al backend
  *
- * @param {string} tableId Id del tbody o tabla a filtrar.
- * @param {string} text Texto que se quiere buscar.
+ * @param {string} tableId Id del tbody o tabla a filtrar
+ * @param {string} text Texto que se quiere buscar
  * @returns {void}
  */
 function filterTable(tableId, text) {
@@ -264,7 +266,7 @@ function filterTable(tableId, text) {
 }
 
 /**
- * Carga las cifras del dashboard y los ultimos pedidos.
+ * Carga las cifras del dashboard y los ultimos pedidos
  *
  * @returns {Promise<void>}
  */
@@ -303,7 +305,7 @@ async function loadDashboard() {
 }
 
 /**
- * Carga la tabla de usuarios y genera sus acciones.
+ * Carga la tabla de usuarios y genera sus acciones
  *
  * @returns {Promise<void>}
  */
@@ -350,9 +352,9 @@ async function loadUsers() {
 }
 
 /**
- * Rellena el modal de usuario para alta o edicion.
+ * Rellena el modal de usuario para alta o edicion
  *
- * @param {object|null} [user=null] Usuario a editar. Si no viene, se prepara alta.
+ * @param {object|null} [user=null] Usuario a editar. Si no viene, se prepara alta
  * @returns {void}
  */
 function openUserModal(user = null) {
@@ -368,7 +370,7 @@ function openUserModal(user = null) {
 }
 
 /**
- * Guarda el usuario desde el mismo modal segun sea alta o edicion.
+ * Guarda el usuario desde el mismo modal segun sea alta o edicion
  *
  * @returns {Promise<void>}
  */
@@ -395,7 +397,7 @@ async function saveUser() {
 }
 
 /**
- * Carga la tabla de viajes del panel.
+ * Carga la tabla de viajes del panel
  *
  * @returns {Promise<void>}
  */
@@ -447,7 +449,7 @@ async function loadTrips() {
 }
 
 /**
- * Limpia la URL temporal de la miniatura si estaba creada desde un archivo local.
+ * Limpia la URL temporal de la miniatura si estaba creada desde un archivo local
  *
  * @returns {void}
  */
@@ -459,9 +461,21 @@ function clearTripPreviewObjectUrl() {
 }
 
 /**
- * Enseña u oculta la miniatura actual del viaje dentro del modal.
+ * Limpia la URL temporal de la miniatura móvil del viaje si venía de un archivo local
  *
- * @param {string|null} imageUrl Ruta o data URL de la imagen.
+ * @returns {void}
+ */
+function clearTripMobilePreviewObjectUrl() {
+    if (tripMobilePreviewObjectUrl) {
+        URL.revokeObjectURL(tripMobilePreviewObjectUrl);
+        tripMobilePreviewObjectUrl = null;
+    }
+}
+
+/**
+ * Enseña u oculta la miniatura actual del viaje dentro del modal
+ *
+ * @param {string|null} imageUrl Ruta o data URL de la imagen
  * @returns {void}
  */
 function updateTripImagePreview(imageUrl) {
@@ -483,24 +497,53 @@ function updateTripImagePreview(imageUrl) {
 }
 
 /**
- * Ajusta el texto de ayuda de la imagen segun estemos creando o editando.
+ * Enseña u oculta la miniatura móvil actual del viaje dentro del modal
  *
- * @param {boolean} isEditing Marca si el modal esta editando un viaje existente.
+ * @param {string|null} imageUrl Ruta o data URL de la imagen móvil
+ * @returns {void}
+ */
+function updateTripMobileImagePreview(imageUrl) {
+    const previewWrap = document.getElementById('v-imagen-movil-preview-wrap');
+    const preview = document.getElementById('v-imagen-movil-preview');
+
+    if (!previewWrap || !preview) {
+        return;
+    }
+
+    if (!imageUrl) {
+        previewWrap.classList.add('d-none');
+        preview.src = '';
+        return;
+    }
+
+    preview.src = imageUrl;
+    previewWrap.classList.remove('d-none');
+}
+
+/**
+ * Ajusta el texto de ayuda de las imágenes según estemos creando o editando
+ *
+ * @param {boolean} isEditing Marca si el modal esta editando un viaje existente
  * @returns {void}
  */
 function updateTripImageHelp(isEditing) {
     const help = document.getElementById('v-imagen-help');
-    if (!help) {
+    const mobileHelp = document.getElementById('v-imagen-movil-help');
+    if (!help || !mobileHelp) {
         return;
     }
 
     help.textContent = isEditing
         ? 'Si no subes una imagen nueva, se mantiene la que ya tiene el viaje.'
         : 'La imagen es opcional. Si no subes nada, el viaje se guarda sin imagen.';
+
+    mobileHelp.textContent = isEditing
+        ? 'Si no subes una imagen móvil nueva, se mantiene la que ya tiene el viaje en móvil.'
+        : 'La imagen móvil es opcional. Si no subes nada, el viaje se guarda sin imagen móvil.';
 }
 
 /**
- * Prepara la miniatura local cuando el admin elige un archivo nuevo.
+ * Prepara la miniatura local cuando el admin elige un archivo nuevo
  *
  * @returns {void}
  */
@@ -524,7 +567,31 @@ function handleTripImageInputChange() {
 }
 
 /**
- * Limpia la URL temporal de la miniatura de provincia si venia de un archivo local.
+ * Prepara la miniatura local cuando el admin elige una imagen móvil nueva para el viaje
+ *
+ * @returns {void}
+ */
+function handleTripMobileImageInputChange() {
+    const input = document.getElementById('v-imagen-movil');
+    const previewWrap = document.getElementById('v-imagen-movil-preview-wrap');
+    if (!(input instanceof HTMLInputElement)) {
+        return;
+    }
+
+    clearTripMobilePreviewObjectUrl();
+
+    const file = input.files?.[0];
+    if (!file) {
+        updateTripMobileImagePreview(previewWrap?.dataset.currentSrc || null);
+        return;
+    }
+
+    tripMobilePreviewObjectUrl = URL.createObjectURL(file);
+    updateTripMobileImagePreview(tripMobilePreviewObjectUrl);
+}
+
+/**
+ * Limpia la URL temporal de la miniatura de provincia si venía de un archivo local
  *
  * @returns {void}
  */
@@ -536,9 +603,21 @@ function clearCategoryPreviewObjectUrl() {
 }
 
 /**
- * Enseña u oculta la miniatura actual de la provincia en el modal.
+ * Limpia la URL temporal de la miniatura móvil de provincia si venía de un archivo local
  *
- * @param {string|null} imageUrl Ruta o data URL de la imagen.
+ * @returns {void}
+ */
+function clearCategoryMobilePreviewObjectUrl() {
+    if (categoryMobilePreviewObjectUrl) {
+        URL.revokeObjectURL(categoryMobilePreviewObjectUrl);
+        categoryMobilePreviewObjectUrl = null;
+    }
+}
+
+/**
+ * Enseña u oculta la miniatura actual de la provincia en el modal
+ *
+ * @param {string|null} imageUrl Ruta o data URL de la imagen
  * @returns {void}
  */
 function updateCategoryImagePreview(imageUrl) {
@@ -560,24 +639,53 @@ function updateCategoryImagePreview(imageUrl) {
 }
 
 /**
- * Ajusta la ayuda del campo de imagen de provincia segun estemos creando o editando.
+ * Enseña u oculta la miniatura móvil actual de la provincia en el modal
  *
- * @param {boolean} isEditing Marca si el modal esta editando una provincia existente.
+ * @param {string|null} imageUrl Ruta o data URL de la imagen móvil
+ * @returns {void}
+ */
+function updateCategoryMobileImagePreview(imageUrl) {
+    const previewWrap = document.getElementById('c-imagen-movil-preview-wrap');
+    const preview = document.getElementById('c-imagen-movil-preview');
+
+    if (!previewWrap || !preview) {
+        return;
+    }
+
+    if (!imageUrl) {
+        previewWrap.classList.add('d-none');
+        preview.src = '';
+        return;
+    }
+
+    preview.src = imageUrl;
+    previewWrap.classList.remove('d-none');
+}
+
+/**
+ * Ajusta la ayuda de las imágenes de provincia según estemos creando o editando
+ *
+ * @param {boolean} isEditing Marca si el modal esta editando una provincia existente
  * @returns {void}
  */
 function updateCategoryImageHelp(isEditing) {
     const help = document.getElementById('c-imagen-help');
-    if (!help) {
+    const mobileHelp = document.getElementById('c-imagen-movil-help');
+    if (!help || !mobileHelp) {
         return;
     }
 
     help.textContent = isEditing
         ? 'Si no subes una imagen nueva, se mantiene la que ya tiene la provincia.'
         : 'La imagen es opcional. Si no subes nada, la provincia se guarda sin imagen propia.';
+
+    mobileHelp.textContent = isEditing
+        ? 'Si no subes una imagen móvil nueva, se mantiene la que ya tiene la provincia en móvil.'
+        : 'La imagen móvil es opcional. Si no subes nada, la provincia se guarda sin imagen móvil.';
 }
 
 /**
- * Prepara la miniatura local cuando el admin elige una imagen nueva para la provincia.
+ * Prepara la miniatura local cuando el admin elige una imagen nueva para la provincia
  *
  * @returns {void}
  */
@@ -601,9 +709,33 @@ function handleCategoryImageInputChange() {
 }
 
 /**
- * Carga provincias y luego rellena el modal del viaje.
+ * Prepara la miniatura local cuando el admin elige una imagen móvil nueva para la provincia
  *
- * @param {object|null} [trip=null] Viaje a editar. Si no viene, se prepara alta.
+ * @returns {void}
+ */
+function handleCategoryMobileImageInputChange() {
+    const input = document.getElementById('c-imagen-movil');
+    const previewWrap = document.getElementById('c-imagen-movil-preview-wrap');
+    if (!(input instanceof HTMLInputElement)) {
+        return;
+    }
+
+    clearCategoryMobilePreviewObjectUrl();
+
+    const file = input.files?.[0];
+    if (!file) {
+        updateCategoryMobileImagePreview(previewWrap?.dataset.currentSrc || null);
+        return;
+    }
+
+    categoryMobilePreviewObjectUrl = URL.createObjectURL(file);
+    updateCategoryMobileImagePreview(categoryMobilePreviewObjectUrl);
+}
+
+/**
+ * Carga provincias y luego rellena el modal del viaje
+ *
+ * @param {object|null} [trip=null] Viaje a editar. Si no viene, se prepara alta
  * @returns {Promise<void>}
  */
 async function openTripModal(trip = null) {
@@ -619,6 +751,7 @@ async function openTripModal(trip = null) {
         const currentTrip = tripDetail || trip || null;
         const select = document.getElementById('v-provincia');
         const imageInput = document.getElementById('v-imagen');
+        const mobileImageInput = document.getElementById('v-imagen-movil');
 
         if (select) {
             select.innerHTML = provinces.map((province) => `
@@ -639,14 +772,23 @@ async function openTripModal(trip = null) {
         if (imageInput instanceof HTMLInputElement) {
             imageInput.value = '';
         }
+        if (mobileImageInput instanceof HTMLInputElement) {
+            mobileImageInput.value = '';
+        }
 
         clearTripPreviewObjectUrl();
+        clearTripMobilePreviewObjectUrl();
         updateTripImageHelp(isEditing);
         const previewWrap = document.getElementById('v-imagen-preview-wrap');
+        const mobilePreviewWrap = document.getElementById('v-imagen-movil-preview-wrap');
         if (previewWrap) {
             previewWrap.dataset.currentSrc = currentTrip?.imagen_preview || '';
         }
+        if (mobilePreviewWrap) {
+            mobilePreviewWrap.dataset.currentSrc = currentTrip?.imagen_movil_preview || '';
+        }
         updateTripImagePreview(currentTrip?.imagen_preview || null);
+        updateTripMobileImagePreview(currentTrip?.imagen_movil_preview || null);
 
         new bootstrap.Modal(document.getElementById('modalViaje')).show();
     } catch (error) {
@@ -656,13 +798,14 @@ async function openTripModal(trip = null) {
 }
 
 /**
- * Guarda el viaje desde el modal de productos.
+ * Guarda el viaje desde el modal de productos
  *
  * @returns {Promise<void>}
  */
 async function saveTrip() {
     const id = document.getElementById('v-id').value;
     const imageInput = document.getElementById('v-imagen');
+    const mobileImageInput = document.getElementById('v-imagen-movil');
     const formData = new FormData();
 
     formData.append('accion', id ? 'editar_viaje' : 'crear_viaje');
@@ -679,6 +822,9 @@ async function saveTrip() {
     if (imageInput instanceof HTMLInputElement && imageInput.files?.[0]) {
         formData.append('imagen', imageInput.files[0]);
     }
+    if (mobileImageInput instanceof HTMLInputElement && mobileImageInput.files?.[0]) {
+        formData.append('imagen_movil', mobileImageInput.files[0]);
+    }
 
     try {
         await apiPostFormData(formData);
@@ -691,7 +837,7 @@ async function saveTrip() {
 }
 
 /**
- * Carga la tabla de provincias del panel.
+ * Carga la tabla de provincias del panel
  *
  * @returns {Promise<void>}
  */
@@ -741,9 +887,9 @@ async function loadCategories() {
 }
 
 /**
- * Rellena el modal de provincias para crear o editar.
+ * Rellena el modal de provincias para crear o editar
  *
- * @param {object|null} [category=null] Provincia a editar o `null` para alta.
+ * @param {object|null} [category=null] Provincia a editar o `null` para alta
  * @returns {void}
  */
 async function openCategoryModal(category = null) {
@@ -754,7 +900,9 @@ async function openCategoryModal(category = null) {
             : category;
 
         const imageInput = document.getElementById('c-imagen');
+        const mobileImageInput = document.getElementById('c-imagen-movil');
         const previewWrap = document.getElementById('c-imagen-preview-wrap');
+        const mobilePreviewWrap = document.getElementById('c-imagen-movil-preview-wrap');
 
         document.getElementById('c-id').value = currentCategory?.id || '';
         document.getElementById('c-nombre').value = currentCategory?.nombre || '';
@@ -764,13 +912,21 @@ async function openCategoryModal(category = null) {
         if (imageInput instanceof HTMLInputElement) {
             imageInput.value = '';
         }
+        if (mobileImageInput instanceof HTMLInputElement) {
+            mobileImageInput.value = '';
+        }
 
         clearCategoryPreviewObjectUrl();
+        clearCategoryMobilePreviewObjectUrl();
         updateCategoryImageHelp(isEditing);
         if (previewWrap) {
             previewWrap.dataset.currentSrc = currentCategory?.imagen_preview || '';
         }
+        if (mobilePreviewWrap) {
+            mobilePreviewWrap.dataset.currentSrc = currentCategory?.imagen_movil_preview || '';
+        }
         updateCategoryImagePreview(currentCategory?.imagen_preview || null);
+        updateCategoryMobileImagePreview(currentCategory?.imagen_movil_preview || null);
 
         new bootstrap.Modal(document.getElementById('modalCategoria')).show();
     } catch (error) {
@@ -780,13 +936,14 @@ async function openCategoryModal(category = null) {
 }
 
 /**
- * Guarda la provincia desde su modal.
+ * Guarda la provincia desde su modal
  *
  * @returns {Promise<void>}
  */
 async function saveCategory() {
     const id = document.getElementById('c-id').value;
     const imageInput = document.getElementById('c-imagen');
+    const mobileImageInput = document.getElementById('c-imagen-movil');
     const formData = new FormData();
 
     formData.append('accion', id ? 'editar_provincia' : 'crear_provincia');
@@ -796,6 +953,9 @@ async function saveCategory() {
 
     if (imageInput instanceof HTMLInputElement && imageInput.files?.[0]) {
         formData.append('imagen', imageInput.files[0]);
+    }
+    if (mobileImageInput instanceof HTMLInputElement && mobileImageInput.files?.[0]) {
+        formData.append('imagen_movil', mobileImageInput.files[0]);
     }
 
     try {
@@ -809,7 +969,7 @@ async function saveCategory() {
 }
 
 /**
- * Carga la tabla de pedidos y aplica el filtro de estado si existe.
+ * Carga la tabla de pedidos y aplica el filtro de estado si existe
  *
  * @returns {Promise<void>}
  */
@@ -863,10 +1023,10 @@ async function loadOrders() {
 }
 
 /**
- * Abre el modal para cambiar el estado de un pedido.
+ * Abre el modal para cambiar el estado de un pedido
  *
- * @param {number|string} id Id del pedido.
- * @param {string} currentStatus Estado actual.
+ * @param {number|string} id Id del pedido
+ * @param {string} currentStatus Estado actual
  * @returns {void}
  */
 function openOrderStatusModal(id, currentStatus) {
@@ -877,7 +1037,7 @@ function openOrderStatusModal(id, currentStatus) {
 }
 
 /**
- * Guarda el estado nuevo del pedido.
+ * Guarda el estado nuevo del pedido
  *
  * @returns {Promise<void>}
  */
@@ -896,10 +1056,10 @@ async function saveOrderStatus() {
 }
 
 /**
- * Guarda el registro pendiente de borrar y abre el modal comun.
+ * Guarda el registro pendiente de borrar y abre el modal comun
  *
- * @param {string} type Tipo de registro.
- * @param {number|string} id Id del registro.
+ * @param {string} type Tipo de registro
+ * @param {number|string} id Id del registro
  * @returns {void}
  */
 function confirmDelete(type, id) {
@@ -908,7 +1068,7 @@ function confirmDelete(type, id) {
 }
 
 /**
- * Ejecuta el borrado confirmado y refresca solo la tabla afectada.
+ * Ejecuta el borrado confirmado y refresca solo la tabla afectada
  *
  * @returns {Promise<void>}
  */
@@ -941,7 +1101,7 @@ async function executeDelete() {
     }
 }
 
-// Las dejo globales porque el HTML del panel las llama desde onclick.
+// Las dejo globales porque el HTML del panel las llama desde onclick
 window.mostrarSeccion = showSection;
 window.toggleSidebar = toggleSidebar;
 window.closeSidebar = closeSidebar;
@@ -961,7 +1121,7 @@ window.abrirModalEstado = openOrderStatusModal;
 window.guardarEstadoPedido = saveOrderStatus;
 window.confirmarEliminar = confirmDelete;
 
-// Dejo tambien alias en ingles por si queda algun render viejo suelto.
+// Dejo tambien alias en ingles por si queda algun render viejo suelto
 window.openUserModal = openUserModal;
 window.saveUser = saveUser;
 window.openTripModal = openTripModal;
@@ -972,7 +1132,7 @@ window.openOrderStatusModal = openOrderStatusModal;
 window.saveOrderStatus = saveOrderStatus;
 window.confirmDelete = confirmDelete;
 
-// Arranco el panel una vez el DOM ya esta listo.
+// Arranco el panel una vez el DOM ya esta listo
 document.addEventListener('DOMContentLoaded', () => {
     initResponsive();
     showSection('dashboard', document.getElementById('nav-dashboard'));
@@ -986,9 +1146,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tripImageInput) {
         tripImageInput.addEventListener('change', handleTripImageInputChange);
     }
+    const tripMobileImageInput = document.getElementById('v-imagen-movil');
+    if (tripMobileImageInput) {
+        tripMobileImageInput.addEventListener('change', handleTripMobileImageInputChange);
+    }
 
     const categoryImageInput = document.getElementById('c-imagen');
     if (categoryImageInput) {
         categoryImageInput.addEventListener('change', handleCategoryImageInputChange);
     }
+    const categoryMobileImageInput = document.getElementById('c-imagen-movil');
+    if (categoryMobileImageInput) {
+        categoryMobileImageInput.addEventListener('change', handleCategoryMobileImageInputChange);
+    }
 });
+
+
