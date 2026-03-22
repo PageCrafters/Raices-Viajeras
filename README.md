@@ -22,6 +22,9 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 # Landing publicada en GitHub Pages
 >  [Ver Página](https://PageCrafters.github.io/Raices-Viajeras)
 
+# Documentación 
+>  [Ver Documentación final](/documentacion/DocumentacionFinalRaicesViajeras.pdf)
+
 # Boceto final Landing Page (vista escritorio y móvil)
 > [Ver Boceto e Informe](https://pagecrafters.github.io/Raices-Viajeras/web/bocetos/Boceto_Final_Landing_Page.html)
 
