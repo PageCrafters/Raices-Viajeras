@@ -4,10 +4,10 @@ require_once __DIR__ . '/contador_entradas.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-// Antes de responder, intentamos levantar la sesion desde la cookie persistente.
+// Antes de responder, intentamos levantar la sesión desde la cookie persistente.
 $user = auth_current_user();
 
-// El contador se mueve aqui porque casi toda la web publica ya consulta esta ruta al cargar el header.
+// El contador se mueve aquí porque casi toda la web pública ya consulta esta ruta al cargar el header.
 entry_counter_register_visit($user);
 
 if ($user) {

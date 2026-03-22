@@ -6,7 +6,7 @@ let categoryPreviewObjectUrl = null;
 let categoryMobilePreviewObjectUrl = null;
 
 /**
- * Saca al usuario del panel cuando la sesion ya no vale
+ * Saca al usuario del panel cuando la sesión ya no vale.
  *
  * @returns {void}
  */
@@ -15,10 +15,10 @@ function redirectToLogin() {
 }
 
 /**
- * Lee la respuesta JSON del panel y corta aqui si el backend ya ha devuelto error
+ * Lee la respuesta JSON del panel y corta aquí si el backend ya ha devuelto error.
  *
  * @param {Response} response Respuesta original de fetch
- * @returns {Promise<any>} JSON valido cuando la respuesta es correcta
+ * @returns {Promise<any>} JSON válido cuando la respuesta es correcta.
  */
 async function parseApiResponse(response) {
     const data = await response.json();
@@ -94,7 +94,7 @@ function showSection(name, linkElement) {
 }
 
 /**
- * Abre o cierra la sidebar del panel en movil
+ * Abre o cierra la sidebar del panel en móvil.
  *
  * @returns {void}
  */
@@ -112,7 +112,7 @@ function toggleSidebar() {
 }
 
 /**
- * Cierra la sidebar cuando estamos en movil
+ * Cierra la sidebar cuando estamos en móvil.
  *
  * @returns {void}
  */
@@ -1056,7 +1056,7 @@ async function saveOrderStatus() {
 }
 
 /**
- * Guarda el registro pendiente de borrar y abre el modal comun
+ * Guarda el registro pendiente de borrar y abre el modal común.
  *
  * @param {string} type Tipo de registro
  * @param {number|string} id Id del registro

@@ -3,9 +3,9 @@
     const nativeFetch = window.fetch.bind(window);
 
     /**
-     * Calcula una sola vez si la carga inicial es móvil o escritorio
+     * Calcula una sola vez si la carga inicial es móvil o escritorio.
      *
-     * @returns {'mobile'|'desktop'} Modo de viewport fijado para esta carga
+     * @returns {'mobile'|'desktop'} Modo de viewport fijado para esta carga.
      */
     function getInitialViewport() {
         if (window.__rvInitialViewport) {
@@ -21,10 +21,10 @@
     }
 
     /**
-     * Añade el header de viewport sin perder el resto de opciones del fetch
+     * Añade el header de viewport sin perder el resto de opciones del fetch.
      *
-     * @param {RequestInit} [init={}] Configuración original del fetch
-     * @returns {RequestInit} Configuración lista para enviar
+     * @param {RequestInit} [init={}] Configuración original del fetch.
+     * @returns {RequestInit} Configuración lista para enviar.
      */
     function withViewportHeaders(init = {}) {
         const headers = new Headers(init.headers || {});
@@ -37,11 +37,11 @@
     }
 
     /**
-     * Wrapper común de fetch para las páginas públicas
+     * Wrapper común de fetch para las páginas públicas.
      *
-     * @param {RequestInfo | URL} input Recurso a pedir
-     * @param {RequestInit} [init={}] Opciones del fetch
-     * @returns {Promise<Response>} Respuesta nativa del navegador
+     * @param {RequestInfo | URL} input Recurso a pedir.
+     * @param {RequestInit} [init={}] Opciones del fetch.
+     * @returns {Promise<Response>} Respuesta nativa del navegador.
      */
     function rvFetch(input, init = {}) {
         return nativeFetch(input, withViewportHeaders(init));

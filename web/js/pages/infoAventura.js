@@ -5,11 +5,11 @@ const request = typeof window.rvFetch === 'function'
     : window.fetch.bind(window);
 
 /**
- * Pinta mensajes simples de error o de estado vacio dentro del detalle
+ * Pinta mensajes simples de error o de estado vacío dentro del detalle.
  *
- * @param {HTMLElement} container Contenedor principal del detalle
- * @param {string} message Texto que se quiere mostrar
- * @param {string} [className='text-muted'] Clase visual del mensaje
+ * @param {HTMLElement} container Contenedor principal del detalle.
+ * @param {string} message Texto que se quiere mostrar.
+ * @param {string} [className='text-muted'] Clase visual del mensaje.
  * @returns {void}
  */
 function renderDetailMessage(container, message, className = 'text-muted') {
@@ -31,9 +31,9 @@ function renderDetailMessage(container, message, className = 'text-muted') {
 }
 
 /**
- * Lee el id del viaje desde la query actual
+ * Lee el ID del viaje desde la query actual.
  *
- * @returns {string|null} Id del viaje o `null` si no viene
+ * @returns {string|null} ID del viaje o `null` si no viene.
  */
 function getTripId() {
     const params = new URLSearchParams(window.location.search);
@@ -41,10 +41,10 @@ function getTripId() {
 }
 
 /**
- * Formatea un precio con el formato local
+ * Formatea un precio con el formato local.
  *
- * @param {number|string} value Importe a mostrar
- * @returns {string} Importe listo para pintar
+ * @param {number|string} value Importe a mostrar.
+ * @returns {string} Importe listo para pintar.
  */
 function formatCurrency(value) {
     return new Intl.NumberFormat('es-ES', {
@@ -54,10 +54,10 @@ function formatCurrency(value) {
 }
 
 /**
- * Formatea una fecha en castellano y deja un guion si no hay valor
+ * Formatea una fecha en castellano y deja un guion si no hay valor.
  *
- * @param {string|null|undefined} value Fecha original
- * @returns {string} Fecha formateada o el texto de respaldo
+ * @param {string|null|undefined} value Fecha original.
+ * @returns {string} Fecha formateada o el texto de respaldo.
  */
 function formatDate(value) {
     if (!value) {
@@ -77,12 +77,12 @@ function formatDate(value) {
 }
 
 /**
- * Devuelve la descripcion que mejor encaja para la ficha
+ * Devuelve la descripción que mejor encaja para la ficha.
  *
- * Primero intento usar la del propio viaje y, si no viene, tiro de la provincia
+ * Primero intento usar la del propio viaje y, si no viene, tiro de la provincia.
  *
- * @param {object} trip Datos del viaje
- * @returns {string} Texto descriptivo listo para pintar
+ * @param {object} trip Datos del viaje.
+ * @returns {string} Texto descriptivo listo para pintar.
  */
 function getTripDescription(trip) {
     const tripDescription = (trip.descripcion || '').toString().trim();
@@ -99,9 +99,9 @@ function getTripDescription(trip) {
 }
 
 /**
- * Espera a que la API global de la cesta este lista
+ * Espera a que la API global de la cesta esté lista.
  *
- * @returns {Promise<Function>} Funcion global para anadir items al carrito
+ * @returns {Promise<Function>} Función global para añadir items al carrito.
  */
 function waitForCartApi() {
     if (typeof window.rvCartAddItem === 'function') {
@@ -121,10 +121,10 @@ function waitForCartApi() {
 }
 
 /**
- * Devuelve el enlace de vuelta mas util para el viaje actual
+ * Devuelve el enlace de vuelta más útil para el viaje actual.
  *
- * @param {object} trip Datos del viaje
- * @returns {string} Ruta de vuelta a destinos o a provincias
+ * @param {object} trip Datos del viaje.
+ * @returns {string} Ruta de vuelta a destinos o a provincias.
  */
 function getBackUrl(trip) {
     if (trip.provincia_id) {
@@ -135,10 +135,10 @@ function getBackUrl(trip) {
 }
 
 /**
- * Anade el viaje al carrito y actualiza el texto del boton un momento
+ * Añade el viaje al carrito y actualiza el texto del botón un momento.
  *
- * @param {number|string} tripId Id del viaje
- * @param {HTMLButtonElement} button Boton que lanza la accion
+ * @param {number|string} tripId ID del viaje.
+ * @param {HTMLButtonElement} button Botón que lanza la acción.
  * @returns {Promise<void>}
  */
 async function handleAddToCart(tripId, button) {
@@ -163,10 +163,10 @@ async function handleAddToCart(tripId, button) {
 }
 
 /**
- * Pinta la ficha del viaje cuando la API devuelve un resultado valido
+ * Pinta la ficha del viaje cuando la API devuelve un resultado válido.
  *
- * @param {HTMLElement} container Contenedor principal del detalle
- * @param {object} trip Datos del viaje
+ * @param {HTMLElement} container Contenedor principal del detalle.
+ * @param {object} trip Datos del viaje.
  * @returns {void}
  */
 function renderTrip(container, trip) {
@@ -300,10 +300,10 @@ function renderTrip(container, trip) {
 }
 
 /**
- * Pide el viaje al backend y valida que la respuesta venga en JSON
+ * Pide el viaje al backend y valida que la respuesta venga en JSON.
  *
- * @param {HTMLElement} container Contenedor principal del detalle
- * @param {string|number} tripId Id del viaje a cargar
+ * @param {HTMLElement} container Contenedor principal del detalle.
+ * @param {string|number} tripId ID del viaje a cargar.
  * @returns {Promise<void>}
  */
 async function loadTripDetail(container, tripId) {
@@ -330,7 +330,7 @@ async function loadTripDetail(container, tripId) {
 }
 
 /**
- * Arranca la pagina de detalle y deja todos los estados controlados aqui
+ * Arranca la página de detalle y deja todos los estados controlados aquí.
  *
  * @returns {Promise<void>}
  */

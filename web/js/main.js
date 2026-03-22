@@ -2,7 +2,7 @@
 document.body.classList.add('theme-loaded');
 
 /**
- * Sincroniza los iconos del tema con el modo que este activo ahora.
+ * Sincroniza los iconos del tema con el modo que esté activo ahora.
  *
  * @returns {void}
  */
@@ -31,7 +31,7 @@ window.cambiaModoColor = () => {
 };
 
 /**
- * Deja el icono del tema listo cuando la pagina ya ha cargado.
+ * Deja el icono del tema listo cuando la página ya ha cargado.
  *
  * @returns {void}
  */

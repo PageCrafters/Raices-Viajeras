@@ -21,6 +21,7 @@ const registerBackBox = document.querySelector('.caja_trasera-registro');
 const loginEmailInput = document.getElementById('correo_login');
 const loginPasswordInput = document.getElementById('pwd_login');
 const rememberMeInput = document.getElementById('remember_me');
+const loginRedirectInput = document.getElementById('login_redirect');
 
 const registerNameInput = document.getElementById('nombre_completo');
 const registerEmailInput = document.getElementById('correo');
@@ -33,11 +34,12 @@ const registerBirthDateBlock = document.querySelector('.auth-date-block');
 const privacyInput = document.getElementById('politica_privacidad');
 const privacyGroup = privacyInput?.closest('.form-check') || null;
 const magazineInput = document.getElementById('revista');
+const registerRedirectInput = document.getElementById('register_redirect');
 
 /**
  * Ajusta el panel del acceso al ancho actual.
  *
- * En movil deja una sola cara visible para que el slider no se monte.
+ * En móvil deja una sola cara visible para que el slider no se monte.
  *
  * @returns {void}
  */
@@ -207,13 +209,50 @@ function showRegister() {
 /**
  * Lee el modo inicial desde la URL.
  *
- * @returns {'login'|'registro'} Modo con el que debe arrancar la pagina.
+ * @returns {'login'|'registro'} Modo con el que debe arrancar la página.
  */
 function getInitialMode() {
     const params = new URLSearchParams(window.location.search);
     const mode = (params.get('modo') || 'login').toLowerCase();
 
     return mode === 'registro' ? 'registro' : 'login';
+}
+
+/**
+ * Lee el redirect y acepta solo rutas internas de la aplicación.
+ *
+ * @returns {string} Redirect seguro o cadena vacía.
+ */
+function getRedirectTarget() {
+    const params = new URLSearchParams(window.location.search);
+    const value = (params.get('redirect') || '').trim();
+
+    if (!value || !value.startsWith('/Raices-Viajeras/')) {
+        return '';
+    }
+
+    if (/^[a-z][a-z0-9+\-.]*:/i.test(value) || value.startsWith('//')) {
+        return '';
+    }
+
+    return value;
+}
+
+/**
+ * Sincroniza los hidden de redirect de ambos formularios.
+ *
+ * @returns {void}
+ */
+function syncRedirectInputs() {
+    const redirect = getRedirectTarget();
+
+    if (loginRedirectInput instanceof HTMLInputElement) {
+        loginRedirectInput.value = redirect;
+    }
+
+    if (registerRedirectInput instanceof HTMLInputElement) {
+        registerRedirectInput.value = redirect;
+    }
 }
 
 /**
@@ -224,14 +263,24 @@ function getInitialMode() {
  */
 function syncUrl(mode) {
     const url = new URL(window.location.href);
+    const redirect = getRedirectTarget();
+
     url.searchParams.set('modo', mode);
+
+    if (redirect) {
+        url.searchParams.set('redirect', redirect);
+    } else {
+        url.searchParams.delete('redirect');
+    }
+
     window.history.replaceState({}, '', url);
+    syncRedirectInputs();
 }
 
 /**
  * Enseña u oculta el mensaje de error de un campo concreto.
  *
- * @param {string} errorId Id del nodo donde se pinta el error.
+ * @param {string} errorId ID del nodo donde se pinta el error.
  * @param {string} message Texto que se quiere mostrar.
  * @returns {void}
  */
@@ -246,7 +295,7 @@ function setErrorMessage(errorId, message) {
 }
 
 /**
- * Marca un input normal como valido o invalido sin depender del navegador.
+ * Marca un input normal como válido o inválido sin depender del navegador.
  *
  * @param {HTMLInputElement|null} input Campo que se quiere marcar.
  * @param {boolean} isInvalid Estado final del campo.
@@ -262,7 +311,7 @@ function setInputInvalidState(input, isInvalid) {
 }
 
 /**
- * Marca un grupo visual como invalido, por ejemplo genero o privacidad.
+ * Marca un grupo visual como inválido, por ejemplo género o privacidad.
  *
  * @param {HTMLElement|null} group Bloque visual del grupo.
  * @param {boolean} isInvalid Estado final del grupo.
@@ -291,7 +340,7 @@ function focusElement(element) {
 /**
  * Valida el correo del login.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateLoginEmail() {
     const value = loginEmailInput?.value.trim() || '';
@@ -309,11 +358,11 @@ function validateLoginEmail() {
 }
 
 /**
- * Valida la contrasena del login.
+ * Valida la contraseña del login.
  *
  * En acceso solo compruebo que exista, sin imponer la regla del alta.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateLoginPassword() {
     const value = loginPasswordInput?.value || '';
@@ -329,7 +378,7 @@ function validateLoginPassword() {
 }
 
 /**
- * Normaliza el checkbox de recordar sesion.
+ * Normaliza el checkbox de recordar sesión.
  *
  * @returns {boolean} `true` si el valor del control es utilizable.
  */
@@ -340,7 +389,7 @@ function validateRememberMe() {
 /**
  * Valida el nombre del registro.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateRegisterName() {
     const value = registerNameInput?.value.trim() || '';
@@ -349,7 +398,7 @@ function validateRegisterName() {
     if (!validarCampoObligatorio(value)) {
         message = 'Escribe tu nombre completo.';
     } else if (!validarNombre(value)) {
-        message = 'El nombre no tiene un formato valido.';
+        message = 'El nombre no tiene un formato válido.';
     }
 
     setErrorMessage('error-nombre_completo', message);
@@ -360,7 +409,7 @@ function validateRegisterName() {
 /**
  * Valida el correo del registro.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateRegisterEmail() {
     const value = registerEmailInput?.value.trim() || '';
@@ -378,9 +427,9 @@ function validateRegisterEmail() {
 }
 
 /**
- * Valida la contrasena del registro con la misma regla del backend.
+ * Valida la contraseña del registro con la misma regla del backend.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateRegisterPassword() {
     const value = registerPasswordInput?.value || '';
@@ -398,9 +447,9 @@ function validateRegisterPassword() {
 }
 
 /**
- * Valida la confirmacion de contrasena del registro.
+ * Valida la confirmación de contraseña del registro.
  *
- * @returns {boolean} `true` si el campo esta correcto.
+ * @returns {boolean} `true` si el campo está correcto.
  */
 function validateRegisterPasswordConfirm() {
     const passwordValue = registerPasswordInput?.value || '';
@@ -419,9 +468,9 @@ function validateRegisterPasswordConfirm() {
 }
 
 /**
- * Valida el grupo de genero del registro.
+ * Valida el grupo de género del registro.
  *
- * @returns {boolean} `true` si hay una opcion valida marcada.
+ * @returns {boolean} `true` si hay una opción válida marcada.
  */
 function validateRegisterGender() {
     const selectedValue = registerGenderInputs.find((input) => input.checked)?.value || '';
@@ -460,7 +509,7 @@ function validateRegisterBirthDate() {
 /**
  * Valida el check obligatorio de privacidad.
  *
- * @returns {boolean} `true` si esta aceptado.
+ * @returns {boolean} `true` si está aceptado.
  */
 function validateRegisterPrivacy() {
     const isValid = validarCheckboxObligatorio(privacyInput?.checked ?? false);
@@ -555,7 +604,7 @@ function bindModeButtons() {
 }
 
 /**
- * Conecta cada campo con su validacion en caliente.
+ * Conecta cada campo con su validación en caliente.
  *
  * @returns {void}
  */
@@ -581,18 +630,22 @@ function bindValidationEvents() {
 }
 
 /**
- * Engancha la validacion al envio real de los formularios.
+ * Engancha la validación al envío real de los formularios.
  *
  * @returns {void}
  */
 function bindSubmitValidation() {
     loginForm?.addEventListener('submit', (event) => {
+        syncRedirectInputs();
+
         if (!validateLoginForm(true)) {
             event.preventDefault();
         }
     });
 
     registerForm?.addEventListener('submit', (event) => {
+        syncRedirectInputs();
+
         if (!validateRegisterForm(true)) {
             event.preventDefault();
         }
@@ -615,6 +668,7 @@ function applyInitialMode() {
     showLogin();
 }
 
+syncRedirectInputs();
 bindModeButtons();
 bindValidationEvents();
 bindSubmitValidation();

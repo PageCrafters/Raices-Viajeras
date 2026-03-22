@@ -3,10 +3,10 @@ const request = typeof window.rvFetch === 'function'
     : window.fetch.bind(window);
 
 /**
- * Resuelve el src del detalle del blog sin romper rutas ya completas
+ * Resuelve el src del detalle del blog sin romper rutas ya completas.
  *
- * @param {string|null|undefined} imagePath Ruta o nombre de imagen recibido desde la API
- * @returns {string} Ruta lista para usar en la imagen
+ * @param {string|null|undefined} imagePath Ruta o nombre de imagen recibido desde la API.
+ * @returns {string} Ruta lista para usar en la imagen.
  */
 function getArticleImageSrc(imagePath) {
     const normalizedPath = String(imagePath ?? '').trim().replace(/\\/g, '/');
@@ -26,9 +26,9 @@ function getArticleImageSrc(imagePath) {
 }
 
 /**
- * Saca el id del articulo desde la URL actual
+ * Saca el ID del artículo desde la URL actual.
  *
- * @returns {string|null} Id del articulo o `null` si no viene en la query
+ * @returns {string|null} ID del artículo o `null` si no viene en la query.
  */
 function getArticleId() {
     const params = new URLSearchParams(window.location.search);
@@ -36,9 +36,9 @@ function getArticleId() {
 }
 
 /**
- * Pinta un mensaje simple cuando falta el id o falla la carga
+ * Pinta un mensaje simple cuando falta el ID o falla la carga.
  *
- * @param {string} message Texto a mostrar en pantalla
+ * @param {string} message Texto a mostrar en pantalla.
  * @returns {void}
  */
 function renderArticleMessage(message) {
@@ -54,9 +54,9 @@ function renderArticleMessage(message) {
 }
 
 /**
- * Pinta el articulo completo en la pagina de detalle
+ * Pinta el artículo completo en la página de detalle.
  *
- * @param {object} article Datos del articulo devueltos por la API
+ * @param {object} article Datos del artículo devueltos por la API.
  * @returns {void}
  */
 function renderArticle(article) {
@@ -76,7 +76,7 @@ function renderArticle(article) {
 }
 
 /**
- * Carga el detalle del articulo y deja un estado claro si algo falla
+ * Carga el detalle del artículo y deja un estado claro si algo falla.
  *
  * @returns {void}
  */

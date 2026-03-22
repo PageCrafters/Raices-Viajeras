@@ -21,7 +21,7 @@
         document.body.dataset.authMode = authParams.get('modo') === 'registro' ? 'registro' : 'login';
     </script>
 
-    <!-- El header compartido se mantiene tambien aqui para no dejar esta pagina aislada. -->
+    <!-- El header compartido se mantiene también aquí para no dejar esta página aislada. -->
     <header id="header"></header>
 
     <main class="auth-main">
@@ -47,6 +47,8 @@
                 <form action="php/login_usuarios.php" class="formulario_login" method="POST" novalidate>
                     <h2>Iniciar sesión</h2>
 
+                    <input type="hidden" name="redirect" id="login_redirect" value="">
+
                     <label class="visually-hidden" for="correo_login">Correo electrónico</label>
                     <input type="email" id="correo_login" name="correo_login" autocomplete="email" placeholder="Correo electrónico" required aria-describedby="error-correo_login">
                     <p class="auth-field-error" id="error-correo_login" aria-live="polite"></p>
@@ -68,6 +70,8 @@
                 <!-- Formulario de registro -->
                 <form action="php/registros_usuarios.php" method="POST" class="formulario_register" novalidate>
                     <h2>Registrarse</h2>
+
+                    <input type="hidden" name="redirect" id="register_redirect" value="">
 
                     <label class="visually-hidden" for="nombre_completo">Nombre completo</label>
                     <input type="text" id="nombre_completo" name="nombre_completo" autocomplete="name" placeholder="Nombre completo" required aria-describedby="error-nombre_completo">

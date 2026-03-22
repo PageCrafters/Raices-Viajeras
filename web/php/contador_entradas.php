@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/autenticacion.php';
 
-// Estas cookies solo marcan si la visita actual ya conto.
+// Estas cookies solo marcan si la visita actual ya contó.
 const RV_ENTRY_GENERAL_COOKIE = 'rv_visit_general';
 const RV_ENTRY_USER_COOKIE = 'rv_visit_user';
 
@@ -34,9 +34,9 @@ function entry_counter_set_visit_cookie(string $name, string $value): void
 }
 
 /**
- * Devuelve una foto vacia para no romper la app si aun no existe la tabla.
+ * Devuelve una foto vacía para no romper la app si aún no existe la tabla.
  *
- * @param int $userId Usuario activo o 0 si no hay sesion.
+ * @param int $userId Usuario activo o 0 si no hay sesión.
  * @return array
  */
 function entry_counter_empty_snapshot(int $userId): array
@@ -48,9 +48,9 @@ function entry_counter_empty_snapshot(int $userId): array
 }
 
 /**
- * Suma una entrada sobre la fila general o la crea si aun no existe.
+ * Suma una entrada sobre la fila general o la crea si aún no existe.
  *
- * @param PDO $pdo Conexion activa.
+ * @param PDO $pdo Conexión activa.
  * @return void
  */
 function entry_counter_increment_general(PDO $pdo): void
@@ -66,7 +66,7 @@ function entry_counter_increment_general(PDO $pdo): void
 /**
  * Suma una entrada para el usuario indicado o crea su fila si es la primera.
  *
- * @param PDO $pdo Conexion activa.
+ * @param PDO $pdo Conexión activa.
  * @param int $userId Usuario al que se le suma la entrada.
  * @return void
  */
@@ -87,8 +87,8 @@ function entry_counter_increment_user(PDO $pdo, int $userId): void
 /**
  * Lee los acumulados actuales para el panel o para otras respuestas futuras.
  *
- * @param PDO $pdo Conexion activa.
- * @param int $userId Usuario activo o 0 si no hay sesion.
+ * @param PDO $pdo Conexión activa.
+ * @param int $userId Usuario activo o 0 si no hay sesión.
  * @return array
  */
 function entry_counter_snapshot(PDO $pdo, int $userId): array
@@ -114,7 +114,7 @@ function entry_counter_snapshot(PDO $pdo, int $userId): array
 /**
  * Cuenta la visita actual una sola vez y devuelve los acumulados ya actualizados.
  *
- * @param array|null $currentUser Usuario activo si hay sesion.
+ * @param array|null $currentUser Usuario activo si hay sesión.
  * @return array
  */
 function entry_counter_register_visit(?array $currentUser = null): array

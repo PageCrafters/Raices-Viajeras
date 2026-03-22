@@ -7,7 +7,7 @@ header('Expires: 0');
 require_once __DIR__ . '/../Formulario/php/conexiones.php';
 require_once __DIR__ . '/utilidades_imagen.php';
 
-// Evito agrupar por imagen para no meter blobs dentro del GROUP BY
+// Evito agrupar por imagen para no meter blobs dentro del GROUP BY.
 $sql = "SELECT
             p.id,
             p.nombre,
@@ -31,7 +31,7 @@ if (!$result) {
 }
 
 $provinces = [];
-// Aqui convierto cada fila al shape que espera directamente provincias.js
+// Aquí convierto cada fila al shape que espera directamente provincias.js.
 while ($row = mysqli_fetch_assoc($result)) {
     $provinces[] = [
         'id' => (int) $row['id'],

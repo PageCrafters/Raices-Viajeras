@@ -1,6 +1,6 @@
 <?php
-// Este archivo concentra la sesion y el remember me para no repetir la misma logica en varios endpoints.
-// Lo dejo como punto comun de autenticacion para toda la carpeta PHP.
+// Este archivo concentra la sesión y el remember me para no repetir la misma lógica en varios endpoints.
+// Lo dejo como punto común de autenticación para toda la carpeta PHP.
 
 const RV_AUTH_DSN = 'mysql:host=localhost;dbname=raices_viajeras;charset=utf8mb4';
 const RV_AUTH_DB_USER = 'root';
@@ -10,7 +10,7 @@ const RV_REMEMBER_DAYS = 30;
 const RV_REMEMBER_PATH = '/Raices-Viajeras/';
 
 /**
- * Devuelve una conexion PDO compartida para toda la capa de autenticacion.
+ * Devuelve una conexión PDO compartida para toda la capa de autenticación.
  *
  * @return PDO
  */
@@ -29,7 +29,7 @@ function auth_get_pdo(): PDO
 }
 
 /**
- * Abre la sesion solo una vez.
+ * Abre la sesión solo una vez.
  *
  * @return void
  */
@@ -41,7 +41,7 @@ function auth_start_session(): void
 }
 
 /**
- * Revisa si la peticion va por HTTPS para marcar la cookie persistente cuando toque.
+ * Revisa si la petición va por HTTPS para marcar la cookie persistente cuando toque.
  *
  * @return bool
  */
@@ -55,7 +55,7 @@ function auth_cookie_is_secure(): bool
 }
 
 /**
- * Centraliza las opciones de cookie para no tener valores distintos segun el archivo.
+ * Centraliza las opciones de cookie para no tener valores distintos según el archivo.
  *
  * @param int $expiresAt Momento exacto en el que debe caducar la cookie.
  * @return array
@@ -72,7 +72,50 @@ function auth_cookie_options(int $expiresAt): array
 }
 
 /**
- * Convierte el usuario de base de datos en el formato que usamos dentro de la sesion.
+ * Acepta solo redirecciones internas de la aplicación.
+ *
+ * @param string|null $target Ruta candidata recibida por query o POST.
+ * @return string|null
+ */
+function auth_sanitize_internal_redirect(?string $target): ?string
+{
+    $target = trim((string) $target);
+    if ($target === '') {
+        return null;
+    }
+
+    if (preg_match('/^[a-z][a-z0-9+\-.]*:/i', $target)) {
+        return null;
+    }
+
+    if (strpos($target, '//') === 0 || $target[0] !== '/') {
+        return null;
+    }
+
+    return strpos($target, '/Raices-Viajeras/') === 0 ? $target : null;
+}
+
+/**
+ * Construye la URL del formulario de acceso conservando el redirect si es válido.
+ *
+ * @param string $mode Cara del formulario que se quiere mostrar.
+ * @param string|null $redirect Ruta interna a conservar.
+ * @return string
+ */
+function auth_build_form_url(string $mode = 'login', ?string $redirect = null): string
+{
+    $url = '/Raices-Viajeras/web/Formulario/form.html?modo=' . $mode;
+    $safeRedirect = auth_sanitize_internal_redirect($redirect);
+
+    if ($safeRedirect !== null) {
+        $url .= '&redirect=' . rawurlencode($safeRedirect);
+    }
+
+    return $url;
+}
+
+/**
+ * Convierte el usuario de base de datos en el formato que usamos dentro de la sesión.
  *
  * @param array $user Fila completa del usuario.
  * @return array
@@ -87,7 +130,7 @@ function auth_session_payload(array $user): array
 }
 
 /**
- * Deja el usuario activo en la sesion actual.
+ * Deja el usuario activo en la sesión actual.
  *
  * @param array $user Usuario ya validado.
  * @return void
@@ -209,7 +252,7 @@ function auth_issue_remember_token(int $userId): void
 }
 
 /**
- * Resuelve el usuario actual usando sesion o remember me.
+ * Resuelve el usuario actual usando sesión o remember me.
  *
  * @return void
  */
@@ -243,7 +286,7 @@ function auth_bootstrap(): void
 }
 
 /**
- * Crea la sesion tras un login correcto y decide si se deja la cookie persistente.
+ * Crea la sesión tras un login correcto y decide si se deja la cookie persistente.
  *
  * @param array $user Usuario ya validado.
  * @param bool $rememberMe Marca del checkbox recordarme.
@@ -265,7 +308,7 @@ function auth_login_user(array $user, bool $rememberMe): void
 }
 
 /**
- * Cierra la sesion actual y limpia cualquier remember me pendiente.
+ * Cierra la sesión actual y limpia cualquier remember me pendiente.
  *
  * @return void
  */
@@ -299,7 +342,7 @@ function auth_logout_user(): void
 }
 
 /**
- * Devuelve el usuario activo o `null` si no hay sesion resuelta.
+ * Devuelve el usuario activo o `null` si no hay sesión resuelta.
  *
  * @return array|null
  */
@@ -311,7 +354,7 @@ function auth_current_user(): ?array
 }
 
 /**
- * Devuelve el id del usuario activo sin repetir la lectura en cada endpoint.
+ * Devuelve el ID del usuario activo sin repetir la lectura en cada endpoint.
  *
  * @return int
  */

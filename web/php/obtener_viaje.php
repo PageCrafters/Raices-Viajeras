@@ -7,14 +7,14 @@ header('Expires: 0');
 require_once __DIR__ . '/../Formulario/php/conexiones.php';
 require_once __DIR__ . '/utilidades_imagen.php';
 
-// Si el id no viene bien, corto aqui y dejo al front pintar su estado vacio
+// Si el ID no viene bien, corto aquí y dejo al front pintar su estado vacío.
 $tripId = isset($_GET['viaje']) ? (int) $_GET['viaje'] : 0;
 if ($tripId <= 0) {
     echo json_encode(null);
     exit;
 }
 
-// Devuelvo todos los campos que hoy existen en viajes y sirven para la ficha completa
+// Devuelvo todos los campos que hoy existen en viajes y sirven para la ficha completa.
 $sql = "SELECT
             v.id,
             v.titulo,
@@ -57,7 +57,7 @@ if (!$row) {
     exit;
 }
 
-// Esta conversion final deja el detalle listo para pintarse sin mas transformaciones
+// Esta conversión final deja el detalle listo para pintarse sin más transformaciones.
 $trip = [
     'id' => (int) $row['id'],
     'titulo' => $row['titulo'],

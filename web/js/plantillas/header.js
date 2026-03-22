@@ -16,7 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Se asegura de que la cesta global se cargue solo una vez
+     * Construye el enlace de acceso, conservando el retorno a cesta cuando toca.
+     *
+     * @returns {string} URL de login lista para usar en el header.
+     */
+    function getLoginUrl() {
+        const url = new URL('/Raices-Viajeras/web/Formulario/form.html?modo=login', window.location.origin);
+
+        if (window.location.pathname.endsWith('/web/html/paga.html')) {
+            url.searchParams.set('redirect', '/Raices-Viajeras/web/html/paga.html');
+        }
+
+        return `${url.pathname}${url.search}`;
+    }
+
+    /**
+     * Se asegura de que la cesta global se cargue solo una vez.
      *
      * @returns {void}
      */
@@ -37,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Pinta el estado de acceso en el header
+     * Pinta el estado de acceso en el header.
      *
-     * @param {object|null} sessionData Datos basicos de la sesion activa
+     * @param {object|null} sessionData Datos básicos de la sesión activa.
      * @returns {void}
      */
     function renderAuthState(sessionData) {
@@ -69,15 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const loginLink = document.createElement('a');
         loginLink.className = 'nav-link';
-        loginLink.href = '/Raices-Viajeras/web/Formulario/form.html?modo=login';
+        loginLink.href = getLoginUrl();
         loginLink.textContent = 'Iniciar sesión';
         authItem.appendChild(loginLink);
     }
 
     /**
-     * Ajusta las partes del header que dependen de la sesion
+     * Ajusta las partes del header que dependen de la sesión.
      *
-     * @param {object|null} sessionData Datos de la sesion actual
+     * @param {object|null} sessionData Datos de la sesión actual.
      * @returns {void}
      */
     function applySessionState(sessionData) {
@@ -90,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Carga la plantilla comun del header y aplica el estado de sesion
+     * Carga la plantilla común del header y aplica el estado de sesión.
      *
      * @returns {Promise<void>}
      */
@@ -121,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sessionData = await sessionResponse.json();
             applySessionState(sessionData);
         } catch (error) {
-            console.error('Error comprobando sesion:', error);
+            console.error('Error comprobando sesión:', error);
             renderAuthState(null);
         }
     }

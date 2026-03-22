@@ -4,7 +4,7 @@ import * as v from './validaciones.js';
 /**
  * Inicializa el formulario antiguo de registro y sus validaciones en caliente.
  *
- * Si el DOM de ese formulario ya no existe, esta funcion sale sin tocar nada.
+ * Si el DOM de ese formulario ya no existe, esta función sale sin tocar nada.
  *
  * @returns {void}
  */
@@ -35,7 +35,7 @@ export function initializeFormController() {
         const nombre = datos.nombre.trim();
 
         if (!v.validarNombre(nombre)) {
-            ui.mostrarError('error-nombre', 'El nombre debe contener solo letras y un maximo de 2 palabras.');
+            ui.mostrarError('error-nombre', 'El nombre debe contener solo letras y un máximo de 2 palabras.');
             return;
         }
 
@@ -48,14 +48,14 @@ export function initializeFormController() {
         const correo = datos.correo.trim();
 
         if (!v.validarCorreo(correo)) {
-            ui.mostrarError('error-correo', 'El correo electronico no tiene un formato valido.');
+            ui.mostrarError('error-correo', 'El correo electrónico no tiene un formato válido.');
             return;
         }
 
         ui.mostrarError('error-correo', '');
     });
 
-    // Reviso formato y coincidencia de contrasenas en el mismo bloque.
+    // Reviso formato y coincidencia de contraseñas en el mismo bloque.
     contrasenaInput.addEventListener('input', () => {
         const datos = ui.obtenerDatosFormulario();
         const contrasena = datos.contrasena;
@@ -66,7 +66,7 @@ export function initializeFormController() {
         const icono2 = boton2?.querySelector('.fa-regular');
 
         if (!v.validarContrasena(contrasena)) {
-            ui.mostrarError('error-contrasena', 'La contrasena debe tener al menos 8 caracteres, mayuscula, minuscula, numero y simbolo.');
+            ui.mostrarError('error-contrasena', 'La contraseña debe tener al menos 8 caracteres, mayúscula, minúscula, número y símbolo.');
             if (icono?.classList.contains('verde')) {
                 icono.classList.replace('verde', 'rojo');
             } else if (icono && !icono.classList.contains('rojo')) {
@@ -82,7 +82,7 @@ export function initializeFormController() {
         }
 
         if (!v.comprobarContrasenas(contrasena, confirmarContrasena)) {
-            ui.mostrarError('error-confirmar-contrasena', 'Las contrasenas no coinciden.');
+            ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
             if (icono2?.classList.contains('verde')) {
                 icono2.classList.replace('verde', 'rojo');
             } else if (icono2 && !icono2.classList.contains('rojo')) {
@@ -99,14 +99,14 @@ export function initializeFormController() {
         }
     });
 
-    // Compruebo la segunda contrasena cada vez que se toca ese campo.
+    // Compruebo la segunda contraseña cada vez que se toca ese campo.
     confirmarContrasenaInput.addEventListener('input', () => {
         const datos = ui.obtenerDatosFormulario();
         const boton = document.getElementById('b2');
         const icono = boton?.querySelector('.fa-regular');
 
         if (!v.comprobarContrasenas(datos.contrasena, datos.confirmarContrasena)) {
-            ui.mostrarError('error-confirmar-contrasena', 'Las contrasenas no coinciden.');
+            ui.mostrarError('error-confirmar-contrasena', 'Las contraseñas no coinciden.');
             if (icono?.classList.contains('verde')) {
                 icono.classList.replace('verde', 'rojo');
             } else if (icono && !icono.classList.contains('rojo')) {
@@ -123,31 +123,31 @@ export function initializeFormController() {
         }
     });
 
-    // Reviso que el selector de pais no se quede vacio.
+    // Reviso que el selector de país no se quede vacío.
     paisSelect.addEventListener('change', () => {
         const datos = ui.obtenerDatosFormulario();
 
         if (!v.validarPais(datos.pais)) {
-            ui.mostrarError('error-pais', 'Debes seleccionar un pais.');
+            ui.mostrarError('error-pais', 'Debes seleccionar un país.');
             return;
         }
 
         ui.mostrarError('error-pais', '');
     });
 
-    // Marco el error del checkbox solo cuando de verdad no esta aceptado.
+    // Marco el error del checkbox solo cuando de verdad no está aceptado.
     privacidadCheckbox.addEventListener('change', () => {
         const datos = ui.obtenerDatosFormulario();
 
         if (!datos.privacidad) {
-            ui.mostrarError('error-privacidad', 'Debes aceptar la politica de privacidad.');
+            ui.mostrarError('error-privacidad', 'Debes aceptar la política de privacidad.');
             return;
         }
 
         ui.mostrarError('error-privacidad', '');
     });
 
-    // Si todo esta bien, envio el formulario antiguo al endpoint que ya usaba este modulo.
+    // Si todo está bien, envío el formulario antiguo al endpoint que ya usaba este módulo.
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         ui.ocultarErrores();

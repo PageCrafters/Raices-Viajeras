@@ -16,30 +16,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Normaliza un texto para comparar sin depender de mayusculas ni espacios
+     * Normaliza un texto para comparar sin depender de mayúsculas ni espacios.
      *
-     * @param {unknown} value Texto original
-     * @returns {string} Texto listo para comparar
+     * @param {unknown} value Texto original.
+     * @returns {string} Texto listo para comparar.
      */
     function normalizeText(value) {
         return (value || '').toString().trim().toLowerCase();
     }
 
     /**
-     * Devuelve la ruta del detalle para un viaje concreto
+     * Devuelve la ruta del detalle para un viaje concreto.
      *
-     * @param {string|number} tripId Id del viaje
-     * @returns {string} URL del detalle
+     * @param {string|number} tripId ID del viaje.
+     * @returns {string} URL del detalle.
      */
     function getTripUrl(tripId) {
         return `infoAventura.html?viaje=${encodeURIComponent(tripId)}`;
     }
 
     /**
-     * Formatea el precio con estilo local
+     * Formatea el precio con estilo local.
      *
-     * @param {number|string} value Importe que se quiere mostrar
-     * @returns {string} Importe listo para pintar
+     * @param {number|string} value Importe que se quiere mostrar.
+     * @returns {string} Importe listo para pintar.
      */
     function formatCurrency(value) {
         return new Intl.NumberFormat('es-ES', {
@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Pinta un mensaje simple en la zona del listado
+     * Pinta un mensaje simple en la zona del listado.
      *
-     * @param {string} message Texto a mostrar
-     * @param {string} className Clase visual para ese mensaje
+     * @param {string} message Texto a mostrar.
+     * @param {string} className Clase visual para ese mensaje.
      * @returns {void}
      */
     function createMessage(message, className) {
@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Espera a que la API global de la cesta este lista
+     * Espera a que la API global de la cesta esté lista.
      *
-     * @returns {Promise<Function>} Funcion global para anadir items al carrito
+     * @returns {Promise<Function>} Función global para añadir items al carrito.
      */
     function waitForCartApi() {
         if (typeof window.rvCartAddItem === 'function') {
@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Cambia el texto de un boton un momento para dar feedback rapido
+     * Cambia el texto de un botón un momento para dar feedback rápido.
      *
-     * @param {HTMLButtonElement} button Boton que se quiere actualizar
-     * @param {string} text Texto temporal
-     * @param {string} originalText Texto al que debe volver
+     * @param {HTMLButtonElement} button Botón que se quiere actualizar.
+     * @param {string} text Texto temporal.
+     * @param {string} originalText Texto al que debe volver.
      * @returns {void}
      */
     function pulseButtonState(button, text, originalText) {
@@ -108,10 +108,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Anade un viaje al carrito compartido
+     * Añade un viaje al carrito compartido.
      *
-     * @param {number|string} tripId Id del viaje
-     * @param {HTMLButtonElement} button Boton que lanza la accion
+     * @param {number|string} tripId ID del viaje.
+     * @param {HTMLButtonElement} button Botón que lanza la acción.
      * @returns {Promise<void>}
      */
     async function handleAddToCart(tripId, button) {
@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Pinta las cards de viajes usando el mismo patron visual que provincias
+     * Pinta las tarjetas de viajes usando el mismo patrón visual que provincias.
      *
-     * @param {Array<object>} items Viajes que se van a pintar
+     * @param {Array<object>} items Viajes que se van a pintar.
      * @returns {void}
      */
     function renderTrips(items) {
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /**
-     * Aplica el filtro del buscador solo cuando se pulsa el boton
+     * Aplica el filtro del buscador solo cuando se pulsa el botón.
      *
      * @returns {void}
      */

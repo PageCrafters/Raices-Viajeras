@@ -9,7 +9,7 @@ require_once __DIR__ . '/utilidades_imagen.php';
 
 $provinceId = 0;
 
-// Acepto provincia_id o provincia por nombre para no romper enlaces viejos
+// Acepto provincia_id o provincia por nombre para no romper enlaces viejos.
 if (isset($_GET['provincia_id'])) {
     $provinceId = (int) $_GET['provincia_id'];
 } elseif (isset($_GET['provincia'])) {
@@ -44,7 +44,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 $trips = [];
-// Mantengo el payload sencillo porque destinos.js ya se encarga del resto del render
+// Mantengo el payload sencillo porque destinos.js ya se encarga del resto del render.
 while ($row = mysqli_fetch_assoc($result)) {
     $trips[] = [
         'id' => (int) $row['id'],

@@ -7,7 +7,7 @@
     font-family: "Roboto", sans-serif;
 }
 
-/* Fondo general de la pagina de acceso */
+/* Fondo general de la página de acceso. */
 .auth-page {
     min-height: 100vh;
     background-image: url('../img/fondo.webp');
@@ -173,7 +173,7 @@
     font-size: 14px;
 }
 
-/* Genero se resuelve en una sola fila para no desperdiciar alto. */
+/* Género se resuelve en una sola fila para no desperdiciar alto. */
 .auth-page .radio-group {
     display: flex;
     gap: 15px;
@@ -231,7 +231,7 @@
     color: #a32929;
 }
 
-/* Los checks se quedan pequenos y alineados para que no rompan el alto del panel. */
+/* Los checks se quedan pequeños y alineados para que no rompan el alto del panel. */
 .auth-page .form-check {
     display: flex;
     flex-direction: column;
@@ -379,7 +379,7 @@
     color: #ffb5b5;
 }
 
-/* En movil dejo una sola cara visible para que el slider no pise el otro formulario. */
+/* En móvil dejo una sola cara visible para que el slider no pise el otro formulario. */
 @media screen and (max-width: 850px) {
     .auth-main {
         margin-top: 40px;

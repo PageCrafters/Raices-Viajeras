@@ -5,10 +5,10 @@ require_once __DIR__ . '/utilidades_imagen.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-// Todas las operaciones del panel pasan por la misma sesion restaurada desde cookie o servidor
+// Todas las operaciones del panel pasan por la misma sesión restaurada desde cookie o servidor.
 auth_bootstrap();
 
-// El panel admin solo deberia responder si el usuario activo tiene permisos de admin
+// El panel admin solo debería responder si el usuario activo tiene permisos de admin.
 $currentUser = auth_current_user();
 if (!$currentUser) {
     http_response_code(401);
@@ -103,14 +103,14 @@ function admin_uploaded_image_binary(?array $file, string $label = 'la imagen'):
     return $binary;
 }
 
-// Conexion PDO compartida con el resto de autenticacion y carrito
+// Conexión PDO compartida con el resto de autenticación y carrito.
 $pdo = auth_get_pdo();
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
     $action = $_GET['accion'] ?? '';
 
-    // Todas las lecturas del panel salen por este switch para mantener el contrato en un solo sitio
+    // Todas las lecturas del panel salen por este switch para mantener el contrato en un solo sitio.
     switch ($action) {
         case 'stats':
             $stats = [];
@@ -238,7 +238,7 @@ if ($method === 'POST') {
     $body = admin_read_request_body();
     $action = $body['accion'] ?? '';
 
-    // Aqui agrupamos altas, ediciones y borrados del panel para no repartir logica por varios archivos
+    // Aquí agrupamos altas, ediciones y borrados del panel para no repartir lógica por varios archivos.
     switch ($action) {
         case 'crear_usuario':
             if (empty($body['pwd'])) {

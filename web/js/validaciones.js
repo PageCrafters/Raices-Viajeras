@@ -21,10 +21,10 @@ export function validarNombre(nombre) {
 }
 
 /**
- * Comprueba que el correo tenga un formato basico valido.
+ * Comprueba que el correo tenga un formato básico válido.
  *
  * @param {string} correo Correo que se quiere revisar.
- * @returns {boolean} `true` si pasa la expresion regular.
+ * @returns {boolean} `true` si pasa la expresión regular.
  */
 export function validarCorreo(correo) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,10 +32,10 @@ export function validarCorreo(correo) {
 }
 
 /**
- * Revisa la complejidad minima que pedimos para la contrasena.
+ * Revisa la complejidad mínima que pedimos para la contraseña.
  *
- * @param {string} contrasena Contrasena escrita por el usuario.
- * @returns {boolean} `true` si cumple mayuscula, minuscula, numero y simbolo.
+ * @param {string} contrasena Contraseña escrita por el usuario.
+ * @returns {boolean} `true` si cumple mayúscula, minúscula, número y símbolo.
  */
 export function validarContrasena(contrasena) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
@@ -43,7 +43,7 @@ export function validarContrasena(contrasena) {
 }
 
 /**
- * Comprueba que las dos contrasenas coincidan exactamente.
+ * Comprueba que las dos contraseñas coincidan exactamente.
  *
  * @param {string} contrasena1 Primer valor.
  * @param {string} contrasena2 Segundo valor.
@@ -54,10 +54,10 @@ export function comprobarContrasenas(contrasena1, contrasena2) {
 }
 
 /**
- * Comprueba que el genero elegido sea uno de los valores cortos permitidos.
+ * Comprueba que el género elegido sea uno de los valores cortos permitidos.
  *
  * @param {string} genero Valor elegido en el formulario.
- * @returns {boolean} `true` si coincide con uno de los codigos validos.
+ * @returns {boolean} `true` si coincide con uno de los códigos válidos.
  */
 export function validarGenero(genero) {
     return ['m', 'f', 'o'].includes(String(genero ?? '').trim().toLowerCase());
@@ -97,7 +97,7 @@ export function validarFechaNacimiento(fecha) {
  * Comprueba el caso de los checks obligatorios.
  *
  * @param {boolean} checked Estado real del checkbox.
- * @returns {boolean} `true` si esta marcado.
+ * @returns {boolean} `true` si está marcado.
  */
 export function validarCheckboxObligatorio(checked) {
     return checked === true;
@@ -114,10 +114,10 @@ export function validarCheckboxOpcional(checked) {
 }
 
 /**
- * Comprueba que se haya elegido algun pais en el selector.
+ * Comprueba que se haya elegido algún país en el selector.
  *
  * @param {string} pais Valor del select.
- * @returns {boolean} `true` si no viene vacio.
+ * @returns {boolean} `true` si no viene vacío.
  */
 export function validarPais(pais) {
     return String(pais ?? '').trim() !== '';

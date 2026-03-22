@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Convierte una plantilla HTML en nodos listos para inyectar.
      *
      * @param {string} html Plantilla cruda del footer.
-     * @returns {Array<Node>} Nodos clonado/importados al documento actual.
+     * @returns {Array<Node>} Nodos clonados/importados al documento actual.
      */
     function parseHtmlNodes(html) {
         const parser = new DOMParser();
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Carga el footer comun sin tocar el resto del DOM ya renderizado.
+     * Carga el footer común sin tocar el resto del DOM ya renderizado.
      *
      * @returns {Promise<void>}
      */

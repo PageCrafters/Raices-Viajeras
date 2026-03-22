@@ -6,11 +6,12 @@ require_once __DIR__ . '/../../php/autenticacion.php';
  *
  * @param string $message Mensaje que se quiere mostrar.
  * @param string $mode Cara del formulario a la que se vuelve.
+ * @param string|null $redirect Redirect interno que se quiere conservar.
  * @return void
  */
-function registro_redirect(string $message, string $mode): void
+function registro_redirect(string $message, string $mode, ?string $redirect = null): void
 {
-    $url = '/Raices-Viajeras/web/Formulario/form.html?modo=' . $mode;
+    $url = auth_build_form_url($mode, $redirect);
     echo '<script>alert(' . json_encode($message, JSON_UNESCAPED_UNICODE) . '); window.location = ' . json_encode($url) . ';</script>';
     exit;
 }
@@ -27,9 +28,9 @@ function registro_nombre_valido(string $nombre): bool
 }
 
 /**
- * Comprueba que la contrasena tenga la complejidad que ya se espera en el front.
+ * Comprueba que la contraseña tenga la complejidad que ya se espera en el front.
  *
- * @param string $password Contrasena escrita por el usuario.
+ * @param string $password Contraseña escrita por el usuario.
  * @return bool
  */
 function registro_password_valido(string $password): bool
@@ -40,7 +41,7 @@ function registro_password_valido(string $password): bool
 /**
  * Acepta solo los valores cortos que ya quedan bien guardados en la tabla.
  *
- * @param string $genero Valor del genero elegido.
+ * @param string $genero Valor del género elegido.
  * @return bool
  */
 function registro_genero_valido(string $genero): bool
@@ -69,13 +70,15 @@ function registro_fecha_valida(string $fecha): bool
     return $date <= $today;
 }
 
+$redirect = auth_sanitize_internal_redirect($_POST['redirect'] ?? $_GET['redirect'] ?? null);
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /Raices-Viajeras/web/Formulario/form.html?modo=registro');
+    header('Location: ' . auth_build_form_url('registro', $redirect));
     exit;
 }
 
 try {
-    // Aqui dejo todos los datos limpios antes de arrancar la validacion en servidor.
+    // Aquí dejo todos los datos limpios antes de arrancar la validación en servidor.
     $nombreCompleto = trim($_POST['nombre_completo'] ?? '');
     $correo = trim($_POST['correo'] ?? '');
     $pwd = (string) ($_POST['pwd'] ?? '');
@@ -93,39 +96,39 @@ try {
         $genero === '' ||
         $fechaNacimiento === ''
     ) {
-        registro_redirect('Debes rellenar todos los campos obligatorios.', 'registro');
+        registro_redirect('Debes rellenar todos los campos obligatorios.', 'registro', $redirect);
     }
 
     if (!registro_nombre_valido($nombreCompleto)) {
-        registro_redirect('El nombre no tiene un formato valido.', 'registro');
+        registro_redirect('El nombre no tiene un formato válido.', 'registro', $redirect);
     }
 
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        registro_redirect('El correo electrónico no es válido.', 'registro');
+        registro_redirect('El correo electrónico no es válido.', 'registro', $redirect);
     }
 
     if (!registro_password_valido($pwd)) {
-        registro_redirect('La contraseña debe tener al menos 8 caracteres con mayúscula, minúscula, número y símbolo.', 'registro');
+        registro_redirect('La contraseña debe tener al menos 8 caracteres con mayúscula, minúscula, número y símbolo.', 'registro', $redirect);
     }
 
     if (!hash_equals($pwd, $passwordConfirm)) {
-        registro_redirect('Las contraseñas no coinciden.', 'registro');
+        registro_redirect('Las contraseñas no coinciden.', 'registro', $redirect);
     }
 
     if (!registro_genero_valido($genero)) {
-        registro_redirect('El género seleccionado no es válido.', 'registro');
+        registro_redirect('El género seleccionado no es válido.', 'registro', $redirect);
     }
 
     if (!registro_fecha_valida($fechaNacimiento)) {
-        registro_redirect('La fecha de nacimiento no es válida.', 'registro');
+        registro_redirect('La fecha de nacimiento no es válida.', 'registro', $redirect);
     }
 
     if ($politicaPrivacidad !== 1) {
-        registro_redirect('Debes aceptar la política de privacidad.', 'registro');
+        registro_redirect('Debes aceptar la política de privacidad.', 'registro', $redirect);
     }
 
     if (auth_find_user_by_email($correo)) {
-        registro_redirect('Este correo ya está registrado.', 'registro');
+        registro_redirect('Este correo ya está registrado.', 'registro', $redirect);
     }
 
     // El alta siempre crea usuarios normales; el rol de admin se gestiona fuera de este formulario.
@@ -144,9 +147,9 @@ try {
         'usuario'
     ]);
 
-    registro_redirect('Usuario registrado correctamente. Ya puedes iniciar sesión.', 'login');
+    registro_redirect('Usuario registrado correctamente. Ya puedes iniciar sesión.', 'login', $redirect);
 } catch (Throwable $error) {
     error_log('registros_usuarios.php error: ' . $error->getMessage());
-    registro_redirect('Error al registrar el usuario.', 'registro');
+    registro_redirect('Error al registrar el usuario.', 'registro', $redirect);
 }
 ?>
