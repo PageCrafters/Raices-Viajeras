@@ -19,6 +19,9 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 # Enlace al video de explicación de Landing Page RV 
 > [Ver Video](https://youtu.be/ucAXW-ixVdw)
 
+# Enlace al video Sprint2
+> [Ver Video](https://www.youtube.com/watch?v=TbkR_Z45Nz8)
+
 # Landing publicada en GitHub Pages
 >  [Ver Página](https://PageCrafters.github.io/Raices-Viajeras)
 
