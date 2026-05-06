@@ -35,7 +35,7 @@ function NoticiaCard({ noticia }) {
             {noticia.descripcion?.substring(0, 100)}...
           </p>
           <a
-            href={`articulo.html?id=${noticia.id}`}
+            href={`/articulo?id=${noticia.id}`}
             className="btn btn-success btn-sm mt-auto"
           >
             Leer noticia completa
@@ -54,7 +54,6 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch inicial — equivale a initBlog()
   useEffect(() => {
     fetch(API_URL)
       .then((res) => {
@@ -73,7 +72,6 @@ export default function Blog() {
       });
   }, []);
 
-  // Filtra en cliente — equivale a filtrarPorCategoria()
   function filtrar(categoria, textoBusqueda) {
     const termino = (textoBusqueda ?? categoria ?? "").toLowerCase().trim();
     if (!termino) {
@@ -87,14 +85,12 @@ export default function Blog() {
     );
   }
 
-  // Click en categoría lateral
   function handleCategoria(valor) {
     setCategoriaActiva(valor);
     setBusqueda("");
     filtrar(valor, "");
   }
 
-  // Input en tiempo real (equivale al listener 'input' del JS original)
   function handleBusquedaChange(e) {
     const texto = e.target.value;
     setBusqueda(texto);
@@ -102,12 +98,10 @@ export default function Blog() {
     filtrar("", texto);
   }
 
-  // Botón buscar
   function handleBuscar() {
     filtrar("", busqueda);
   }
 
-  // Enter en el input
   function handleKeyDown(e) {
     if (e.key === "Enter") handleBuscar();
   }
