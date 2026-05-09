@@ -1,15 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-/**
- * ConocenosPages.jsx
- * Equivalente estático a conocenos.html
- *
- * CSS necesario — importa en tu main.jsx o aquí mismo:
- *   import '../css/about.css'  (copia about.css a src/css/)
- *
- * Imágenes — ajusta las rutas según dónde pongas los assets en /public
- */
-
 export default function ConocenosPages() {
   const navigate = useNavigate();
 
@@ -23,7 +13,6 @@ export default function ConocenosPages() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="hero-conocenos">
         <div className="hero-bg-shape"></div>
         <div className="container-fluid px-4 px-lg-5">
@@ -65,7 +54,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Misión ───────────────────────────────────────────────────────── */}
       <section className="mision-section">
         <div className="container">
           <p className="mision-quote">
@@ -75,7 +63,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Valores ──────────────────────────────────────────────────────── */}
       <section className="valores-section">
         <div className="container">
           <div className="row mb-2">
@@ -105,7 +92,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Historia ─────────────────────────────────────────────────────── */}
       <section className="historia-section">
         <div className="container">
           <div className="row g-5 align-items-center">
@@ -140,7 +126,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Equipo ───────────────────────────────────────────────────────── */}
       <section className="equipo-section">
         <div className="container">
           <div className="text-center mb-5">
@@ -166,7 +151,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Compromiso ───────────────────────────────────────────────────── */}
       <section className="compromiso-section">
         <div className="container">
           <div className="row g-5 align-items-center">
@@ -217,7 +201,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="cta-section">
         <div className="container cta-inner">
           <h2>¿Listo para viajar de otra manera?</h2>

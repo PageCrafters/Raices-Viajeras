@@ -38,6 +38,41 @@
 
 /* Reservado para ajustes propios del blog si vuelven a hacer falta. */
 
+.noticia-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.noticia-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-leer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.25s ease;
+  overflow: hidden;
+}
+
+.btn-leer .flecha {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.btn-leer:hover .flecha {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.btn-leer:hover {
+  gap: 10px;
+}
+
 @media screen and (max-width: 850px){
 
 }
