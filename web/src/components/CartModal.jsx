@@ -1,15 +1,10 @@
 import { CartItemCard } from './CartItemCard'
 import { CartStateView } from './CartStateView'
 import { formatCurrency, getCountLabel } from '../lib/cartUi'
+import { APP_PATHS, buildLoginUrl } from '../lib/routes'
 
 function getLoginUrl() {
-  const url = new URL(
-    '/Raices-Viajeras/web/Formulario/form.html?modo=login',
-    window.location.origin
-  )
-
-  url.searchParams.set('redirect', '/Raices-Viajeras/web/html/paga.html')
-  return `${url.pathname}${url.search}`
+  return buildLoginUrl(APP_PATHS.paga)
 }
 
 function renderModalState({ isLoading, error, summary }) {
@@ -45,7 +40,7 @@ function renderModalState({ isLoading, error, summary }) {
       <CartStateView
         title="Tu cesta está vacía"
         message={message}
-        actionHref="/Raices-Viajeras/web/html/provincias.html"
+        actionHref={APP_PATHS.provincias}
         actionLabel="Explorar viajes"
         className="rv-cart-state-copy mb-3"
       />

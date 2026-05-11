@@ -1,15 +1,10 @@
 import { CartItemCard } from './CartItemCard'
 import { CartStateView } from './CartStateView'
 import { formatCurrency, getCountLabel } from '../lib/cartUi'
+import { APP_PATHS, buildLoginUrl } from '../lib/routes'
 
 function getLoginUrl() {
-  const url = new URL(
-    '/Raices-Viajeras/web/Formulario/form.html?modo=login',
-    window.location.origin
-  )
-
-  url.searchParams.set('redirect', '/Raices-Viajeras/web/html/paga.html')
-  return `${url.pathname}${url.search}`
+  return buildLoginUrl(APP_PATHS.paga)
 }
 
 export function CartPage({
@@ -81,7 +76,7 @@ export function CartPage({
           <CartStateView
             title="Tu cesta está vacía"
             message="Todavía no hay viajes en tu carrito activo."
-            actionHref="/Raices-Viajeras/web/html/provincias.html"
+            actionHref={APP_PATHS.provincias}
             actionLabel="Explorar viajes"
             className="rv-cart-state-copy mb-3"
           />
@@ -113,7 +108,7 @@ export function CartPage({
               </p>
 
               <div className="d-grid gap-2 mt-4">
-                <a href="/Raices-Viajeras/web/html/provincias.html" className="btn btn-primario">
+                <a href={APP_PATHS.provincias} className="btn btn-primario">
                   Seguir explorando
                 </a>
                 <button type="button" className="btn btn-outline-secondary" disabled>

@@ -7,10 +7,19 @@ import {
 } from './api/cartApi'
 import { CartModal } from './components/CartModal'
 import { CartPage } from './components/CartPage'
+import { FooterReact } from './components/FooterReact'
 import { HeaderReact } from './components/HeaderReact'
 import { ToastStack } from './components/ToastStack'
+import { APP_PATHS, buildLoginUrl, resolveRoute } from './lib/routes'
+import { DestinosView } from './views/DestinosView'
+import { InfoAventuraView } from './views/InfoAventuraView'
+import { ProvinciasView } from './views/ProvinciasView'
 
 function App() {
+  const [locationState, setLocationState] = useState(() => ({
+    pathname: window.location.pathname,
+    search: window.location.search,
+  }))
   const [session, setSession] = useState(null)
   const [summary, setSummary] = useState(null)
   const [isLoadingSession, setIsLoadingSession] = useState(true)
@@ -23,6 +32,7 @@ function App() {
   const [removingItemIds, setRemovingItemIds] = useState([])
   const [toasts, setToasts] = useState([])
 
+  const currentRoute = useMemo(() => resolveRoute(locationState.pathname), [locationState.pathname])
   const isLoading = isLoadingSession || isLoadingSummary
   const cartCount = summary?.carrito?.count ?? 0
 
@@ -62,7 +72,7 @@ function App() {
         const nextSummary = await fetchCartSummary()
         setSummary(nextSummary)
         return nextSummary
-      } catch {
+      } catch (error) {
         const message = 'No hemos podido recuperar tu cesta en este momento.'
 
         if (target === 'both' || target === 'page') {
@@ -81,6 +91,20 @@ function App() {
     },
     []
   )
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setLocationState({
+        pathname: window.location.pathname,
+        search: window.location.search,
+      })
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [])
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
@@ -199,15 +223,13 @@ function App() {
   const modalCta = useMemo(() => {
     if (!summary?.logueado) {
       return {
-        href: `/Raices-Viajeras/web/Formulario/form.html?modo=login&redirect=${encodeURIComponent(
-          '/Raices-Viajeras/web/html/paga.html'
-        )}`,
+        href: buildLoginUrl(APP_PATHS.paga),
         label: 'Iniciar sesión o registrarte para comprar',
       }
     }
 
     return {
-      href: '/Raices-Viajeras/web/html/paga.html',
+      href: APP_PATHS.paga,
       label: 'Ir a la cesta',
     }
   }, [summary])
@@ -236,8 +258,10 @@ function App() {
             : 'Viaje añadido a tu cesta temporal.',
           'success'
         )
+        return nextSummary
       } catch (error) {
         addToast(error.message || 'No se pudo añadir el viaje a la cesta.', 'error')
+        throw error
       }
     },
     [addToast]
@@ -254,6 +278,41 @@ function App() {
     }
   }, [addToast, handleAddItem])
 
+  const pageContent = useMemo(() => {
+    if (currentRoute === 'provincias') {
+      return <ProvinciasView />
+    }
+
+    if (currentRoute === 'destinos') {
+      return <DestinosView search={locationState.search} onAddToCart={handleAddItem} />
+    }
+
+    if (currentRoute === 'infoAventura') {
+      return <InfoAventuraView search={locationState.search} onAddToCart={handleAddItem} />
+    }
+
+    return (
+      <CartPage
+        summary={summary}
+        isLoading={isLoading}
+        error={pageError}
+        onRetry={handleRetryPage}
+        onRemoveItem={handleRemoveItem}
+        isRemovingItem={isRemovingItem}
+      />
+    )
+  }, [
+    currentRoute,
+    handleAddItem,
+    handleRemoveItem,
+    handleRetryPage,
+    isLoading,
+    isRemovingItem,
+    locationState.search,
+    pageError,
+    summary,
+  ])
+
   return (
     <>
       <HeaderReact
@@ -264,14 +323,9 @@ function App() {
         onOpenCart={handleOpenModal}
       />
 
-      <CartPage
-        summary={summary}
-        isLoading={isLoading}
-        error={pageError}
-        onRetry={handleRetryPage}
-        onRemoveItem={handleRemoveItem}
-        isRemovingItem={isRemovingItem}
-      />
+      {pageContent}
+
+      <FooterReact />
 
       <CartModal
         isOpen={isModalOpen}

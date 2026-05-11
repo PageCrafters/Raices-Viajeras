@@ -1,13 +1,8 @@
 import { useState } from 'react'
+import { APP_PATHS, buildLoginUrl } from '../lib/routes'
 
 function getLoginUrl() {
-  const url = new URL(
-    '/Raices-Viajeras/web/Formulario/form.html?modo=login',
-    window.location.origin
-  )
-
-  url.searchParams.set('redirect', '/Raices-Viajeras/web/html/paga.html')
-  return `${url.pathname}${url.search}`
+  return buildLoginUrl(APP_PATHS.paga)
 }
 
 function getBadgeLabel(count) {
@@ -82,13 +77,15 @@ export function HeaderReact({
                   Inicio
                 </a>
               </li>
+
               <li className="nav-item">
                 <a className="nav-link" href="/Raices-Viajeras/web/html/blog.html" onClick={closeMenu}>
                   Blog
                 </a>
               </li>
+
               <li className="nav-item">
-                <a className="nav-link" href="/Raices-Viajeras/web/html/provincias.html" onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.provincias} onClick={closeMenu}>
                   Viajes
                 </a>
               </li>
@@ -105,10 +102,7 @@ export function HeaderReact({
                   }}
                 >
                   <i className="bi bi-basket-fill" aria-hidden="true"></i>
-                  <span
-                    className={`rv-cart-badge ${cartCount > 0 ? '' : 'd-none'}`}
-                    aria-live="polite"
-                  >
+                  <span className={`rv-cart-badge ${cartCount > 0 ? '' : 'd-none'}`} aria-live="polite">
                     {getBadgeLabel(cartCount)}
                   </span>
                 </button>
@@ -134,11 +128,7 @@ export function HeaderReact({
               </li>
 
               <li className={`nav-item ${session?.rol === 'admin' ? '' : 'd-none'}`}>
-                <a
-                  className="btn btn-success btn-sm ms-lg-2"
-                  href="/Raices-Viajeras/web/html/admin.html"
-                  onClick={closeMenu}
-                >
+                <a className="btn btn-success btn-sm ms-lg-2" href="/web/html/admin.html" onClick={closeMenu}>
                   <i className="bi bi-speedometer2 me-1"></i>Panel Admin
                 </a>
               </li>
