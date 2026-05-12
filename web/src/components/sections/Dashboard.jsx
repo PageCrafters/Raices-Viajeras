@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDashboard } from '../hooks/useDashboard';
-import { BadgeEstado, FilaCargando, FilaError, FilaVacia } from './ui';
+import { useDashboard } from '../../hooks/useDashboard';
+import { BadgeEstado, FilaCargando, FilaError, FilaVacia } from '../ui';
 
 const STATS = [
     { key: 'usuarios',       label: 'Usuarios',         icon: 'bi-people-fill',      bg: 'bg-success bg-opacity-10 text-success' },
