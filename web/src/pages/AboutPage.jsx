@@ -1,14 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
-/**
- * ConocenosPages.jsx
- * Equivalente estático a conocenos.html
- *
- * CSS necesario — importa en tu main.jsx o aquí mismo:
- *   import '../css/about.css'  (copia about.css a src/css/)
- *
- * Imágenes — ajusta las rutas según dónde pongas los assets en /public
- */
+import { useState, useEffect, useRef } from "react";
+import AnimatedNumber from "../components/AnimatedNumber";
 
 export default function ConocenosPages() {
   const navigate = useNavigate();
@@ -23,7 +15,6 @@ export default function ConocenosPages() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="hero-conocenos">
         <div className="hero-bg-shape"></div>
         <div className="container-fluid px-4 px-lg-5">
@@ -65,7 +56,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Misión ───────────────────────────────────────────────────────── */}
       <section className="mision-section">
         <div className="container">
           <p className="mision-quote">
@@ -75,7 +65,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Valores ──────────────────────────────────────────────────────── */}
       <section className="valores-section">
         <div className="container">
           <div className="row mb-2">
@@ -86,12 +75,12 @@ export default function ConocenosPages() {
           </div>
           <div className="row g-4">
             {[
-              { icon: "bi-tree-fill",      titulo: "Sostenibilidad real",        texto: "No greenwashing. Evaluamos cada proveedor con criterios rigurosos: energía renovable, gestión de residuos, huella de carbono y certificaciones verificables." },
-              { icon: "bi-people-fill",    titulo: "Comunidades primero",        texto: "Más del 70 % del precio de cada viaje se queda en la economía local: guías autóctonos, artesanos y restaurantes de kilómetro cero." },
-              { icon: "bi-heart-fill",     titulo: "Turismo consciente",         texto: "Diseñamos experiencias que fomentan la escucha, la presencia y el respeto profundo por la cultura y los ecosistemas de cada destino." },
-              { icon: "bi-shield-check",   titulo: "Transparencia total",        texto: "Publicamos nuestra huella de carbono anual, los destinos de cada euro pagado y los informes de impacto de nuestros viajes." },
-              { icon: "bi-lightbulb-fill", titulo: "Innovación verde",           texto: "Adoptamos transporte de bajas emisiones, rutas de temporada baja y tecnología para minimizar el impacto de cada desplazamiento." },
-              { icon: "bi-globe2",         titulo: "Mirada global, acción local",texto: "Conectamos viajeros de todo el mundo con experiencias únicas que refuerzan identidades locales y preservan patrimonios en peligro." },
+              { icon: "bi-tree-fill",      titulo: "Sostenibilidad real",         texto: "No greenwashing. Evaluamos cada proveedor con criterios rigurosos: energía renovable, gestión de residuos, huella de carbono y certificaciones verificables." },
+              { icon: "bi-people-fill",    titulo: "Comunidades primero",         texto: "Más del 70 % del precio de cada viaje se queda en la economía local: guías autóctonos, artesanos y restaurantes de kilómetro cero." },
+              { icon: "bi-heart-fill",     titulo: "Turismo consciente",          texto: "Diseñamos experiencias que fomentan la escucha, la presencia y el respeto profundo por la cultura y los ecosistemas de cada destino." },
+              { icon: "bi-shield-check",   titulo: "Transparencia total",         texto: "Publicamos nuestra huella de carbono anual, los destinos de cada euro pagado y los informes de impacto de nuestros viajes." },
+              { icon: "bi-lightbulb-fill", titulo: "Innovación verde",            texto: "Adoptamos transporte de bajas emisiones, rutas de temporada baja y tecnología para minimizar el impacto de cada desplazamiento." },
+              { icon: "bi-globe2",         titulo: "Mirada global, acción local", texto: "Conectamos viajeros de todo el mundo con experiencias únicas que refuerzan identidades locales y preservan patrimonios en peligro." },
             ].map((v) => (
               <div key={v.titulo} className="col-12 col-sm-6 col-lg-4">
                 <div className="valor-card">
@@ -105,7 +94,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Historia ─────────────────────────────────────────────────────── */}
       <section className="historia-section">
         <div className="container">
           <div className="row g-5 align-items-center">
@@ -122,9 +110,9 @@ export default function ConocenosPages() {
 
               <div className="timeline">
                 {[
-                  { year: "2025 — El inicio",       titulo: "Una mochila y una pregunta",      texto: "Todo comenzó con una viajera que, tras recorrer cinco países, se preguntó: ¿por qué mis viajes dejan solo huellas de carbono y no de cambio positivo?" },
-                  { year: "2026 — El lanzamiento",  titulo: "Raíces Viajeras nace online",     texto: "Lanzamos nuestra plataforma digital con los primeros 15 itinerarios verificados y la promesa de compensar el 100 % de las emisiones de cada viaje." },
-                  { year: "2025–2026 — Hoy",        titulo: "Crecemos contigo",                texto: "Más de 20 destinos, cientos de viajeros conscientes y un compromiso renovado: cada ruta que añadimos es una comunidad que apoyamos." },
+                  { year: "2025 — El inicio",      titulo: "Una mochila y una pregunta",  texto: "Todo comenzó con una viajera que, tras recorrer cinco países, se preguntó: ¿por qué mis viajes dejan solo huellas de carbono y no de cambio positivo?" },
+                  { year: "2026 — El lanzamiento", titulo: "Raíces Viajeras nace online",  texto: "Lanzamos nuestra plataforma digital con los primeros 15 itinerarios verificados y la promesa de compensar el 100 % de las emisiones de cada viaje." },
+                  { year: "2025–2026 — Hoy",       titulo: "Crecemos contigo",             texto: "Más de 20 destinos, cientos de viajeros conscientes y un compromiso renovado: cada ruta que añadimos es una comunidad que apoyamos." },
                 ].map((item) => (
                   <div key={item.year} className="timeline-item">
                     <div className="timeline-dot"></div>
@@ -140,7 +128,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Equipo ───────────────────────────────────────────────────────── */}
       <section className="equipo-section">
         <div className="container">
           <div className="text-center mb-5">
@@ -149,9 +136,9 @@ export default function ConocenosPages() {
           </div>
           <div className="row justify-content-center g-4">
             {[
-              { inicial: "A", clase: "avatar-ana",    nombre: "Ana López",      rol: "Fundadora & CEO",                  texto: "Bióloga de formación y viajera de vocación. Diseña cada ruta pensando en el equilibrio entre experiencia humana e impacto ambiental." },
-              { inicial: "M", clase: "avatar-manuel", nombre: "Manuel Moreno",  rol: "Experiencia de Viajero",           texto: "Ex guía de montaña reconvertido en diseñador de experiencias. Cuida que cada momento del viaje sea memorable y sin rastro." },
-              { inicial: "M", clase: "avatar-monica", nombre: "Mónica Cortes",  rol: "Responsable de Sostenibilidad",   texto: "Experta en certificaciones ambientales y análisis de ciclo de vida. Audita y mejora la huella de cada viaje que ofrecemos." },
+              { inicial: "A", clase: "avatar-ana",    nombre: "Ana López",     rol: "Fundadora & CEO",               texto: "Bióloga de formación y viajera de vocación. Diseña cada ruta pensando en el equilibrio entre experiencia humana e impacto ambiental." },
+              { inicial: "M", clase: "avatar-manuel", nombre: "Manuel Moreno", rol: "Experiencia de Viajero",        texto: "Ex guía de montaña reconvertido en diseñador de experiencias. Cuida que cada momento del viaje sea memorable y sin rastro." },
+              { inicial: "M", clase: "avatar-monica", nombre: "Mónica Cortes", rol: "Responsable de Sostenibilidad", texto: "Experta en certificaciones ambientales y análisis de ciclo de vida. Audita y mejora la huella de cada viaje que ofrecemos." },
             ].map((p) => (
               <div key={p.nombre} className="col-12 col-sm-6 col-lg-3">
                 <div className="equipo-card">
@@ -166,7 +153,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── Compromiso ───────────────────────────────────────────────────── */}
       <section className="compromiso-section">
         <div className="container">
           <div className="row g-5 align-items-center">
@@ -177,10 +163,10 @@ export default function ConocenosPages() {
                 Nuestro compromiso contigo<br />y con el planeta
               </h2>
               {[
-                { num: 1, titulo: "Verificación independiente",          texto: "Todos nuestros alojamientos y proveedores pasan una auditoría anual realizada por organismos externos especializados en turismo responsable." },
-                { num: 2, titulo: "Compensación certificada de CO₂",     texto: "Calculamos la huella de cada viaje y la compensamos mediante proyectos de reforestación y energías renovables en los propios destinos visitados." },
-                { num: 3, titulo: "Fondo de impacto local",              texto: "El 5 % de cada reserva se destina a un fondo que financia proyectos educativos, de conservación y de desarrollo en las comunidades anfitrionas." },
-                { num: 4, titulo: "Garantía de satisfacción responsable",texto: "Si algo no cumple nuestros estándares de sostenibilidad durante tu viaje, actuamos de inmediato y publicamos el incidente en nuestro informe anual." },
+                { num: 1, titulo: "Verificación independiente",           texto: "Todos nuestros alojamientos y proveedores pasan una auditoría anual realizada por organismos externos especializados en turismo responsable." },
+                { num: 2, titulo: "Compensación certificada de CO₂",      texto: "Calculamos la huella de cada viaje y la compensamos mediante proyectos de reforestación y energías renovables en los propios destinos visitados." },
+                { num: 3, titulo: "Fondo de impacto local",               texto: "El 5 % de cada reserva se destina a un fondo que financia proyectos educativos, de conservación y de desarrollo en las comunidades anfitrionas." },
+                { num: 4, titulo: "Garantía de satisfacción responsable", texto: "Si algo no cumple nuestros estándares de sostenibilidad durante tu viaje, actuamos de inmediato y publicamos el incidente en nuestro informe anual." },
               ].map((c) => (
                 <div key={c.num} className="compromiso-item">
                   <div className="compromiso-num">{c.num}</div>
@@ -193,21 +179,25 @@ export default function ConocenosPages() {
             </div>
 
             <div className="col-12 col-lg-5">
+              {/* 95% */}
               <div className="compromiso-badge">
-                <span className="big-num">95%</span>
+                <AnimatedNumber target={95} suffix="%" />
                 <p>de nuestros viajeros repetiría con nosotros</p>
               </div>
               <div className="badge-grid">
+                {/* +1.200 */}
                 <div className="compromiso-badge badge-sm">
-                  <span className="big-num">+1.200</span>
+                  <AnimatedNumber prefix="+" target={1200} duration={2000} />
                   <p>árboles plantados en 2025</p>
                 </div>
+                {/* +40 */}
                 <div className="compromiso-badge badge-sm">
-                  <span className="big-num">+40</span>
+                  <AnimatedNumber prefix="+" target={40} />
                   <p>comunidades beneficiadas</p>
                 </div>
+                {/* 100% */}
                 <div className="compromiso-badge badge-sm badge-full">
-                  <span className="big-num">100%</span>
+                  <AnimatedNumber target={100} suffix="%" />
                   <p>proveedores con energía renovable o certificada</p>
                 </div>
               </div>
@@ -217,7 +207,6 @@ export default function ConocenosPages() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="cta-section">
         <div className="container cta-inner">
           <h2>¿Listo para viajar de otra manera?</h2>

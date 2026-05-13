@@ -6,12 +6,13 @@ import ConocenosPages from "./pages/AboutPage";
 function App() {
   return (
     <BrowserRouter>
+      <Header />   {/* ← aquí, fuera de Routes */}
       <Routes>
         <Route path="/conocenos" element={<ConocenosPages />} />
-        <Route path="/" element={<BlogPages />} />          {/* ← ruta raíz */}
+        <Route path="/" element={<BlogPages />} />
         <Route path="/blog" element={<BlogPages />} />
         <Route path="/articulo" element={<ArticuloPages />} />
-        <Route path="*" element={<BlogPages />} />          {/* ← comodín */}
+        <Route path="*" element={<BlogPages />} />
       </Routes>
     </BrowserRouter>
   );
