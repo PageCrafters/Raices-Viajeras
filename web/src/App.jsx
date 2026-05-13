@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BlogPages from "./pages/BlogPage";
 import ArticuloPages from "./pages/ArticulPage";
 import ConocenosPages from "./pages/AboutPage";
-import Header from "./components/Header";
 
 function App() {
   return (
