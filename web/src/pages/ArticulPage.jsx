@@ -56,7 +56,6 @@ export default function ArticuloPages() {
     <article
       className="container mt-5 px-4"
       id="articulo-container"
-      aria-describedby="desc-articulo"
     >
       {loading && (
         <div className="text-center my-5">
