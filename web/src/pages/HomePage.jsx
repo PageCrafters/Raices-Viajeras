@@ -1,8 +1,4 @@
-// Importa tus imágenes como assets de Vite para que el bundler las resuelva
-// Si las tienes en /public, usa la ruta directa como string (ej: '/img/landing1.webp')
-// Si las tienes en /src/assets, importa así:
-// import landing1 from '../assets/img/landing1.webp';
-import '../assets/css/style.css';
+import AmbientPlayer from '../components/AmbientalSound';
 
 const GALERIA_DERECHA = [
     { src: '/web/img/landing1.webp', alt: '' },
@@ -116,6 +112,10 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
+
+                <div className="encabezado pt-0" aria-label="Reproductor de sonidos ambientales">
+                    <AmbientPlayer />
+                </div>
 
             </div>
         </main>
