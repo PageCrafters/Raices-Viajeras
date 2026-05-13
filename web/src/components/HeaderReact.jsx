@@ -27,7 +27,7 @@ export function HeaderReact({
     <header>
       <nav className="navbar navbar-expand-lg navbar-light navbar-personalizada">
         <div className="container-fluid">
-          <a className="navbar-brand d-flex align-items-center" href="/Raices-Viajeras/index.html">
+          <a className="navbar-brand d-flex align-items-center" href={APP_PATHS.home}>
             <img
               src="/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp"
               alt="RV"
@@ -73,13 +73,13 @@ export function HeaderReact({
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="/Raices-Viajeras/index.html" onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.home} onClick={closeMenu}>
                   Inicio
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="/Raices-Viajeras/web/html/blog.html" onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.blog} onClick={closeMenu}>
                   Blog
                 </a>
               </li>
@@ -128,7 +128,7 @@ export function HeaderReact({
               </li>
 
               <li className={`nav-item ${session?.rol === 'admin' ? '' : 'd-none'}`}>
-                <a className="btn btn-success btn-sm ms-lg-2" href="/web/html/admin.html" onClick={closeMenu}>
+                <a className="btn btn-success btn-sm ms-lg-2" href={APP_PATHS.admin} onClick={closeMenu}>
                   <i className="bi bi-speedometer2 me-1"></i>Panel Admin
                 </a>
               </li>

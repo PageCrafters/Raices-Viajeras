@@ -1,28 +1,43 @@
+function isApacheProjectPath() {
+  return window.location.pathname.startsWith('/Raices-Viajeras/')
+}
+
+const FRONTEND_BASE = isApacheProjectPath() ? '/Raices-Viajeras/web' : ''
+
 export const APP_PATHS = {
-  provincias: '/web/html/provincias.html',
-  destinos: '/web/html/destinos.html',
-  infoAventura: '/web/html/infoAventura.html',
-  paga: '/web/html/paga.html',
+  home: isApacheProjectPath() ? '/Raices-Viajeras/index.html' : '/',
+  provincias: `${FRONTEND_BASE}/html/provincias.html`,
+  destinos: `${FRONTEND_BASE}/html/destinos.html`,
+  infoAventura: `${FRONTEND_BASE}/html/infoAventura.html`,
+  paga: `${FRONTEND_BASE}/html/paga.html`,
+  blog: `${FRONTEND_BASE}/html/blog.html`,
+  conocenos: `${FRONTEND_BASE}/html/conocenos.html`,
+  admin: `${FRONTEND_BASE}/html/admin.html`,
+  login: `${FRONTEND_BASE}/Formulario/form.html`,
 }
 
 export function resolveRoute(pathname) {
-  if (pathname.endsWith('/web/html/provincias.html')) {
+  if (pathname === '/' || pathname.endsWith('/Raices-Viajeras/index.html')) {
+    return 'home'
+  }
+
+  if (pathname.endsWith('/html/provincias.html')) {
     return 'provincias'
   }
 
-  if (pathname.endsWith('/web/html/destinos.html')) {
+  if (pathname.endsWith('/html/destinos.html')) {
     return 'destinos'
   }
 
-  if (pathname.endsWith('/web/html/infoAventura.html')) {
+  if (pathname.endsWith('/html/infoAventura.html')) {
     return 'infoAventura'
   }
 
-  if (pathname.endsWith('/web/html/paga.html')) {
+  if (pathname.endsWith('/html/paga.html')) {
     return 'paga'
   }
 
-  return 'paga'
+  return 'home'
 }
 
 export function buildDestinosUrl(provinceId) {
@@ -34,7 +49,7 @@ export function buildInfoAventuraUrl(tripId) {
 }
 
 export function buildLoginUrl(redirectPath = APP_PATHS.paga) {
-  const url = new URL('/Raices-Viajeras/web/Formulario/form.html?modo=login', window.location.origin)
+  const url = new URL(`${APP_PATHS.login}?modo=login`, window.location.origin)
   url.searchParams.set('redirect', redirectPath)
 
   return `${url.pathname}${url.search}`

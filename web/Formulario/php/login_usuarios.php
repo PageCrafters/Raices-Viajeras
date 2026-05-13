@@ -102,7 +102,7 @@ try {
         $loginMessage .= ' No hemos podido recuperar tu cesta temporal todavía.';
     }
 
-    $target = $redirect ?? '/Raices-Viajeras/index.html';
+    $target = $redirect ?? '/';
     login_redirect($loginMessage, 'login', $target, $redirect);
 } catch (Throwable $error) {
     error_log('login_usuarios.php error: ' . $error->getMessage());

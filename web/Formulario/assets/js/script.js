@@ -227,7 +227,15 @@ function getRedirectTarget() {
     const params = new URLSearchParams(window.location.search);
     const value = (params.get('redirect') || '').trim();
 
-    if (!value || !value.startsWith('/Raices-Viajeras/')) {
+    if (
+        !value ||
+        !(
+            value === '/' ||
+            value.startsWith('/html/') ||
+            value.startsWith('/Formulario/') ||
+            value.startsWith('/Raices-Viajeras/')
+        )
+    ) {
         return '';
     }
 

@@ -1,4 +1,4 @@
-﻿const API = '../php/admin_api.php';
+﻿const API = '/Raices-Viajeras/web/php/admin_api.php';
 let pendingDelete = null;
 let tripPreviewObjectUrl = null;
 let tripMobilePreviewObjectUrl = null;
