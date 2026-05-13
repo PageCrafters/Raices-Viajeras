@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 
 const SCENES = [
-  { key: 'bosque',  label: 'Bosque',  icon: '🌲', desc: 'Pájaros y viento',
+  { key: 'bosque',  label: 'Bosque',  icon: '🌲', desc: 'Viento',
     mp3: '/audio/bosque.mp3', ogg: '/audio/bosque.ogg' },
   { key: 'playa',   label: 'Playa',   icon: '🌊', desc: 'Olas del mar',
     mp3: '/audio/playa.mp3',  ogg: '/audio/playa.ogg'  },
-  { key: 'montana', label: 'Montaña', icon: '⛰️', desc: 'Viento y río',
+  { key: 'montana', label: 'Montaña', icon: '⛰️', desc: 'Río',
     mp3: '/audio/montana.mp3', ogg: '/audio/montana.ogg' },
 ];
 

@@ -113,7 +113,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                <div className="encabezado pt-0">
+                <div className="encabezado pt-0" aria-label="Reproductor de sonidos ambientales">
                     <AmbientPlayer />
                 </div>
 
