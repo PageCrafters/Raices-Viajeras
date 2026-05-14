@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { CatalogCard } from "../components/CatalogCard";
 
 const API_URL = "/php/noticias_api.php";
 
 const CATEGORIAS = [
-  { label: "Turismo",     value: "Turismo"    },
-  { label: "Sostenible",  value: "Sostenible" },
-  { label: "Todas",       value: ""           },
+  { label: "Turismo",    value: "Turismo"    },
+  { label: "Sostenible", value: "Sostenible" },
+  { label: "Todas",      value: ""           },
 ];
 
 function getNewsImageSrc(imagePath) {
@@ -16,43 +17,13 @@ function getNewsImageSrc(imagePath) {
   return `../img/${normalizedPath.replace(/^\/+/, "")}`;
 }
 
-function NoticiaCard({ noticia }) {
-  return (
-    <div className="col mb-3">
-      <div className="card h-100 shadow-sm">
-        <img
-          src={getNewsImageSrc(noticia.imagen)}
-          className="card-img-top"
-          alt={noticia.nombre}
-          style={{ height: "160px", objectFit: "cover" }}
-        />
-        <div className="card-body d-flex flex-column">
-          <span className="badge bg-success mb-2 align-self-start">
-            {noticia.categoria}
-          </span>
-          <h6 className="card-title fw-bold">{noticia.nombre}</h6>
-          <p className="card-text text-muted small">
-            {noticia.descripcion?.substring(0, 100)}...
-          </p>
-          <a
-            href={`/articulo?id=${noticia.id}`}
-            className="btn btn-success btn-sm mt-auto"
-          >
-            Leer noticia completa
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Blog() {
-  const [todasLasNoticias, setTodasLasNoticias] = useState([]);
+  const [todasLasNoticias, setTodasLasNoticias]   = useState([]);
   const [noticiasFiltradas, setNoticiasFiltradas] = useState([]);
-  const [categoriaActiva, setCategoriaActiva] = useState("");
-  const [busqueda, setBusqueda] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [categoriaActiva, setCategoriaActiva]     = useState("");
+  const [busqueda, setBusqueda]                   = useState("");
+  const [loading, setLoading]                     = useState(true);
+  const [error, setError]                         = useState(null);
 
   useEffect(() => {
     fetch(API_URL)
@@ -167,7 +138,7 @@ export default function Blog() {
         {/* Grid de noticias */}
         <div className="col-12 col-xl-9 order-2 order-xl-1">
           <div
-            className="row row-cols-1 row-cols-sm-2 row-cols-xl-3"
+            className="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-3"
             id="noticias-container"
             aria-describedby="desc-noticias"
           >
@@ -185,17 +156,23 @@ export default function Blog() {
 
             {!loading && !error && noticiasFiltradas.length === 0 && (
               <div className="col-12">
-                <p className="text-muted ms-3">
-                  No hay noticias en esta categoría.
-                </p>
+                <p className="text-muted ms-3">No hay noticias en esta categoría.</p>
               </div>
             )}
 
-            {!loading &&
-              !error &&
-              noticiasFiltradas.map((noticia) => (
-                <NoticiaCard key={noticia.id} noticia={noticia} />
-              ))}
+            {!loading && !error && noticiasFiltradas.map((noticia) => (
+              <div className="col" key={noticia.id}>
+                <CatalogCard
+                  variant="trip"
+                  title={noticia.nombre}
+                  imageSrc={getNewsImageSrc(noticia.imagen)}
+                  imageAlt={noticia.nombre}
+                  href={`/articulo?id=${noticia.id}`}
+                  primaryActionLabel="Leer noticia"
+                  primaryActionHref={`/articulo?id=${noticia.id}`}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
