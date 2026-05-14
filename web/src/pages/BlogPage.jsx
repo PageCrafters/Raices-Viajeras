@@ -43,15 +43,15 @@ export default function Blog() {
       });
   }, []);
 
-  function filtrar(categoria, textoBusqueda) {
-    const termino = (textoBusqueda ?? categoria ?? "").toLowerCase().trim();
-    if (!termino) {
+  function aplicarFiltro(termino) {
+    const t = (termino ?? "").toLowerCase().trim();
+    if (!t) {
       setNoticiasFiltradas(todasLasNoticias);
       return;
     }
     setNoticiasFiltradas(
       todasLasNoticias.filter((n) =>
-        n.categoria?.toLowerCase().includes(termino)
+        n.categoria?.toLowerCase().includes(t)
       )
     );
   }
@@ -59,18 +59,18 @@ export default function Blog() {
   function handleCategoria(valor) {
     setCategoriaActiva(valor);
     setBusqueda("");
-    filtrar(valor, "");
+    aplicarFiltro(valor);
   }
 
   function handleBusquedaChange(e) {
     const texto = e.target.value;
     setBusqueda(texto);
     setCategoriaActiva("");
-    filtrar("", texto);
+    aplicarFiltro(texto);
   }
 
   function handleBuscar() {
-    filtrar("", busqueda);
+    aplicarFiltro(busqueda);
   }
 
   function handleKeyDown(e) {
