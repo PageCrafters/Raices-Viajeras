@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { CatalogCard } from '../components/CatalogCard'
 import { fetchProvinces } from '../api/catalogApi'
 import { buildDestinosUrl } from '../lib/routes'
 
@@ -137,34 +138,14 @@ export function ProvinciasView() {
 
                   return (
                     <div key={province.id} className="col-6 col-lg-4 mb-4">
-                      <div
-                        className={`ca-card ${hasTrips ? '' : 'card-disabled'}`}
-                        onClick={() => {
-                          if (hasTrips) {
-                            window.location.href = provinceUrl
-                          }
-                        }}
-                      >
-                        <img className="ca-card-img" alt={province.nombre || ''} src={province.imagen} />
-                        <div className="ca-card-overlay"></div>
-
-                        <div className="ca-card-body">
-                          <span className="ca-card-name">{province.nombre || ''}</span>
-                          {hasTrips ? (
-                            <a
-                              className="ca-card-btn"
-                              href={provinceUrl}
-                              onClick={(event) => {
-                                event.stopPropagation()
-                              }}
-                            >
-                              Ver destinos
-                            </a>
-                          ) : (
-                            <span className="ca-card-btn">Sin viajes disponibles</span>
-                          )}
-                        </div>
-                      </div>
+                      <CatalogCard
+                        imageAlt={province.nombre || ''}
+                        imageSrc={province.imagen}
+                        title={province.nombre || ''}
+                        href={hasTrips ? provinceUrl : undefined}
+                        disabled={!hasTrips}
+                        primaryActionLabel={hasTrips ? 'Ver destinos' : 'Sin viajes disponibles'}
+                      />
                     </div>
                   )
                 })

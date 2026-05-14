@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
+import { CatalogCard } from '../components/CatalogCard'
 import { fetchTripsByProvince } from '../api/catalogApi'
-import { formatCurrency } from '../lib/cartUi'
 import { buildInfoAventuraUrl } from '../lib/routes'
 
 function normalizeText(value) {
@@ -199,49 +199,18 @@ export function DestinosView({ search, onAddToCart }) {
 
                   return (
                     <div key={trip.id} className="col-12 col-md-6 col-xl-4">
-                      <div
-                        className="ca-card ca-card--trip"
-                        onClick={() => {
-                          window.location.href = tripUrl
-                        }}
-                      >
-                        <img className="ca-card-img" alt={trip.titulo || ''} src={trip.imagen} />
-                        <div className="ca-card-overlay"></div>
-
-                        <div className="ca-card-body ca-card-body--trip">
-                          <div className="ca-card-copy">
-                            <span className="ca-card-name">{trip.titulo || ''}</span>
-                          </div>
-
-                          <div className="ca-card-btn-row ca-card-btn-row--actions">
-                            <span className="ca-card-price">{formatCurrency(trip.precio)}</span>
-                            <div className="ca-card-actions">
-                              <a
-                                className="ca-card-btn"
-                                href={tripUrl}
-                                onClick={(event) => {
-                                  event.stopPropagation()
-                                }}
-                              >
-                                Ver aventura
-                              </a>
-
-                              <button
-                                type="button"
-                                className="ca-card-btn ca-card-btn-secondary"
-                                onClick={(event) => {
-                                  event.stopPropagation()
-                                  event.preventDefault()
-                                  handleAddToCart(trip.id)
-                                }}
-                                disabled={buttonStateByTripId[trip.id] === 'loading'}
-                              >
-                                {getButtonLabel(trip.id)}
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <CatalogCard
+                        variant="trip"
+                        imageAlt={trip.titulo || ''}
+                        imageSrc={trip.imagen}
+                        title={trip.titulo || ''}
+                        href={tripUrl}
+                        price={trip.precio}
+                        primaryActionLabel="Ver aventura"
+                        secondaryActionLabel={getButtonLabel(trip.id)}
+                        secondaryActionOnClick={() => handleAddToCart(trip.id)}
+                        secondaryActionDisabled={buttonStateByTripId[trip.id] === 'loading'}
+                      />
                     </div>
                   )
                 })
