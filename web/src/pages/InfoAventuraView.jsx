@@ -38,7 +38,7 @@ function getTripDescription(trip) {
     return provinceDescription
   }
 
-  return 'Sin descripción disponible.'
+  return 'Sin descripciÃ³n disponible.'
 }
 
 export function InfoAventuraView({ search, onAddToCart }) {
@@ -52,9 +52,6 @@ export function InfoAventuraView({ search, onAddToCart }) {
     let cancelled = false
 
     if (!tripId) {
-      setTrip(null)
-      setError('')
-      setIsLoading(false)
       return () => {
         cancelled = true
       }
@@ -71,7 +68,7 @@ export function InfoAventuraView({ search, onAddToCart }) {
         }
       } catch {
         if (!cancelled) {
-          setError('Error cargando información del viaje.')
+          setError('Error cargando informaciÃ³n del viaje.')
         }
       } finally {
         if (!cancelled) {
@@ -115,10 +112,10 @@ export function InfoAventuraView({ search, onAddToCart }) {
 
   const addButtonLabel =
     addButtonState === 'loading'
-      ? 'Añadiendo...'
+      ? 'AÃ±adiendo...'
       : addButtonState === 'added'
-        ? 'Añadido'
-        : 'Añadir a la cesta'
+        ? 'AÃ±adido'
+        : 'AÃ±adir a la cesta'
 
   return (
     <main className="info-trip-shell">
@@ -135,7 +132,7 @@ export function InfoAventuraView({ search, onAddToCart }) {
 
           {tripId && isLoading ? (
             <div className="info-trip-empty">
-              <p className="text-muted mb-0">Cargando información del viaje...</p>
+              <p className="text-muted mb-0">Cargando informaciÃ³n del viaje...</p>
             </div>
           ) : null}
 

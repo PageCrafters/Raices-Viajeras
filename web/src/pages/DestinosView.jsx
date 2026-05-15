@@ -25,9 +25,6 @@ export function DestinosView({ search, onAddToCart }) {
     let cancelled = false
 
     if (!provinceId) {
-      setTrips([])
-      setError('')
-      setIsLoading(false)
       return () => {
         cancelled = true
       }
@@ -74,14 +71,14 @@ export function DestinosView({ search, onAddToCart }) {
   const getButtonLabel = (tripId) => {
     const currentState = buttonStateByTripId[tripId]
     if (currentState === 'loading') {
-      return 'Añadiendo...'
+      return 'AÃ±adiendo...'
     }
 
     if (currentState === 'added') {
-      return 'Añadido'
+      return 'AÃ±adido'
     }
 
-    return 'Añadir a la cesta'
+    return 'AÃ±adir a la cesta'
   }
 
   const handleAddToCart = async (tripId) => {
@@ -118,11 +115,11 @@ export function DestinosView({ search, onAddToCart }) {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-lg-8 text-center">
-              <p className="buscador-eyebrow">Tu próxima aventura sostenible</p>
+              <p className="buscador-eyebrow">Tu prÃ³xima aventura sostenible</p>
               <h1 className="buscador-title">
-                ¿A dónde te llaman
+                Â¿A dÃ³nde te llaman
                 <br />
-                <em>tus raíces</em> hoy?
+                <em>tus raÃ­ces</em> hoy?
               </h1>
               <p className="buscador-subtitle">
                 Filtra los viajes de esta provincia y elige la experiencia que mejor encaja
@@ -138,7 +135,7 @@ export function DestinosView({ search, onAddToCart }) {
                 <input
                   type="text"
                   className="buscador-input"
-                  placeholder="Título o descripción del viaje..."
+                  placeholder="TÃ­tulo o descripciÃ³n del viaje..."
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   onKeyDown={(event) => {
@@ -189,7 +186,7 @@ export function DestinosView({ search, onAddToCart }) {
 
             {provinceId && !isLoading && !error && trips.length > 0 && visibleTrips.length === 0 ? (
               <div className="col-12">
-                <p className="text-muted">No se han encontrado viajes para esa búsqueda.</p>
+                <p className="text-muted">No se han encontrado viajes para esa bÃºsqueda.</p>
               </div>
             ) : null}
 

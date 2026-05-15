@@ -6,9 +6,9 @@ import ArticulPage from './pages/ArticulPage'
 import BlogPage from './pages/BlogPage'
 import AdminPanel from './pages/AdminPanel'
 import HomePage from './pages/HomePage'
-import { DestinosView } from './views/DestinosView'
-import { InfoAventuraView } from './views/InfoAventuraView'
-import { ProvinciasView } from './views/ProvinciasView'
+import { DestinosView } from './pages/DestinosView'
+import { InfoAventuraView } from './pages/InfoAventuraView'
+import { ProvinciasView } from './pages/ProvinciasView'
 
 function AppRoutes({ shell }) {
   const { search } = useLocation()
