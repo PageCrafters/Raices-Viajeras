@@ -1,4 +1,4 @@
-import { formatCurrency } from '../lib/cartUi'
+﻿import { formatCurrency } from '../lib/cartUi'
 
 function joinClasses(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -55,6 +55,8 @@ function renderSecondaryAction({ label, onClick, disabled }) {
 export function CatalogCard({
   className = '',
   disabled = false,
+  description = '',
+  eyebrow = '',
   href,
   imageAlt = '',
   imageSrc,
@@ -69,15 +71,21 @@ export function CatalogCard({
   variant = 'province',
 }) {
   const cardHref = href || primaryActionHref
+  const isDetailVariant = variant === 'trip' || variant === 'blog'
 
   const rootClassName = joinClasses(
     'ca-card',
-    variant === 'trip' && 'ca-card--trip',
+    isDetailVariant && 'ca-card--trip',
+    variant === 'blog' && 'ca-card--blog',
     disabled && 'card-disabled',
     className
   )
 
-  const bodyClassName = joinClasses('ca-card-body', variant === 'trip' && 'ca-card-body--trip')
+  const bodyClassName = joinClasses(
+    'ca-card-body',
+    isDetailVariant && 'ca-card-body--trip',
+    variant === 'blog' && 'ca-card-body--blog'
+  )
 
   const handleCardClick = () => {
     if (disabled || !cardHref) {
@@ -93,10 +101,12 @@ export function CatalogCard({
       <div className="ca-card-overlay"></div>
 
       <div className={bodyClassName}>
-        {variant === 'trip' ? (
+        {isDetailVariant ? (
           <>
             <div className="ca-card-copy">
+              {eyebrow ? <span className="ca-card-eyebrow">{eyebrow}</span> : null}
               <span className="ca-card-name">{title || ''}</span>
+              {description ? <p className="ca-card-description">{description}</p> : null}
             </div>
 
             <div className="ca-card-btn-row ca-card-btn-row--actions">

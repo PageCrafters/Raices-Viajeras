@@ -92,11 +92,24 @@ function auth_sanitize_internal_redirect(?string $target): ?string
         return null;
     }
 
+    $allowedExact = [
+        '/',
+        '/blog',
+        '/conocenos',
+        '/articulo',
+        '/admin',
+        '/paga',
+        '/provincias',
+        '/destinos',
+        '/info-aventura',
+    ];
+
     if (
-        $target === '/' ||
+        in_array($target, $allowedExact, true) ||
         strpos($target, '/html/') === 0 ||
         strpos($target, '/Formulario/') === 0 ||
-        strpos($target, '/Raices-Viajeras/') === 0
+        strpos($target, '/Raices-Viajeras/') === 0 ||
+        strpos($target, '/Raices-Viajeras/web/') === 0
     ) {
         return $target;
     }

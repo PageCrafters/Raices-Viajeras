@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { APP_PATHS, buildLoginUrl } from '../lib/routes'
+﻿import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { APP_PATHS, assetPath, backendPath, buildLoginUrl } from '../lib/routes'
 
 function getLoginUrl() {
   return buildLoginUrl(APP_PATHS.paga)
@@ -27,15 +28,15 @@ export function HeaderReact({
     <header>
       <nav className="navbar navbar-expand-lg navbar-light navbar-personalizada">
         <div className="container-fluid">
-          <a className="navbar-brand d-flex align-items-center" href={APP_PATHS.home}>
+          <Link className="navbar-brand d-flex align-items-center" to={APP_PATHS.home} onClick={closeMenu}>
             <img
-              src="/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp"
-              alt="RV"
+              src={assetPath('img/raices-viajeras-logo0.webp')}
+              alt="Raíces Viajeras"
               style={{ maxWidth: 56 }}
               className="me-2"
             />
             <span>RAÍCES VIAJERAS</span>
-          </a>
+          </Link>
 
           <div className="d-flex align-items-center gap-2">
             <button
@@ -73,21 +74,21 @@ export function HeaderReact({
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href={APP_PATHS.home} onClick={closeMenu}>
+                <Link className="nav-link" to={APP_PATHS.home} onClick={closeMenu}>
                   Inicio
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href={APP_PATHS.blog} onClick={closeMenu}>
+                <Link className="nav-link" to={APP_PATHS.blog} onClick={closeMenu}>
                   Blog
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href={APP_PATHS.provincias} onClick={closeMenu}>
+                <Link className="nav-link" to={APP_PATHS.provincias} onClick={closeMenu}>
                   Viajes
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
@@ -114,7 +115,7 @@ export function HeaderReact({
                     <span className="nav-link header-user-name">Hola, {session.nombre || 'Usuario'}</span>
                     <a
                       className="nav-link header-logout-link"
-                      href="/Raices-Viajeras/web/php/cerrar_sesion.php"
+                      href={backendPath('/php/cerrar_sesion.php')}
                       onClick={closeMenu}
                     >
                       Cerrar sesión
@@ -128,9 +129,9 @@ export function HeaderReact({
               </li>
 
               <li className={`nav-item ${session?.rol === 'admin' ? '' : 'd-none'}`}>
-                <a className="btn btn-success btn-sm ms-lg-2" href={APP_PATHS.admin} onClick={closeMenu}>
+                <Link className="btn btn-success btn-sm ms-lg-2" to={APP_PATHS.admin} onClick={closeMenu}>
                   <i className="bi bi-speedometer2 me-1"></i>Panel Admin
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -6,6 +6,7 @@ export function ToastStack({ toasts, onDismiss }) {
       return undefined
     }
 
+    // Cada toast se auto-cierra solo, asi el stack no requiere intervencion manual.
     const timers = toasts.map((toast) =>
       window.setTimeout(() => {
         onDismiss(toast.id)

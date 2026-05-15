@@ -1,6 +1,8 @@
-const API_URL = '/Raices-Viajeras/web/php/cesta_api.php'
-const SESSION_URL = '/Raices-Viajeras/web/php/sesion.php'
-const FALLBACK_IMAGE = '/Raices-Viajeras/img/logos/raices-viajeras-logo0.webp'
+﻿import { assetPath, backendPath } from '../lib/routes'
+
+const API_URL = backendPath('/php/cesta_api.php')
+const SESSION_URL = backendPath('/php/sesion.php')
+const FALLBACK_IMAGE = assetPath('img/logos/raices-viajeras-logo0.webp')
 
 function formatErrorMessage(errorMessage, fallbackMessage) {
   if (typeof errorMessage === 'string' && errorMessage.trim() !== '') {
@@ -44,7 +46,9 @@ export function normalizeSummary(data) {
 }
 
 async function parseJsonResponse(response, fallbackMessage) {
-  const data = await response.json()
+  const raw = await response.text()
+  const normalized = raw.replace(/^\uFEFF/, '').trim()
+  const data = normalized ? JSON.parse(normalized) : null
 
   if (!response.ok) {
     throw new Error(formatErrorMessage(data?.error, fallbackMessage))
@@ -95,6 +99,21 @@ export async function addCartItem(tripId) {
   return normalizeSummary(data)
 }
 
+export async function checkoutCart() {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      accion: 'checkout',
+    }),
+  })
+  const data = await parseJsonResponse(response, 'No se pudo completar el pago.')
+
+  return normalizeSummary(data)
+}
 export async function removeCartItem(cartItemId) {
   const response = await fetch(API_URL, {
     method: 'POST',

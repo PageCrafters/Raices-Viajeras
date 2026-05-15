@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../php/autenticacion.php';
+ob_start();
 require_once __DIR__ . '/../../php/cesta_service.php';
+ob_end_clean();
 
 /**
  * Muestra un aviso corto y devuelve al usuario a la ruta correcta.

@@ -30,6 +30,7 @@ export default function AdminPanel() {
         if (window.innerWidth < 992) setSidebarOpen(false);
     };
 
+    // La vista cambia de layout segun el ancho actual; en escritorio la sidebar queda fija.
     const isDesktop = window.innerWidth >= 992;
 
     return (

@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+﻿import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
   addCartItem,
+  checkoutCart,
   fetchCartSummary,
   fetchSession,
   removeCartItem,
@@ -21,7 +22,13 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
   const [modalError, setModalError] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isModalLoading, setIsModalLoading] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
+
+    return savedTheme ? savedTheme === 'dark' : Boolean(prefersDark)
+  })
   const [removingItemIds, setRemovingItemIds] = useState([])
   const [toasts, setToasts] = useState([])
 
@@ -37,15 +44,9 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
     setToasts((current) => current.filter((toast) => toast.id !== toastId))
   }, [])
 
-  const applyTheme = useCallback((nextIsDark) => {
-    setIsDarkMode(nextIsDark)
-    document.documentElement.classList.toggle('dark-mode', nextIsDark)
-    localStorage.setItem('theme', nextIsDark ? 'dark' : 'light')
-  }, [])
-
   const toggleTheme = useCallback(() => {
-    applyTheme(!isDarkMode)
-  }, [applyTheme, isDarkMode])
+    setIsDarkMode((current) => !current)
+  }, [])
 
   const refreshCartSummary = useCallback(
     async ({ target = 'both', showLoading = false } = {}) => {
@@ -85,12 +86,13 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
   )
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
-    applyTheme(savedTheme ? savedTheme === 'dark' : Boolean(prefersDark))
-  }, [applyTheme])
+    // Sincronizamos la clase global y la preferencia guardada cada vez que cambia el modo.
+    document.documentElement.classList.toggle('dark-mode', isDarkMode)
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+  }, [isDarkMode])
 
   useEffect(() => {
+    // Marcamos el body como "ya cargado" para que las transiciones del layout entren suaves.
     document.body.classList.add('theme-loaded')
 
     return () => {
@@ -101,24 +103,37 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
   useEffect(() => {
     let cancelled = false
 
-    const loadData = async () => {
+    const loadSession = async () => {
       setIsLoadingSession(true)
+
+      try {
+        const sessionData = await fetchSession()
+
+        if (!cancelled) {
+          setSession(sessionData)
+        }
+      } catch {
+        if (!cancelled) {
+          setSession(null)
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoadingSession(false)
+        }
+      }
+    }
+
+    const loadSummary = async () => {
       setIsLoadingSummary(true)
       setPageError('')
       setModalError('')
 
       try {
-        const [sessionData, summaryData] = await Promise.all([
-          fetchSession(),
-          fetchCartSummary(),
-        ])
+        const summaryData = await fetchCartSummary()
 
-        if (cancelled) {
-          return
+        if (!cancelled) {
+          setSummary(summaryData)
         }
-
-        setSession(sessionData)
-        setSummary(summaryData)
       } catch {
         if (!cancelled) {
           setPageError('No hemos podido recuperar tu cesta en este momento.')
@@ -126,13 +141,13 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
         }
       } finally {
         if (!cancelled) {
-          setIsLoadingSession(false)
           setIsLoadingSummary(false)
         }
       }
     }
 
-    loadData()
+    loadSession()
+    loadSummary()
 
     return () => {
       cancelled = true
@@ -147,6 +162,7 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
     }
 
     const handleKeyDown = (event) => {
+      // Escape funciona como cierre rápido del modal, igual que en una app nativa.
       if (event.key === 'Escape') {
         setIsModalOpen(false)
       }
@@ -199,17 +215,37 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
     [removingItemIds]
   )
 
+  const handleCheckout = useCallback(async () => {
+    setIsCheckoutLoading(true)
+    setPageError('')
+    setModalError('')
+
+    try {
+      const nextSummary = await checkoutCart()
+      setSummary(nextSummary)
+      return nextSummary
+    } catch (error) {
+      const message = error?.message || 'No se ha podido completar el pago.'
+      setPageError(message)
+      setModalError(message)
+      addToast(message, 'error')
+      throw error
+    } finally {
+      setIsCheckoutLoading(false)
+    }
+  }, [addToast])
+
   const modalCta = useMemo(() => {
     if (!summary?.logueado) {
       return {
         href: buildLoginUrl(APP_PATHS.paga),
-        label: 'Iniciar sesion o registrarte para comprar',
+        label: 'Iniciar sesión o registrarte para comprar',
       }
     }
 
     return {
       href: APP_PATHS.paga,
-      label: 'Ir a la cesta',
+      label: 'Ir a pagar',
     }
   }, [summary])
 
@@ -233,13 +269,13 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
         setSummary(nextSummary)
         addToast(
           nextSummary.logueado
-            ? 'Viaje anadido a la cesta.'
-            : 'Viaje anadido a tu cesta temporal.',
+            ? 'Viaje añadido a la cesta.'
+            : 'Viaje añadido a tu cesta temporal.',
           'success'
         )
         return nextSummary
       } catch (error) {
-        addToast(error.message || 'No se pudo anadir el viaje a la cesta.', 'error')
+        addToast(error.message || 'No se pudo añadir el viaje a la cesta.', 'error')
         throw error
       }
     },
@@ -247,6 +283,7 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
   )
 
   useEffect(() => {
+    // Este puente deja viva la integración con el JS viejo que sigue llamando a la cesta desde HTML.
     window.rvCartAddItem = handleAddItem
     window.rvCartShowNotice = addToast
     document.dispatchEvent(new CustomEvent('rv:cesta-ready'))
@@ -275,6 +312,8 @@ export function AppShell({ children, headerTarget = null, footerTarget = null })
     handleRemoveItem,
     isRemovingItem,
     handleAddItem,
+    handleCheckout,
+    isCheckoutLoading,
   }
 
   return (

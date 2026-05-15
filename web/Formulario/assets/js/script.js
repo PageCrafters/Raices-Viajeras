@@ -231,9 +231,18 @@ function getRedirectTarget() {
         !value ||
         !(
             value === '/' ||
+            value === '/blog' ||
+            value === '/conocenos' ||
+            value === '/articulo' ||
+            value === '/admin' ||
+            value === '/paga' ||
+            value === '/provincias' ||
+            value === '/destinos' ||
+            value === '/info-aventura' ||
             value.startsWith('/html/') ||
             value.startsWith('/Formulario/') ||
-            value.startsWith('/Raices-Viajeras/')
+            value.startsWith('/Raices-Viajeras/') ||
+            value.startsWith('/Raices-Viajeras/web/')
         )
     ) {
         return '';

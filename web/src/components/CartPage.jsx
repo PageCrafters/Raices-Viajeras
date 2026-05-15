@@ -1,4 +1,4 @@
-import { CartItemCard } from './CartItemCard'
+﻿import { CartItemCard } from './CartItemCard'
 import { CartStateView } from './CartStateView'
 import { formatCurrency, getCountLabel } from '../lib/cartUi'
 import { APP_PATHS, buildLoginUrl } from '../lib/routes'
@@ -14,6 +14,8 @@ export function CartPage({
   onRetry,
   onRemoveItem,
   isRemovingItem,
+  onCheckout,
+  isCheckoutLoading,
 }) {
   const isLoggedIn = Boolean(summary?.logueado)
   const count = summary?.carrito?.count ?? 0
@@ -21,6 +23,20 @@ export function CartPage({
   const items = summary?.carrito?.items ?? []
 
   const showItems = !isLoading && !error && isLoggedIn && items.length > 0
+  const canCheckout = showItems && !isCheckoutLoading
+
+  const handleCheckout = async () => {
+    if (!canCheckout || typeof onCheckout !== 'function') {
+      return
+    }
+
+    try {
+      await onCheckout()
+      alert('Pagado correctamente')
+    } catch {
+      // El error ya se muestra en la shell; aquí solo evitamos el salto de estado brusco.
+    }
+  }
 
   return (
     <main className="container rv-cart-page-shell">
@@ -103,16 +119,20 @@ export function CartPage({
               <p className="rv-cart-summary-label mb-1">Total actual</p>
               <div className="rv-cart-total">{formatCurrency(total)}</div>
               <p className="rv-cart-inline-note mt-2">
-                El checkout completo llegará en la siguiente fase. Por ahora puedes revisar tu
-                cesta y seguir explorando la web.
+                Ya puedes pagar tu cesta y dejar registrado el pedido en la base de datos.
               </p>
 
               <div className="d-grid gap-2 mt-4">
                 <a href={APP_PATHS.provincias} className="btn btn-primario">
                   Seguir explorando
                 </a>
-                <button type="button" className="btn btn-outline-secondary" disabled>
-                  Pago próximamente
+                <button
+                  type="button"
+                  className="btn btn-primario"
+                  onClick={handleCheckout}
+                  disabled={!canCheckout}
+                >
+                  {isCheckoutLoading ? 'Procesando...' : 'Pagar'}
                 </button>
               </div>
             </aside>

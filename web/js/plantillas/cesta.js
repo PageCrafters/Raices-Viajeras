@@ -167,6 +167,23 @@
     }
 
     /**
+     * Lee JSON tolerando un posible BOM al principio de la respuesta.
+     *
+     * @param {Response} response Respuesta del backend.
+     * @returns {Promise<object|null>} JSON parseado o `null` si viene vacío.
+     */
+    async function readJsonResponse(response) {
+        const raw = await response.text();
+        const normalized = raw.replace(/^\uFEFF/, '').trim();
+
+        if (!normalized) {
+            return null;
+        }
+
+        return JSON.parse(normalized);
+    }
+
+    /**
      * Se asegura de que exista el contenedor donde se inyecta la cesta.
      *
      * @returns {HTMLElement} Nodo contenedor de la plantilla.
@@ -637,7 +654,7 @@
             cache: 'no-store',
             credentials: 'same-origin'
         });
-        const data = await response.json();
+        const data = await readJsonResponse(response);
 
         if (!response.ok) {
             throw new Error(data && data.error ? data.error : `HTTP ${response.status}`);
@@ -665,7 +682,7 @@
             })
         });
 
-        const data = await response.json();
+        const data = await readJsonResponse(response);
 
         if (!response.ok) {
             const message = data && data.error ? data.error : `HTTP ${response.status}`;
@@ -728,7 +745,7 @@
             })
         });
 
-        const data = await response.json();
+        const data = await readJsonResponse(response);
 
         if (!response.ok) {
             throw new Error(data && data.error ? data.error : `HTTP ${response.status}`);

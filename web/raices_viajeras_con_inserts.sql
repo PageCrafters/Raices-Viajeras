@@ -208,8 +208,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre_completo`, `correo`, `pwd`, `genero`, `fechaNacimiento`, `politica_privacidad`, `revista`, `rol`, `rememberMe`) VALUES
 (1, 'Administrador', 'admin@raicesviajeras.local', '$2y$10$SlV7HWrq8mp8my5iAZT4O.mVCsgxQVMk8n8Hbjq5VMuJHTBDGirn2', 'o', '1990-01-01', 1, 0, 'admin', NULL),
 (2, 'Ana Lopez', 'ana@raicesviajeras.local', '$2y$10$zroGOJFLU6P.QuJoJKXuZuP8mhX2fLc8ugCvjAobrsfIa02XVFQeG', 'f', '1995-03-24', 1, 1, 'usuario', NULL),
-(4, 'Manuel', 'manudatos1@gmail.com', '$2y$10$TfgD6InrQSWCTdQjBdGYw.b/Tf0H9lnOMzEei/eXAvm1YhMTcccgG', 'm', '2005-03-01', 1, 0, 'usuario', NULL),
-(5, 'Celia López', 'celialopezcalvo1@gmail.com', '$2y$10$tk9V8CV446dNaxzay1FSlOKcmuSrbzNFiwog8T/cIvfDMrKRI6.HC', 'o', '2008-10-01', 1, 1, 'usuario', NULL);
+(4, 'Manuel', 'manudatos1@gmail.com', '$2y$10$TfgD6InrQSWCTdQjBdGYw.b/Tf0H9lnOMzEei/eXAvm1YhMTcccgG', 'm', '2005-03-01', 1, 0, 'usuario', NULL);
 
 -- --------------------------------------------------------
 
