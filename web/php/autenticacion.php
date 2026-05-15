@@ -92,7 +92,29 @@ function auth_sanitize_internal_redirect(?string $target): ?string
         return null;
     }
 
-    return strpos($target, '/Raices-Viajeras/') === 0 ? $target : null;
+    $allowedExact = [
+        '/',
+        '/blog',
+        '/conocenos',
+        '/articulo',
+        '/admin',
+        '/paga',
+        '/provincias',
+        '/destinos',
+        '/info-aventura',
+    ];
+
+    if (
+        in_array($target, $allowedExact, true) ||
+        strpos($target, '/html/') === 0 ||
+        strpos($target, '/Formulario/') === 0 ||
+        strpos($target, '/Raices-Viajeras/') === 0 ||
+        strpos($target, '/Raices-Viajeras/web/') === 0
+    ) {
+        return $target;
+    }
+
+    return null;
 }
 
 /**
@@ -104,7 +126,7 @@ function auth_sanitize_internal_redirect(?string $target): ?string
  */
 function auth_build_form_url(string $mode = 'login', ?string $redirect = null): string
 {
-    $url = '/Raices-Viajeras/web/Formulario/form.html?modo=' . $mode;
+    $url = '/Formulario/form.html?modo=' . $mode;
     $safeRedirect = auth_sanitize_internal_redirect($redirect);
 
     if ($safeRedirect !== null) {

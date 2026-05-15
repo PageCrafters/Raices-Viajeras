@@ -22,7 +22,7 @@
     </script>
 
     <!-- El header compartido se mantiene también aquí para no dejar esta página aislada. -->
-    <header id="header"></header>
+    <div id="rv-header-root"></div>
 
     <main class="auth-main">
         <div class="contenedor" id="auth-slider">
@@ -44,7 +44,7 @@
             <!-- Este contenedor se desplaza de lado a lado para tapar el formulario inactivo. -->
             <div class="contenedor_login-register">
                 <!-- Formulario de login -->
-                <form action="php/login_usuarios.php" class="formulario_login" method="POST" novalidate>
+                <form action="/Raices-Viajeras/web/Formulario/php/login_usuarios.php" class="formulario_login" method="POST" novalidate>
                     <h2>Iniciar sesión</h2>
 
                     <input type="hidden" name="redirect" id="login_redirect" value="">
@@ -68,7 +68,7 @@
                 </form>
 
                 <!-- Formulario de registro -->
-                <form action="php/registros_usuarios.php" method="POST" class="formulario_register" novalidate>
+                <form action="/Raices-Viajeras/web/Formulario/php/registros_usuarios.php" method="POST" class="formulario_register" novalidate>
                     <h2>Registrarse</h2>
 
                     <input type="hidden" name="redirect" id="register_redirect" value="">
@@ -123,9 +123,10 @@
         </div>
     </main>
 
+    <div id="rv-footer-root"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/plantillas/header.js"></script>
+    <script type="module" src="/src/sharedShell.jsx"></script>
     <script type="module" src="assets/js/script.js"></script>
 </body>
 </html>

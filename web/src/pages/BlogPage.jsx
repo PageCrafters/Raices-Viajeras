@@ -26,10 +26,11 @@ export default function Blog() {
   const [error, setError]                         = useState(null);
 
   useEffect(() => {
+    // El blog se descarga una vez y luego filtramos en cliente para que el cambio de categoría sea inmediato.
     fetch(API_URL)
       .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
       })
       .then((noticias) => {
         setTodasLasNoticias(noticias);
@@ -74,7 +75,7 @@ export default function Blog() {
   }
 
   function handleKeyDown(e) {
-    if (e.key === "Enter") handleBuscar();
+    if (e.key === 'Enter') handleBuscar()
   }
 
   return (
@@ -107,6 +108,7 @@ export default function Blog() {
               </button>
             </div>
           </div>
+        </div>
 
           {/* Categorías */}
           <div>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/autenticacion.php';
 require_once __DIR__ . '/utilidades_imagen.php';
 
@@ -516,12 +516,111 @@ function cart_add_item(PDO $pdo, int $userId, int $tripId): array
 }
 
 /**
- * Añade un viaje a la cesta temporal del invitado.
+ * Convierte el carrito activo en un pedido real y deja la cesta lista para empezar de cero.
  *
  * @param PDO $pdo Conexión PDO compartida.
- * @param int $tripId ID del viaje.
+ * @param int $userId ID del usuario activo.
  * @return array
  */
+function cart_checkout_user(PDO $pdo, int $userId): array
+{
+    if ($userId <= 0) {
+        throw new RuntimeException('Debes iniciar sesión para pagar.');
+    }
+
+    $cartId = cart_get_active_id($pdo, $userId);
+    if ($cartId === null) {
+        return [
+            'pedido_id' => null,
+            'logueado' => true,
+            'carrito' => cart_empty_summary(true)['carrito']
+        ];
+    }
+
+    $pdo->beginTransaction();
+
+    try {
+        $stmt = $pdo->prepare(
+            "SELECT
+                cv.id,
+                cv.viaje_id,
+                cv.cantidad,
+                cv.precio_unitario,
+                v.titulo
+             FROM carrito_viajes cv
+             INNER JOIN viajes v ON v.id = cv.viaje_id
+             WHERE cv.carrito_id = ?
+             ORDER BY cv.id ASC
+             FOR UPDATE"
+        );
+        $stmt->execute([$cartId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$rows) {
+            cart_sync_total($pdo, $cartId, 0.0);
+            $pdo->commit();
+
+            return [
+                'pedido_id' => null,
+                'logueado' => true,
+                'carrito' => cart_empty_summary(true)['carrito']
+            ];
+        }
+
+        $total = 0.0;
+        foreach ($rows as $row) {
+            $quantity = (int) ($row['cantidad'] ?? 0);
+            $unitPrice = (float) ($row['precio_unitario'] ?? 0);
+            $total += $quantity * $unitPrice;
+        }
+
+        $insertPedido = $pdo->prepare(
+            "INSERT INTO pedidos (usuario_id, carrito_id, total, estado, direccion_envio, fecha_pedido)
+             VALUES (?, ?, ?, ?, ?, NOW())"
+        );
+        $insertPedido->execute([
+            $userId,
+            $cartId,
+            number_format($total, 2, '.', ''),
+            'pagado',
+            null
+        ]);
+        $pedidoId = (int) $pdo->lastInsertId();
+
+        $insertPedidoViaje = $pdo->prepare(
+            'INSERT INTO pedido_viajes (pedido_id, viaje_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)'
+        );
+
+        foreach ($rows as $row) {
+            $insertPedidoViaje->execute([
+                $pedidoId,
+                (int) ($row['viaje_id'] ?? 0),
+                (int) ($row['cantidad'] ?? 0),
+                (float) ($row['precio_unitario'] ?? 0)
+            ]);
+        }
+
+        $closeCart = $pdo->prepare("UPDATE carritos SET total = 0, estado = 'cerrado' WHERE id = ?");
+        $closeCart->execute([$cartId]);
+
+        $clearLines = $pdo->prepare('DELETE FROM carrito_viajes WHERE carrito_id = ?');
+        $clearLines->execute([$cartId]);
+
+        $pdo->commit();
+    } catch (Throwable $error) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
+        throw $error;
+    }
+
+    return [
+        'pedido_id' => $pedidoId,
+        'logueado' => true,
+        'carrito' => cart_empty_summary(true)['carrito']
+    ];
+}
 function cart_add_guest_item(PDO $pdo, int $tripId): array
 {
     if (!cart_find_trip($pdo, $tripId)) {

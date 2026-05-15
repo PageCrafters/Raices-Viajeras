@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import "../../Formulario/assets/css/style.css";
 
 // Validaciones desde la carpeta original (se migrará más adelante)
@@ -10,8 +10,7 @@ import {
     comprobarContrasenas,
     validarGenero,
     validarFechaNacimiento,
-    validarCheckboxObligatorio,
-    validarCheckboxOpcional
+    validarCheckboxObligatorio
 } from '../../js/validaciones.js';
 
 export default function AuthForm() {
@@ -63,7 +62,7 @@ export default function AuthForm() {
         else url.searchParams.delete('redirect');
         window.history.replaceState({}, '', url);
         document.body.dataset.authMode = mode;
-    }, [mode]);
+    }, [mode, redirect]);
 
     // Responsive: reaplica modo al redimensionar 
     useEffect(() => {

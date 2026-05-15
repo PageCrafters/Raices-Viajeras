@@ -1,7 +1,21 @@
 let todasLasNoticias = [];
+let categoriasDisponibles = [];
 const request = typeof window.rvFetch === 'function'
     ? window.rvFetch.bind(window)
     : window.fetch.bind(window);
+
+function normalizeText(value) {
+    return String(value ?? '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+}
+
+function normalizeCategory(value) {
+    return normalizeText(value);
+}
 
 /**
  * Resuelve el src final del blog sin duplicar prefijos cuando la API ya trae una ruta usable
@@ -58,7 +72,7 @@ function renderNoticias(noticias) {
         card.className = 'card h-100 shadow-sm';
 
         const img = document.createElement('img');
-        img.src = `../img/${noticia.imagen}`;
+        img.src = getNewsImageSrc(noticia.imagen);
         img.className = 'card-img-top';
         img.alt = noticia.nombre;
         img.style.height = '160px';
@@ -99,6 +113,38 @@ function renderNoticias(noticias) {
 }
 
 /**
+ * Reconstruye la lista lateral con las categorías reales devueltas por la API.
+ *
+ * @returns {void}
+ */
+function renderCategorias() {
+    const list = document.getElementById('lista-categorias');
+    if (!list) {
+        return;
+    }
+
+    list.replaceChildren();
+
+    categoriasDisponibles.forEach((categoria) => {
+        const item = document.createElement('li');
+        item.className = 'list-group-item list-group-item-action';
+        item.dataset.categoria = categoria.value;
+        item.style.cursor = 'pointer';
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('aria-pressed', 'false');
+        item.textContent = categoria.label;
+        list.appendChild(item);
+    });
+
+    const current = list.querySelector('[data-categoria=""]');
+    if (current) {
+        current.classList.add('active');
+        current.setAttribute('aria-pressed', 'true');
+    }
+}
+
+/**
  * Filtra las noticias ya cargadas sin pedir datos otra vez
  *
  * @param {string} categoria Categoria o texto del filtro
@@ -114,9 +160,17 @@ function filtrarPorCategoria(categoria, elemento) {
         elemento.classList.add('active');
     }
 
-    const filtradas = categoria === ''
+    const termino = normalizeCategory(categoria);
+    const filtradas = termino === ''
         ? todasLasNoticias
-        : todasLasNoticias.filter((noticia) => noticia.categoria.toLowerCase() === categoria.toLowerCase());
+        : todasLasNoticias.filter((noticia) => {
+            const categoriaNormalizada = normalizeCategory(noticia.categoria);
+            const nombreNormalizado = normalizeText(noticia.nombre);
+            const descripcionNormalizada = normalizeText(noticia.descripcion);
+            return categoriaNormalizada === termino
+                || nombreNormalizado.includes(termino)
+                || descripcionNormalizada.includes(termino);
+        });
 
     renderNoticias(filtradas);
 }
@@ -131,12 +185,47 @@ function initBlog() {
         .then((response) => response.json())
         .then((noticias) => {
             todasLasNoticias = noticias;
+            const seen = new Map();
+            const addCategory = (value) => {
+                const label = String(value ?? '').trim();
+                const normalized = normalizeCategory(label);
+                if (!normalized || seen.has(normalized)) {
+                    return;
+                }
+
+                seen.set(normalized, label);
+            };
+
+            todasLasNoticias.forEach((noticia) => addCategory(noticia.categoria));
+            ['Turismo', 'Sostenible'].forEach(addCategory);
+            categoriasDisponibles = [
+                { label: 'Todas', value: '' },
+                ...Array.from(seen.values()).map((label) => ({ label, value: label }))
+            ];
+
+            renderCategorias();
             renderNoticias(todasLasNoticias);
 
-            document.querySelectorAll('#lista-categorias .list-group-item').forEach((item) => {
-                item.addEventListener('click', () => {
-                    filtrarPorCategoria(item.dataset.categoria, item);
-                });
+            document.getElementById('lista-categorias')?.addEventListener('click', (event) => {
+                const item = event.target.closest('.list-group-item');
+                if (!item || !event.currentTarget.contains(item)) {
+                    return;
+                }
+
+                filtrarPorCategoria(item.dataset.categoria, item);
+            });
+
+            document.getElementById('lista-categorias')?.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter') {
+                    return;
+                }
+
+                const item = event.target.closest('.list-group-item');
+                if (!item || !event.currentTarget.contains(item)) {
+                    return;
+                }
+
+                filtrarPorCategoria(item.dataset.categoria, item);
             });
 
             document.getElementById('buscador-categoria')?.addEventListener('input', (event) => {

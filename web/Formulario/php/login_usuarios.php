@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../php/autenticacion.php';
+ob_start();
 require_once __DIR__ . '/../../php/cesta_service.php';
+ob_end_clean();
 
 /**
  * Muestra un aviso corto y devuelve al usuario a la ruta correcta.
@@ -102,7 +104,7 @@ try {
         $loginMessage .= ' No hemos podido recuperar tu cesta temporal todavía.';
     }
 
-    $target = $redirect ?? '/Raices-Viajeras/index.html';
+    $target = $redirect ?? '/';
     login_redirect($loginMessage, 'login', $target, $redirect);
 } catch (Throwable $error) {
     error_log('login_usuarios.php error: ' . $error->getMessage());

@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/autenticacion.php';
+ob_start();
 require_once __DIR__ . '/cesta_service.php';
+ob_end_clean();
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-cache, no-store, must-revalidate');
@@ -68,6 +70,21 @@ if ($method === 'POST') {
         }
     }
 
+    if ($action === 'checkout') {
+        if ($userId <= 0) {
+            cart_json_response(['error' => 'Debes iniciar sesión para pagar.'], 401);
+        }
+
+        try {
+            cart_json_response(cart_checkout_user($pdo, $userId));
+        } catch (RuntimeException $error) {
+            cart_json_response(['error' => $error->getMessage()], 400);
+        } catch (Throwable $error) {
+            error_log('cesta_api.php checkout error: ' . $error->getMessage());
+            cart_json_response(['error' => 'No se pudo completar el pago.'], 500);
+        }
+    }
+
     if ($action !== 'eliminar_item') {
         cart_json_response(['error' => 'Acción no válida.'], 400);
     }
@@ -106,4 +123,3 @@ if ($method === 'POST') {
 }
 
 cart_json_response(['error' => 'Método no permitido.'], 405);
-?>

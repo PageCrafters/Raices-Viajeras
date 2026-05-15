@@ -17,8 +17,7 @@
 </head>
 
 <body id="body">
-<header id="header"></header>
-<script type="module" src="../js/plantillas/header.js"></script>
+<div id="rv-header-root"></div>
 
 <!--Header -->
 <section class="hero-conocenos">
@@ -273,20 +272,19 @@
     <div class="container cta-inner">
         <h2>¿Listo para viajar de otra manera?</h2>
         <p>Únete a nuestra comunidad de viajeros conscientes y descubre destinos que te transformarán sin dañar el mundo que los hace posibles.</p>
-        <a href="/Raices-Viajeras/web/html/provincias.html" class="btn-cta-blanco">Ver destinos</a>
-        <a href="/Raices-Viajeras/web/Formulario/form.html" class="btn-cta-outline-blanco">Crear cuenta gratis</a>
+        <a href="/html/provincias.html" class="btn-cta-blanco">Ver destinos</a>
+        <a href="/Formulario/form.html" class="btn-cta-outline-blanco">Crear cuenta gratis</a>
 
     </div>
     <div class="container btn-back">
         <!-- Botón para volver a la página anterior -->
-        <button class="back-btn" type="button" onclick="history.length > 1 ? history.back() : window.location.href='/Raices-Viajeras/index.html'">Volver</button>
+        <button class="back-btn" type="button" onclick="history.length > 1 ? history.back() : window.location.href='/'">Volver</button>
     </div>
 </section>
 
-<div id="footer"></div>
-<script type="module" src="../js/plantillas/footer.js"></script>
+<div id="rv-footer-root"></div>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script type="module" src="../js/main.js"></script>
+<script type="module" src="/src/sharedShell.jsx"></script>
 <script src="https://kit.fontawesome.com/0b95445ffc.js" crossorigin="anonymous"></script>
 </body>
 </html>
