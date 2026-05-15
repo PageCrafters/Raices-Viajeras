@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { CatalogCard } from "../components/CatalogCard";
 
-const API_URL = "/php/noticias_api.php";
+const API_URL = "/Raices-Viajeras/web/php/noticias_api.php";
 
 const CATEGORIAS = [
   { label: "Turismo",    value: "Turismo"    },
@@ -108,8 +108,7 @@ export default function Blog() {
               </button>
             </div>
           </div>
-        </div>
-
+        
           {/* Categorías */}
           <div>
             <h6 className="fw-bold" aria-describedby="desc-categorias">
@@ -177,7 +176,6 @@ export default function Blog() {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );
