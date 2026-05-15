@@ -6,6 +6,10 @@ import { DestinosView } from './views/DestinosView'
 import { HomeView } from './views/HomeView'
 import { InfoAventuraView } from './views/InfoAventuraView'
 import { ProvinciasView } from './views/ProvinciasView'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BlogPages from "./pages/BlogPage";
+import ArticuloPages from "./pages/ArticulPage";
+import ConocenosPages from "./pages/AboutPage";
 
 function App() {
   const [locationState, setLocationState] = useState(() => ({
@@ -55,6 +59,20 @@ function App() {
         if (currentRoute === 'infoAventura') {
           return <InfoAventuraView search={locationState.search} onAddToCart={handleAddItem} />
         }
+        else {
+          return (
+            <BrowserRouter>
+              <Header />   {/* ← aquí, fuera de Routes */}
+              <Routes>
+                <Route path="/conocenos" element={<ConocenosPages />} />
+                <Route path="/" element={<BlogPages />} />
+                <Route path="/blog" element={<BlogPages />} />
+                <Route path="/articulo" element={<ArticuloPages />} />
+                <Route path="*" element={<BlogPages />} />
+              </Routes>
+            </BrowserRouter>
+          );
+        }
 
         return (
           <CartPage
@@ -71,4 +89,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
