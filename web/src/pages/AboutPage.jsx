@@ -60,6 +60,36 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="video-section">
+        <div className="container">
+          <div className="row g-5 align-items-center">
+            <div className="col-12 col-lg-5">
+              <p className="section-label">Así viajamos</p>
+              <h2 className="section-title video-title">Una mirada más cercana a nuestra filosofía</h2>
+              <p className="video-copy">
+                Este vídeo resume la sensación que queremos dejar en cada viaje: calma, respeto por
+                el entorno y ganas de descubrir sin consumir de más.
+              </p>
+            </div>
+
+            <div className="col-12 col-lg-7">
+              <div className="video-card">
+                <video
+                  className="conocenos-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={assetPath('img/conocenos/naturaleza-deskpot.webp')}
+                >
+                  <source src={assetPath('img/video.mp4')} type="video/mp4" />
+                  Tu navegador no soporta la reproducción de vídeo HTML5.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="mision-section">
         <div className="container">
           <p className="mision-quote">

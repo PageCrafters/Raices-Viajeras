@@ -293,6 +293,125 @@ body.theme-loaded {
   background: transparent
 }
 
+.pie-extenso {
+  text-align: left;
+  padding: 0;
+  background: linear-gradient(180deg, rgba(223, 240, 228, 0.58), rgba(246, 251, 246, 0.95));
+  border-top: 1px solid rgba(47, 158, 68, 0.12);
+}
+
+.footer-brand-block {
+  max-width: 28rem;
+}
+
+.footer-kicker {
+  margin: 0 0 .6rem;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--verde-500);
+}
+
+.footer-title {
+  margin: 0 0 .9rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--verde-oscuro);
+}
+
+.footer-copy {
+  margin: 0;
+  color: var(--tono-apagado);
+  line-height: 1.7;
+}
+
+.footer-heading {
+  margin-bottom: 1rem;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--verde-oscuro);
+}
+
+.footer-link-list,
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link-list {
+  display: grid;
+  gap: .6rem;
+}
+
+.footer-link-list a,
+.footer-contact-list a {
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.footer-link-list a:hover,
+.footer-link-list a:focus-visible,
+.footer-contact-list a:hover,
+.footer-contact-list a:focus-visible {
+  color: var(--verde-500);
+  text-decoration: underline;
+}
+
+.footer-contact-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.footer-contact-list li {
+  display: grid;
+  gap: .2rem;
+}
+
+.footer-contact-list span {
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--tono-apagado);
+}
+
+.footer-contact-list p {
+  margin: 0;
+  color: var(--texto);
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(47, 158, 68, 0.12);
+  color: var(--tono-apagado);
+  font-size: .95rem;
+}
+
+.dark-mode .pie-extenso {
+  background: linear-gradient(180deg, rgba(5, 22, 11, 0.92), rgba(9, 9, 9, 0.98));
+  border-top-color: rgba(52, 208, 88, 0.18);
+}
+
+.dark-mode .footer-title,
+.dark-mode .footer-heading,
+.dark-mode .footer-contact-list p,
+.dark-mode .footer-link-list a {
+  color: var(--texto);
+}
+
+.dark-mode .footer-kicker,
+.dark-mode .footer-copy,
+.dark-mode .footer-contact-list span,
+.dark-mode .footer-bottom {
+  color: var(--tono-apagado);
+}
+
 /* Helper pequeno para botones compactos */
 .btn-modo {
   display: inline-flex;
