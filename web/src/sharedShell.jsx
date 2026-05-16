@@ -1,5 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { APP_BASE } from './lib/routes'
 import '../css/bootstrap.min.css'
 import '../css/style.css'
 import '../css/paga.css'
@@ -62,9 +64,11 @@ installBackendFetchBridge()
 
 createRoot(ensureShellRoot()).render(
   <StrictMode>
-    <AppShell
-      headerTarget={ensureTarget('rv-header-root', 'prepend')}
-      footerTarget={ensureTarget('rv-footer-root')}
-    />
+    <BrowserRouter basename={APP_BASE}>
+      <AppShell
+        headerTarget={ensureTarget('rv-header-root', 'prepend')}
+        footerTarget={ensureTarget('rv-footer-root')}
+      />
+    </BrowserRouter>
   </StrictMode>
 )

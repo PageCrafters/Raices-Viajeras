@@ -1,5 +1,4 @@
 ﻿import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { APP_PATHS, assetPath, backendPath, buildLoginUrl } from '../lib/routes'
 
 function getLoginUrl() {
@@ -28,7 +27,7 @@ export function HeaderReact({
     <header>
       <nav className="navbar navbar-expand-lg navbar-light navbar-personalizada">
         <div className="container-fluid">
-          <Link className="navbar-brand d-flex align-items-center" to={APP_PATHS.home} onClick={closeMenu}>
+          <a className="navbar-brand d-flex align-items-center" href={APP_PATHS.home} onClick={closeMenu}>
             <img
               src={assetPath('img/raices-viajeras-logo0.webp')}
               alt="Raíces Viajeras"
@@ -36,7 +35,7 @@ export function HeaderReact({
               className="me-2"
             />
             <span>RAÍCES VIAJERAS</span>
-          </Link>
+          </a>
 
           <div className="d-flex align-items-center gap-2">
             <button
@@ -74,21 +73,21 @@ export function HeaderReact({
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to={APP_PATHS.home} onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.home} onClick={closeMenu}>
                   Inicio
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to={APP_PATHS.blog} onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.blog} onClick={closeMenu}>
                   Blog
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to={APP_PATHS.provincias} onClick={closeMenu}>
+                <a className="nav-link" href={APP_PATHS.provincias} onClick={closeMenu}>
                   Viajes
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item">
@@ -129,9 +128,9 @@ export function HeaderReact({
               </li>
 
               <li className={`nav-item ${session?.rol === 'admin' ? '' : 'd-none'}`}>
-                <Link className="btn btn-success btn-sm ms-lg-2" to={APP_PATHS.admin} onClick={closeMenu}>
+                <a className="btn btn-success btn-sm ms-lg-2" href={APP_PATHS.admin} onClick={closeMenu}>
                   <i className="bi bi-speedometer2 me-1"></i>Panel Admin
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

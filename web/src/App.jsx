@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { APP_PATHS } from './lib/routes'
 import { AppShell } from './components/AppShell'
 import { CartPage } from './components/CartPage'
+import AuthForm from './components/AuthForm'
 import AboutPage from './pages/AboutPage'
 import ArticulPage from './pages/ArticulPage'
 import BlogPage from './pages/BlogPage'
@@ -45,6 +47,7 @@ function AppRoutes({ shell }) {
         }
       />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
+      <Route path={APP_PATHS.login} element={<AuthForm />} />
       <Route path="/html/blog.html" element={<Navigate to="/blog" replace />} />
       <Route path="/html/conocenos.html" element={<Navigate to="/conocenos" replace />} />
       <Route path="/html/articulo.html" element={<Navigate to="/articulo" replace />} />
