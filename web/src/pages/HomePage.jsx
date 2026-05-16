@@ -52,22 +52,22 @@ export default function HomePage() {
           <div className="row align-items-center">
             <div className="col-12 col-lg-7">
               <h1 id="titulo-hero" className="display-6">
-                Cada Viaje con Nosotros deja
+                Cada viaje con nosotros deja
                 <br />
-                <em>Huella en tu Memoria no en el Planeta</em>
+                <em>Huella en tu memoria no en el planeta</em>
               </h1>
 
               <p className="lead">
-                Viajes sostenibles, alojamientos con energia renovable y experiencias que apoyan
+                Viajes sostenibles, alojamientos con energía renovable y experiencias que apoyan
                 a comunidades locales.
               </p>
 
               <div className="mt-3">
                 <a href={buildRegisterUrl(APP_PATHS.home)} className="btn btn-primario me-2">
-                  Apuntate hoy
+                  Apúntate hoy
                 </a>
                 <Link to={APP_PATHS.conocenos} className="btn btn-primario-outline">
-                  Conocenos
+                  Conócenos
                 </Link>
               </div>
             </div>
@@ -86,8 +86,8 @@ export default function HomePage() {
 
             <div className="col-12 col-lg-7">
               <h2 id="titulo-beneficios">
-                Sabias que tu escapada de FIN DE SEMANA consume la misma energia que 3 FAMILIAS
-                en UN ANO entero?
+                Sabías que tu escapada de FIN DE SEMANA consume la misma energía que 3 FAMILIAS
+                en UN AÑO entero?
               </h2>
 
               <ul className="lista-beneficios" aria-label="Nuestros compromisos sostenibles">

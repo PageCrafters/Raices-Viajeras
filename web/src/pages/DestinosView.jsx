@@ -71,14 +71,14 @@ export function DestinosView({ search, onAddToCart }) {
   const getButtonLabel = (tripId) => {
     const currentState = buttonStateByTripId[tripId]
     if (currentState === 'loading') {
-      return 'AÃ±adiendo...'
+      return 'Añadiendo...'
     }
 
     if (currentState === 'added') {
-      return 'AÃ±adido'
+      return 'Añadido'
     }
 
-    return 'AÃ±adir a la cesta'
+    return 'Añadir a la cesta'
   }
 
   const handleAddToCart = async (tripId) => {
