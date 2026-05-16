@@ -159,7 +159,8 @@ export default function BlogPage() {
               </button>
             </div>
           </div>
-
+        
+          {/* Categorías */}
           <div>
             <h6 className="fw-bold" aria-describedby="desc-categorias">
               Categorías

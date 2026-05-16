@@ -1,5 +1,9 @@
 import { useRef, useState } from 'react'
 import { assetPath } from '../lib/routes'
+import bosqueMp3  from '../assets/audios/bosque.mp3'
+import playaMp3   from '../assets/audios/playa.mp3'
+import montanaMp3 from '../assets/audios/montana.mp3'
+
 
 const SCENES = [
   {
@@ -7,24 +11,24 @@ const SCENES = [
     label: 'Bosque',
     iconClass: 'bi-tree-fill',
     desc: 'Viento',
-    mp3: assetPath('audio/bosque.mp3'),
-    ogg: assetPath('audio/bosque.ogg'),
+    mp3: bosqueMp3,
+    ogg: montanaMp3,
   },
   {
     key: 'playa',
     label: 'Playa',
     iconClass: 'bi-water',
     desc: 'Olas del mar',
-    mp3: assetPath('audio/playa.mp3'),
-    ogg: assetPath('audio/playa.ogg'),
+    mp3: playaMp3,
+    ogg: playaMp3,
   },
   {
     key: 'montana',
     label: 'Montana',
     iconClass: 'bi-compass-fill',
     desc: 'Rio',
-    mp3: assetPath('audio/montana.mp3'),
-    ogg: assetPath('audio/montana.ogg'),
+    mp3: montanaMp3,
+    ogg: montanaMp3,
   },
 ]
 
