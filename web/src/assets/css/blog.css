@@ -12,7 +12,8 @@
     --marron-900: #6b4226;
     --fondo-tarjeta: #ffffff;
     --glass: rgba(255, 255, 255, 0.65);
-    --perla: #f0eeeb;
+    --perla: #e0e4e1;
+    --perla-gradient: linear-gradient(var(--bg) 0%, var(--perla) 100%);
     --shadow: 0 8px 24px rgba(35, 48, 41, 0.08);
     --texto-boton: #ffffff;
     --focus: rgba(47, 158, 68, 0.18);
@@ -29,7 +30,7 @@
     --marron-900: #e8b48a;
     --fondo-tarjeta: #0f0f0f;
     --glass: rgba(10, 10, 10, 0.6);
-    --perla: #ece9e4;
+    --perla: #0c1f11;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     --texto-boton: #ffffff;
     --focus: rgba(52, 208, 88, 0.12);
