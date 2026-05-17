@@ -40,3 +40,11 @@ Dirigido tanto a **viajeros individuales** como a **grupos** interesados en ecot
 # Informe Usabilidad
 > [Informe de Usabilidad](documentacion/Informe%20Usabilidad%20Ra%C3%ADces%20Viajeras.pdf)
 
+# Guía de estilos
+> [Guia de esilos](documentacion/Guia_de_Estilos_Raices_Viajeras_Completa.pdf)
+
+# Despliegue en Xampp
+> [Despliegue en Xampp](documentacion/Depliegue_Raices_Viajeras_XAMMP.pdf)
+
+
+
