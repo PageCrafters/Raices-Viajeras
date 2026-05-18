@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { assetPath } from '../lib/routes'
 import bosqueMp3  from '../assets/audios/bosque.mp3'
-import playaMp3   from '../assets/audios/playa.mp3'
+import playaMp3   from '../assets/audios/Playa.mp3'
 import montanaMp3 from '../assets/audios/montana.mp3'
 
 
